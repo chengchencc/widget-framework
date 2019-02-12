@@ -1,0 +1,8 @@
+// 此文件存储公共的变量参数，供其他样式文件调用，不会存在具体样式
+/*
+    拆分bootstrap到多个文件，
+    这里是文件1，包含基本的bootstap 变量、mixin、function、自定义变量
+*/
+
+
+@import '../core/bootstrap-root.scss';
