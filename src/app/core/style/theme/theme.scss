@@ -1,2 +1,9 @@
-@import './dark.scss';
+// @import './dark.scss';
+// @import './light.scss';
+@import './root.scss';
 @import './bootstrap.scss';
+//引用custom
+@import "./custom";
+@import "./designer";
+//test
+@import "./test";

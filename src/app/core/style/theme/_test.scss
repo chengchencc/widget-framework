@@ -1,0 +1,49 @@
+
+$color1:$gray-800;
+$color2:$dark;
+$color3:darken($dark,10%);
+$color4:lighten($dark,10%);
+
+$testColor:();
+$testColor:map-merge((
+    "color1":$color1,
+    "color2":$color2,
+    "color3":$color3,
+    "color4":$color4,
+    "color5":lighten($dark,20%),
+    "color6":lighten($dark,30%),
+    "color7":$gray-100,
+    "color8":$gray-200,
+    "color9":$gray-300,
+    "color10":$gray-400,
+    "color11":$gray-500,
+    "color12":$gray-600,
+    "color13":$gray-700,
+    "color14":$gray-800,
+    "color15":$gray-900,
+    "color16":$gray-100
+    ), 
+    $testColor );
+
+@each $color,$value in $testColor {
+    @include bg-variant(".test-bg-#{$color}",$value);
+}
+
+$test-blue:#1A599E;
+
+$test-color-blue:();
+$test-color-blue:map-merge((
+    "color0":$test-blue,
+    "color1":lighten($test-blue,10%),
+    "color2":lighten($test-blue,20%),
+    "color3":lighten($test-blue,30%),
+    "color4":lighten($test-blue,40%),
+    "color5":lighten($test-blue,50%),
+    "color6":lighten($test-blue,60%),
+    "color7":$test-blue
+    ), 
+    $test-color-blue );
+    
+    @each $color,$value in $test-color-blue {
+        @include bg-variant(".test-bg-blue-#{$color}",$value);
+    }

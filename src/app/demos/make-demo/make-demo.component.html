@@ -1,3 +1,14 @@
 <p>
   make-demo works!
 </p>
+
+<div>
+  <div *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]"  class="test-bg-color{{item}}" style="height: 50px;">{{item}}
+  </div>
+  <a *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]"  class="test-bg-color{{item}}" style="height: 50px;">{{item}}
+  </a>
+  <button *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]"  class="test-bg-color{{item}}" style="height: 50px;">{{item}}
+  </button>
+  <div *ngFor="let item of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]"  class="test-bg-blue-color{{item}}" style="height: 50px;">test-bg-blue-color{{item}}
+  </div>
+</div>

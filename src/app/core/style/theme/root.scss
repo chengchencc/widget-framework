@@ -4,5 +4,12 @@
     这里是文件1，包含基本的bootstap 变量、mixin、function、自定义变量
 */
 
+// 特有主题色
+@import "./variables";
 
-@import '../core/bootstrap-root.scss';
+//引用bootstrap 基础组件
+@import "../bootstrap/functions";
+@import "../bootstrap/variables";
+@import "../bootstrap/mixins";
+
+
