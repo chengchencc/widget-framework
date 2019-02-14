@@ -4,7 +4,7 @@ import { TooltipContainerComponent } from './tooltip-container.component';
 import { TooltipDirective } from './tooltip.directive';
 import { TooltipConfig } from './tooltip.config';
 import { ComponentLoaderFactory } from '../component-loader';
-import { PositioningService } from 'ngx-bootstrap/positioning';
+import { PositioningService } from '../positioning';
 
 @NgModule({
   imports: [CommonModule],
