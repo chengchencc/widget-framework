@@ -1,0 +1,9 @@
+@mixin design-footer {
+    design-footer {
+        display: block;
+        flex: none;
+        background-color: $footer-bg;
+        border-top: $dsn-border;
+        height: 25px
+    }
+}

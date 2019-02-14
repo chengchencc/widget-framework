@@ -1,0 +1,74 @@
+@mixin design-header {
+    design-header {
+        display: flex;
+        flex: none;
+        height: 34px;
+        background-color: $header-bg;
+        color: $header-color;
+        border-bottom: $dsn-border;
+        justify-content: center;
+        user-select: none;
+        .header {
+            &-left {
+                flex-basis: 50%;
+                display: flex;
+                .page-title {
+                    line-height: 34px;
+                    padding: 0px 10px;
+                }
+            }
+            &-right {
+                flex-basis: 50%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                select {
+                    background: $header-button-bg;
+                    border: 1px solid $header-button-border-color;
+                    border-bottom: none;
+                    border-right: none;
+                    padding: 3px 5px 5px 5px;
+                    color: $dsn-color;
+                }
+            }
+        }
+        .select-device {
+            display: flex;
+            flex-direction: row;
+            .list-group-item {
+                // @include button-variant($header-button-bg, $dsn-border-color,$dsn-hover-bg,$dsn-border-color,$dsn-active-color,$dsn-border-color); // background-color: transparent;
+                padding: 5px 10px;
+                background: transparent;
+                outline-style: none;
+                color: $dsn-color;
+                border: none;
+                border-left: $dsn-border;
+                border-radius: 0px;
+                cursor: pointer;
+                &:last-child {
+                    border-right: $dsn-border;
+                }
+                &:hover{
+                    color: $dsn-active-color;
+                    background: $dsn-tab-active-bg;
+                    border-bottom: none;
+                }
+                &.active {
+                    // border-bottom: none;
+                    color: $header-device-active-color;
+                    background: $header-device-active-bg;
+                    border-bottom: none;
+                    margin-bottom: -1px;
+                }
+            }
+        }
+        .btn-preview {
+            @include button-variant($header-button-bg, $dsn-border-color); // background-color: transparent;
+            padding: 4px 10px;
+            outline: none;
+            border-top: none;
+            border-bottom: none;
+            border-radius: 0px;
+        }
+    }
+}

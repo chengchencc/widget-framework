@@ -1,0 +1,7 @@
+@mixin design-content {
+    design-content {
+        display: block;
+        flex: auto;
+        background-color: $content-bg;
+    }
+}

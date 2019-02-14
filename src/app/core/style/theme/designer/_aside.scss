@@ -1,0 +1,95 @@
+@mixin design-aside {
+    design-aside {
+        display: block;
+        flex: none;
+        flex-direction: column;
+        width: $aside-width;
+        background-color: $aside-bg;
+        border-left: $dsn-border;
+        color: $dsn-color;
+        .tab-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+        .nav-tabs {
+            flex-direction: row;
+            background: $dsn-tab-bg;
+            border: none;
+            border-right: $dsn-border;
+            .nav-item {
+                margin-right: -1px;
+                border: $dsn-border;
+                border-top: none;
+                &:first-child {
+                    border-left: 0px;
+                }
+                &.active {
+                    border-bottom: none;
+                }
+            }
+            .nav-link {
+                color: $dsn-color;
+                border: none;
+                padding: 0px;
+                padding-top: 5px;
+                border-radius: 0px;
+                &:hover {
+                    // background-color: $dsn-tab-active-bg;
+                    color: $dsn-active-color;
+                } 
+                &.active {
+                    background-color: $dsn-tab-active-bg;
+                    color: $dsn-active-color;
+                    border-bottom: none;
+                }
+            }
+        }
+        .tab-content {
+            flex: auto;
+            padding-left: 5px;
+            overflow: auto;
+            &>.tab-pane.active {
+                display: flex;
+                width: 100%;
+                height: 100%; // border: 1px solid black;
+                // border-right: 0px;
+                // border-left: $dsn-border;
+                .panel {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    &-header {
+                        padding: 10px;
+                        border-bottom: $dsn-border;
+                    }
+                    &-body {}
+                }
+            }
+            &::-webkit-scrollbar {
+                width: 7px;
+                height: 10px;
+            }
+            &::-webkit-scrollbar-corner {
+                background-color: $dsn-hover-bg;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-left: 2px solid transparent; // border-radius: 10px;
+                background-color: $dsn-hover-bg;
+                border-style: solid;
+                border-color: transparent;
+                border-width: 0 0 0 1px;
+                background-clip: content-box;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: $dsn-border; //lighten($primary, 30.5%); //#e5e5e5;
+                border-left: 2px solid transparent;
+                background-clip: padding-box;
+                border-style: solid;
+                border-color: $dsn-border;
+                border-width: 0 0 0 1px;
+            }
+        }
+    }
+}

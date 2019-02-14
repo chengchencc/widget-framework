@@ -1,3 +1,70 @@
-<p>
-  sidebar works!
-</p>
+<!-- <div *ngIf="!isPreview" class="left-sider"> -->
+  <tabset [vertical]="true">
+    <tab>
+      <ng-template tabHeading>
+        <i class="material-icons">description</i>
+      </ng-template>
+      <div class="panel">
+        <div class="panel-header">页面基本信息</div>
+        <div class="panel-body scroll-thin">
+          <!-- <app-page-info></app-page-info> -->
+        </div>
+      </div>
+    </tab>
+
+    <tab>
+      <ng-template tabHeading>
+        <i class="material-icons">web</i>
+      </ng-template>
+      <div class="panel">
+        <div class="panel-header">布局</div>
+        <div class="panel-body scroll-thin">
+          <!-- <app-layout-settings></app-layout-settings> -->
+          <!-- <app-layout-widget-selector></app-layout-widget-selector> -->
+        </div>
+      </div>
+    </tab>
+    <tab>
+      <ng-template tabHeading>
+        <i class="material-icons">extension</i>
+      </ng-template>
+
+      <div class="panel">
+        <div class="panel-header">基础组件</div>
+        <div class="panel-body  scroll-thin">
+          基础组件
+          <!-- <app-basic-widget-selector></app-basic-widget-selector> -->
+
+        </div>
+      </div>
+    </tab>
+    <tab [active]="true">
+      <ng-template tabHeading>
+        <i class="material-icons">developer_board</i>
+      </ng-template>
+
+      <div class="panel">
+        <div class="panel-header">部件</div>
+        <div class="panel-body  scroll-thin">
+          portlet
+          <!-- <app-widget-selector></app-widget-selector> -->
+
+        </div>
+      </div>
+    </tab>
+    <tab>
+      <ng-template tabHeading>
+        <i class="material-icons">insert_photo</i>
+      </ng-template>
+      <div class="panel">
+        <div class="panel-header">资源文件</div>
+        <div class="panel-body">
+          assets
+          <!-- <app-assets-selector></app-assets-selector> -->
+
+        </div>
+      </div>
+    </tab>
+  </tabset>
+
+<!-- </div> -->

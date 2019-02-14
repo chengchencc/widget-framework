@@ -1,0 +1,36 @@
+//basic
+$dsn-bg:#3b424a;
+$dsn-hover-bg:lighten($dsn-bg,10%);
+$dsn-active-bg:lighten($dsn-bg,10%);
+$dsn-color:rgba($white, .5);
+$dsn-hover-color:rgba($white, .7);
+$dsn-active-color:rgba($white, .9);
+$dsn-border-color:darken($dsn-bg,20%);
+$dsn-border:1px solid $dsn-border-color;
+
+$dsn-tab-bg:darken($dsn-bg,10%);
+$dsn-tab-hover-bg:$dsn-bg;
+$dsn-tab-active-bg:$dsn-bg;
+
+//header
+$header-bg:darken($dsn-bg,5%);
+$header-color:$dsn-color;
+
+$header-button-bg:$header-bg;
+$header-button-border-color:darken($header-bg,10%);
+
+$header-device-active-bg:white;
+$header-device-active-color:color-yiq($header-device-active-bg);
+//sidebar
+$sidebar-bg:$dsn-bg;
+$sidebar-width:300px;
+
+//content
+$content-bg:white;
+
+//aside
+$aside-bg:$dsn-bg;
+$aside-width:200px;
+
+//footer
+$footer-bg:$dsn-bg;

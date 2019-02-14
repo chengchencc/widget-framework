@@ -1,0 +1,49 @@
+
+@import './variables';
+@import './header';
+@import './sidebar';
+@import './content';
+@import './aside';
+@import './footer';
+
+app-designer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: $dsn-color;
+    main {
+        flex: auto;
+        display: flex;
+        flex-direction: row;
+    }
+
+    @include design-header;
+    @include design-sidebar;
+    @include design-content;
+    @include design-aside;
+    @include design-footer;
+
+}
+
+// header{
+//     flex: none;
+// }
+// main{
+//     flex: auto;
+//     display: flex;
+//     flex-direction: row;
+//     .sidebar{
+//         flex: none;
+//         width: $sidebar-width;
+//     }
+//     .content{
+//         flex: auto;
+//     }
+//     aside{
+//         flex:none;
+//         width: $aside-width;
+//     }
+// }
+// footer{
+//     flex: none;
+// }

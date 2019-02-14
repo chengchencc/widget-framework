@@ -1,3 +1,28 @@
-<p>
-  aside works!
-</p>
+<tabset justified="true">
+  <tab [active]="true">
+    <ng-template tabHeading>
+      <i class="material-icons">format_color_fill</i>
+    </ng-template>
+    <!-- <app-style></app-style> -->
+  </tab>
+  <tab>
+    <ng-template tabHeading>
+      <i class="material-icons">settings</i>
+    </ng-template>
+    <!-- <app-settings></app-settings> -->
+  </tab>
+  <!-- structure -->
+  <tab >
+    <ng-template tabHeading>
+      <i class="material-icons">list</i>
+    </ng-template>
+    <!-- <app-structure></app-structure> -->
+  </tab>
+  <tab>
+    <ng-template tabHeading>
+      <!-- <i class="material-icons">list</i> -->
+      <i class="material-icons">flash_on</i>
+    </ng-template>
+    事件绑定
+  </tab>
+</tabset>

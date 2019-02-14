@@ -1,3 +1,28 @@
-<p>
-  header works!
-</p>
+  <div class="header-left">
+    <div class="page-title">
+      页面名称:{{'pageCofnig.name'}}
+    </div>
+    <button type="button" class="btn btn-preview" (click)="preview();" tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+      <i class="material-icons">
+        visibility
+      </i>
+    </button>
+  </div>
+
+  <div class="select-device list-group">
+    <button class="list-group-item" [ngClass]="{'active': isPc}" (click)="changeDevice();" ><i class="material-icons">desktop_windows</i></button>
+    <button class="list-group-item" [ngClass]="{'active': !isPc}" (click)="changeDevice();"><i class="material-icons">smartphone</i></button>
+  </div>
+
+  <div class="header-right">
+    <div>
+      <select name="theme" id="theme" (change)="themeChanged($event)">
+        <option *ngFor="let themeItem of registedThemes"  [value]="themeItem.href">{{themeItem.key}}</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-preview" (click)="save()">
+      <i class="material-icons" style="color:rgba(42, 217, 134, 0.6);">
+        save
+      </i>
+    </button>
+  </div>
