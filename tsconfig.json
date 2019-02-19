@@ -17,6 +17,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "widget-core": [
+        "dist/widget-core"
+      ],
+      "widget-core/*": [
+        "dist/widget-core/*"
+      ]
+    }
   }
 }

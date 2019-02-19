@@ -1,10 +1,10 @@
 <design-header></design-header>
 <main>
-  <design-sidebar></design-sidebar>
+  <design-sidebar *ngIf="!isPreview" ></design-sidebar>
   <design-content></design-content>
-  <design-aside></design-aside>
+  <design-aside *ngIf="!isPreview"></design-aside>
 </main>
-<design-footer></design-footer>
+<design-footer *ngIf="!isPreview"></design-footer>
 
 <!-- <header>
   header

@@ -2,8 +2,11 @@
 // @import './light.scss';
 @import './root.scss';
 @import './bootstrap.scss';
+//引用基本样式
+@import "./layout";
+@import "./preview";
 //引用custom
 @import "./custom";
 @import "./designer/designer";
 //test
-@import "./test";
+// @import "./test";

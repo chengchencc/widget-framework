@@ -1,0 +1,42 @@
+<h6>系统布局</h6>
+<div class="select-widgets">
+  <div class="select-widgets-item" appDraggable appDroppable *ngFor="let item of layoutTemplates"  [passData]="item">
+
+   <div style="width:60px;height:60px;background-color: black">
+     <div style="width:50px;height:50px;border:3px dashed gray; margin:5px 5px;"></div>
+   </div>
+   <div>{{item.name}}</div>
+
+   <div class="select-widgets-item"  *appDraggableHelper>
+     <div style="width:60px;height:60px;background-color: black">
+       <div style="width:50px;height:50px;border:3px dashed gray; margin:5px 5px;"></div>
+     </div>
+     <div>{{item.name}}</div>
+   </div>
+ </div>
+
+</div>
+<h6>布局模板</h6>
+<div class="select-widgets">
+  <div class="select-widgets-item custom-layout-tpl" appDraggable appDroppable *ngFor="let item of customLayoutTemplates"  [passData]="item">
+
+    <div style="width:60px;height:60px;background-color: black">
+      <div style="width:50px;height:50px;border:3px dashed gray; margin:5px 5px;"></div>
+    </div>
+    <div>{{item.name}}</div>
+
+    <div class="toolbar">
+      <button type="button" class="btn btn-dark btn-sm" (click)="remove(item)">
+        <i class="material-icons"> delete_forever </i>
+      </button>
+    </div>
+
+    <div class="select-widgets-item"  *appDraggableHelper>
+      <div style="width:60px;height:60px;background-color: black">
+        <div style="width:50px;height:50px;border:3px dashed gray; margin:5px 5px;"></div>
+      </div>
+      <div>{{item.name}}</div>
+    </div>
+  </div>
+
+</div>

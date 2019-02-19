@@ -126,7 +126,11 @@
             }
         }
 
-
+        .form-control{
+            background-color: $dsn-form-control-bg;
+            border: 1px solid $dsn-form-control-border-color;
+            color: $dsn-form-control-color;
+        }
 
 
     }

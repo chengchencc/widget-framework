@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { DesignerService } from '../../services/designer.service';
 
 @Component({
   selector: 'design-header',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
     {key:"red",href:"/assets/themes/styles.css"}
   ]
 
-  constructor() { }
+  constructor(private designerService: DesignerService) { }
 
   ngOnInit() {
   }
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
 
   preview(){
     // this.onPreview.emit();
+    this.designerService.togglePreview();
   }
 
   themeChanged(event){

@@ -8,23 +8,23 @@
         <div class="panel-header">页面基本信息</div>
         <div class="panel-body scroll-thin">
           <!-- <app-page-info></app-page-info> -->
+          <design-sidebar-info></design-sidebar-info>
         </div>
       </div>
     </tab>
 
-    <tab>
+    <tab [active]="true">
       <ng-template tabHeading>
         <i class="material-icons">web</i>
       </ng-template>
       <div class="panel">
         <div class="panel-header">布局</div>
         <div class="panel-body scroll-thin">
-          <!-- <app-layout-settings></app-layout-settings> -->
-          <!-- <app-layout-widget-selector></app-layout-widget-selector> -->
+          <design-sidebar-layout></design-sidebar-layout>
         </div>
       </div>
     </tab>
-    <tab>
+    <!-- <tab>
       <ng-template tabHeading>
         <i class="material-icons">extension</i>
       </ng-template>
@@ -33,12 +33,10 @@
         <div class="panel-header">基础组件</div>
         <div class="panel-body  scroll-thin">
           基础组件
-          <!-- <app-basic-widget-selector></app-basic-widget-selector> -->
-
         </div>
       </div>
-    </tab>
-    <tab [active]="true">
+    </tab> -->
+    <tab >
       <ng-template tabHeading>
         <i class="material-icons">developer_board</i>
       </ng-template>
@@ -46,9 +44,7 @@
       <div class="panel">
         <div class="panel-header">部件</div>
         <div class="panel-body  scroll-thin">
-          portlet
-          <!-- <app-widget-selector></app-widget-selector> -->
-
+          <design-sidebar-widget></design-sidebar-widget>
         </div>
       </div>
     </tab>

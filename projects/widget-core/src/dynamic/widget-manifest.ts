@@ -11,6 +11,8 @@ export interface RegistedWidgetManifest extends WidgetManifest{
 
 export class WidgetManager {
     private static _registries:{[key:string]:RegistedWidgetManifest} = WidgetManager._registries || {};
+    
+    //@dynamic
     static registry = function(info:WidgetManifest){
         return function (constructor:any) {
             WidgetManager._registries[info.name] = {

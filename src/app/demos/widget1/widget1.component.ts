@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Widget } from './../../core/common/dynamic/widget-manifest';
+import { Widget } from 'widget-core'; //'projects/widget-core/src/dynamic/widget-manifest';
+// import { Widget } from 'widget-core';
+
 
 @Widget({
   name:"demo-widget1"
