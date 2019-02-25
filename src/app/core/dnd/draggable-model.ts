@@ -1,5 +1,5 @@
 import { DropzoneDirective } from './dropzone.directive';
-export interface DragEvent{
+export interface WidgetDragEvent{
     event:PointerEvent,
     data?:any,
     dropzone?:DropzoneDirective

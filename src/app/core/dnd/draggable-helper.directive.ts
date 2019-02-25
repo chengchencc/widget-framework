@@ -2,7 +2,7 @@ import { Directive, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@an
 import { DraggableDirective } from './draggable.directive';
 import { GlobalPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { DragEvent } from './draggable-model';
+import { WidgetDragEvent } from './draggable-model';
 
 
 @Directive({
@@ -35,7 +35,7 @@ export class DraggableHelperDirective implements OnInit, OnDestroy {
     this.overlayRef.dispose();
   }
 
-  private onDragStart(event: DragEvent): void {
+  private onDragStart(event: WidgetDragEvent): void {
     // determine relative start position
     const clientRect = this.draggable.element.nativeElement.getBoundingClientRect();
 
@@ -48,7 +48,7 @@ export class DraggableHelperDirective implements OnInit, OnDestroy {
     this.overlayRef.overlayElement.style.width = `${clientRect.width}px`;
   }
 
-  private onDragMove(event: DragEvent): void {
+  private onDragMove(event: WidgetDragEvent): void {
     if (!this.overlayRef.hasAttached()) {
       // render the helper in the overlay
       this.overlayRef.attach(new TemplatePortal(this.templateRef, this.viewContainerRef));

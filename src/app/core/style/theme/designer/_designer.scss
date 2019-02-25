@@ -1,53 +1,40 @@
-
 @import './variables';
 @import './header';
 @import './sidebar';
 @import './content';
 @import './aside';
 @import './footer';
-
+@import './preview';
 app-designer {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    // color: $dsn-color;
+    height: 100%; // color: $dsn-color;
     main {
         flex: auto;
         display: flex;
         flex-direction: row;
     }
-
     @include design-header;
     @include design-sidebar;
     @include design-content;
     @include design-aside;
     @include design-footer;
-
-    .setting-container{
+    .setting-container {
         padding: 10px;
     }
+    .select-widgets {
+        display: flex;
+        flex-wrap: wrap;
+        .select-widgets-item {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            text-align: center;
+            background: #343a40;
+            padding: 10px;
+        }
+    }
+
 
 }
-
-// header{
-//     flex: none;
-// }
-// main{
-//     flex: auto;
-//     display: flex;
-//     flex-direction: row;
-//     .sidebar{
-//         flex: none;
-//         width: $sidebar-width;
-//     }
-//     .content{
-//         flex: auto;
-//     }
-//     aside{
-//         flex:none;
-//         width: $aside-width;
-//     }
-// }
-// footer{
-//     flex: none;
-// }

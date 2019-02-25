@@ -1,9 +1,14 @@
+//ngx
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+//
 import { DesignerComponent } from './designer.component';
 import { DesignerRoutingModule } from './designer-routing.module';
+
 //common vendors
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgSelectModule } from '@ng-select/ng-select';
 // core
 import { CoreModule } from './../core/core.module';
 
@@ -20,14 +25,20 @@ import { DraggableModule } from '../core/dnd/draggable.module';
 
 //services
 import { DesignerService } from './services/designer.service';
+import { AsideStyleComponent } from './shell/aside/aside-style/aside-style.component';
+import { AsideSettingComponent } from './shell/aside/aside-setting/aside-setting.component';
+import { AsideStructureComponent, AsideStructureTreeComponent } from './shell/aside/aside-structure/aside-structure.component';
+import { AsideEventComponent } from './shell/aside/aside-event/aside-event.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     DesignerRoutingModule,
     TabsModule.forRoot(),
     CoreModule,
-    DraggableModule
+    DraggableModule,
+    NgSelectModule
   ],
   declarations: [
     DesignerComponent,
@@ -38,7 +49,12 @@ import { DesignerService } from './services/designer.service';
     AsideComponent,
     SidebarInfoComponent,
     SidebarLayoutComponent,
-    SidebarWidgetComponent
+    SidebarWidgetComponent,
+    AsideStyleComponent,
+    AsideSettingComponent,
+    AsideStructureComponent,
+    AsideStructureTreeComponent,
+    AsideEventComponent
   ],
   providers:[
     DesignerService

@@ -5,13 +5,30 @@ import { DemoRoutingModule } from './demo-routing.module';
 import { Widget1Component } from './widget1/widget1.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
 import { CoreModule } from '../core/core.module';
+import { BstoastComponent, BsToastService } from './bstoast/bstoast.component';
+
+import { OverlayModule } from "@angular/cdk/overlay";
+import { IframeComponent } from './iframe/iframe.component';
+import { DraggableModule } from '../core/dnd/draggable.module';
+
 
 @NgModule({
-  declarations: [MakeDemoComponent, Widget1Component, LoaderDemoComponent],
+  declarations: [MakeDemoComponent, Widget1Component, LoaderDemoComponent, BstoastComponent, IframeComponent],
   imports: [
     CommonModule,
     DemoRoutingModule,
-    CoreModule
+    CoreModule,
+    OverlayModule,
+    DraggableModule
+  ],
+  exports:[
+    BstoastComponent
+  ],
+  entryComponents:[
+    BstoastComponent
+  ],
+  providers:[
+    BsToastService
   ]
 })
 export class DemoModule { }

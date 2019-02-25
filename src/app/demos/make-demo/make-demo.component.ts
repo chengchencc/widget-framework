@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { BstoastComponent, BsToastService } from '../bstoast/bstoast.component';
 
 @Component({
   selector: 'app-make-demo',
@@ -7,13 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MakeDemoComponent implements OnInit {
 
-  constructor() { 
+  constructor(private toastr: ToastrService,private myToastService: BsToastService) { 
 
   }
 
   ngOnInit() {
   
     console.log(this);
+  }
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
+  }
+
+  showBsToast(){
+     this.myToastService.show("this is my toast!!!");
   }
 
 }

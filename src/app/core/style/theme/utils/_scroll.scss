@@ -1,0 +1,67 @@
+@mixin thin-scroll($selector,$bg,$border:1px solid darken($bg,20%)) {
+    #{$selector}{
+        & {
+            overflow: auto;
+        }
+        // &::-webkit-scrollbar {
+        //     width: 7px;
+        //     height: 10px;
+        // }
+        // &::-webkit-scrollbar-corner {
+        //     background-color: #2b2b2b;
+        // }
+        // &::-webkit-scrollbar-thumb {
+        //     border-left: 2px solid transparent;
+        //      background-color: #2b2b2b;
+        //     border-style: solid;
+        //     border-color: transparent;
+        //     border-width: 0 0 0 1px;
+        //     background-clip: content-box;
+        // }
+        // &::-webkit-scrollbar-track {
+        //     border-left: 2px solid transparent;
+        //      background-color: #4d4d4d;
+        //      background-clip: padding-box;
+        //     border-style: solid;
+        //     border-color: #212121;
+        //     border-width: 0 0 0 1px;
+        // }
+
+        &::-webkit-scrollbar              { 
+            //滚动条整体部分
+            width:7px;
+            height:10px;
+            background-color:lighten($bg,10%);
+        }
+        &::-webkit-scrollbar-button       {
+             //滚动条两端的按钮
+        }
+        &::-webkit-scrollbar-track        {
+            // 外层轨道
+            border-radius:0px;
+            background-color:lighten($bg,20%);
+            border: $border;
+            background-clip: padding-box;
+            border-right: none;
+        }
+        &::-webkit-scrollbar-track-piece  {
+            //内层轨道，滚动条中间部分（除去）
+        }
+        &::-webkit-scrollbar-thumb        {
+            //滚动条里面可以拖动的那个
+            border-radius:0px;
+            background-color:darken($bg,20%);
+            border: $border;
+            background-clip: content-box;
+        }
+        &::-webkit-scrollbar-corner       {
+            //边角
+            // background-color: red;
+        }
+        &::-webkit-resizer                {
+            ///定义右下角拖动块的样式
+            // background-color: red;
+        }
+
+    }
+}

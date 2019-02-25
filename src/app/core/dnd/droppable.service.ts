@@ -1,7 +1,7 @@
 import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
-import { DragEvent } from './draggable-model';
+import { WidgetDragEvent } from './draggable-model';
 import { DropzoneDirective } from './dropzone.directive';
 
  interface Distance{
@@ -11,13 +11,13 @@ import { DropzoneDirective } from './dropzone.directive';
 
 @Injectable()
 export class DroppableService {
-  dragStart$: Observable<DragEvent>;
-  dragMove$: Observable<DragEvent>;
-  dragEnd$: Observable<DragEvent>;
+  dragStart$: Observable<WidgetDragEvent>;
+  dragMove$: Observable<WidgetDragEvent>;
+  dragEnd$: Observable<WidgetDragEvent>;
 
-  private dragStartSubject = new Subject<DragEvent>();
-  private dragMoveSubject = new Subject<DragEvent>();
-  private dragEndSubject = new Subject<DragEvent>();
+  private dragStartSubject = new Subject<WidgetDragEvent>();
+  private dragMoveSubject = new Subject<WidgetDragEvent>();
+  private dragEndSubject = new Subject<WidgetDragEvent>();
 
   dropzoneDirectiveInstance = new Array<DropzoneDirective>();
 
@@ -30,7 +30,7 @@ export class DroppableService {
     console.log("new droppable service.");
   }
 
-  onDragStart(event: DragEvent): void {
+  onDragStart(event: WidgetDragEvent): void {
     this.dragStartSubject.next(event);
 
     // if (this.parent) {
@@ -38,7 +38,7 @@ export class DroppableService {
     // }
   }
 
-  onDragMove(event: DragEvent): void {
+  onDragMove(event: WidgetDragEvent): void {
 
     this.closedDirective = this.getClosedDirective(event);
 
@@ -49,7 +49,7 @@ export class DroppableService {
     // }
   }
 
-  onDragEnd(event: DragEvent): void {
+  onDragEnd(event: WidgetDragEvent): void {
     
 
     this.dragEndSubject.next(event);
@@ -60,7 +60,7 @@ export class DroppableService {
     // }
   }
 
-  getClosedDirective(event: DragEvent) {
+  getClosedDirective(event: WidgetDragEvent) {
     const distances = this.dropzoneDirectiveInstance.map((current) => {
       let e = event.event;
       if (this.isInside(e, current.clientRect)) {

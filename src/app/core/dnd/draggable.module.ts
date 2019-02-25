@@ -11,6 +11,7 @@ import { SortableDirective } from "./sortable.directive";
 import { DropzoneDirective } from "./dropzone.directive";
 import { DroppableDirective } from "./droppable.directive";
 import { DroppableService } from './droppable.service';
+import { ResizableDirective } from './resizable.directive';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DroppableService } from './droppable.service';
     SortableListDirective,
     SortableDirective,
     DropzoneDirective,
-    DroppableDirective
+    DroppableDirective,
+    ResizableDirective
   ],
   exports: [
     DraggableDirective,
@@ -33,7 +35,8 @@ import { DroppableService } from './droppable.service';
     SortableListDirective,
     SortableDirective,
     DropzoneDirective,
-    DroppableDirective
+    DroppableDirective,
+    ResizableDirective
   ],
   providers: [
     DroppableService

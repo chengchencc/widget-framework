@@ -1,3 +1,8 @@
 widget-layout{
     display: block;
+    position: relative;
+    &.body{
+        height: 100%;
+    }
+
 }

@@ -1,9 +1,9 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, OnInit, Output, SkipSelf, ViewChildren, QueryList, ContentChildren, ViewChild, ViewContainerRef, ComponentFactoryResolver, ContentChild, AfterContentInit, AfterViewInit, Input } from '@angular/core';
 import { DroppableService } from './droppable.service';
-import { DragEvent } from './draggable-model';
+import { WidgetDragEvent } from './draggable-model';
 
 @Directive({
-  selector: 'app-layout,[appDropzone]'
+  selector: '[appDropzone]'
   // selector: '[appDropzone],[role-layout],app-layout'
 })
 export class DropzoneDirective implements OnInit,AfterContentInit,AfterViewInit {
@@ -14,8 +14,8 @@ export class DropzoneDirective implements OnInit,AfterContentInit,AfterViewInit 
 
   @Input() dropView :ViewContainerRef;
 
-  @Output() drop = new EventEmitter<DragEvent>();
-  @Output() remove = new EventEmitter<DragEvent>();
+  @Output() drop = new EventEmitter<WidgetDragEvent>();
+  @Output() remove = new EventEmitter<WidgetDragEvent>();
 
   public clientRect: ClientRect;
 
@@ -69,15 +69,21 @@ export class DropzoneDirective implements OnInit,AfterContentInit,AfterViewInit 
     this.entered = false;
   }
 
-  private onDragStart(event: DragEvent): void {
-    this.clientRect = this.element.nativeElement.getBoundingClientRect();
+  private onDragStart(event: WidgetDragEvent): void {
 
     this.activated = true;
+
+    //延迟绑定，防止clientRact计算不准的情况。
+    setTimeout(() => {
+      this.clientRect = this.element.nativeElement.getBoundingClientRect();
+      
+    }, 0);
+
 
     // console.log(this.element, this.droppableService.dropzoneDirectiveInstance);
   }
 
-  private onDragEnd(event: DragEvent): void {
+  private onDragEnd(event: WidgetDragEvent): void {
     if (!this.activated) {
       return;
     }
@@ -102,14 +108,14 @@ export class DropzoneDirective implements OnInit,AfterContentInit,AfterViewInit 
     // console.log(this.children);
   }
 
-  private isEventInside(event: DragEvent) {
+  private isEventInside(event: WidgetDragEvent) {
     return event.event.clientX >= this.clientRect.left &&
     event.event.clientX <= this.clientRect.right &&
     event.event.clientY >= this.clientRect.top &&
     event.event.clientY <= this.clientRect.bottom;
   }
 
-  private isClosed(event:DragEvent){
+  private isClosed(event:WidgetDragEvent){
     return this.droppableService.closedDirective === this;
 
   }

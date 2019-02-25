@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { LayoutService } from '../common/layout.service';
+import { LayoutConfig } from '../common/page.interface';
 
 @Component({
-  selector: 'app-preview',
+  selector: 'widget-preview',
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.scss']
 })
 export class PreviewComponent implements OnInit {
 
-  constructor() { }
+  layoutConfig: LayoutConfig;
+
+  constructor(public layoutService:LayoutService) { 
+    this.layoutConfig = layoutService.layoutConfig;
+  }
 
   ngOnInit() {
   }

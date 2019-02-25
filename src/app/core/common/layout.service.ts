@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { LayoutComponent } from '../layout/layout.component';
 import { LayoutConfig, LayoutTemplate } from './page.interface';
 import * as _ from 'lodash';
-import { DragEvent } from '../dnd/draggable-model';
+import { WidgetDragEvent } from '../dnd/draggable-model';
 import { Story } from './story/story';
 
 @Injectable({
@@ -162,7 +162,7 @@ export class LayoutService {
    * @param event 
    * @param ref 
    */
-  move(event: DragEvent, ref: LayoutConfig) {
+  move(event: WidgetDragEvent, ref: LayoutConfig) {
     var d = <LayoutTemplate>event.data;
     this.append(ref, _.cloneDeep(d.layoutConfig));
     return;

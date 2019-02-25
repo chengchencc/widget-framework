@@ -1,7 +1,7 @@
 <design-header></design-header>
 <main>
-  <design-sidebar *ngIf="!isPreview" ></design-sidebar>
-  <design-content></design-content>
+  <design-sidebar *ngIf="!isPreview"></design-sidebar>
+  <design-content [isPreview]="isPreview"></design-content>
   <design-aside *ngIf="!isPreview"></design-aside>
 </main>
 <design-footer *ngIf="!isPreview"></design-footer>

@@ -18,6 +18,7 @@
             background: $dsn-tab-bg;
             border: none;
             border-right: $dsn-border;
+            flex: none;
             .nav-item {
                 margin-right: -1px;
                 border: $dsn-border;
@@ -89,6 +90,19 @@
                 border-style: solid;
                 border-color: $dsn-border;
                 border-width: 0 0 0 1px;
+            }
+        }
+
+        .breadcrumb{
+            font-size: 14px;
+            padding: 0px;
+        
+            .breadcrumb-item + .breadcrumb-item{
+                padding-right: "2px";
+                &::before{
+                    content: ">";
+                    padding-right: "2px";
+                }
             }
         }
     }

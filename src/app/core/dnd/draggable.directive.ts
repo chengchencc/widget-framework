@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, HostBinding, HostListener, Output, ElementRef, Input } from '@angular/core';
-import { DragEvent } from './draggable-model';
+import { WidgetDragEvent } from './draggable-model';
 
 
 @Directive({
@@ -13,9 +13,9 @@ export class DraggableDirective {
   // to trigger pointer-events polyfill
   @HostBinding('attr.touch-action') touchAction = 'none';
 
-  @Output() dragStart = new EventEmitter<DragEvent>();
-  @Output() dragMove = new EventEmitter<DragEvent>();
-  @Output() dragEnd = new EventEmitter<DragEvent>();
+  @Output() dragStart = new EventEmitter<WidgetDragEvent>();
+  @Output() dragMove = new EventEmitter<WidgetDragEvent>();
+  @Output() dragEnd = new EventEmitter<WidgetDragEvent>();
 
   @HostBinding('class.dragging') dragging = false;
 

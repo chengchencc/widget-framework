@@ -25,9 +25,9 @@ export interface LayoutConfig{
     settings?:any,
     parent?:LayoutConfig,
     layout:LayoutConfig[],
-    type:'grid'|'body'|'div'|'group',
-    pathArray?:string[]
-    widgets?:any[]
+    type:'body'|'div'|'grid'|'group'|'widget',
+    pathArray?:string[],
+    widgetInfo?:WidgetInfo
 }
 
 /**
@@ -38,3 +38,8 @@ export interface LayoutTemplate{
     id:string,
     layoutConfig:LayoutConfig
   }
+
+  export interface WidgetInfo{
+
+  }
+

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'design-content',
@@ -6,6 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
+
+  @Input() isPreview:boolean;
+
+  @HostBinding("class.is-preview")
+  public get previewing() : boolean {
+    return this.isPreview;
+  }
+  
 
   constructor() { }
 

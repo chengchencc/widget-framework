@@ -2,7 +2,7 @@
   preview works!
 </p> -->
 
-<widget-layout>
+<!-- <widget-layout>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-6 bg-info">left</div>
@@ -15,5 +15,6 @@
   <widget-layout class="col col-sm-6 col-lg-4 bg-primary">right</widget-layout>
   <widget-layout class="col col-sm- col-lg-4 bg-danger">right</widget-layout>
 
-</widget-layout>
+</widget-layout> -->
 
+<widget-layout [config]="layoutConfig" appDropzone (drop)="layoutService.move($event,layoutConfig)"></widget-layout>
