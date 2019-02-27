@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, Inject, ViewChild, ViewContainerRef, Injector, ViewRef } from '@angular/core';
 import { WidgetManager, RegistedWidgetManifest } from 'widget-core'; //'projects/widget-core/src/dynamic/widget-manifest';
 import { Story, StoryInterface } from '../../core/common/story/story';
-import { DynamicLoaderService } from './../../core/common/dynamic-loader.service';
+import { DynamicLoaderService } from '../../core/common/dynamic-loader.service';
 
 @Component({
   selector: 'demo-loader-demo',
@@ -25,12 +25,6 @@ export class LoaderDemoComponent implements OnInit {
 
   ngOnInit() {
 
-    // console.log(this.widgetLoader.getRegistries());
-
-    // console.log(this.widgetLoader.loadWidgetLoaderManifest());
-
-    // this.widgetRegisted = WidgetManager.prototype.getAllRegistries();
-    // console.log(this.widgetRegisted);
   }
 
   async loadWidget(){
@@ -43,7 +37,7 @@ export class LoaderDemoComponent implements OnInit {
     // console.log(this.viewContainer);
     // this.viewContainer.createComponent(componentInfo.componentFactory,0,componentInfo.componentInjector);
     // this.widgetContainer.insert(componentInstance.hostView);
-    componentInstance.hostView.destroy();
+    // componentInstance.hostView.destroy();
     console.log(componentInstance.hostView);
     console.log(this.widgetRegisted);
     console.log(WidgetManager.prototype.getAllRegistries());

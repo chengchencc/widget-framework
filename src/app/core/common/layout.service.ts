@@ -6,9 +6,7 @@ import * as _ from 'lodash';
 import { WidgetDragEvent } from '../dnd/draggable-model';
 import { Story } from './story/story';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LayoutService {
 
   //布局选中事件

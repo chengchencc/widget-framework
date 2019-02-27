@@ -12,6 +12,9 @@ import { Story } from './common/story/story';
 import { StoryLocal } from './common/story/story-local';
 import { StoryHttp } from './common/story/story-http';
 import { WidgetContainerComponent } from './widget/widget.component';
+import { DynamicLoaderService } from './common/dynamic-loader.service';
+import { PageService } from './common/page.service';
+import { LayoutService } from './common/layout.service';
 
 const declareAndExports = [
   LayoutComponent, 
@@ -29,8 +32,10 @@ const declareAndExports = [
     WidgetContainerComponent
   ],
   providers:[
-    // Story
-    // {provide:Story,useClass:StoryLocal}
+    Story,
+    DynamicLoaderService,
+    LayoutService,
+    PageService
   ],
   exports:[
     ...declareAndExports

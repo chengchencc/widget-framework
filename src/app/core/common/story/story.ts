@@ -12,9 +12,7 @@ const Custom_Layout_Template = "Custom_Layout_Template";
 
 const Widget_Manifest_Url = "/assets/widgets/widget.manifest.json";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class Story implements StoryInterface {
 
     /**
