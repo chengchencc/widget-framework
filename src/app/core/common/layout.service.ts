@@ -4,7 +4,7 @@ import { LayoutComponent } from '../layout/layout.component';
 import { LayoutConfig, LayoutTemplate } from './page.interface';
 import * as _ from 'lodash';
 import { WidgetDragEvent } from '../dnd/draggable-model';
-import { Story } from './story/story';
+import { Store } from './store/store';
 
 @Injectable()
 export class LayoutService {
@@ -125,7 +125,7 @@ export class LayoutService {
     parent: null
   };
 
-  constructor(private story:Story) {
+  constructor(private store:Store) {
     this.layoutConfig = this.load();
     console.log("first loaded layout config...", this.layoutConfig);
     this.loadLayoutTemplates();
@@ -255,13 +255,13 @@ export class LayoutService {
     console.log("saving...", this.layoutConfig);
     var result = this._serializeLayout(this.layoutConfig);
     console.log(result);
-    this.story.savePageLayoutConfig("pagename",result);
+    this.store.savePageLayoutConfig("pagename",result);
   }
   /**
    * 第一次加载页面布局
    */
   load(): LayoutConfig {
-    const s = this.story.loadPageLayoutConfig("pagename");
+    const s = this.store.loadPageLayoutConfig("pagename");
     if (s) {
       var layout = this._deserializeLayout(s);
       this._recursiveGenerateParent(layout);
@@ -281,11 +281,11 @@ export class LayoutService {
   saveLayoutTemplate() {
     // console.log("save custom layout template", this._serializeLayout(this.customLayoutTemplates));
     // window.localStorage.setItem("layout-template", this._serializeLayout(this.customLayoutTemplates));
-    this.story.saveCustomLayoutTemplate(this._serializeLayout(this.customLayoutTemplates));
+    this.store.saveCustomLayoutTemplate(this._serializeLayout(this.customLayoutTemplates));
   }
 
   loadLayoutTemplates = () => {
-    let tpls = this.story.loadCustomLayoutTemplate(); //window.localStorage.getItem("layout-template");
+    let tpls = this.store.loadCustomLayoutTemplate(); //window.localStorage.getItem("layout-template");
     if (tpls) {
       this.customLayoutTemplates = JSON.parse(tpls);
     }

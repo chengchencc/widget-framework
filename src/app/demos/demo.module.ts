@@ -9,6 +9,8 @@ import { BstoastComponent, BsToastService } from './bstoast/bstoast.component';
 import { OverlayModule } from "@angular/cdk/overlay";
 import { IframeComponent } from './iframe/iframe.component';
 import { DraggableModule } from '../core/dnd/draggable.module';
+import { StoreHttp } from '../core/common/store/store-http';
+import { Store } from '../core/common/store/store';
 
 
 @NgModule({
@@ -16,7 +18,7 @@ import { DraggableModule } from '../core/dnd/draggable.module';
   imports: [
     CommonModule,
     DemoRoutingModule,
-    CoreModule,
+    CoreModule.forRoot({runtimeType:"runtime"},[{provide:Store,useClass:StoreHttp}]),
     OverlayModule,
     DraggableModule
   ],

@@ -3,8 +3,8 @@ import { WidgetInfo } from '../common/page.interface';
 
 @Component({
   selector: 'widget-container',
-  templateUrl: './widget.component.html',
-  styleUrls: ['./widget.component.scss']
+  templateUrl: './widget-container.component.html',
+  styleUrls: ['./widget-container.component.scss']
 })
 export class WidgetContainerComponent implements OnInit {
 

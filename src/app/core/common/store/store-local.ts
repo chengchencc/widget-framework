@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
-import { StoryInterface, Story } from './story';
+import { StoreInterface, Store } from './store';
 
 // @Injectable()
-export class StoryLocal extends Story{
+export class StoreLocal extends Store{
     whoAmI(): string {
         return "story-local";
     }

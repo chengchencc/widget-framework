@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DynamicLoaderService } from '../../../../core/common/dynamic-loader.service';
+import { WidgetLoaderManifest } from '../../../../core/common/page.interface';
+import { Store } from 'src/app/core/common/store/store';
 
 @Component({
   selector: 'design-sidebar-widget',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarWidgetComponent implements OnInit {
 
-  constructor() { }
+  widgetManifests:WidgetLoaderManifest[];
 
-  ngOnInit() {
+  constructor(private dloader:DynamicLoaderService,private store:Store) { }
+
+  async ngOnInit() {
+    this.widgetManifests = await this.dloader.loadWidgetLoaderManifest()
   }
 
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -8,18 +8,29 @@ import { DraggableModule } from './dnd/draggable.module';
 import { LayoutComponent } from './layout/layout.component';
 import { PreviewComponent } from './preview/preview.component';
 // provider
-import { Story } from './common/story/story';
-import { StoryLocal } from './common/story/story-local';
-import { StoryHttp } from './common/story/story-http';
-import { WidgetContainerComponent } from './widget/widget.component';
+import { Store } from './common/store/store';
+import { StoreLocal } from './common/store/store-local';
+import { StoreHttp } from './common/store/store-http';
+import { WidgetContainerComponent } from './widget/widget-container.component';
 import { DynamicLoaderService } from './common/dynamic-loader.service';
 import { PageService } from './common/page.service';
 import { LayoutService } from './common/layout.service';
+import { RuntimeConfig } from './common/page.interface';
 
 const declareAndExports = [
-  LayoutComponent, 
+  LayoutComponent,
   PreviewComponent
 ];
+
+const providers = [
+  Store,
+  // DynamicLoaderService,
+  // LayoutService,
+  PageService];
+
+  const defaultRuntimeConfig:RuntimeConfig={
+    runtimeType:'design'
+  };
 
 @NgModule({
   imports: [
@@ -32,13 +43,29 @@ const declareAndExports = [
     WidgetContainerComponent
   ],
   providers:[
-    Story,
-    DynamicLoaderService,
-    LayoutService,
-    PageService
+  DynamicLoaderService,
+  LayoutService
   ],
-  exports:[
+  exports: [
     ...declareAndExports
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  static forRoot(config: RuntimeConfig=defaultRuntimeConfig,replacedProviders:Provider[]=[]): ModuleWithProviders {
+
+    //合并默认provider与replaced providers
+    const endpointProviders = [...providers,...replacedProviders];
+
+    console.log(config);
+    
+    const result = {
+      ngModule: CoreModule,
+      providers: [
+        ...endpointProviders,
+        {provide: 'runtimeConfig', useValue: config}
+      ]
+    };
+    return result;
+  }
+
+}

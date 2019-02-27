@@ -3,7 +3,7 @@ import { from, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { WidgetLoaderManifest } from '../page.interface';
 
-export interface StoryInterface {
+export interface StoreInterface {
     whoAmI(): string;
 }
 
@@ -13,7 +13,7 @@ const Custom_Layout_Template = "Custom_Layout_Template";
 const Widget_Manifest_Url = "/assets/widgets/widget.manifest.json";
 
 @Injectable()
-export class Story implements StoryInterface {
+export class Store implements StoreInterface {
 
     /**
      *
@@ -22,7 +22,7 @@ export class Story implements StoryInterface {
     }
 
     whoAmI(): string {
-        return "story abstract";
+        return "store";
     }
 
     /**

@@ -1,5 +1,9 @@
 import { ComponentFactory, Injector, ComponentRef } from "@angular/core";
 
+export interface RuntimeConfig{
+    runtimeType?:'design'|'runtime';
+}
+
 /**
  * 一个页面的完整配置信息
  */
@@ -42,7 +46,7 @@ export interface LayoutTemplate{
   }
 
   export interface WidgetInfo{
-
+    
   }
 
 

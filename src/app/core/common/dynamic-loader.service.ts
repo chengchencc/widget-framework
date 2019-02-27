@@ -1,5 +1,5 @@
 import { Injectable, ViewContainerRef, ModuleWithComponentFactories, Injector, ComponentFactory, Compiler } from '@angular/core';
-import { Story } from './story/story';
+import { Store } from './store/store';
 import * as WidgetCore from 'widget-core';
 import { WidgetLoaderManifest } from './page.interface';
 import { Observable, of } from 'rxjs';
@@ -32,11 +32,11 @@ import * as BrowserAnimations from '@angular/platform-browser/animations';
 export class DynamicLoaderService {
 
   constructor(
-    private story: Story,
+    private store: Store,
     private compiler: Compiler,
     private injector: Injector
   ) {
-    console.log(story.whoAmI());
+    console.log(store.whoAmI());
   }
 
 
@@ -53,7 +53,7 @@ export class DynamicLoaderService {
    * 获取部件注册信息
    */
   async loadWidgetLoaderManifest(): Promise<WidgetLoaderManifest[]> {
-    const result = await this.story.loadWidgetLoaderManifest().toPromise()
+    const result = await this.store.loadWidgetLoaderManifest().toPromise()
     console.log("widget loader manifest", result);
     return result;
   }

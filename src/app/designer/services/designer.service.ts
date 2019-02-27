@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Story, StoryInterface } from '../../core/common/story/story';
+import { Store, StoreInterface } from '../../core/common/store/store';
 import { PageService } from '../../core/common/page.service';
 import { Observable, Subject } from 'rxjs';
 import { LayoutComponent } from 'src/app/core/layout/layout.component';
@@ -14,8 +14,8 @@ export class DesignerService {
   onTogglePreviewState$: Observable<boolean> = this.togglePreviewSubject.asObservable();
 
 
-  constructor(private story: Story, private pageService: PageService) {
-    console.log(this.story.whoAmI());
+  constructor(private store: Store, private pageService: PageService) {
+    console.log(this.store.whoAmI());
   }
 
   togglePreview() {

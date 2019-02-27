@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, Inject, ViewChild, ViewContainerRef, Injector, ViewRef } from '@angular/core';
 import { WidgetManager, RegistedWidgetManifest } from 'widget-core'; //'projects/widget-core/src/dynamic/widget-manifest';
-import { Story, StoryInterface } from '../../core/common/story/story';
+import { Store, StoreInterface } from '../../core/common/store/store';
 import { DynamicLoaderService } from '../../core/common/dynamic-loader.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class LoaderDemoComponent implements OnInit {
   widgetRegisted:any[]=[];
   @ViewChild("widgetContainer", { read: ViewContainerRef }) widgetContainer:ViewContainerRef;
 
-  constructor(@Inject(Story) story:StoryInterface,private widgetLoader:DynamicLoaderService,private injector: Injector,
+  constructor(@Inject(Store) story:StoreInterface,private widgetLoader:DynamicLoaderService,private injector: Injector,
   private viewContainer:ViewContainerRef) { 
     console.log(story.whoAmI());
     console.log(injector);
