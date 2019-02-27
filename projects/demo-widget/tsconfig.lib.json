@@ -20,7 +20,7 @@
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,//默认为true。https://github.com/angular/angular/issues/19698
+    "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "enableResourceInlining": true

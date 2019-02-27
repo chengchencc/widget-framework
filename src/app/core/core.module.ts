@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
 //custom dnd
 import { DraggableModule } from './dnd/draggable.module';
 // custom components
@@ -19,6 +21,7 @@ const declareAndExports = [
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     DraggableModule
   ],
   declarations: [
@@ -26,6 +29,7 @@ const declareAndExports = [
     WidgetContainerComponent
   ],
   providers:[
+    // Story
     // {provide:Story,useClass:StoryLocal}
   ],
   exports:[

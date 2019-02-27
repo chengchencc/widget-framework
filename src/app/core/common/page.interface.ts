@@ -1,3 +1,5 @@
+import { ComponentFactory, Injector, ComponentRef } from "@angular/core";
+
 /**
  * 一个页面的完整配置信息
  */
@@ -43,3 +45,30 @@ export interface LayoutTemplate{
 
   }
 
+
+
+export interface WidgetLoaderManifest {
+    //名称
+    name: string;
+    //显示名称
+    displayName: string;
+    //预览图地址
+    previewUrl?: string;
+    //路径url
+    path: string;
+    src: string;
+    //module name
+    moduleName: string;
+    //描述
+    description?: string;
+    //是否已注册
+    registered?: boolean;
+    //依赖的第三方插件
+    deps?: string[]
+}
+
+export interface DynamicComponetMetaData {
+    factory: ComponentFactory<any>;
+    injector: Injector;
+    componentRef: ComponentRef<any>;
+}

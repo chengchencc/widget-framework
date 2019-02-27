@@ -1,0 +1,12 @@
+[
+    {
+        "name":"demo-widget",
+        "displayName":"Demo",
+        "previewUrl":"",
+        "path":"DemoWidgetModule",
+        "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
+        "moduleName":"DemoWidgetModule",
+        "description":"by angular library",
+        "registered":true
+    }
+]

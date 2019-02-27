@@ -3,9 +3,9 @@ import { Widget } from 'widget-core'; //'projects/widget-core/src/dynamic/widget
 // import { Widget } from 'widget-core';
 
 
-@Widget({
-  name:"demo-widget1"
-})
+// @Widget({
+//   name:"demo-widget1"
+// })
 @Component({
   selector: 'demo-widget1',
   templateUrl: './widget1.component.html',

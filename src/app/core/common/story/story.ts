@@ -1,4 +1,7 @@
 import { InjectionToken, Injectable } from '@angular/core';
+import { from, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { WidgetLoaderManifest } from '../page.interface';
 
 export interface StoryInterface {
     whoAmI(): string;
@@ -7,11 +10,19 @@ export interface StoryInterface {
 const Page_Layout_Config = "Page_Layout_Config";
 const Custom_Layout_Template = "Custom_Layout_Template";
 
+const Widget_Manifest_Url = "/assets/widgets/widget.manifest.json";
 
 @Injectable({
     providedIn: "root"
 })
 export class Story implements StoryInterface {
+
+    /**
+     *
+     */
+    constructor(private http:HttpClient) {
+    }
+
     whoAmI(): string {
         return "story abstract";
     }
@@ -41,5 +52,8 @@ export class Story implements StoryInterface {
         window.localStorage.setItem(Custom_Layout_Template,tpl);
     }
 
+    loadWidgetLoaderManifest():Observable<WidgetLoaderManifest[]>{
+        return this.http.get<WidgetLoaderManifest[]>(Widget_Manifest_Url);
+    }
 
 } 

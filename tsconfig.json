@@ -24,6 +24,12 @@
       ],
       "widget-core/*": [
         "dist/widget-core/*"
+      ],
+      "demo-widget": [
+        "dist/demo-widget"
+      ],
+      "demo-widget/*": [
+        "dist/demo-widget/*"
       ]
     }
   }

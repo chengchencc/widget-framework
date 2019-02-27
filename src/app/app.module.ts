@@ -1,5 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   imports: [
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     // OverlayModule,
     ToastrModule.forRoot() // ToastrModule added

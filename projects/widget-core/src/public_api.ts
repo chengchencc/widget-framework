@@ -7,3 +7,4 @@ export * from './lib/widget-core.component';
 export * from './lib/widget-core.module';
 
 export * from './dynamic/widget-manifest';
+export * from './dynamic/widget-manager';
