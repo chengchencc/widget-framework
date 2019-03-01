@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { LayoutComponent } from '../layout/layout.component';
-import { LayoutConfig, LayoutTemplate } from './page.interface';
+import { LayoutConfig, LayoutTemplate, WidgetInfo, WidgetLoaderManifest } from './page.interface';
 import * as _ from 'lodash';
 import { WidgetDragEvent } from '../dnd/draggable-model';
 import { Store } from './store/store';
@@ -14,7 +14,7 @@ export class LayoutService {
   private layoutSelectedSubject = new Subject<LayoutComponent>();
 
   //当前选中的布局配置信息改变事件
-  onActivedLayoutSettingsChanged$:Observable<any>;
+  onActivedLayoutSettingsChanged$: Observable<any>;
   private activedLayoutSettingsChangeSubject = new Subject<any>();
 
   //widget选中事件
@@ -112,6 +112,79 @@ export class LayoutService {
         ]
       }
     },
+    {
+      id: "row-4-4-4",
+      name: "row-4-4-4",
+      layoutConfig: {
+        id: null,
+        classes: ["row"],
+        style: null,
+        type: "group",
+        layout: [
+          {
+            id: null,
+            classes: ["col-4"],
+            style: null,
+            type: "div",
+            layout: []
+          },
+          {
+            id: null,
+            classes: ["col-4"],
+            style: null,
+            type: "div",
+            layout: []
+          },
+          {
+            id: null,
+            classes: ["col-4"],
+            style: null,
+            type: "div",
+            layout: []
+          }
+        ]
+      }
+    },
+    {
+      id: "row-3-3-3",
+      name: "row-3-3-3",
+      layoutConfig: {
+        id: null,
+        classes: ["row"],
+        style: null,
+        type: "group",
+        layout: [
+          {
+            id: null,
+            classes: ["col-3"],
+            style: null,
+            type: "div",
+            layout: []
+          },
+          {
+            id: null,
+            classes: ["col-3"],
+            style: null,
+            type: "div",
+            layout: []
+          },
+          {
+            id: null,
+            classes: ["col-3"],
+            style: null,
+            type: "div",
+            layout: []
+          },
+          {
+            id: null,
+            classes: ["col-3"],
+            style: null,
+            type: "div",
+            layout: []
+          }
+        ]
+      }
+    },
   ];
   //自定义布局模板
   customLayoutTemplates: LayoutTemplate[] = [];
@@ -125,7 +198,7 @@ export class LayoutService {
     parent: null
   };
 
-  constructor(private store:Store) {
+  constructor(private store: Store) {
     this.layoutConfig = this.load();
     console.log("first loaded layout config...", this.layoutConfig);
     this.loadLayoutTemplates();
@@ -158,12 +231,32 @@ export class LayoutService {
   /**
    * 拖放布局
    * @param event 
-   * @param ref 
+   * @param parent 
    */
-  move(event: WidgetDragEvent, ref: LayoutConfig) {
-    var d = <LayoutTemplate>event.data;
-    this.append(ref, _.cloneDeep(d.layoutConfig));
-    return;
+  move(event: WidgetDragEvent, parent: LayoutConfig) {
+
+    console.log("layout service move ::", event);
+    console.log(typeof event.data);
+    let droppedLayoutConfig:LayoutConfig;
+    //拖动的是widget
+    if (event.data.type === "widget") {
+      const widgetManifest = <WidgetLoaderManifest>event.data.data;
+      droppedLayoutConfig={
+        id:"",
+        layout:[],
+        type:'widget',
+        widgetInfo:{
+          name:widgetManifest.name
+        }
+      }
+    } else {
+      //拖动的是layout
+      var d = <LayoutTemplate>event.data;
+      droppedLayoutConfig = d.layoutConfig;
+    }
+    this.append(parent, _.cloneDeep(droppedLayoutConfig));
+
+    // return;
   }
 
   /**
@@ -187,6 +280,7 @@ export class LayoutService {
       pathArray: template.pathArray,
       parent: parent,
       type: template.type,
+      widgetInfo:template.widgetInfo
     }
 
 
@@ -255,7 +349,7 @@ export class LayoutService {
     console.log("saving...", this.layoutConfig);
     var result = this._serializeLayout(this.layoutConfig);
     console.log(result);
-    this.store.savePageLayoutConfig("pagename",result);
+    this.store.savePageLayoutConfig("pagename", result);
   }
   /**
    * 第一次加载页面布局
@@ -271,7 +365,7 @@ export class LayoutService {
       return this.defaultLayout;
     }
   }
-//模板相关
+  //模板相关
 
   addLayoutTemplate = (tpl: LayoutTemplate) => {
     this.customLayoutTemplates.push(tpl);
@@ -297,7 +391,7 @@ export class LayoutService {
   }
 
   //
-  changeActivedLayoutSettings(newValue:any){
+  changeActivedLayoutSettings(newValue: any) {
     // this.activedLayout.config.settings = newValue;
     // this.activedLayoutSettingsChangeSubject.next(newValue);
   }

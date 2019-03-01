@@ -18,7 +18,7 @@ import { Store } from '../core/common/store/store';
   imports: [
     CommonModule,
     DemoRoutingModule,
-    CoreModule.forRoot({runtimeType:"runtime"},[{provide:Store,useClass:StoreHttp}]),
+    CoreModule.forRoot({runtimeType:"runtime"},[{provide:Store,useClass:Store}]),
     OverlayModule,
     DraggableModule
   ],

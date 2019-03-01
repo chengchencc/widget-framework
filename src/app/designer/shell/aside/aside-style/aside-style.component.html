@@ -30,8 +30,15 @@
 
       <ng-select [items]="classes" autofocus name="classes" [multiple]="true" [(ngModel)]="config.classes">
       </ng-select>
-
       <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="position">position</label>
+      <select class="form-control form-control-sm" name="position" id="position" [(ngModel)]="styles['position']">
+        <option *ngFor="let item of flexSelectors.position" [value]="item">{{item}}</option>
+      </select>
+      <small id="positionHelper" class="text-muted">position</small>
     </div>
 
     <div class="form-group">

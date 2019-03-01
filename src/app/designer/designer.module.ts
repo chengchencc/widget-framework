@@ -8,6 +8,9 @@ import { DesignerRoutingModule } from './designer-routing.module';
 
 //common vendors
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 // core
 import { CoreModule } from './../core/core.module';
@@ -38,7 +41,11 @@ import { AsideEventComponent } from './shell/aside/aside-event/aside-event.compo
     TabsModule.forRoot(),
     CoreModule.forRoot(),
     DraggableModule,
-    NgSelectModule
+    NgSelectModule,
+    TabsModule.forRoot(),
+    CollapseModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
   ],
   declarations: [
     DesignerComponent,

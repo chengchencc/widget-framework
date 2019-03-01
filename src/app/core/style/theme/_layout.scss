@@ -3,6 +3,13 @@ widget-layout{
     position: relative;
     &.body{
         height: 100%;
+        overflow: auto;
+    }
+    .setting-tool{
+        display: none;
     }
 
+}
+widget-container{
+    display: block;
 }

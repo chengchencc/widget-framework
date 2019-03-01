@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { WidgetInfo } from '../common/page.interface';
+import { DynamicLoaderService } from '../common/dynamic-loader.service';
 
 @Component({
   selector: 'widget-container',
@@ -8,11 +9,32 @@ import { WidgetInfo } from '../common/page.interface';
 })
 export class WidgetContainerComponent implements OnInit {
 
-@Input() info:WidgetInfo;
+  widgetRegisted: any[] = [];
 
-  constructor() { }
+  isLoading:boolean = false;
 
-  ngOnInit() {
+  @Input() info: WidgetInfo;
+
+  @ViewChild("wc", { read: ViewContainerRef })
+  widgetContainer: ViewContainerRef;
+
+  constructor(private widgetLoader:DynamicLoaderService,) { }
+
+  async ngOnInit() {
+
+    this.toggleLoading();
+
+    const componentInfo = await this.widgetLoader.loadAndInitComponent(this.info.name);
+
+    var componentInstance = this.widgetContainer.createComponent(componentInfo.componentFactory, 0, componentInfo.componentInjector);
+
+    this.widgetRegisted.push(componentInstance);
+
+    this.toggleLoading();
+  }
+
+  toggleLoading(){
+    this.isLoading = !this.isLoading;
   }
 
 }

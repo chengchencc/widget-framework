@@ -126,10 +126,17 @@
             }
         }
 
-        .form-control{
+        .form-control {
             background-color: $dsn-form-control-bg;
             border: 1px solid $dsn-form-control-border-color;
             color: $dsn-form-control-color;
+            &:focus {
+                color: $dsn-form-control-color;
+                background-color: $dsn-bg;
+            }
+            option {
+                color: $dsn-form-control-color;
+            }
         }
 
 

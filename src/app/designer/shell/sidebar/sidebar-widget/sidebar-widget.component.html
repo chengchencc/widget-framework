@@ -1,3 +1,79 @@
-<p>
-  sidebar-widget works!
-</p>
+<div class="toolbar">
+  <button type="button" class="btn btn-light btn-sm" (click)="staticModal.show()">注册</button>
+</div>
+
+<div class="select-widgets">
+  <!-- <div class="select-widgets-item" appDraggable appDroppable  *ngFor="let item of widgetManifests" draggable="true" (dragstart)="dragStartHandler($event,item)"> -->
+  <div class="select-widgets-item" appDraggable appDroppable *ngFor="let item of widgetManifests" [passData]="{type:'widget',data:item}">
+    {{item.displayName}}
+    <div class="select-widgets-item" *appDraggableHelper>
+      {{item.displayName}}
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: true}" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">注册部件</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="name">部件名称</label>
+          <input type="text" name="name" id="name" class="form-control" placeholder="部件名称" aria-describedby="name">
+          <small id="name" class="text-muted">部件名称</small>
+        </div>
+
+        <div class="form-group">
+          <label for="code">部件编号</label>
+          <input type="text" name="code" id="code" class="form-control" placeholder="部件编号"
+            aria-describedby="codeHelper">
+          <small id="codeHelper" class="text-muted">部件编号</small>
+        </div>
+
+        <div class="form-group">
+          <label for="url">部件url</label>
+          <input type="text" name="url" id="url" class="form-control" placeholder="部件url地址"
+            aria-describedby="urlHelper">
+          <small id="urlHelper" class="text-muted">部件Url</small>
+        </div>
+
+        <div class="form-group">
+          <label for="preview">部件预览图</label>
+          <input type="text" name="preview" id="preview" class="form-control" placeholder="部件预览图"
+            aria-describedby="previewHelper">
+          <small id="previewHelper" class="text-muted">preview</small>
+        </div>
+
+        <div class="form-group">
+          <label for="preview">部件预览图</label>
+          <input type="text" name="preview" id="preview" class="form-control" placeholder="部件预览图"
+            aria-describedby="previewHelper">
+          <small id="previewHelper" class="text-muted">preview</small>
+        </div>
+
+        <div class="form-group">
+          <label for="deps">依赖</label>
+          <select multiple class="form-control form-control-sm" name="deps" id="deps">
+            <option>@angular/core</option>
+            <option>@angular/platform-browser</option>
+            <option>@angular/forms</option>
+            <option>@angular/common/http</option>
+            <option>echart</option>
+            <option>rxjs</option>
+          </select>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

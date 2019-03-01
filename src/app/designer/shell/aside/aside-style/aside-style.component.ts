@@ -36,6 +36,15 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
   ];
 
   flexSelectors={
+    position:[
+      "relative",
+      "absolute",
+      "fixed",
+      "static",
+      "sticky",
+      "inherit",
+      "unset"
+    ],
     display:[
       "block",
       "flex"

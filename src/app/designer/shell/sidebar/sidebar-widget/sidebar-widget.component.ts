@@ -18,4 +18,11 @@ export class SidebarWidgetComponent implements OnInit {
     this.widgetManifests = await this.dloader.loadWidgetLoaderManifest()
   }
 
+  dragStartHandler($event:DragEvent,widget:WidgetLoaderManifest){
+    // console.log($event);
+    // console.log(widget);
+    // $event.dataTransfer.setData("text/plain",JSON.stringify(widget));
+    // $event.dataTransfer.dropEffect = 'copy';
+  }
+
 }

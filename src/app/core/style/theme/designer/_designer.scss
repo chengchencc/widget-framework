@@ -31,10 +31,13 @@ app-designer {
             flex-direction: column;
             /* justify-content: center; */
             text-align: center;
-            background: #343a40;
+            background: darken($dsn-bg, 5%);
             padding: 10px;
+            cursor: grab;
         }
     }
 
-
+    .modal-content {
+        background-color: $dsn-bg;
+    }
 }

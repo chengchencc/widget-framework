@@ -30,7 +30,7 @@ export interface LayoutConfig{
     style?:any,
     settings?:any,
     parent?:LayoutConfig,
-    layout:LayoutConfig[],
+    layout:(LayoutConfig)[],
     type:'body'|'div'|'grid'|'group'|'widget',
     pathArray?:string[],
     widgetInfo?:WidgetInfo
@@ -46,7 +46,13 @@ export interface LayoutTemplate{
   }
 
   export interface WidgetInfo{
-    
+    name:string;
+    // id:string,
+    // path?:string,
+    // type:'body'|'div'|'grid'|'group'|'widget',
+    // pathArray?:string[],
+    // parent?:LayoutConfig,
+
   }
 
 
