@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewContainerRef, HostListener } from '@angular/core';
 import { WidgetInfo } from '../common/page.interface';
 import { DynamicLoaderService } from '../common/dynamic-loader.service';
+import { LayoutService } from '../common/layout.service';
 
 @Component({
   selector: 'widget-container',
@@ -18,7 +19,7 @@ export class WidgetContainerComponent implements OnInit {
   @ViewChild("wc", { read: ViewContainerRef })
   widgetContainer: ViewContainerRef;
 
-  constructor(private widgetLoader:DynamicLoaderService,) { }
+  constructor(private widgetLoader:DynamicLoaderService,private layoutService:LayoutService) { }
 
   async ngOnInit() {
 

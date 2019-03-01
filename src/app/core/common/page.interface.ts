@@ -82,3 +82,5 @@ export interface DynamicComponetMetaData {
     injector: Injector;
     componentRef: ComponentRef<any>;
 }
+
+export interface canse

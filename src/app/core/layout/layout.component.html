@@ -5,18 +5,17 @@
 </widget-layout> -->
 
 <ng-container *ngFor="let item of config.layout">
-
   <widget-layout *ngIf="item.type !== 'widget'" [config]="item" appDropzone (drop)="move($event,item)">
     <!-- <ng-content></ng-content> -->
   </widget-layout>
-
+  
   <widget-container *ngIf="item.type === 'widget'" [info]="item.widgetInfo">
-
+    <div class="setting-tool">
+      <button type="button" class="btn btn-dark btn-sm">{{item.id}}</button>
+      <button type="button" class="btn btn-dark btn-sm">{{item.type}}</button>
+    </div>
   </widget-container>
-
 </ng-container>
-
-<!-- <app-grid-layout  *ngIf="config.type == 'grid'" style="flex:auto;display: flex; flex-direction: column;" [settings]="config.settings" ></app-grid-layout> -->
 
 <div class="setting-tool">
   <button type="button" class="btn btn-dark btn-sm">{{config.id}}</button>

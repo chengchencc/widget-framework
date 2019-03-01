@@ -18,7 +18,8 @@ widget-preview {
                 height: 100px;
             }
             &.selected {
-                border: 1px dashed var(--red);
+                border: 2px solid $blue;
+                box-shadow: 0px 0px 10px 0px $blue;
                 &>.setting-tool {
                     display: block;
                     @include transition();

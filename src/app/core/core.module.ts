@@ -16,10 +16,13 @@ import { DynamicLoaderService } from './common/dynamic-loader.service';
 import { PageService } from './common/page.service';
 import { LayoutService } from './common/layout.service';
 import { RuntimeConfig } from './common/page.interface';
+import { WidgetSettableDirective } from './common/widget-settable.directive';
 
 const declareAndExports = [
   LayoutComponent,
-  PreviewComponent
+  PreviewComponent,
+  WidgetContainerComponent,
+  WidgetSettableDirective
 ];
 
 const providers = [
@@ -39,8 +42,8 @@ const providers = [
     DraggableModule
   ],
   declarations: [
-    ...declareAndExports,
-    WidgetContainerComponent
+    ...declareAndExports
+    
   ],
   providers:[
   DynamicLoaderService,

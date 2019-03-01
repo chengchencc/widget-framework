@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   save(){
-    // this.onSave.emit();
+    this.designerService.save();
   }
 
   preview(){

@@ -81,8 +81,6 @@ export class LayoutComponent implements OnInit {
   select(event: MouseEvent) {
     event.stopPropagation();
     event.preventDefault();
-    // console.log(this.config);
-    // console.log(this.elementRef);
     //unselected
     if (this.layoutService.activedLayout)
       this.layoutService.activedLayout.unselect();

@@ -43,6 +43,8 @@ export class DynamicLoaderService {
   private isSystemJSInitialed: boolean = false;
   private loadedModules: { key: string, compiledModule: ModuleWithComponentFactories<any> }[] = [];
 
+  private widgetLoaderManifestCache:Promise<WidgetLoaderManifest[]>;
+
   /**
    * 获取已加载的部件
    */
@@ -53,9 +55,18 @@ export class DynamicLoaderService {
    * 获取部件注册信息
    */
   async loadWidgetLoaderManifest(): Promise<WidgetLoaderManifest[]> {
-    const result = await this.store.loadWidgetLoaderManifest().toPromise()
-    console.log("widget loader manifest", result);
-    return result;
+
+    this.widgetLoaderManifestCache = this.widgetLoaderManifestCache || this.store.loadWidgetLoaderManifest().toPromise();
+
+    return await this.widgetLoaderManifestCache;
+
+
+    // if(this.widgetLoaderManifestCache) {
+    //   const result = await this.store.loadWidgetLoaderManifest().toPromise();
+    // }
+    // console.log("widget loader manifest", result);
+
+    // return result;
   }
 
   async initialSystemJS() {
