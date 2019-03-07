@@ -5,4 +5,9 @@
 
 <ng-container #wc></ng-container>
 
-<ng-content></ng-content>
+<!-- <ng-content></ng-content> -->
+<div class="setting-tool">
+  <!-- <button type="button" class="btn btn-dark btn-sm">{{item.id}}</button> -->
+<button type="button" class="btn btn-dark btn-sm" (click)="selectParent($event)">parent</button>
+<!-- <button type="button" class="btn btn-dark btn-sm">{{item.type}}</button> -->
+</div>

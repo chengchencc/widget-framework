@@ -1,29 +1,99 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, ElementRef } from '@angular/core';
 import { LayoutService } from './layout.service';
+import { ISettable, LayoutConfig } from './page.interface';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 
 @Directive({
-    selector: 'core-widget-settable',
+    selector: '[appSettable]',
 })
 export class WidgetSettableDirective {
+
+    // @HostBinding("class.selected")
+
+    @Input()
+    config: LayoutConfig;
+
+    _classes: string[] = [];
     selected: boolean = false;
 
-    constructor(private layoutService: LayoutService) {
-
-    }
+    constructor(
+        @SkipSelf() @Optional() public parent: WidgetSettableDirective,
+        private layoutService: LayoutService,
+        public elementRef: ElementRef,
+        private sanitizer: DomSanitizer,
+    ) { }
 
     @HostListener("click", ['$event'])
     select(event: MouseEvent) {
         event.stopPropagation();
         event.preventDefault();
+        console.log(event);
         //unselected
-        if (this.layoutService.activedLayout)
-            this.layoutService.activedLayout.unselect();
+        if (this.layoutService.selectedSettableItem)
+            this.layoutService.selectedSettableItem.unselect();
         //selected current
         this.selected = true;
-        this.layoutService.activeLayout(this);
+        this.layoutService.selectSettable(this);
 
     }
     unselect() {
         if (this.selected) this.selected = false;
+    }
+
+    @HostBinding("class")
+    public get classes(): string {
+
+        if (this.config && this.config.classes) {
+            this._classes = [...this.config.classes];
+        }
+
+        this.addOrRemove(this.config.layout && this.config.layout.length == 0, "is-empty")
+
+        this.addOrRemove(this.selected, "selected");
+
+        let result = this._classes.join(" ");
+        return result;
+    }
+    addOrRemove(express: boolean, className: string) {
+        if (express) {
+            if (!this._classes.includes(className)) {
+                this._classes.push(className);
+            }
+        } else {
+            if (this._classes.includes(className)) {
+                this._classes.splice(this._classes.indexOf(className), 1);
+            }
+        }
+    }
+
+    @HostBinding('style')
+    get myStyle(): SafeStyle {
+        let styleString = this.getStyle();
+        return this.sanitizer.bypassSecurityTrustStyle(styleString);
+    }
+
+    getStyle(): string {
+        var styleString = "";
+        for (const key in this.config.style) {
+            if (this.config.style.hasOwnProperty(key)) {
+                const value = this.config.style[key];
+                if (value) {
+                    styleString += `${key}:${value};`;
+                }
+            }
+        }
+        return styleString;
+    }
+
+    getPath(): string[] {
+        return this.config.id.split("-");
+        // let path: string[] = [];
+        // path.push(this.config.id);
+        // let index = this._parent;
+        // while (index) {
+        //   path.push(index.config.id);
+        //   index = index._parent;
+        // }
+        // return path.reverse();
     }
 }

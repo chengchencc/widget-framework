@@ -20,20 +20,25 @@ export interface PageInfo{
     cssUrls?:string[];
 }
 
-/**
- * 布局配置信息
- */
-export interface LayoutConfig{
-    id:string,
-    path?:string,
+export interface ISettable{
     classes?:string[],
     style?:any,
     settings?:any,
+    path?:string
+
+}
+
+/**
+ * 布局配置信息
+ */
+export interface LayoutConfig extends ISettable {
+    id:string,
+    path?:string,
     parent?:LayoutConfig,
     layout:(LayoutConfig)[],
     type:'body'|'div'|'grid'|'group'|'widget',
     pathArray?:string[],
-    widgetInfo?:WidgetInfo
+    content?:any
 }
 
 /**
@@ -82,5 +87,3 @@ export interface DynamicComponetMetaData {
     injector: Injector;
     componentRef: ComponentRef<any>;
 }
-
-export interface canse

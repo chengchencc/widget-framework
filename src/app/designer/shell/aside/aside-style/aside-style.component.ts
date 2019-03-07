@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { LayoutService } from 'src/app/core/common/layout.service';
 import { LayoutComponent } from 'src/app/core/layout/layout.component';
+import { WidgetSettableDirective } from '../../../../core/common/widget-settable.directive';
 
 @Component({
   selector: 'design-aside-style',
@@ -116,9 +117,8 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
 
   // layoutConfig:layoutConfig;
 
-  constructor(private layoutService:LayoutService) {
-    
-    this.layoutService.onLayoutActived$.subscribe(s=>this.selectedLayout(s));
+  constructor(private layoutService:LayoutService) {    
+    this.layoutService.onSelectSettableItem$.subscribe(s=>this.selecteSettableItem(s));
    }
 
   ngOnInit() {
@@ -129,27 +129,16 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     // this.getStyle();
   }
 
-  selectedLayout(component:LayoutComponent){
-    if (component) {
-      //config
-
-      this.config = component.config;
-      //styles
-      component.config.style = component.config.style || {};
-      this.styles = component.config.style;
-      let computedStyles:CSSStyleDeclaration = getComputedStyle(component.elementRef.nativeElement);
-
+  selecteSettableItem(item:WidgetSettableDirective){
+    if(item){
+      this.config = item.config;
+      item.config.style = item.config.style || {};
+      this.styles = item.config.style;
+      let computedStyles:CSSStyleDeclaration = getComputedStyle(item.elementRef.nativeElement);
       this.styles.display = computedStyles.display;
       this.styles["flex-direction"] = computedStyles.flexDirection;
 
-
-      //path
-     this.path = component.getPath();
-
-    //   console.log(component.config);
-    //   console.log(component);
-    //  console.log(getComputedStyle(component.elementRef.nativeElement));
-
+      this.path = item.getPath();
 
     }
   }

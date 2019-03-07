@@ -17,6 +17,7 @@ import { PageService } from './common/page.service';
 import { LayoutService } from './common/layout.service';
 import { RuntimeConfig } from './common/page.interface';
 import { WidgetSettableDirective } from './common/widget-settable.directive';
+import { GridsterModule } from './gridster/gridster.module';
 
 const declareAndExports = [
   LayoutComponent,
@@ -39,7 +40,8 @@ const providers = [
   imports: [
     CommonModule,
     HttpClientModule,
-    DraggableModule
+    DraggableModule,
+    GridsterModule
   ],
   declarations: [
     ...declareAndExports
@@ -55,20 +57,14 @@ const providers = [
 })
 export class CoreModule {
   static forRoot(config: RuntimeConfig=defaultRuntimeConfig,replacedProviders:Provider[]=[]): ModuleWithProviders {
-
-    //合并默认provider与replaced providers
-    const endpointProviders = [...providers,...replacedProviders];
-
-    console.log(config);
-    
-    const result = {
+    return {
       ngModule: CoreModule,
       providers: [
-        ...endpointProviders,
+        ...providers,
+        ...replacedProviders,
         {provide: 'runtimeConfig', useValue: config}
       ]
     };
-    return result;
   }
 
 }

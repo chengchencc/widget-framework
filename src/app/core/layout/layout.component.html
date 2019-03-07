@@ -5,16 +5,19 @@
 </widget-layout> -->
 
 <ng-container *ngFor="let item of config.layout">
-  <widget-layout *ngIf="item.type !== 'widget'" [config]="item" appDropzone (drop)="move($event,item)">
-    <!-- <ng-content></ng-content> -->
-  </widget-layout>
-  
-  <widget-container *ngIf="item.type === 'widget'" [info]="item.widgetInfo">
-    <div class="setting-tool">
-      <button type="button" class="btn btn-dark btn-sm">{{item.id}}</button>
-      <button type="button" class="btn btn-dark btn-sm">{{item.type}}</button>
-    </div>
-  </widget-container>
+
+  <ng-container [ngSwitch]="item.type">
+    <!-- widget -->
+    <widget-container *ngSwitchCase="'widget'" [info]="item.content" appSettable [config]="item"></widget-container>
+    <!-- grid -->
+    <gridster *ngSwitchCase="'grid'" [options]="item.settings" appSettable [config]="item">
+      <gridster-item *ngFor="let gridItems of item.content" [item]="gridItems"></gridster-item>
+    </gridster>
+    <widget-layout *ngSwitchDefault [config]="item" appDropzone appSettable (drop)="move($event,item)">
+      <!-- <ng-content></ng-content> -->
+    </widget-layout>
+  </ng-container>
+
 </ng-container>
 
 <div class="setting-tool">

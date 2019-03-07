@@ -5,9 +5,17 @@ import { LayoutConfig, LayoutTemplate, WidgetInfo, WidgetLoaderManifest } from '
 import * as _ from 'lodash';
 import { WidgetDragEvent } from '../dnd/draggable-model';
 import { Store } from './store/store';
+import { WidgetSettableDirective } from './widget-settable.directive';
+import { GridType, CompactType, DisplayGrid } from '../gridster/gridsterConfig.interface';
 
 @Injectable()
 export class LayoutService {
+
+
+  //选中设置元素
+  onSelectSettableItem$:Observable<WidgetSettableDirective>
+  private onSelectSettableItemSubject = new Subject<WidgetSettableDirective>();
+  selectedSettableItem:WidgetSettableDirective;
 
   //布局选中事件
   onLayoutActived$: Observable<LayoutComponent>;
@@ -56,8 +64,70 @@ export class LayoutService {
         id: null,
         classes: ["grid"],
         style: null,
+        settings:{
+          gridType: GridType.Fit,
+          compactType: CompactType.None,
+          margin: 10,
+          outerMargin: true,
+          outerMarginTop: null,
+          outerMarginRight: null,
+          outerMarginBottom: null,
+          outerMarginLeft: null,
+          useTransformPositioning: true,
+          mobileBreakpoint: 640,
+          minCols: 1,
+          maxCols: 100,
+          minRows: 1,
+          maxRows: 100,
+          maxItemCols: 100,
+          minItemCols: 1,
+          maxItemRows: 100,
+          minItemRows: 1,
+          maxItemArea: 2500,
+          minItemArea: 1,
+          defaultItemCols: 1,
+          defaultItemRows: 1,
+          fixedColWidth: 105,
+          fixedRowHeight: 105,
+          keepFixedHeightInMobile: false,
+          keepFixedWidthInMobile: false,
+          scrollSensitivity: 10,
+          scrollSpeed: 20,
+          enableEmptyCellClick: false,
+          enableEmptyCellContextMenu: false,
+          enableEmptyCellDrop: false,
+          enableEmptyCellDrag: false,
+          emptyCellDragMaxCols: 50,
+          emptyCellDragMaxRows: 50,
+          ignoreMarginInRow: false,
+          draggable: {
+            enabled: true,
+          },
+          resizable: {
+            enabled: true,
+          },
+          swap: false,
+          pushItems: true,
+          disablePushOnDrag: false,
+          disablePushOnResize: false,
+          pushDirections: {north: true, east: true, south: true, west: true},
+          pushResizeItems: false,
+          displayGrid: DisplayGrid.Always,
+          disableWindowResize: false,
+          disableWarnings: false,
+          scrollToNewItems: false
+        },
         layout: [],
-        type: "grid"
+        type: "grid",
+        content: [
+          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
+          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
+          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
+          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
+          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
+          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
+
+        ]
       }
     },
     {
@@ -206,6 +276,7 @@ export class LayoutService {
 
     this.onActivedLayoutSettingsChanged$ = this.activedLayoutSettingsChangeSubject.asObservable();
 
+    this.onSelectSettableItem$ = this.onSelectSettableItemSubject.asObservable();
     // this.onWidgetActived$ = this.widgetActivedSubject.asObservable();
   }
 
@@ -245,7 +316,7 @@ export class LayoutService {
         id:"",
         layout:[],
         type:'widget',
-        widgetInfo:{
+        content:{
           name:widgetManifest.name
         }
       }
@@ -280,7 +351,7 @@ export class LayoutService {
       pathArray: template.pathArray,
       parent: parent,
       type: template.type,
-      widgetInfo:template.widgetInfo
+      content:template.content
     }
 
 
@@ -341,6 +412,15 @@ export class LayoutService {
     this.activedLayout = component;
     this.layoutSelectedSubject.next(component);
   }
+
+  /**
+   * 选中可设置项
+   * @param item settable item
+   */
+  selectSettable(item:WidgetSettableDirective){
+    this.selectedSettableItem = item;
+    this.onSelectSettableItemSubject.next(item);
+  } 
 
   /**
    * 保存页面配置信息

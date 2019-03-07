@@ -3,6 +3,7 @@ import { LayoutConfig, LayoutTemplate } from '../common/page.interface';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 import { LayoutService } from '../common/layout.service';
 import { WidgetDragEvent } from '../dnd/draggable-model';
+import { WidgetSettableDirective } from '../common/widget-settable.directive';
 
 @Component({
   selector: 'widget-layout',
@@ -15,57 +16,43 @@ export class LayoutComponent implements OnInit {
   config: LayoutConfig;
   templates: LayoutTemplate[];
 
-  _classes: string[] = [];
+  // _classes: string[] = [];
 
-  @HostBinding("class")
-  public get classes(): string {
+  // @HostBinding("class.is-empty")
+  // public get isEmpty(): boolean {
+  //   return this.config.layout && this.config.layout.length == 0;
+  // }
 
-    if (this.config && this.config.classes) {
-      this._classes = [...this.config.classes] ;
-    }
-
-    this.addOrRemove(this.config.layout && this.config.layout.length == 0, "is-empty")
-
-    this.addOrRemove(this.selected, "selected");
-
-    let result = this._classes.join(" ");
-    return result;
-  }
-
-  addOrRemove(express: boolean, className: string) {
-    if (express) {
-      if (!this._classes.includes(className)) {
-        this._classes.push(className);
-      }
-    } else {
-      if (this._classes.includes(className)) {
-        this._classes.splice(this._classes.indexOf(className), 1);
-      }
-    }
-  }
+  // addOrRemove(express: boolean, className: string) {
+  //   if (express) {
+  //     if (!this._classes.includes(className)) {
+  //       this._classes.push(className);
+  //     }
+  //   } else {
+  //     if (this._classes.includes(className)) {
+  //       this._classes.splice(this._classes.indexOf(className), 1);
+  //     }
+  //   }
+  // }
 
   selected: boolean = false;
-
-  @HostBinding('style')
-  get myStyle(): SafeStyle {
-    let styleString = this.getStyle();
-    return this.sanitizer.bypassSecurityTrustStyle(styleString);
-  }
 
   private _parent: LayoutComponent;
 
   // bsModalRef: BsModalRef;
-  
+
 
   constructor(
     @SkipSelf() @Optional() parentLayout: LayoutComponent,
     private layoutService: LayoutService,
     public elementRef: ElementRef,
     private sanitizer: DomSanitizer,
+    @Optional() private settable:WidgetSettableDirective
     // private modalService: BsModalService
   ) {
     this._parent = parentLayout;
     this.templates = layoutService.layoutTemplates;
+
   }
 
   ngOnInit() {
@@ -77,51 +64,10 @@ export class LayoutComponent implements OnInit {
     this.layoutService.move(event, ref);
   }
 
-  @HostListener("click", ['$event'])
-  select(event: MouseEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-    //unselected
-    if (this.layoutService.activedLayout)
-      this.layoutService.activedLayout.unselect();
-    //selected current
-    this.selected = true;
-    this.layoutService.activeLayout(this);
-
-  }
-
-  unselect() {
-    if (this.selected) this.selected = false;
-  }
-
-  getStyle(): string {
-    var styleString = "";
-    for (const key in this.config.style) {
-      if (this.config.style.hasOwnProperty(key)) {
-        const value = this.config.style[key];
-        if (value) {
-          styleString += `${key}:${value};`;
-        }
-      }
-    }
-    return styleString;
-  }
-
-  getPath(): string[] {
-    let path: string[] = [];
-    path.push(this.config.id);
-    let index = this._parent;
-    while (index) {
-      path.push(index.config.id);
-      index = index._parent;
-    }
-    return path.reverse();
-  }
-
-/**
- * 移除自己
- */
-  removeSelf(){
+  /**
+   * 移除自己
+   */
+  removeSelf() {
     //第一种移除方式，通过lodash
     this.layoutService.remove(this.config);
     //第二种移除方式，通过parent，remove掉即可
@@ -131,7 +77,7 @@ export class LayoutComponent implements OnInit {
 
   saveAsTemplate() {
 
-    this.openModalWithComponent((tplName)=>{
+    this.openModalWithComponent((tplName) => {
       this.layoutService.addLayoutTemplate({
         name: tplName,
         id: "",
@@ -142,16 +88,18 @@ export class LayoutComponent implements OnInit {
 
   }
   //选择上级
-  selectParent(event:MouseEvent){
-    if(this._parent){
-      this._parent.select(event);
-    }
+  selectParent(event: MouseEvent) {
+    if (this._parent) {
+      //this._parent.select(event);
+      console.log(this.settable);
+    this.settable.parent.select(event);
+  }
   }
 
-  openModalWithComponent(callback:any) {
+  openModalWithComponent(callback: any) {
     const initialState = {
       title: '请输入模板名称',
-      onOk:callback
+      onOk: callback
     };
     // this.bsModalRef = this.modalService.show(CreateTemplateModalComponent, {initialState});
     // this.bsModalRef.content.closeBtnName = 'Close';
