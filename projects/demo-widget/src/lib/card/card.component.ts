@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Widget } from 'widget-core';
 @Widget({
   name:'demo-widget-card'
@@ -10,9 +10,23 @@ import { Widget } from 'widget-core';
 })
 export class CardComponent implements OnInit {
 
+  @Input() settings:any = {
+    title:"Card Title",
+    subtitle:"Sub Title"
+  };
+  @Output() titleClick = new EventEmitter<any>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onTitleClick(e){
+    this.titleClick.emit({
+      event:e,
+      msg:"red"
+    });
+  }
 }
+
+

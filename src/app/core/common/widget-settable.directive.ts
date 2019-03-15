@@ -25,7 +25,7 @@ export class WidgetSettableDirective {
         private layoutService: LayoutService,
         public elementRef: ElementRef,
         private sanitizer: DomSanitizer,
-        // @Optional() private widget:WidgetContainerComponent
+         @Optional() public widget:WidgetContainerComponent
     ) { }
 
     @HostListener("click", ['$event'])

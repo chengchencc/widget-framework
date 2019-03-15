@@ -1,5 +1,5 @@
 import { __decorate, __metadata } from 'tslib';
-import { Injectable, NgModule, Component, defineInjectable } from '@angular/core';
+import { Injectable, NgModule, Component, Input, EventEmitter, Output, defineInjectable } from '@angular/core';
 import { Widget } from 'widget-core';
 
 /**
@@ -86,18 +86,33 @@ let JumbotronComponent = class JumbotronComponent {
     /**
      * @return {?}
      */
+    get fcolor() {
+        return this.color || "black";
+    }
+    /**
+     * @return {?}
+     */
     ngOnInit() {
+    }
+    /**
+     * @return {?}
+     */
+    resetColor() {
+        this.color = "black";
     }
 };
 JumbotronComponent.decorators = [
     { type: Component, args: [{
                 selector: 'demo-widget-jumbotron',
-                template: "<div class=\"jumbotron\">\n  <h1 class=\"display-4\">Hello, world!</h1>\n  <p class=\"lead\">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>\n  <hr class=\"my-4\">\n  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>\n  <a class=\"btn btn-primary btn-lg\" href=\"#\" role=\"button\">Learn more</a>\n</div>",
+                template: "<div class=\"jumbotron\">\n  <h1 class=\"display-4\" [style.color]=\"fcolor\">Hello, world!</h1>\n  <p class=\"lead\">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>\n  <hr class=\"my-4\">\n  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>\n  <a class=\"btn btn-primary btn-lg\" href=\"#\" role=\"button\" (click)=\"resetColor()\">reset color</a>\n</div>",
                 styles: [""]
             }] }
 ];
 /** @nocollapse */
 JumbotronComponent.ctorParameters = () => [];
+JumbotronComponent.propDecorators = {
+    color: [{ type: Input }]
+};
 JumbotronComponent = __decorate([
     Widget({
         name: 'demo-widget-jumbotron'
@@ -138,22 +153,42 @@ FormLoginComponent = __decorate([
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 let CardComponent = class CardComponent {
-    constructor() { }
+    constructor() {
+        this.settings = {
+            title: "Card Title",
+            subtitle: "Sub Title"
+        };
+        this.titleClick = new EventEmitter();
+    }
     /**
      * @return {?}
      */
     ngOnInit() {
     }
+    /**
+     * @param {?} e
+     * @return {?}
+     */
+    onTitleClick(e) {
+        this.titleClick.emit({
+            event: e,
+            msg: "red"
+        });
+    }
 };
 CardComponent.decorators = [
     { type: Component, args: [{
                 selector: 'demo-widget-card',
-                template: "<div class=\"card\" style=\"\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">Card title</h5>\n    <h6 class=\"card-subtitle mb-2 text-muted\">Card subtitle</h6>\n    <p class=\"card-text\">Some quick example text to build on the card title and make up the bulk of the card's content.</p>\n    <a href=\"#\" class=\"card-link\">Card link</a>\n    <a href=\"#\" class=\"card-link\">Another link</a>\n  </div>\n</div>",
+                template: "<div class=\"card\" style=\"\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">{{settings.title}}</h5>\n    <h6 class=\"card-subtitle mb-2 text-muted\">{{settings.subtitle}}</h6>\n    <p class=\"card-text\">Some quick example text to build on the card title and make up the bulk of the card's content.</p>\n    <a href=\"#\" class=\"card-link\" (click)=\"onTitleClick($event)\">Card link</a>\n    <a href=\"#\" class=\"card-link\">Another link</a>\n    <button class=\"btn btn-danger\">click</button>\n  </div>\n</div>",
                 styles: [""]
             }] }
 ];
 /** @nocollapse */
 CardComponent.ctorParameters = () => [];
+CardComponent.propDecorators = {
+    settings: [{ type: Input }],
+    titleClick: [{ type: Output }]
+};
 CardComponent = __decorate([
     Widget({
         name: 'demo-widget-card'

@@ -1,3 +1,28 @@
 <p>
   aside-event works!
 </p>
+
+<div>
+  <ul>
+    <li *ngFor="let item of registed" >sub:{{item.sub}}---pub:{{item.pub}}</li>
+  </ul>
+</div>
+
+<div *ngIf="subscriber">
+  subscriber:
+  <select (change)="subChanged($event)" [(ngModel)]="s" #ss>
+    <option value=""></option>
+    <option *ngFor="let item of subscriber.widgetFactory.inputs" [value]="item.propName">{{item.propName}}</option>
+  </select>
+</div>
+
+<div *ngIf="publisher">
+  publisher:
+  <select  (change)="pubChanged($event)" [(ngModel)]="p" #pp>
+    <option value=""></option>
+    <option *ngFor="let item of publisher.widgetFactory.outputs" [value]="item.propName">{{item.propName}}</option>
+  </select>
+</div>
+
+
+<button (click)="createOb()">save</button>
