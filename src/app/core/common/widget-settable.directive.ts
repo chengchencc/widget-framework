@@ -1,7 +1,8 @@
-import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, ElementRef } from '@angular/core';
+import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { LayoutService } from './layout.service';
 import { ISettable, LayoutConfig } from './page.interface';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+import { WidgetContainerComponent } from '../widget/widget-container.component';
 
 @Directive({
     selector: '[appSettable]',
@@ -13,6 +14,9 @@ export class WidgetSettableDirective {
     @Input()
     config: LayoutConfig;
 
+    @Output()
+    onSelected= new EventEmitter<boolean>();
+
     _classes: string[] = [];
     selected: boolean = false;
 
@@ -21,6 +25,7 @@ export class WidgetSettableDirective {
         private layoutService: LayoutService,
         public elementRef: ElementRef,
         private sanitizer: DomSanitizer,
+        // @Optional() private widget:WidgetContainerComponent
     ) { }
 
     @HostListener("click", ['$event'])
@@ -34,10 +39,11 @@ export class WidgetSettableDirective {
         //selected current
         this.selected = true;
         this.layoutService.selectSettable(this);
-
+        this.onSelected.emit(this.selected);
     }
     unselect() {
         if (this.selected) this.selected = false;
+        this.onSelected.emit(this.selected);
     }
 
     @HostBinding("class")

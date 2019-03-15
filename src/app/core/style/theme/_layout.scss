@@ -1,15 +1,33 @@
-widget-layout{
-    display: block;
-    position: relative;
-    &.body{
-        height: 100%;
-        overflow: auto;
-    }
-    .setting-tool{
-        display: none;
-    }
+widget-layout {
+  display: block;
+  position: relative;
+
+  &.body {
+    height: 100%;
+    overflow: auto;
+  }
+
+  .setting-tool {
+    display: none;
+  }
 
 }
-widget-container{
-    display: block;
+
+widget-container {
+  display: block;
+}
+
+gridster-container {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+gridster-item {
+  widget-container {
+    height: 100%;
+    overflow: hidden;
+  }
 }

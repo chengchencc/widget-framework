@@ -17,7 +17,7 @@ widget-preview {
                 height: 100px;
             }
         }
-        [appSettable] {
+        [appSettable],gridster-container {
             &.selected {
                 border: 2px solid $blue;
                 box-shadow: 0px 0px 10px 0px $blue;
@@ -41,7 +41,7 @@ widget-preview {
         padding: $dsn-preview-padding;
     }
     .dropzone-entered {
-        background-color: $gray-200;
-        transition: all 0.25s;
+        // background-color: $gray-200;
+        // transition: all 0.25s;
     }
 }

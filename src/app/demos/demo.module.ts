@@ -11,10 +11,11 @@ import { IframeComponent } from './iframe/iframe.component';
 import { DraggableModule } from '../core/dnd/draggable.module';
 import { StoreHttp } from '../core/common/store/store-http';
 import { Store } from '../core/common/store/store';
+import { CheckObjectChangeDemoComponent } from './check-object-change-demo/check-object-change-demo.component';
 
 
 @NgModule({
-  declarations: [MakeDemoComponent, LoaderDemoComponent, BstoastComponent, IframeComponent],
+  declarations: [MakeDemoComponent, LoaderDemoComponent, BstoastComponent, IframeComponent, CheckObjectChangeDemoComponent],
   imports: [
     CommonModule,
     DemoRoutingModule,

@@ -1,3 +1,5 @@
-<p>
-  aside-setting works!
-</p>
+<div *ngIf="settings" > 
+
+    <app-settings-grid [settings]="settings" (settingsChange)="onSettingsChanged($event)"></app-settings-grid>
+
+</div>

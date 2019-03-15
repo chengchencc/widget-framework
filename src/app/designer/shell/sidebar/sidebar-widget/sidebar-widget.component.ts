@@ -16,6 +16,7 @@ export class SidebarWidgetComponent implements OnInit {
 
   async ngOnInit() {
     this.widgetManifests = await this.dloader.loadWidgetLoaderManifest()
+    console.log("widget manifests::",this.widgetManifests);
   }
 
   dragStartHandler($event:DragEvent,widget:WidgetLoaderManifest){

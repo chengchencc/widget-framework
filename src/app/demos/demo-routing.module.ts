@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { MakeDemoComponent } from './make-demo/make-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
 import { IframeComponent } from './iframe/iframe.component';
+import { CheckObjectChangeDemoComponent } from './check-object-change-demo/check-object-change-demo.component';
 
 
 const routes: Routes = [
   {path:'',redirectTo:'default',pathMatch: 'full'},
   { path: 'default', component: MakeDemoComponent },
   { path: 'loader', component: LoaderDemoComponent },
-  { path: 'iframe', component: IframeComponent }
+  { path: 'iframe', component: IframeComponent },
+  {path:'checkobj',component:CheckObjectChangeDemoComponent}
 ];
 
 @NgModule({

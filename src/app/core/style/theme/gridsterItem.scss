@@ -1,8 +1,8 @@
-/* gridster-item {
+gridster-item {
   box-sizing: border-box;
   z-index: 1;
   position: absolute;
-  overflow: hidden;
+  overflow: visible;
   transition: .3s;
   display: none;
   background: white;
@@ -93,4 +93,4 @@ gridster-item.gridster-item-resizing, gridster-item.gridster-item-moving {
 
 gridster-item:hover .gridster-item-resizable-handler.handle-se {
   border-color: transparent transparent #ccc
-} */
+}

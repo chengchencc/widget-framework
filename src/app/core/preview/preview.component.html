@@ -17,4 +17,4 @@
 
 </widget-layout> -->
 
-<widget-layout [config]="layoutConfig" appDropzone appSettable (drop)="layoutService.move($event,layoutConfig)"></widget-layout>
+<widget-layout [config]="layoutConfig" appDropzone appSettable (onDragDrop)="layoutService.move($event,layoutConfig)"></widget-layout>

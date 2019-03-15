@@ -4,9 +4,9 @@
 
 <div class="select-widgets">
   <!-- <div class="select-widgets-item" appDraggable appDroppable  *ngFor="let item of widgetManifests" draggable="true" (dragstart)="dragStartHandler($event,item)"> -->
-  <div class="select-widgets-item" appDraggable appDroppable *ngFor="let item of widgetManifests" [passData]="{type:'widget',data:item}">
+  <div class="select-widgets-item" appDraggable appDroppable *ngFor="let item of widgetManifests"  [passData]="{type:'widget',data:item}">
     {{item.displayName}}
-    <div class="select-widgets-item" *appDraggableHelper>
+    <div class="select-widgets-item" *appDraggableHelper >
       {{item.displayName}}
     </div>
   </div>

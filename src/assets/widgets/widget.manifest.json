@@ -27,7 +27,11 @@
         "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
         "moduleName":"DemoWidgetModule",
         "description":"by angular library",
-        "registered":true
+        "registered":true,
+        "grid":{
+            "cols":3,
+            "rows":1
+        }
     },
     {
         "name":"demo-widget-jumbotron",
@@ -37,7 +41,11 @@
         "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
         "moduleName":"DemoWidgetModule",
         "description":"by angular library",
-        "registered":true
+        "registered":true,
+        "grid":{
+            "cols":5,
+            "rows":3
+        }
     },
     {
         "name":"demo-widget-card",
@@ -47,6 +55,10 @@
         "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
         "moduleName":"DemoWidgetModule",
         "description":"by angular library",
-        "registered":true
+        "registered":true,
+        "grid":{
+            "cols":2,
+            "rows":1
+        }
     }
 ]

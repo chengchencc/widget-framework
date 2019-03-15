@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 //custom dnd
 import { DraggableModule } from './dnd/draggable.module';
@@ -18,12 +19,16 @@ import { LayoutService } from './common/layout.service';
 import { RuntimeConfig } from './common/page.interface';
 import { WidgetSettableDirective } from './common/widget-settable.directive';
 import { GridsterModule } from './gridster/gridster.module';
+import { GridsterContainerComponent } from './layout/gridster-container.component';
+import { SettingsGridComponent } from './layout/settings-grid/settings-grid.component';
 
 const declareAndExports = [
   LayoutComponent,
   PreviewComponent,
   WidgetContainerComponent,
-  WidgetSettableDirective
+  WidgetSettableDirective,
+  GridsterContainerComponent,
+  SettingsGridComponent
 ];
 
 const providers = [
@@ -41,10 +46,12 @@ const providers = [
     CommonModule,
     HttpClientModule,
     DraggableModule,
-    GridsterModule
+    GridsterModule,
+    FormsModule
   ],
   declarations: [
-    ...declareAndExports
+    ...declareAndExports,
+    
     
   ],
   providers:[

@@ -90,7 +90,8 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
       "center",
       "baseline",
       "stretch"
-    ]
+    ],
+    
   }
 
   config:any;

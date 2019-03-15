@@ -10,70 +10,10 @@ import { GridType, CompactType, DisplayGrid } from '../gridster/gridsterConfig.i
 import { ToastrService, Toast } from 'ngx-toastr';
 import { GridsterItem } from '../gridster/gridsterItem.interface';
 
-const emptyCellClick = function(event: MouseEvent, item: GridsterItem) {
-  console.info('empty cell click', event, item);
-  // this.dashboard.push(item);
-}
 
-const gridDefaultSettings = {
-  gridType: GridType.Fixed,
-  compactType: CompactType.None,
-  margin: 10,
-  outerMargin: true,
-  outerMarginTop: null,
-  outerMarginRight: null,
-  outerMarginBottom: null,
-  outerMarginLeft: null,
-  useTransformPositioning: true,
-  mobileBreakpoint: 640,
-  minCols: 1,
-  maxCols: 100,
-  minRows: 1,
-  maxRows: 100,
-  maxItemCols: 100,
-  minItemCols: 1,
-  maxItemRows: 100,
-  minItemRows: 1,
-  maxItemArea: 2500,
-  minItemArea: 1,
-  defaultItemCols: 1,
-  defaultItemRows: 1,
-  fixedColWidth: 130,
-  fixedRowHeight: 130,
-  keepFixedHeightInMobile: false,
-  keepFixedWidthInMobile: false,
-  scrollSensitivity: 10,
-  scrollSpeed: 20,
-  enableEmptyCellClick: false,
-  enableEmptyCellContextMenu: false,
-  enableEmptyCellDrop: true,
-  enableEmptyCellDrag: false,
-  emptyCellDragMaxCols: 50,
-  emptyCellDragMaxRows: 50,
-  emptyCellDropCallback: emptyCellClick.bind(this) ,
-  emptyCellDragCallback: emptyCellClick.bind(this),
-  ignoreMarginInRow: false,
-  draggable: {
-    enabled: true,
-  },
-  resizable: {
-    enabled: true,
-  },
-  swap: false,
-  pushItems: true,
-  disablePushOnDrag: false,
-  disablePushOnResize: false,
-  pushDirections: {north: true, east: true, south: true, west: true},
-  pushResizeItems: false,
-  displayGrid: DisplayGrid.Always,
-  disableWindowResize: false,
-  disableWarnings: false,
-  scrollToNewItems: false
-};
 
 @Injectable()
 export class LayoutService {
-
 
   //选中设置元素
   onSelectSettableItem$:Observable<WidgetSettableDirective>
@@ -93,11 +33,6 @@ export class LayoutService {
   // private widgetActivedSubject = new Subject<ModuleInfo>();
 
   self:LayoutService = this;
-
-
-
-  
-
 
   //布局配置信息
   layoutConfig: LayoutConfig;
@@ -134,18 +69,10 @@ export class LayoutService {
         id: null,
         classes: ["grid"],
         style: null,
-        settings:gridDefaultSettings,
+        settings:null,
         layout: [],
         type: "grid",
-        content: [
-          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
-          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
-          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
-          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
-          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
-          {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
-
-        ]
+        content: []
       }
     },
     {

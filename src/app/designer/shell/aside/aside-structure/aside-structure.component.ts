@@ -22,7 +22,7 @@ export class AsideStructureComponent implements OnInit {
 @Component({
   selector: 'design-aside-structure-tree',
   template: `
-  <a>{{config.id}}({{config.path}})</a>
+  <a>{{config.type}}({{config.id}})</a>
   <ul>
     <li *ngFor="let item of config.layout">
       <design-aside-structure-tree [config]="item"></design-aside-structure-tree>

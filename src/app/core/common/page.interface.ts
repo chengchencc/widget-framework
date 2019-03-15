@@ -1,4 +1,5 @@
 import { ComponentFactory, Injector, ComponentRef } from "@angular/core";
+import { GridsterItem } from '../gridster/gridsterItem.interface';
 
 export interface RuntimeConfig{
     runtimeType?:'design'|'runtime';
@@ -38,7 +39,7 @@ export interface LayoutConfig extends ISettable {
     layout:(LayoutConfig)[],
     type:'body'|'div'|'grid'|'group'|'widget',
     pathArray?:string[],
-    content?:any
+    content?:WidgetInfo|GridsterItem|any
 }
 
 /**
@@ -79,7 +80,11 @@ export interface WidgetLoaderManifest {
     //是否已注册
     registered?: boolean;
     //依赖的第三方插件
-    deps?: string[]
+    deps?: string[],
+    grid?:{
+        cols?:number,
+        rows?:number
+    }
 }
 
 export interface DynamicComponetMetaData {
