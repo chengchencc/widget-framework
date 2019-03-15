@@ -93,8 +93,7 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     ]
   }
 
-  config:any={
-  };
+  config:any;
 
   path:string[];
 

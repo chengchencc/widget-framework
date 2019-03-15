@@ -2,22 +2,24 @@
   style works!
 </p> -->
 
-<div class="setting-container">
-
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb bg-dark">
-      <li class="breadcrumb-item" *ngFor="let item of path; let i=index;" [class.active]=" i == path.length"><a href="#">{{item}}</a></li>
-      <!-- <li class="breadcrumb-item" aria-current="page" >Data</li> -->
-    </ol>
-  </nav>
-
-
-  <!-- <div>css selector</div>
+<!-- <div>css selector</div>
 <div>layout style</div>
 <div>background</div>
 <div>border</div>
 <div>shadows</div>
 <div>Typography</div> -->
+
+<p *ngIf="!config" >请选择布局或部件......</p>
+
+<div class="setting-container" *ngIf="config" >
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-dark">
+      <li class="breadcrumb-item" *ngFor="let item of path; let i=index;" [class.active]=" i == path.length"><a
+          href="#">{{item}}</a></li>
+      <!-- <li class="breadcrumb-item" aria-current="page" >Data</li> -->
+    </ol>
+  </nav>
 
   <form>
 
@@ -56,7 +58,8 @@
     <div class="form-group">
       <label for="flex-direction">flex-direction</label>
       <!-- <input type="text" name="flex-direction" id="flex-direction" class="form-control" placeholder="flex-direction" aria-describedby="flex-direction" [(ngModel)]="styles['flex-direction']"> -->
-      <select class="form-control form-control-sm" name="flex-direction" id="flex-direction" [(ngModel)]="styles['flex-direction']">
+      <select class="form-control form-control-sm" name="flex-direction" id="flex-direction"
+        [(ngModel)]="styles['flex-direction']">
         <option *ngFor="let item of flexSelectors.direction" [value]="item">{{item}}</option>
       </select>
       <small id="flex-direction" class="text-muted">flex-direction</small>
@@ -79,14 +82,16 @@
 
     <div class="form-group">
       <label for="justify-content">justify-content</label>
-      <select class="form-control form-control-sm" name="justify-content" id="justify-content" [(ngModel)]="styles['justify-content']">
+      <select class="form-control form-control-sm" name="justify-content" id="justify-content"
+        [(ngModel)]="styles['justify-content']">
         <option *ngFor="let item of flexSelectors.justifyContent" [value]="item">{{item}}</option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="align-items">align-items</label>
-      <select class="form-control form-control-sm" name="align-items" id="align-items" [(ngModel)]="styles['align-items']">
+      <select class="form-control form-control-sm" name="align-items" id="align-items"
+        [(ngModel)]="styles['align-items']">
         <option *ngFor="let item of flexSelectors.alignItems" [value]="item">{{item}}</option>
       </select>
     </div>
@@ -108,8 +113,8 @@
     <div class="form-group">
       <label for="fontSize">font-size</label>
       <div class="input-group">
-        <input type="text" name="fontSize" id="fontSize" class="form-control" placeholder="font-size" autocomplete="false"
-          aria-describedby="fontSizeHelper">
+        <input type="text" name="fontSize" id="fontSize" class="form-control" placeholder="font-size"
+          autocomplete="false" aria-describedby="fontSizeHelper">
         <span class="input-group-btn">
           <button type="button" class="btn btn-secondary dropdown-toggle" aria-label="" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -128,8 +133,8 @@
     <!-- height -->
     <div class="form-group">
       <label for="height">height</label>
-      <input type="text" name="height" id="height" class="form-control" placeholder="height" aria-describedby="heighthelper"
-        [(ngModel)]="styles['height']">
+      <input type="text" name="height" id="height" class="form-control" placeholder="height"
+        aria-describedby="heighthelper" [(ngModel)]="styles['height']">
       <small id="heighthelper" class="text-muted">height</small>
     </div>
 
@@ -137,8 +142,8 @@
     <!-- width -->
     <div class="form-group">
       <label for="width">width</label>
-      <input type="text" name="width" id="width" class="form-control" placeholder="width" aria-describedby="widththelper"
-        [(ngModel)]="styles['width']">
+      <input type="text" name="width" id="width" class="form-control" placeholder="width"
+        aria-describedby="widththelper" [(ngModel)]="styles['width']">
       <small id="widththelper" class="text-muted">width</small>
     </div>
 

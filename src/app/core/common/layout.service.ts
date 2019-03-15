@@ -7,6 +7,69 @@ import { WidgetDragEvent } from '../dnd/draggable-model';
 import { Store } from './store/store';
 import { WidgetSettableDirective } from './widget-settable.directive';
 import { GridType, CompactType, DisplayGrid } from '../gridster/gridsterConfig.interface';
+import { ToastrService, Toast } from 'ngx-toastr';
+import { GridsterItem } from '../gridster/gridsterItem.interface';
+
+const emptyCellClick = function(event: MouseEvent, item: GridsterItem) {
+  console.info('empty cell click', event, item);
+  // this.dashboard.push(item);
+}
+
+const gridDefaultSettings = {
+  gridType: GridType.Fixed,
+  compactType: CompactType.None,
+  margin: 10,
+  outerMargin: true,
+  outerMarginTop: null,
+  outerMarginRight: null,
+  outerMarginBottom: null,
+  outerMarginLeft: null,
+  useTransformPositioning: true,
+  mobileBreakpoint: 640,
+  minCols: 1,
+  maxCols: 100,
+  minRows: 1,
+  maxRows: 100,
+  maxItemCols: 100,
+  minItemCols: 1,
+  maxItemRows: 100,
+  minItemRows: 1,
+  maxItemArea: 2500,
+  minItemArea: 1,
+  defaultItemCols: 1,
+  defaultItemRows: 1,
+  fixedColWidth: 130,
+  fixedRowHeight: 130,
+  keepFixedHeightInMobile: false,
+  keepFixedWidthInMobile: false,
+  scrollSensitivity: 10,
+  scrollSpeed: 20,
+  enableEmptyCellClick: false,
+  enableEmptyCellContextMenu: false,
+  enableEmptyCellDrop: true,
+  enableEmptyCellDrag: false,
+  emptyCellDragMaxCols: 50,
+  emptyCellDragMaxRows: 50,
+  emptyCellDropCallback: emptyCellClick.bind(this) ,
+  emptyCellDragCallback: emptyCellClick.bind(this),
+  ignoreMarginInRow: false,
+  draggable: {
+    enabled: true,
+  },
+  resizable: {
+    enabled: true,
+  },
+  swap: false,
+  pushItems: true,
+  disablePushOnDrag: false,
+  disablePushOnResize: false,
+  pushDirections: {north: true, east: true, south: true, west: true},
+  pushResizeItems: false,
+  displayGrid: DisplayGrid.Always,
+  disableWindowResize: false,
+  disableWarnings: false,
+  scrollToNewItems: false
+};
 
 @Injectable()
 export class LayoutService {
@@ -28,6 +91,13 @@ export class LayoutService {
   //widget选中事件
   // onWidgetActived$: Observable<ModuleInfo>;
   // private widgetActivedSubject = new Subject<ModuleInfo>();
+
+  self:LayoutService = this;
+
+
+
+  
+
 
   //布局配置信息
   layoutConfig: LayoutConfig;
@@ -64,59 +134,7 @@ export class LayoutService {
         id: null,
         classes: ["grid"],
         style: null,
-        settings:{
-          gridType: GridType.Fit,
-          compactType: CompactType.None,
-          margin: 10,
-          outerMargin: true,
-          outerMarginTop: null,
-          outerMarginRight: null,
-          outerMarginBottom: null,
-          outerMarginLeft: null,
-          useTransformPositioning: true,
-          mobileBreakpoint: 640,
-          minCols: 1,
-          maxCols: 100,
-          minRows: 1,
-          maxRows: 100,
-          maxItemCols: 100,
-          minItemCols: 1,
-          maxItemRows: 100,
-          minItemRows: 1,
-          maxItemArea: 2500,
-          minItemArea: 1,
-          defaultItemCols: 1,
-          defaultItemRows: 1,
-          fixedColWidth: 105,
-          fixedRowHeight: 105,
-          keepFixedHeightInMobile: false,
-          keepFixedWidthInMobile: false,
-          scrollSensitivity: 10,
-          scrollSpeed: 20,
-          enableEmptyCellClick: false,
-          enableEmptyCellContextMenu: false,
-          enableEmptyCellDrop: false,
-          enableEmptyCellDrag: false,
-          emptyCellDragMaxCols: 50,
-          emptyCellDragMaxRows: 50,
-          ignoreMarginInRow: false,
-          draggable: {
-            enabled: true,
-          },
-          resizable: {
-            enabled: true,
-          },
-          swap: false,
-          pushItems: true,
-          disablePushOnDrag: false,
-          disablePushOnResize: false,
-          pushDirections: {north: true, east: true, south: true, west: true},
-          pushResizeItems: false,
-          displayGrid: DisplayGrid.Always,
-          disableWindowResize: false,
-          disableWarnings: false,
-          scrollToNewItems: false
-        },
+        settings:gridDefaultSettings,
         layout: [],
         type: "grid",
         content: [
@@ -268,7 +286,7 @@ export class LayoutService {
     parent: null
   };
 
-  constructor(private store: Store) {
+  constructor(private store: Store,private toast:ToastrService) {
     this.layoutConfig = this.load();
     console.log("first loaded layout config...", this.layoutConfig);
     this.loadLayoutTemplates();
@@ -295,6 +313,11 @@ export class LayoutService {
    * @param layout 
    */
   remove(layout: LayoutConfig) {
+    if(layout.id =="0"){
+      this.toast.warning("body cannot be removed!")
+      return;
+    }
+
     _.remove(layout.parent.layout, layout);
     // _.unset(this.layoutConfig,layout.path);//这种方式不支持，array中会保留hold
   }
