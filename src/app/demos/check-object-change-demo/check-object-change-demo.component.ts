@@ -1,14 +1,28 @@
 import { Component, OnInit, KeyValueDiffers, KeyValueDiffer, DoCheck } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-check-object-change-demo',
   templateUrl: './check-object-change-demo.component.html',
-  styleUrls: ['./check-object-change-demo.component.scss']
+  styleUrls: ['./check-object-change-demo.component.scss'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(100)
+      ]),
+      transition('* => void', [
+        animate(100, style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class CheckObjectChangeDemoComponent implements OnInit,DoCheck {
 
   private objDiffer: KeyValueDiffer<string, any>;
   private obj: any;
+  isShow:boolean=true;
   constructor(private differs: KeyValueDiffers) { 
     this.obj = {name:"name1",value:12};
   }
@@ -29,5 +43,10 @@ export class CheckObjectChangeDemoComponent implements OnInit,DoCheck {
 
     // this.ngDoCheck();
   }
+
+  animate(){
+    this.isShow = !this.isShow;
+  }
+
 
 }

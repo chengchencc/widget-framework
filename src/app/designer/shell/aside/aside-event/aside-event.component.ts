@@ -54,7 +54,7 @@ export class AsideEventComponent implements OnInit {
     console.log("pub select::",e);
 
   }
-  createOb(ss,pp){
+  createOb(){
     // console.log(ss,pp);
     console.log(this.s,this.p);
     this.registed.push({
