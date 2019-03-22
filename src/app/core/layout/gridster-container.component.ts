@@ -38,8 +38,10 @@ export class GridsterContainerComponent implements OnInit {
 
   public get options(): GridsterConfig {
 
+    // return Object.assign({},gridDefaultSettings,this.config.settings);
+
     if(!this.config.settings){
-      this.config.settings =  deepClone(gridDefaultSettings);
+      this.config.settings = deepClone(gridDefaultSettings);
     }
 
     return this.config.settings;

@@ -40,8 +40,9 @@ widget-preview {
         // padding-bottom: 20px;
         padding: $dsn-preview-padding;
     }
-    .dropzone-entered {
-        // background-color: $gray-200;
-        // transition: all 0.25s;
+    .dropzone-entered:not(gridster) {
+        background-color: $gray-200;
+        background-color: rgba(0, 0, 0, 0.15);
+        transition: all 0.25s;
     }
 }

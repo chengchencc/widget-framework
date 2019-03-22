@@ -13,9 +13,9 @@ const routes: Routes = [
   {
     path: 'demo', component: DemoComponent, children: [
       { path: '', redirectTo: 'default', pathMatch: 'full' },
-      { path: 'default', component: MakeDemoComponent },
-      { path: 'loader', component: LoaderDemoComponent },
-      { path: 'iframe', component: IframeComponent },
+      { path: 'default', component: MakeDemoComponent,data: {animation: 'HomePage'} },
+      { path: 'loader', component: LoaderDemoComponent ,data: {animation: 'AboutPage'}},
+      { path: 'iframe', component: IframeComponent,data: {animation: 'FilterPage'} },
       { path: 'checkobj', component: CheckObjectChangeDemoComponent }
     ]
   },
