@@ -11,7 +11,9 @@
     "startprod": "ng serve --prod",
     "startprodvendor": "ng serve --prod --vendor-chunk=true",
     "buildprod": "ng build --prod",
-    "buildprodvendor": "ng build --prod --vendor-chunk=true"
+    "buildprodvendor": "ng build --prod --vendor-chunk=true",
+    "build:core":"ng build widget-core",
+    "build:demo":"ng build demo-widget"
   },
   "private": true,
   "dependencies": {
