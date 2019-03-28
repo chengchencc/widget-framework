@@ -1,6 +1,6 @@
 import { __decorate, __metadata } from 'tslib';
 import { Injectable, NgModule, EventEmitter, Component, Input, Output, defineInjectable } from '@angular/core';
-import { Widget } from 'widget-core';
+import { Widget } from '@widget/core';
 
 /**
  * @fileoverview added by tsickle

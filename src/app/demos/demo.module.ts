@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MakeDemoComponent } from './make-demo/make-demo.component';
 import { DemoRoutingModule } from './demo-routing.module';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
-import { CoreModule } from '../core/core.module';
+import { CoreModule } from '@widget/core';
 import { BstoastComponent, BsToastService } from './bstoast/bstoast.component';
 
 import { OverlayModule } from "@angular/cdk/overlay";
 import { IframeComponent } from './iframe/iframe.component';
-import { DraggableModule } from '../core/dnd/draggable.module';
-import { StoreHttp } from '../core/common/store/store-http';
-import { Store } from '../core/common/store/store';
+import { DraggableModule } from '@widget/core';
+// import { StoreHttp } from '@widget/core';
+import { Store } from '@widget/core';
 import { CheckObjectChangeDemoComponent } from './check-object-change-demo/check-object-change-demo.component';
 import { DemoComponent } from './demo.component';
 

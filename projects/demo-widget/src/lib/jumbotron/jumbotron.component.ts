@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
-import { Widget } from 'widget-core';
+import { Widget } from '@widget/core';
 @Widget({
   name:'demo-widget-jumbotron'
 })

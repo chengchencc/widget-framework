@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, Inject, ViewChild, ViewContainerRef, Injector, ViewRef } from '@angular/core';
-import { WidgetManager, RegistedWidgetManifest } from 'widget-core'; //'projects/widget-core/src/dynamic/widget-manifest';
-import { Store, StoreInterface } from '../../core/common/store/store';
-import { DynamicLoaderService } from '../../core/common/dynamic-loader.service';
+import { WidgetManager, RegistedWidgetManifest } from '@widget/core'; //'projects/widget-core/src/dynamic/widget-manifest';
+import { Store, StoreInterface } from '@widget/core';
+import { DynamicLoaderService } from '@widget/core';
 
 @Component({
   selector: 'demo-loader-demo',

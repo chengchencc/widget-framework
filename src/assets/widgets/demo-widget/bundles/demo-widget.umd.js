@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('widget-core')) :
-    typeof define === 'function' && define.amd ? define('demo-widget', ['exports', '@angular/core', 'widget-core'], factory) :
-    (factory((global['demo-widget'] = {}),global.ng.core,global.widgetCore));
-}(this, (function (exports,i0,widgetCore) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@widget/core')) :
+    typeof define === 'function' && define.amd ? define('demo-widget', ['exports', '@angular/core', '@widget/core'], factory) :
+    (factory((global['demo-widget'] = {}),global.ng.core,global.core));
+}(this, (function (exports,i0,core) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -75,7 +75,7 @@
         /** @nocollapse */
         DemoWidgetComponent.ctorParameters = function () { return []; };
         DemoWidgetComponent = __decorate([
-            widgetCore.Widget({
+            core.Widget({
                 name: "demo-widget"
             }),
             __metadata("design:paramtypes", [])
@@ -108,7 +108,7 @@
         /** @nocollapse */
         DemoWidgetNavComponent.ctorParameters = function () { return []; };
         DemoWidgetNavComponent = __decorate([
-            widgetCore.Widget({
+            core.Widget({
                 name: "demo-widget-nav"
             }),
             __metadata("design:paramtypes", [])
@@ -162,7 +162,7 @@
             color: [{ type: i0.Input }]
         };
         JumbotronComponent = __decorate([
-            widgetCore.Widget({
+            core.Widget({
                 name: 'demo-widget-jumbotron'
             }),
             __metadata("design:paramtypes", [])
@@ -195,7 +195,7 @@
         /** @nocollapse */
         FormLoginComponent.ctorParameters = function () { return []; };
         FormLoginComponent = __decorate([
-            widgetCore.Widget({
+            core.Widget({
                 name: 'demo-widget-form-login'
             }),
             __metadata("design:paramtypes", [])
@@ -251,7 +251,7 @@
             titleClick: [{ type: i0.Output }]
         };
         CardComponent = __decorate([
-            widgetCore.Widget({
+            core.Widget({
                 name: 'demo-widget-card'
             }),
             __metadata("design:paramtypes", [])

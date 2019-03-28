@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Widget } from 'widget-core';
+import { Widget } from '@widget/core';
 @Widget({
   name:'demo-widget-form-login'
 })
