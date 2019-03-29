@@ -242,8 +242,12 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./webpack-extra-style.config.js",
+              "mergeStrategies": { "entry": "replace" }
+           },
             "outputPath": "dist/widget/styles",
             "index": "src/index.html",
             "main": "projects/widget/styles/theme/theme.scss",
@@ -253,7 +257,25 @@
             "styles": [
               "src/styles.scss"
             ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": true,
+              "aot": false,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": false
+            }
           }
+          
         }
       }
     }
