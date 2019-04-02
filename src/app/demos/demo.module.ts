@@ -21,7 +21,7 @@ import { DemoComponent } from './demo.component';
     CommonModule,
     DemoRoutingModule,
     // CoreModule.forRoot({runtimeType:"runtime"},[{provide:Store,useClass:Store}]),
-    CoreModule.forRoot(),
+    CoreModule,
     OverlayModule,
     DraggableModule
   ],

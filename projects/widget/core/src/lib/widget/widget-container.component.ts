@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ViewContainerRef, HostListener, Optional, ComponentFactory, Injector } from '@angular/core';
 import { WidgetInfo } from '../common/page.interface';
-import { DynamicLoaderService } from '../common/dynamic-loader.service';
+import { LoaderService } from '../common/loader.service';
 import { LayoutService } from '../common/layout.service';
 import { WidgetSettableDirective } from '../common/widget-settable.directive';
 
@@ -22,7 +22,7 @@ export class WidgetContainerComponent implements OnInit {
   isLoading: boolean = false;
 
   constructor(
-    private widgetLoader: DynamicLoaderService,
+    private widgetLoader: LoaderService,
     private layoutService: LayoutService,
     // @Optional() private settable: WidgetSettableDirective
   ) { }

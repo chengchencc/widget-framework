@@ -6,7 +6,7 @@ import { LayoutComponent } from '@widget/core';
 import { LayoutService } from '@widget/core';
 import { ToastrService } from 'ngx-toastr';
 
-@Injectable({providedIn:'root'})
+@Injectable()
 export class DesignerService {
 
   isPreview: boolean = false;

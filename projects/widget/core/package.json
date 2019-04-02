@@ -1,6 +1,9 @@
 {
   "name": "@widget/core",
   "version": "0.0.1",
+  "dependencies": {
+    "ngx-toastr": "^9.1.2"
+  },
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0",

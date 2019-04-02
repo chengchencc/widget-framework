@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DynamicLoaderService } from './dynamic-loader.service';
+import { LoaderService } from './loader.service';
 
 describe('DynamicLoaderService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DynamicLoaderService = TestBed.get(DynamicLoaderService);
+    const service: LoaderService = TestBed.get(LoaderService);
     expect(service).toBeTruthy();
   });
 });

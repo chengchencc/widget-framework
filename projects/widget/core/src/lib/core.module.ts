@@ -13,14 +13,16 @@ import { Store } from './common/store/store';
 import { StoreLocal } from './common/store/store-local';
 import { StoreHttp } from './common/store/store-http';
 import { WidgetContainerComponent } from './widget/widget-container.component';
-import { DynamicLoaderService } from './common/dynamic-loader.service';
+import { LoaderService } from './common/loader.service';
 import { PageService } from './common/page.service';
 import { LayoutService } from './common/layout.service';
-import { RuntimeConfig } from './common/page.interface';
+import { RuntimeConfig, Runtime_Config_Token } from './common/page.interface';
 import { WidgetSettableDirective } from './common/widget-settable.directive';
 import { GridsterModule } from './gridster/gridster.module';
 import { GridsterContainerComponent } from './layout/gridster-container.component';
 import { SettingsGridComponent } from './layout/settings-grid/settings-grid.component';
+
+import { CoreConfig, Core_Config_Token } from './core.config';
 
 const declareAndExports = [
   LayoutComponent,
@@ -37,9 +39,9 @@ const providers = [
   // LayoutService,
   PageService];
 
-  const defaultRuntimeConfig:RuntimeConfig={
-    runtimeType:'design'
-  };
+const defaultRuntimeConfig: RuntimeConfig = {
+  runtimeType: 'design'
+};
 
 @NgModule({
   imports: [
@@ -52,9 +54,12 @@ const providers = [
   declarations: [
     ...declareAndExports,
   ],
-  providers:[
-    DynamicLoaderService,
-    LayoutService
+  providers: [
+    Store,
+    LoaderService,
+    LayoutService,
+    PageService,
+    {provide:Runtime_Config_Token,useValue:defaultRuntimeConfig}
   ],
   exports: [
     ...declareAndExports,
@@ -63,15 +68,14 @@ const providers = [
   ]
 })
 export class CoreModule {
-  static forRoot(config: RuntimeConfig=defaultRuntimeConfig,replacedProviders:Provider[]=[]): ModuleWithProviders {
-    return {
-      ngModule: CoreModule,
-      providers: [
-        ...providers,
-        ...replacedProviders,
-        {provide: 'runtimeConfig', useValue: config}
-      ]
-    };
-  }
-
+  // static forRoot(config: RuntimeConfig=defaultRuntimeConfig,replacedProviders:Provider[]=[]): ModuleWithProviders {
+  //   return {
+  //     ngModule: CoreModule,
+  //     providers: [
+  //       ...providers,
+  //       ...replacedProviders,
+  //       {provide: 'runtimeConfig', useValue: config }
+  //     ]
+  //   };
+  // }
 }

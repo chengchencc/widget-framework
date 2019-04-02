@@ -37,7 +37,7 @@ import { AsideEventComponent } from './shell/aside/aside-event/aside-event.compo
     CommonModule,
     FormsModule,
     TabsModule.forRoot(),
-    CoreModule.forRoot(),
+    CoreModule,
     DraggableModule,
     NgSelectModule,
     TabsModule.forRoot(),

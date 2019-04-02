@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicLoaderService } from '@widget/core';
+import { LoaderService } from '@widget/core';
 import { WidgetLoaderManifest } from '@widget/core';
 import { Store } from '@widget/core';
 
@@ -12,7 +12,7 @@ export class SidebarWidgetComponent implements OnInit {
 
   widgetManifests:WidgetLoaderManifest[];
 
-  constructor(private dloader:DynamicLoaderService,private store:Store) { }
+  constructor(private dloader:LoaderService,private store:Store) { }
 
   async ngOnInit() {
     this.widgetManifests = await this.dloader.loadWidgetLoaderManifest()

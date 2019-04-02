@@ -1,9 +1,11 @@
-import { ComponentFactory, Injector, ComponentRef } from "@angular/core";
+import { ComponentFactory, Injector, ComponentRef, InjectionToken } from "@angular/core";
 import { GridsterItem } from '../gridster/gridsterItem.interface';
 
 export interface RuntimeConfig{
     runtimeType?:'design'|'runtime';
 }
+
+export const Runtime_Config_Token = new InjectionToken("Runtime_Config_Token");
 
 /**
  * 一个页面的完整配置信息

@@ -32,7 +32,7 @@ import * as BrowserAnimations from '@angular/platform-browser/animations';
  * 7. 通过描述信息，找到编译完成的angular module中对应的组件构造工厂动态加载angular组件
  */
 @Injectable()
-export class DynamicLoaderService {
+export class LoaderService {
 
   constructor(
     private store: Store,
