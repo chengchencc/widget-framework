@@ -2,21 +2,19 @@
  * Public API Surface of core
  */
 
-// export * from './lib/core.module';
+// export * from './lib/dnd/draggable.module';
+// export * from './lib/dnd/draggable.directive';
+// export * from './lib/dnd/draggable-model';
+// export * from './lib/dnd/droppable.directive';
+// export * from './lib/dnd/droppable.service';
+// export * from './lib/dnd/dropzone.directive';
+// export * from './lib/dnd/movable-area.directive';
+// export * from './lib/dnd/movable.directive';
+// export * from './lib/dnd/resizable.directive';
+// export * from './lib/dnd/sortable-list.directive';
+// export * from './lib/dnd/sortable.directive';
 
-export * from './lib/dnd/draggable.module';
-export * from './lib/dnd/draggable.directive';
-export * from './lib/dnd/draggable-model';
-export * from './lib/dnd/droppable.directive';
-export * from './lib/dnd/droppable.service';
-export * from './lib/dnd/dropzone.directive';
-export * from './lib/dnd/movable-area.directive';
-export * from './lib/dnd/movable.directive';
-export * from './lib/dnd/resizable.directive';
-export * from './lib/dnd/sortable-list.directive';
-export * from './lib/dnd/sortable.directive';
-
-export * from './lib/index';
+export * from './lib/core';
 
 
 // export * from './lib/dnd';

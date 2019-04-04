@@ -1,11 +1,13 @@
 import { InjectionToken } from '@angular/core';
 
-export interface ICoreConfig{
+export interface WidgetCoreConfig{
+    evn:'design'|'runtime';
     widgetManifestUrl:string;
 }
 
-export const Core_Config_Token = new InjectionToken<ICoreConfig>("core_config");
+export const Widget_Core_Config_Token = new InjectionToken("Widget_Core_Config_Token");
 
-export const CoreConfig:ICoreConfig = {
+export const DefaultWidgetCoreConfig:WidgetCoreConfig={
+    evn:"runtime",
     widgetManifestUrl:""
 }

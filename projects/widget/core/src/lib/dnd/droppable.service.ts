@@ -27,37 +27,19 @@ export class DroppableService {
     this.dragStart$ = this.dragStartSubject.asObservable();
     this.dragMove$ = this.dragMoveSubject.asObservable();
     this.dragEnd$ = this.dragEndSubject.asObservable();
-    console.log("new droppable service.");
   }
 
   onDragStart(event: WidgetDragEvent): void {
     this.dragStartSubject.next(event);
-
-    // if (this.parent) {
-    //   this.parent.onDragStart(event);
-    // }
   }
 
   onDragMove(event: WidgetDragEvent): void {
-
     this.closedDirective = this.getClosedDirective(event);
-
     this.dragMoveSubject.next(event);
-
-    // if (this.parent) {
-    //   this.parent.onDragMove(event);
-    // }
   }
 
   onDragEnd(event: WidgetDragEvent): void {
-    
-
     this.dragEndSubject.next(event);
-
-
-    // if (this.parent) {
-    //   this.parent.onDragEnd(event);
-    // }
   }
 
   getClosedDirective(event: WidgetDragEvent) {
@@ -90,9 +72,6 @@ export class DroppableService {
     });
 
     return closed.distance>10000?null:closed.directive;
-
-    // return closed.directive;
-
   }
 
   calcDistance(event: PointerEvent, clientRect: ClientRect) {

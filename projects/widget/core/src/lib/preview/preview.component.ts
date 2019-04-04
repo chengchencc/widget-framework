@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from '../common/layout.service';
-import { LayoutConfig } from '../common/page.interface';
+import { LayoutService } from '../layout/layout.service';
+import { LayoutConfig } from '../layout/layout.interface';
 
 @Component({
   selector: 'widget-preview',
