@@ -1,15 +1,12 @@
 import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { LayoutService } from '../layout/layout.service';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
-import { LayoutConfig, WidgetContainerComponent } from '../layout';
+import { LayoutConfig } from '../layout/layout.interface';
 
 @Directive({
     selector: '[appSettable]',
 })
 export class WidgetSettableDirective {
-
-    // @HostBinding("class.selected")
-
     @Input()
     config: LayoutConfig;
 
@@ -23,8 +20,8 @@ export class WidgetSettableDirective {
         @SkipSelf() @Optional() public parent: WidgetSettableDirective,
         private layoutService: LayoutService,
         public elementRef: ElementRef,
-        private sanitizer: DomSanitizer,
-        @Optional() public widget: WidgetContainerComponent
+        private sanitizer: DomSanitizer
+        // @Optional() public widget: WidgetContainerComponent
     ) { }
 
     @HostListener("click", ['$event'])
@@ -58,7 +55,7 @@ export class WidgetSettableDirective {
         let result = this._classes.join(" ");
         return result;
     }
-    
+
     addOrRemove(express: boolean, className: string) {
         if (express) {
             if (!this._classes.includes(className)) {

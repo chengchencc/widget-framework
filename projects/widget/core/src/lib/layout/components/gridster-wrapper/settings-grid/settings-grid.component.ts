@@ -1,6 +1,5 @@
 import { Component, OnInit, KeyValueDiffers } from '@angular/core';
-import { SettingBase } from '../../settable/setting.base';
-import { basename } from 'path';
+import { SettingBase } from '../../../../settable/setting.base';
 
 @Component({
   selector: 'app-settings-grid',

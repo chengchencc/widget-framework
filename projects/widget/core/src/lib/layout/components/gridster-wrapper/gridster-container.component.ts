@@ -1,8 +1,14 @@
 import { Component, OnInit, Input, Optional, ViewChild, ElementRef, HostBinding } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
-import { GridsterItem } from '../../../gridster';
+import { GridsterItem, GridsterConfig, GridsterComponent, GridsterComponentInterface, GridType, CompactType, DisplayGrid } from '../../../gridster';
 import { LayoutConfig } from '../../layout.interface';
+import { deepClone } from '../../../utils/object';
+import { WidgetSettableDirective } from '../../../settable/widget-settable.directive';
+import { DroppableService } from '../../../dnd/droppable.service';
+import { WidgetDragEvent } from '../../../dnd/draggable-model';
+import { WidgetLoaderManifest } from '../../../loader/widget-loader';
+import { GridsterUtils } from '../../../gridster/gridsterUtils.service';
 
 @Component({
   selector: 'gridster-container',

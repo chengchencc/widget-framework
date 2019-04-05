@@ -6,7 +6,10 @@ import { FormsModule } from '@angular/forms';
 //custom dnd
 import { DraggableModule } from './dnd/draggable.module';
 // custom components
-import { LayoutComponent } from './layout/components/layout.component';
+import { LayoutComponent } from './layout';
+import { WidgetContainerComponent } from './layout';
+import { GridsterContainerComponent } from './layout';
+import { SettingsGridComponent } from './layout';
 import { PreviewComponent } from './preview/preview.component';
 // provider
 
@@ -18,18 +21,7 @@ import { GridsterModule } from './gridster/gridster.module';
 
 import { Widget_Core_Config_Token, DefaultWidgetCoreConfig } from './core.config';
 import { Store } from './store/store';
-import { WidgetContainerComponent } from './layout/components/widget-container/widget-container.component';
-import { GridsterContainerComponent } from './layout/components/gridster-wrapper/gridster-container.component';
-import { SettingsGridComponent } from './layout/components/gridster-wrapper/settings-grid/settings-grid.component';
 
-const declareAndExports = [
-  LayoutComponent,
-  PreviewComponent,
-  WidgetContainerComponent,
-  WidgetSettableDirective,
-  GridsterContainerComponent,
-  SettingsGridComponent
-];
 
 @NgModule({
   imports: [
@@ -40,17 +32,27 @@ const declareAndExports = [
     FormsModule
   ],
   declarations: [
-    ...declareAndExports,
+    LayoutComponent,
+    PreviewComponent,
+    WidgetContainerComponent,
+    WidgetSettableDirective,
+    GridsterContainerComponent,
+    SettingsGridComponent
   ],
   providers: [
     Store,
     WidgetLoader,
     LayoutService,
-    PageService,
-    {provide:Widget_Core_Config_Token,useValue:DefaultWidgetCoreConfig}
+    PageService
+    // {provide:Widget_Core_Config_Token,useValue:DefaultWidgetCoreConfig}
   ],
   exports: [
-    ...declareAndExports,
+    LayoutComponent,
+    PreviewComponent,
+    WidgetContainerComponent,
+    WidgetSettableDirective,
+    GridsterContainerComponent,
+    SettingsGridComponent,
     DraggableModule,
     GridsterModule
   ]
