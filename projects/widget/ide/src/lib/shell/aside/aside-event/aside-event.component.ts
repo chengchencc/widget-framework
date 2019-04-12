@@ -29,21 +29,21 @@ export class AsideEventComponent implements OnInit {
   selecteSettableItem(directive: WidgetSettableDirective) {
     console.log(directive);
 
-    if (directive && directive.widget) {
+    // if (directive && directive.widget) {
 
-      if (!this.subscriber || this.publisher) {
-        this.subscriber = directive.widget;
-        this.publisher = null;
-        console.log("set subscriber::", this.subscriber);
-      } else {
-        this.publisher = directive.widget;
-        console.log("set publisher::", this.publisher);
-      }
-      // this.publisher.widgetFactory.inputs;
-      // this.publisher.widgetFactory.outputs;
-      // this.subscriber.widgetFactory.inputs;
-      // this.subscriber.widgetFactory.outputs;
-    }
+    //   if (!this.subscriber || this.publisher) {
+    //     this.subscriber = directive.widget;
+    //     this.publisher = null;
+    //     console.log("set subscriber::", this.subscriber);
+    //   } else {
+    //     this.publisher = directive.widget;
+    //     console.log("set publisher::", this.publisher);
+    //   }
+    //   // this.publisher.widgetFactory.inputs;
+    //   // this.publisher.widgetFactory.outputs;
+    //   // this.subscriber.widgetFactory.inputs;
+    //   // this.subscriber.widgetFactory.outputs;
+    // }
   }
 
   subChanged(e) {
