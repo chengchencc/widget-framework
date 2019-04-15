@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
+import { Widget_Core_Config_Token, DefaultWidgetCoreConfig } from '@widget/core/src/lib/core.config';
 
 // import { OverlayModule } from "@angular/cdk/overlay";
 
@@ -28,7 +29,9 @@ import { ToastrModule } from 'ngx-toastr';
       // positionClass: 'toast-bottom-full-width'
     }) // ToastrModule added
   ],
-  providers: [],
+  providers: [
+    { provide: Widget_Core_Config_Token, useValue: DefaultWidgetCoreConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
