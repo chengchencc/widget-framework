@@ -8,10 +8,10 @@ import { WidgetSettableDirective } from '@widget/core';
   templateUrl: './aside-style.component.html',
   styleUrls: ['./aside-style.component.scss']
 })
-export class AsideStyleComponent implements OnInit,DoCheck  {
+export class AsideStyleComponent implements OnInit, DoCheck {
 
 
-  classes:string[]=[
+  classes: string[] = [
     "body",
     "container",
     "container-fluid",
@@ -32,12 +32,12 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     "scroll-thin"
   ];
 
-  displaySelector:string[] = [
+  displaySelector: string[] = [
     "flex"
   ];
 
-  flexSelectors={
-    position:[
+  flexSelectors = {
+    position: [
       "relative",
       "absolute",
       "fixed",
@@ -46,36 +46,36 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
       "inherit",
       "unset"
     ],
-    display:[
+    display: [
       "block",
       "flex"
     ],
-    direction:[
+    direction: [
       "row",
       "row-reverse",
       "column",
       "column-reverse"
     ],
-    wrap:[
-      "nowrap", 
-      "wrap", 
+    wrap: [
+      "nowrap",
+      "wrap",
       "wrap-reverse"
     ],
-    justifyContent:[
-      "flex-start", 
-      "flex-end", 
-      "center", 
-      "space-between", 
+    justifyContent: [
+      "flex-start",
+      "flex-end",
+      "center",
+      "space-between",
       "space-around"
     ],
-    alignItems:[
-      "flex-start", 
-      "flex-end", 
-      "center", 
-      "baseline", 
+    alignItems: [
+      "flex-start",
+      "flex-end",
+      "center",
+      "baseline",
       "stretch"
     ],
-    alignContent:[
+    alignContent: [
       "flex-start",
       "flex-end",
       "center",
@@ -83,7 +83,7 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
       "space-around",
       "stretch"
     ],
-    alignSelf:[
+    alignSelf: [
       "auto",
       "flex-start",
       "flex-end",
@@ -91,12 +91,12 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
       "baseline",
       "stretch"
     ],
-    
+
   }
 
-  config:any;
+  config: any;
 
-  path:string[];
+  path: string[];
 
   //KeyValueDiffers
   // styles:{[key: string]: any}={
@@ -113,13 +113,16 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
   //   "font-size":"16px",
   //   "background":""
   // }
-  styles:{[key: string]: any}={};
+  // styles: { [key: string]: any } = {};
+  
+  itemConfig: { [key: string]: any } = null
+  computedStyles: CSSStyleDeclaration = null
 
   // layoutConfig:layoutConfig;
 
-  constructor(private layoutService:LayoutService) {    
-    this.layoutService.onSelectSettableItem$.subscribe(s=>this.selecteSettableItem(s));
-   }
+  constructor(private layoutService: LayoutService) {
+    this.layoutService.onSelectSettableItem$.subscribe(s => this.selectSettableItem(s));
+  }
 
   ngOnInit() {
     // this.getStyle();
@@ -129,19 +132,21 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     // this.getStyle();
   }
 
-  selecteSettableItem(item:WidgetSettableDirective){
-    if(item){
-      this.config = item.config;
-      item.config.style = item.config.style || {};
-      this.styles = item.config.style;
-      let computedStyles:CSSStyleDeclaration = getComputedStyle(item.elementRef.nativeElement);
-      this.styles.display = computedStyles.display;
-      this.styles["flex-direction"] = computedStyles.flexDirection;
-
+  selectSettableItem(item: WidgetSettableDirective) {
+    if (item) {
+      item.config.style = item.config.style || {}
+      this.itemConfig = item.config
+      this.computedStyles = getComputedStyle(item.elementRef.nativeElement);
       this.path = item.getPath();
-
     }
   }
 
+  handleSelectOption (e, propName) {
+    // console.log(e)
+    this.itemConfig.style[propName] = e
+  }
+  getValue (propName) {
+    return this.itemConfig.style[propName] || this.computedStyles[propName]
+  }
 
 }

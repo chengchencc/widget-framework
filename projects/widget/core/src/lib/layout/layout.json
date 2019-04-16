@@ -1,0 +1,50 @@
+{
+    "id": "0",
+    "path": null,
+    "classes": [
+        "body"
+    ],
+    "type": "body",
+    "layout": [
+        {
+            "id": "0-0",
+            "path": "layout.0",
+            "style": {
+                "display": "block",
+                "flex-direction": "row"
+            },
+            "layout": [],
+            "type": "widget",
+            "content": {
+                "name": "demo-widget"
+            }
+        },
+        {
+            "id": "0-1",
+            "path": "layout.1",
+            "classes": [
+                "div"
+            ],
+            "style": {
+                "display": "block",
+                "flex-direction": "row"
+            },
+            "layout": [
+                {
+                    "id": "0-1-0",
+                    "path": "layout.1.layout.0",
+                    "layout": [],
+                    "type": "widget",
+                    "content": {
+                        "name": "demo-widget"
+                    }
+                }
+            ],
+            "type": "div"
+        }
+    ],
+    "style": {
+        "display": "block",
+        "flex-direction": "row"
+    }
+}

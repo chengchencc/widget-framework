@@ -29,15 +29,14 @@ export class DroppableService {
     this.dragEnd$ = this.dragEndSubject.asObservable();
   }
 
+  /** droppable.directive 触发 */
   onDragStart(event: WidgetDragEvent): void {
     this.dragStartSubject.next(event);
   }
-
   onDragMove(event: WidgetDragEvent): void {
     this.closedDirective = this.getClosedDirective(event);
     this.dragMoveSubject.next(event);
   }
-
   onDragEnd(event: WidgetDragEvent): void {
     this.dragEndSubject.next(event);
   }

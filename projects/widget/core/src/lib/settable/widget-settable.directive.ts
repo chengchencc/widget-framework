@@ -70,6 +70,7 @@ export class WidgetSettableDirective {
 
     @HostBinding('style')
     get myStyle(): SafeStyle {
+        // console.count('get myStyle') //TODO: 鼠标移动的每帧都调用？
         let styleString = this.getStyle();
         return this.sanitizer.bypassSecurityTrustStyle(styleString);
     }

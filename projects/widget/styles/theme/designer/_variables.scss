@@ -2,19 +2,19 @@
 $dsn-bg:#3b424a;
 $dsn-hover-bg:lighten($dsn-bg,10%);
 $dsn-active-bg:lighten($dsn-bg,10%);
-$dsn-color:rgba($white, .5);
+$dsn-color:rgba($white, .8);
 $dsn-hover-color:rgba($white, .7);
 $dsn-active-color:rgba($white, .9);
-$dsn-border-color:darken($dsn-bg,20%);
+$dsn-border-color:darken($dsn-bg, 10%);
 $dsn-border:1px solid $dsn-border-color;
 
 $dsn-tab-bg:darken($dsn-bg,10%);
 $dsn-tab-hover-bg:$dsn-bg;
 $dsn-tab-active-bg:$dsn-bg;
 
-$dsn-form-control-bg:$dsn-bg;
+$dsn-form-control-bg: lighten($dsn-bg, 10%);
 $dsn-form-control-color:$dsn-color;
-$dsn-form-control-border-color:$dsn-border-color;
+$dsn-form-control-border-color: $dsn-border-color;
 
 //header
 $header-bg:darken($dsn-bg,5%);
