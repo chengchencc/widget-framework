@@ -13,10 +13,6 @@
   <form>
     <div class="form-group setting-item">
       <label for="classes">class</label>
-      <!-- <select class="form-control form-control-sm" name="classes" [(ngModel)]="config.classes">
-        <option value="">未设置</option>
-        <option *ngFor="let item of classes" value="item">{{item}}</option>
-      </select> -->
       <ng-select
         [items]="classes"
         autofocus
@@ -32,27 +28,6 @@
       [itemConfigStyles]="itemConfig.style"
       [computedStyles]="computedStyles"
       (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
-
-
-    <div class="form-group">
-      <label for="flex">flex</label>
-      <input type="text" name="flex" id="flex" class="form-control" placeholder="flex" aria-describedby="flex"
-        [(ngModel)]="computedStyles['flex']">
-      <small id="flex" class="text-muted">flex</small>
-    </div>
-
-    <div class="form-group">
-      <label for="background">background</label>
-      <input type="text" name="background" id="background" class="form-control" placeholder="background"
-        aria-describedby="backgroundhelper" [(ngModel)]="computedStyles['background']">
-      <small id="backgroundhelper" class="text-muted">background</small>
-    </div>
-    <div class="form-group">
-      <label for="boxShadow">boxShadow</label>
-      <input type="text" name="boxShadow" id="boxShadow" class="form-control" placeholder="boxShadow"
-        aria-describedby="boxShadowhelper" [(ngModel)]="computedStyles['box-shadow']">
-      <small id="boxShadowhelper" class="text-muted">boxShadow</small>
-    </div>
 
     <div class="form-group">
       <label for="fontSize">font-size</label>
@@ -73,34 +48,5 @@
 
       <small id="fontSizeHelper" class="text-muted">font-size</small>
     </div>
-
-    <div class="form-group">
-      <label for="color">文字颜色</label>
-      <input type="text" name="color" id="color" class="form-control" placeholder="color" aria-describedby="colorHelper"
-        [(ngModel)]="computedStyles['color']">
-      <small id="colorHelper" class="text-muted">文字颜色</small>
-    </div>
-
-    <!-- height -->
-    <div class="form-group">
-      <label for="height">height</label>
-      <input type="text" name="height" id="height" class="form-control" placeholder="height"
-        aria-describedby="heighthelper" [(ngModel)]="computedStyles['height']">
-      <small id="heighthelper" class="text-muted">height</small>
-    </div>
-
-
-    <!-- width -->
-    <!-- <div class="form-group">
-      <label for="width">width</label>
-      <input type="text" name="width" id="width" class="form-control" placeholder="width"
-        aria-describedby="widththelper"
-        [ngModel]="getValue('width')"
-        (ngModelChange)="handleChangeValue($event, 'width')">
-      <small id="widththelper" class="text-muted">width</small>
-    </div> -->
-
-
   </form>
-
 </div>

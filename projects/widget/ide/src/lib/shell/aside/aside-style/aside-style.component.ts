@@ -23,6 +23,16 @@ export enum StylePropType {
   LongEnum, ShortEnum,
   Number, ScopedNumberWithoutUnit,
   Color,
+  Text,
+}
+function camel2Joiner(src: string, joiner = '-') {
+	var result = src.replace(/[A-Z]/g, function (match) {	
+		return joiner + match.toLowerCase()
+  })
+  if(result.slice(0, 1) === joiner){ //如果首字母是大写，执行replace时会多一个_，这里需要去掉
+    result = result.slice(1);
+  }
+	return result
 }
 
 @Component({
@@ -215,6 +225,31 @@ export class AsideStyleComponent implements OnInit, DoCheck {
       type: StylePropType.LongEnum,
       EnumValues: ['visible', 'auto', 'hidden', 'scroll', 'scroll-x', 'scroll-y']
     },
+    {
+      name: 'backgroundColor',
+      type: StylePropType.Color,
+    },
+    {
+      name: 'boxShadow',
+      type: StylePropType.Text,
+    },
+    {
+      name: 'fontSize',
+      type: StylePropType.Number,
+    },
+    {
+      name: 'color',
+      type: StylePropType.Color,
+    },
+    {
+      name: 'width',
+      type: StylePropType.Number,
+    },
+    {
+      name: 'height',
+      type: StylePropType.Number,
+    },
+    
   ]
 
   config: any;
@@ -269,7 +304,7 @@ export class AsideStyleComponent implements OnInit, DoCheck {
     // if(unitPxProps.includes(propName)) {
     // }
     let { value, prop } = e
-    this.itemConfig.style[prop.name] = value
+    this.itemConfig.style[camel2Joiner(prop.name)] = value
   }
 
 }

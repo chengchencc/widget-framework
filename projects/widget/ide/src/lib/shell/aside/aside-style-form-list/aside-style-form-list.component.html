@@ -28,11 +28,34 @@
               [btnRadio]="v" tabindex="0" role="button">{{v}}</label>
           </div>
 
-          <div>
-            
-          </div>
-        </ng-container>
+          <input *ngSwitchCase='StylePropType.Text'
+            type="text"
+            [name]="prop.name"
+            [id]="prop.name"
+            class="form-control"
+            [placeholder]="prop.name"
+            [ngModel]="getValue(prop.name)"
+            (ngModelChange)="handleChangeValue($event, prop)">
 
+          <input *ngSwitchCase='StylePropType.Color'
+            type="text"
+            [name]="prop.name"
+            [id]="prop.name"
+            class="form-control"
+            [placeholder]="prop.name"
+            [ngModel]="getValue(prop.name)"
+            (ngModelChange)="handleChangeValue($event, prop)">
+
+          <input *ngSwitchCase='StylePropType.Number'
+            type="text"
+            [name]="prop.name"
+            [id]="prop.name"
+            class="form-control"
+            [placeholder]="prop.name"
+            [ngModel]="getValue(prop.name)"
+            (ngModelChange)="handleChangeValue($event, prop)">
+        
+          </ng-container>
       </ng-container>
 
       <!-- style props 容器 -->
