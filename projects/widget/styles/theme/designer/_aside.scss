@@ -7,39 +7,47 @@
         background-color: $aside-bg;
         border-left: $dsn-border;
         color: $dsn-color;
+
         .tab-container {
             display: flex;
             flex-direction: column;
             width: 100%;
             height: 100%;
         }
+
         .nav-tabs {
             flex-direction: row;
             background: $dsn-tab-bg;
             border: none;
             border-right: $dsn-border;
             flex: none;
+
             .nav-item {
                 margin-right: -1px;
                 border: $dsn-border;
                 border-top: none;
+
                 &:first-child {
                     border-left: 0px;
                 }
+
                 &.active {
                     border-bottom: none;
                 }
             }
+
             .nav-link {
                 color: $dsn-color;
                 border: none;
                 padding: 0px;
                 padding-top: 5px;
                 border-radius: 0px;
+
                 &:hover {
                     // background-color: $dsn-tab-active-bg;
                     color: $dsn-active-color;
-                } 
+                }
+
                 &.active {
                     background-color: $dsn-tab-active-bg;
                     color: $dsn-active-color;
@@ -47,34 +55,42 @@
                 }
             }
         }
+
         .tab-content {
             flex: auto;
             // padding-left: 5px;
             overflow: auto;
+
             &>.tab-pane.active {
                 display: flex;
                 width: 100%;
                 height: 100%; // border: 1px solid black;
+
                 // border-right: 0px;
                 // border-left: $dsn-border;
                 .panel {
                     display: flex;
                     flex-direction: column;
                     width: 100%;
+
                     &-header {
                         padding: 10px;
                         border-bottom: $dsn-border;
                     }
+
                     &-body {}
                 }
             }
+
             &::-webkit-scrollbar {
                 width: 7px;
                 height: 10px;
             }
+
             &::-webkit-scrollbar-corner {
                 background-color: $dsn-hover-bg;
             }
+
             &::-webkit-scrollbar-thumb {
                 border-left: 2px solid transparent; // border-radius: 10px;
                 background-color: $dsn-hover-bg;
@@ -83,6 +99,7 @@
                 border-width: 0 0 0 1px;
                 background-clip: content-box;
             }
+
             &::-webkit-scrollbar-track {
                 background-color: $dsn-border; //lighten($primary, 30.5%); //#e5e5e5;
                 border-left: 2px solid transparent;
@@ -97,20 +114,56 @@
             padding: 0;
         }
 
-        .breadcrumb{
+        .breadcrumb {
             font-size: 14px;
             padding: 0px;
-        
-            .breadcrumb-item + .breadcrumb-item{
+
+            .breadcrumb-item+.breadcrumb-item {
                 padding-right: "2px";
-                &::before{
+
+                &::before {
                     content: ">";
                     padding-right: "2px";
                 }
             }
         }
+        .ng-select.ng-select-multiple {
+            .ng-select-container {
+                background: darken($aside-bg, 10%);
+                padding: 3px;
+                border: 1px solid $dsn-border-color;
+                border-radius: 5px;
+                .ng-arrow, .ng-clear {
+                    color: $dsn-form-control-bg;
+                }
+                .ng-value-container {
+                    border: none;
+                    .ng-value {
+                        background-color: $dsn-brand-color!important;
+                        padding: 0px 5px 2px;
+                        margin: 2px;
+                        .ng-value-label {
+                            font-size: 12px;
+                            font-weight: normal;
+                        }
+                    }
+                }
+            }
+            &.ng-select-focused {
+                .ng-select-container {
+                    border: 1px solid $dsn-brand-color;
+                }
+                .ng-select-container:after {
+                    border: none;
+                }
+                .ng-arrow {
+                    color: $dsn-form-control-bg!important;
+                }
+            }
+        }
+
         .ul-category {
-            > li {
+            >li {
                 .category-title {
                     background: darken($aside-bg, 16%);
                     font-size: 13px;
@@ -119,44 +172,57 @@
                     cursor: default;
                     border-bottom: 1px solid black;
                 }
+
                 .ul-prop {
-                    .li-prop {
-                        padding: 2px 10px;
-                        margin: 0;
-                    }
+                    .li-prop {}
                 }
             }
         }
 
         .form-group {
-           
-            .btn:focus, .btn.focus {
+            padding: 0 10px;
+            margin: 0;
+
+            .ng-select {
+                padding: 0;
+            }
+
+            .btn:focus,
+            .btn.focus {
                 outline: 0;
                 box-shadow: none;
             }
 
             label {
-                font-size: 13px;
+                font-size: 12px;
                 margin: 0;
                 text-transform: capitalize;
+            }
+            small {
+                line-height: 1.2;
             }
             .btn-group {
                 display: block;
             }
+
             .btn-radio {
                 border: $dsn-border;
                 background: lighten($aside-bg, 10%);
                 color: $dsn-color;
                 border-radius: 5px;
+
                 &.active {
                     background: darken($aside-bg, 10%);
                     color: white;
                 }
+
                 &:not(.active):hover {
                     background-color: lighten($dsn-form-control-bg, 5%);
                 }
             }
-            .form-control, .btn {
+
+            .form-control,
+            .btn {
                 font-size: 12px;
                 padding: 3px 10px;
                 height: 24px;
@@ -165,22 +231,28 @@
                 text-transform: capitalize;
                 border-radius: 2px;
             }
+
             select {
                 background-color: $dsn-form-control-bg;
+
                 &:focus {
                     color: $dsn-form-control-color;
                     box-shadow: none;
                     background-color: $dsn-form-control-bg;
                 }
+
                 option {
                     color: $dsn-form-control-color;
                 }
+
                 &:hover {
                     background-color: lighten($dsn-form-control-bg, 5%);
                 }
             }
+
             input {
                 background: darken($aside-bg, 10%);
+
                 &:focus {
                     box-shadow: rgb(52, 144, 235) 0px 0px 0px 1px;
                     // border-color: $dsn-form-control-border-color;
