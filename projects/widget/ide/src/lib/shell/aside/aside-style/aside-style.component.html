@@ -23,11 +23,18 @@
       <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
     </div>
 
-    <aside-style-form-list
-      [propList]='styleProps'
-      [itemConfigStyles]="itemConfig.style"
-      [computedStyles]="computedStyles"
-      (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
+    <ul class="ul-category">
+      <li *ngFor="let category of styleProps">
+        <div class=category-title
+          (click)="category.collapsed=!category.collapsed" >{{category.name}}</div>
+        <aside-style-form-list
+          *ngIf="!category.collapsed"
+          [propList]='category.styleProps'
+          [itemConfigStyles]="itemConfig.style"
+          [computedStyles]="computedStyles"
+          (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
+      </li>
+    </ul>
 
     <div class="form-group">
       <label for="fontSize">font-size</label>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StylePropType, StyleProp, stylePropsContainer, camel2Joiner } from '../aside-style/aside-style.component';
+import { StylePropType, StyleProp, stylePropsContainer, camel2Joiner, stylePropsCategory } from '../aside-style/aside-style.component';
 
 @Component({
   selector: 'aside-style-form-list',

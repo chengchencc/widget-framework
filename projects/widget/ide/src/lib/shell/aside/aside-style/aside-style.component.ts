@@ -19,6 +19,11 @@ export interface stylePropsContainer {
   ifShow: (itemConfigStyles: CSSStyleDeclaration, computedStyles: CSSStyleDeclaration) => boolean,
   styleProps: StyleProp[]
 }
+export interface stylePropsCategory {
+  name: string,
+  styleProps: (StyleProp | stylePropsContainer)[],
+  collapsed?: boolean
+}
 export enum StylePropType {
   LongEnum, ShortEnum,
   Number, ScopedNumberWithoutUnit,
@@ -136,129 +141,157 @@ export class AsideStyleComponent implements OnInit, DoCheck {
 
   StylePropType = StylePropType
 
-  styleProps: (StyleProp | stylePropsContainer)[] = [
+  styleProps: stylePropsCategory[] =[
     {
-      name: 'display',
-      type: StylePropType.ShortEnum,
-      EnumValues: ['block', 'flex']
-    },
-    /** flex TODO: 条件显示 */
-    {
-      ifShow (itemConfigStyles: CSSStyleDeclaration , computedStyles: CSSStyleDeclaration) {
-        if(itemConfigStyles.display) return itemConfigStyles.display == 'flex'
-        return computedStyles.display == 'flex'
-      },
+      name: '布局',
       styleProps: [
         {
-          name: 'flexDirection',
-          type: StylePropType.LongEnum,
-          EnumValues: [
-            'row',
-            'row-reverse',
-            'column',
-            'column-reverse']
+          name: 'display',
+          type: StylePropType.ShortEnum,
+          EnumValues: ['block', 'flex']
+        },
+        /** flex TODO: 条件显示 */
+        {
+          ifShow (itemConfigStyles: CSSStyleDeclaration , computedStyles: CSSStyleDeclaration) {
+            if(itemConfigStyles.display) return itemConfigStyles.display == 'flex'
+            return computedStyles.display == 'flex'
+          },
+          styleProps: [
+            {
+              name: 'flexDirection',
+              type: StylePropType.LongEnum,
+              EnumValues: [
+                'row',
+                'row-reverse',
+                'column',
+                'column-reverse']
+            },
+            {
+              name: 'flexWrap',
+              type: StylePropType.LongEnum,
+              EnumValues: [
+                'nowrap',
+                'wrap',
+                'wrap-reverse']
+            },
+            {
+              name: 'justifyContent',
+              type: StylePropType.LongEnum,
+              EnumValues: [
+                'normal',
+                'flex-start',
+                'flex-end',
+                'center',
+                'space-between',
+                'space-around']
+            },
+            {
+              name: 'alignItems',
+              type: StylePropType.LongEnum,
+              EnumValues: [
+                'normal',
+                'flex-start',
+                'flex-end',
+                'center',
+                'baseline',
+                'stretch']
+            },
+            {
+              name: 'alignContent',
+              type: StylePropType.LongEnum,
+              EnumValues: [
+                'normal',
+                'flex-start',
+                'flex-end',
+                'center',
+                'space-between',
+                'space-around',
+                'stretch']
+            },
+            {
+              name: 'alignSelf',
+              type: StylePropType.LongEnum,
+              EnumValues: [
+                'auto',
+                'flex-start',
+                'flex-end',
+                'center',
+                'baseline',
+                'stretch']
+            },
+            {
+              name: 'justifyContent',
+              type: StylePropType.LongEnum,
+              EnumValues: [
+                'normal',
+                'flex-start',
+                'flex-end',
+                'center',
+                'space-between',
+                'space-around']
+            },
+          ]
         },
         {
-          name: 'flexWrap',
+          name: 'position',
           type: StylePropType.LongEnum,
-          EnumValues: [
-            'nowrap',
-            'wrap',
-            'wrap-reverse']
-        },
-        {
-          name: 'justifyContent',
-          type: StylePropType.LongEnum,
-          EnumValues: [
-            'normal',
-            'flex-start',
-            'flex-end',
-            'center',
-            'space-between',
-            'space-around']
-        },
-        {
-          name: 'alignItems',
-          type: StylePropType.LongEnum,
-          EnumValues: [
-            'normal',
-            'flex-start',
-            'flex-end',
-            'center',
-            'baseline',
-            'stretch']
-        },
-        {
-          name: 'alignContent',
-          type: StylePropType.LongEnum,
-          EnumValues: [
-            'normal',
-            'flex-start',
-            'flex-end',
-            'center',
-            'space-between',
-            'space-around',
-            'stretch']
-        },
-        {
-          name: 'alignSelf',
-          type: StylePropType.LongEnum,
-          EnumValues: [
-            'auto',
-            'flex-start',
-            'flex-end',
-            'center',
-            'baseline',
-            'stretch']
-        },
-        {
-          name: 'justifyContent',
-          type: StylePropType.LongEnum,
-          EnumValues: [
-            'normal',
-            'flex-start',
-            'flex-end',
-            'center',
-            'space-between',
-            'space-around']
+          EnumValues: ['static', 'relative', 'absolute', 'fixed', 'sticky', 'inherit', 'unset']
         },
       ]
-    },
-    {
-      name: 'position',
-      type: StylePropType.LongEnum,
-      EnumValues: ['static', 'relative', 'absolute', 'fixed', 'sticky', 'inherit', 'unset']
-    },
-    {
-      name: 'overflow',
-      type: StylePropType.LongEnum,
-      EnumValues: ['visible', 'auto', 'hidden', 'scroll', 'scroll-x', 'scroll-y']
-    },
-    {
-      name: 'backgroundColor',
-      type: StylePropType.Color,
-    },
-    {
-      name: 'boxShadow',
-      type: StylePropType.Text,
-    },
-    {
-      name: 'fontSize',
-      type: StylePropType.Number,
-    },
-    {
-      name: 'color',
-      type: StylePropType.Color,
-    },
-    {
-      name: 'width',
-      type: StylePropType.Number,
-    },
-    {
-      name: 'height',
-      type: StylePropType.Number,
-    },
-    
+    }, {
+      name: '外观',
+      styleProps: [
+        {
+          name: 'backgroundColor',
+          type: StylePropType.Color,
+        },
+        {
+          name: 'boxShadow',
+          type: StylePropType.Text,
+        },
+        {
+          name: 'fontSize',
+          type: StylePropType.Number,
+        },
+        {
+          name: 'color',
+          type: StylePropType.Color,
+        },
+        {
+          name: 'width',
+          type: StylePropType.Number,
+        },
+        {
+          name: 'height',
+          type: StylePropType.Number,
+        }
+      ]
+    }, {
+      name: '尺寸',
+      styleProps: [
+        {
+          name: 'width',
+          type: StylePropType.Number,
+        },
+        {
+          name: 'height',
+          type: StylePropType.Number,
+        },
+        {
+          name: 'margin',
+          type: StylePropType.Text,
+        },
+        {
+          name: 'padding',
+          type: StylePropType.Text,
+        },
+        {
+          name: 'overflow',
+          type: StylePropType.LongEnum,
+          EnumValues: ['visible', 'auto', 'hidden', 'scroll', 'scroll-x', 'scroll-y']
+        },
+      ]
+    }
   ]
 
   config: any;
