@@ -51,25 +51,12 @@
 
     <div class="form-group">
       <label for="display">display</label>
-      <!-- <select class="form-control form-control-sm" name="display" id="display"
-      [ngModel]="getValue('display')"
-      (ngModelChange)="handleSelectOption($event, 'display')">
-        <option *ngFor="let item of flexSelectors.display" [value]="item" [selected]="computedStyles['display']==item">
-          {{item}}</option>
-      </select> -->
-      <!-- <div class="btn-group">
-        <label name="display" class="btn btn-primary" [(ngModel)]="computedStyles['display']"
-              btnRadio="block" tabindex="0" role="button">block</label>
-        <label name="display" class="btn btn-primary" [(ngModel)]="computedStyles['display']"
-              btnRadio="flex" tabindex="0" role="button">flex</label>
-      </div> -->
-
       <div class="btn-group"
         btnRadioGroup
         name="display"
         ngDefaultControl
         [ngModel]="getValue('display')"
-        (ngModelChange)="handleSelectOption($event, 'display')" >
+        (ngModelChange)="handleChangeValue($event, 'display')" >
         <label class="btn btn-radio"
               btnRadio="block" tabindex="0" role="button">block</label>
         <label class="btn btn-radio"
@@ -181,7 +168,9 @@
     <div class="form-group">
       <label for="width">width</label>
       <input type="text" name="width" id="width" class="form-control" placeholder="width"
-        aria-describedby="widththelper" [(ngModel)]="computedStyles['width']">
+        aria-describedby="widththelper"
+        [ngModel]="getValue('width')"
+        (ngModelChange)="handleChangeValue($event, 'width')">
       <small id="widththelper" class="text-muted">width</small>
     </div>
 

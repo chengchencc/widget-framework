@@ -3,6 +3,10 @@ import { LayoutService } from '@widget/core';
 import { LayoutComponent } from '@widget/core';
 import { WidgetSettableDirective } from '@widget/core';
 
+//TODO: 放这？
+/** 默认单位为 px 的属性列表 */
+// const unitPxProps = ['width', 'height', 'margin']
+
 @Component({
   selector: 'design-aside-style',
   templateUrl: './aside-style.component.html',
@@ -141,12 +145,26 @@ export class AsideStyleComponent implements OnInit, DoCheck {
     }
   }
 
-  handleSelectOption (e, propName) {
-    // console.log(e)
+  handleChangeValue (e, propName: string) {
+    //TODO: 验证、自动增加单位，或改为单位选框
+    // if(unitPxProps.includes(propName)) {
+    // }
     this.itemConfig.style[propName] = e
   }
-  getValue (propName) {
-    return this.itemConfig.style[propName] || this.computedStyles[propName]
+  getValue (propName: string) {
+    let v: string = this.itemConfig.style[propName]
+
+    if(!v) {
+      switch(propName) {
+        case 'width':
+        case 'height':
+          return 'auto'
+          break
+        default:
+          v = this.computedStyles[propName]
+      }
+    }
+    return v
   }
 
 }
