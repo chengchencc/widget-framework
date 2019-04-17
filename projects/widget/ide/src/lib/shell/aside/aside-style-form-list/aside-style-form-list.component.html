@@ -3,7 +3,7 @@
       class="form-group">
       <!-- 普通 style prop，直接显示 -->
       <ng-container *ngIf="!prop.ifShow">
-        <label [for]="prop.name">{{prop.name}}</label>
+        <label [for]="prop.name">{{camel2Joiner(prop.name, ' ')}}</label>
         <ng-container [ngSwitch]="prop.type">
 
           <select *ngSwitchCase='StylePropType.LongEnum'
@@ -13,7 +13,7 @@
             [ngModel]="getValue(prop.name)"
             (ngModelChange)="handleChangeValue($event, prop)" >
             <option *ngFor="let v of prop.EnumValues"
-              [value]="v">{{v}}</option>
+              [value]="v">{{camel2Joiner(v, ' ')}}</option>
           </select>
 
           <div *ngSwitchCase='StylePropType.ShortEnum'
@@ -25,7 +25,7 @@
             (ngModelChange)="handleChangeValue($event, prop)" >
             <label *ngFor="let v of prop.EnumValues"
               class="btn btn-radio"
-              [btnRadio]="v" tabindex="0" role="button">{{v}}</label>
+              [btnRadio]="v" tabindex="0" role="button">{{camel2Joiner(v, ' ')}}</label>
           </div>
 
           <input *ngSwitchCase='StylePropType.Text'
@@ -33,7 +33,7 @@
             [name]="prop.name"
             [id]="prop.name"
             class="form-control"
-            [placeholder]="prop.name"
+            [placeholder]="camel2Joiner(prop.name, ' ')"
             [ngModel]="getValue(prop.name)"
             (ngModelChange)="handleChangeValue($event, prop)">
 
@@ -42,7 +42,7 @@
             [name]="prop.name"
             [id]="prop.name"
             class="form-control"
-            [placeholder]="prop.name"
+            [placeholder]="camel2Joiner(prop.name, ' ')"
             [ngModel]="getValue(prop.name)"
             (ngModelChange)="handleChangeValue($event, prop)">
 
@@ -51,7 +51,7 @@
             [name]="prop.name"
             [id]="prop.name"
             class="form-control"
-            [placeholder]="prop.name"
+            [placeholder]="camel2Joiner(prop.name, ' ')"
             [ngModel]="getValue(prop.name)"
             (ngModelChange)="handleChangeValue($event, prop)">
         

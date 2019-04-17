@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StylePropType, StyleProp, stylePropsContainer } from '../aside-style/aside-style.component';
+import { StylePropType, StyleProp, stylePropsContainer, camel2Joiner } from '../aside-style/aside-style.component';
 
 @Component({
   selector: 'aside-style-form-list',
@@ -15,6 +15,7 @@ export class AsideStyleFormListComponent implements OnInit {
   @Output() onChangeValue = new EventEmitter<{ value: string, prop: StyleProp }>()
 
   StylePropType = StylePropType
+  camel2Joiner = camel2Joiner
 
   constructor() { }
 

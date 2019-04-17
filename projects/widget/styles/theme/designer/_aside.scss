@@ -49,7 +49,7 @@
         }
         .tab-content {
             flex: auto;
-            padding-left: 5px;
+            // padding-left: 5px;
             overflow: auto;
             &>.tab-pane.active {
                 display: flex;
@@ -107,13 +107,16 @@
         }
 
         .form-group {
+           
             .btn:focus, .btn.focus {
                 outline: 0;
                 box-shadow: none;
             }
 
             label {
-                font-size: 14px;
+                font-size: 13px;
+                margin: 0;
+                text-transform: capitalize;
             }
             .btn-group {
                 display: block;
@@ -126,18 +129,40 @@
                 &.active {
                     background: darken($aside-bg, 10%);
                 }
+                &:not(.active):hover {
+                    background-color: lighten($dsn-form-control-bg, 5%);
+                }
             }
-        }
-        .form-control {
-            background-color: $dsn-form-control-bg;
-            border: 1px solid $dsn-form-control-border-color;
-            color: $dsn-form-control-color;
-            &:focus {
+            .form-control, .btn {
+                font-size: 12px;
+                padding: 3px 10px;
+                height: 24px;
+                border: 1px solid $dsn-form-control-border-color;
                 color: $dsn-form-control-color;
-                background-color: $dsn-bg;
+                text-transform: capitalize;
+                border-radius: 2px;
             }
-            option {
-                color: $dsn-form-control-color;
+            select {
+                background-color: $dsn-form-control-bg;
+                &:focus {
+                    color: $dsn-form-control-color;
+                    box-shadow: none;
+                    background-color: $dsn-form-control-bg;
+                }
+                option {
+                    color: $dsn-form-control-color;
+                }
+                &:hover {
+                    background-color: lighten($dsn-form-control-bg, 5%);
+                }
+            }
+            input {
+                background: darken($aside-bg, 10%);
+                &:focus {
+                    box-shadow: rgb(52, 144, 235) 0px 0px 0px 1px;
+                    // border-color: $dsn-form-control-border-color;
+                    background: darken($aside-bg, 10%);
+                }
             }
         }
     }

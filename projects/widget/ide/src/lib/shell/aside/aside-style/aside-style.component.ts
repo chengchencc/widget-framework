@@ -25,15 +25,24 @@ export enum StylePropType {
   Color,
   Text,
 }
-function camel2Joiner(src: string, joiner = '-') {
-	var result = src.replace(/[A-Z]/g, function (match) {	
-		return joiner + match.toLowerCase()
-  })
+/** 驼峰 -> 小写 + 连接符 */
+export function camel2Joiner (src: string, joiner = '-') {
+	let result = src.replace(/[A-Z]/g, match => joiner + match.toLowerCase())
   if(result.slice(0, 1) === joiner){ //如果首字母是大写，执行replace时会多一个_，这里需要去掉
     result = result.slice(1);
   }
 	return result
 }
+// /** 驼峰 -> 大写开头 + 空格 */
+// function camel2CapitalizeSpace (src: string) {
+//   var result = src.replace(/[A-Z]/g, function (match) {	
+// 		return joiner + match.toLowerCase()
+//   })
+//   if(result.slice(0, 1) === joiner){ //如果首字母是大写，执行replace时会多一个_，这里需要去掉
+//     result = result.slice(1);
+//   }
+// 	return result
+// }
 
 @Component({
   selector: 'design-aside-style',
@@ -306,5 +315,6 @@ export class AsideStyleComponent implements OnInit, DoCheck {
     let { value, prop } = e
     this.itemConfig.style[camel2Joiner(prop.name)] = value
   }
+
 
 }
