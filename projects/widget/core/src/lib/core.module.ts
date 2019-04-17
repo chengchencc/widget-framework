@@ -43,8 +43,8 @@ import { Store } from './store/store';
     Store,
     WidgetLoader,
     LayoutService,
-    PageService
-    // {provide:Widget_Core_Config_Token,useValue:DefaultWidgetCoreConfig}
+    PageService,
+    {provide:Widget_Core_Config_Token,useValue:DefaultWidgetCoreConfig}
   ],
   exports: [
     LayoutComponent,

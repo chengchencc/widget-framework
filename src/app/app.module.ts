@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 
-// import { OverlayModule } from "@angular/cdk/overlay";
 
 
 @NgModule({
@@ -28,7 +27,8 @@ import { ToastrModule } from 'ngx-toastr';
       // positionClass: 'toast-bottom-full-width'
     }) // ToastrModule added
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -32,6 +32,16 @@ import { AsideSettingComponent } from './shell/aside/aside-setting/aside-setting
 import { AsideStructureComponent, AsideStructureTreeComponent } from './shell/aside/aside-structure/aside-structure.component';
 import { AsideEventComponent } from './shell/aside/aside-event/aside-event.component';
 
+import { Widget_Core_Config_Token, WidgetCoreConfig } from '@widget/core/src/lib/core.config';
+
+// import { OverlayModule } from "@angular/cdk/overlay";
+
+const widgetCoreConfig:WidgetCoreConfig={
+  evn:"design",
+  widgetManifestUrl:"aaa"
+}
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -62,7 +72,9 @@ import { AsideEventComponent } from './shell/aside/aside-event/aside-event.compo
     AsideEventComponent
   ],
   providers:[
-    DesignerService
+    DesignerService,
+    {provide:Widget_Core_Config_Token,useValue:widgetCoreConfig}
+
   ]
 })
 export class IdeModule { }
