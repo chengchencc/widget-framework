@@ -1,14 +1,3 @@
-<!-- <p>
-  style works!
-</p> -->
-
-<!-- <div>css selector</div>
-<div>layout style</div>
-<div>background</div>
-<div>border</div>
-<div>shadows</div>
-<div>Typography</div> -->
-
 <p *ngIf="!itemConfig">请选择布局或部件......</p>
 
 <div class="setting-container" *ngIf="itemConfig">
@@ -22,14 +11,12 @@
   </nav>
 
   <form>
-
     <div class="form-group setting-item">
       <label for="classes">class</label>
       <!-- <select class="form-control form-control-sm" name="classes" [(ngModel)]="config.classes">
         <option value="">未设置</option>
         <option *ngFor="let item of classes" value="item">{{item}}</option>
       </select> -->
-
       <ng-select
         [items]="classes"
         autofocus
@@ -40,73 +27,38 @@
       <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
     </div>
 
-    <div class="form-group">
-      <label for="position">position</label>
-      <select class="form-control form-control-sm" name="position" id="position"
-        [(ngModel)]="computedStyles['position']">
-        <option *ngFor="let item of flexSelectors.position" [value]="item">{{item}}</option>
-      </select>
-      <small id="positionHelper" class="text-muted">position</small>
+    <div
+      *ngFor="let prop of styleProps"
+      class="form-group">
+      <label [for]="prop.name">{{prop.name}}</label>
+      <ng-container [ngSwitch]="prop.type">
+
+        <select *ngSwitchCase='StylePropType.LongEnum'
+          class="form-control form-control-sm"
+          [name]="prop.name"
+          [id]="prop.name"
+          [ngModel]="getValue(prop.name)"
+          (ngModelChange)="handleChangeValue($event, prop.name)" >
+          <option *ngFor="let v of prop.EnumValues"
+            [value]="v">{{v}}</option>
+        </select>
+
+        <div *ngSwitchCase='StylePropType.ShortEnum'
+          class="btn-group"
+          btnRadioGroup
+          ngDefaultControl
+          [name]="prop.name"
+          [ngModel]="getValue(prop.name)"
+          (ngModelChange)="handleChangeValue($event, prop.name)" >
+          <label *ngFor="let v of prop.EnumValues"
+            class="btn btn-radio"
+            [btnRadio]="v" tabindex="0" role="button">{{v}}</label>
+        </div>
+
+      </ng-container>
+      <small id="positionHelper" class="text-muted">{{prop.helperContent || prop.name}}</small>
     </div>
 
-    <div class="form-group">
-      <label for="display">display</label>
-      <div class="btn-group"
-        btnRadioGroup
-        name="display"
-        ngDefaultControl
-        [ngModel]="getValue('display')"
-        (ngModelChange)="handleChangeValue($event, 'display')" >
-        <label class="btn btn-radio"
-              btnRadio="block" tabindex="0" role="button">block</label>
-        <label class="btn btn-radio"
-              btnRadio="flex" tabindex="0" role="button">flex</label>
-      </div>
-      <small id="displayHelper" class="text-muted">display</small>
-    </div>
-    
-
-    <div class="form-group">
-      <label for="flex-direction">flex-direction</label>
-      <!-- <input type="text" name="flex-direction" id="flex-direction" class="form-control" placeholder="flex-direction" aria-describedby="flex-direction" [(ngModel)]="computedStyles['flex-direction']"> -->
-      <select class="form-control form-control-sm" name="flex-direction" id="flex-direction"
-        [(ngModel)]="computedStyles['flex-direction']">
-        <option *ngFor="let item of flexSelectors.direction" [value]="item">{{item}}</option>
-      </select>
-      <small id="flex-direction" class="text-muted">flex-direction</small>
-    </div>
-
-    <div class="form-group">
-      <label for="flex-wrap">flex-wrap</label>
-      <!-- <input type="text" name="flex-wrap" id="flex-wrap" class="form-control" placeholder="flex-wrap" aria-describedby="flex-wrap" [(ngModel)]="computedStyles['flex-wrap']"> -->
-      <select class="form-control form-control-sm" name="flex-wrap" id="flex-wrap"
-        [(ngModel)]="computedStyles['flex-wrap']">
-        <option *ngFor="let item of flexSelectors.wrap" [value]="item">{{item}}</option>
-      </select>
-      <small id="flex-wrap" class="text-muted">flex-wrap</small>
-    </div>
-
-    <!-- <div class="form-group">
-      <label for="flex-flow">flex-flow</label>
-      <input type="search" name="flex-flow" id="flex-flow" class="form-control" placeholder="flex-flow" aria-describedby="flex-flow" [(ngModel)]="computedStyles['flex-flow']">
-      <small id="flex-flow" class="text-muted">flex-flow</small>
-    </div> -->
-
-    <div class="form-group">
-      <label for="justify-content">justify-content</label>
-      <select class="form-control form-control-sm" name="justify-content" id="justify-content"
-        [(ngModel)]="computedStyles['justify-content']">
-        <option *ngFor="let item of flexSelectors.justifyContent" [value]="item">{{item}}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="align-items">align-items</label>
-      <select class="form-control form-control-sm" name="align-items" id="align-items"
-        [(ngModel)]="computedStyles['align-items']">
-        <option *ngFor="let item of flexSelectors.alignItems" [value]="item">{{item}}</option>
-      </select>
-    </div>
 
     <div class="form-group">
       <label for="flex">flex</label>
