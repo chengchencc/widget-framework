@@ -51,14 +51,33 @@
 
     <div class="form-group">
       <label for="display">display</label>
-      <select class="form-control form-control-sm" name="display" id="display"
+      <!-- <select class="form-control form-control-sm" name="display" id="display"
       [ngModel]="getValue('display')"
       (ngModelChange)="handleSelectOption($event, 'display')">
         <option *ngFor="let item of flexSelectors.display" [value]="item" [selected]="computedStyles['display']==item">
           {{item}}</option>
-      </select>
+      </select> -->
+      <!-- <div class="btn-group">
+        <label name="display" class="btn btn-primary" [(ngModel)]="computedStyles['display']"
+              btnRadio="block" tabindex="0" role="button">block</label>
+        <label name="display" class="btn btn-primary" [(ngModel)]="computedStyles['display']"
+              btnRadio="flex" tabindex="0" role="button">flex</label>
+      </div> -->
+
+      <div class="btn-group"
+        btnRadioGroup
+        name="display"
+        ngDefaultControl
+        [ngModel]="getValue('display')"
+        (ngModelChange)="handleSelectOption($event, 'display')" >
+        <label class="btn btn-radio"
+              btnRadio="block" tabindex="0" role="button">block</label>
+        <label class="btn btn-radio"
+              btnRadio="flex" tabindex="0" role="button">flex</label>
+      </div>
       <small id="displayHelper" class="text-muted">display</small>
     </div>
+    
 
     <div class="form-group">
       <label for="flex-direction">flex-direction</label>

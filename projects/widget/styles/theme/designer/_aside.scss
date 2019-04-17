@@ -107,8 +107,25 @@
         }
 
         .form-group {
+            .btn:focus, .btn.focus {
+                outline: 0;
+                box-shadow: none;
+            }
+
             label {
                 font-size: 14px;
+            }
+            .btn-group {
+                display: block;
+            }
+            .btn-radio {
+                border: $dsn-border;
+                background: lighten($aside-bg, 10%);
+                color: $dsn-color;
+                border-radius: 5px;
+                &.active {
+                    background: darken($aside-bg, 10%);
+                }
             }
         }
         .form-control {

@@ -10,6 +10,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgSelectModule } from '@ng-select/ng-select';
 // core
 import { CoreModule } from '@widget/core';
@@ -44,6 +45,7 @@ import { AsideEventComponent } from './shell/aside/aside-event/aside-event.compo
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    ButtonsModule.forRoot(),
   ],
   declarations: [
     DesignerComponent,
