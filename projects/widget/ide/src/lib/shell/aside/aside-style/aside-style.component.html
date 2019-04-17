@@ -27,37 +27,11 @@
       <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
     </div>
 
-    <div
-      *ngFor="let prop of styleProps"
-      class="form-group">
-      <label [for]="prop.name">{{prop.name}}</label>
-      <ng-container [ngSwitch]="prop.type">
-
-        <select *ngSwitchCase='StylePropType.LongEnum'
-          class="form-control form-control-sm"
-          [name]="prop.name"
-          [id]="prop.name"
-          [ngModel]="getValue(prop.name)"
-          (ngModelChange)="handleChangeValue($event, prop.name)" >
-          <option *ngFor="let v of prop.EnumValues"
-            [value]="v">{{v}}</option>
-        </select>
-
-        <div *ngSwitchCase='StylePropType.ShortEnum'
-          class="btn-group"
-          btnRadioGroup
-          ngDefaultControl
-          [name]="prop.name"
-          [ngModel]="getValue(prop.name)"
-          (ngModelChange)="handleChangeValue($event, prop.name)" >
-          <label *ngFor="let v of prop.EnumValues"
-            class="btn btn-radio"
-            [btnRadio]="v" tabindex="0" role="button">{{v}}</label>
-        </div>
-
-      </ng-container>
-      <small id="positionHelper" class="text-muted">{{prop.helperContent || prop.name}}</small>
-    </div>
+    <aside-style-form-list
+      [propList]='styleProps'
+      [itemConfigStyles]="itemConfig.style"
+      [computedStyles]="computedStyles"
+      (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
 
 
     <div class="form-group">
@@ -117,14 +91,14 @@
 
 
     <!-- width -->
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="width">width</label>
       <input type="text" name="width" id="width" class="form-control" placeholder="width"
         aria-describedby="widththelper"
         [ngModel]="getValue('width')"
         (ngModelChange)="handleChangeValue($event, 'width')">
       <small id="widththelper" class="text-muted">width</small>
-    </div>
+    </div> -->
 
 
   </form>

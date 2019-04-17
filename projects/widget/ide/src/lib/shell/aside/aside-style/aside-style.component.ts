@@ -7,7 +7,7 @@ import { WidgetSettableDirective } from '@widget/core';
 /** 默认单位为 px 的属性列表 */
 // const unitPxProps = ['width', 'height', 'margin']
 
-interface styleProp {
+export interface StyleProp {
   name: string,
   type: StylePropType,
   helperContent?: string,
@@ -15,7 +15,11 @@ interface styleProp {
   maxMin?: number[],
   step?: number,
 }
-enum StylePropType {
+export interface stylePropsContainer {
+  ifShow: (itemConfigStyles: CSSStyleDeclaration, computedStyles: CSSStyleDeclaration) => boolean,
+  styleProps: StyleProp[]
+}
+export enum StylePropType {
   LongEnum, ShortEnum,
   Number, ScopedNumberWithoutUnit,
   Color,
@@ -113,11 +117,93 @@ export class AsideStyleComponent implements OnInit, DoCheck {
 
   StylePropType = StylePropType
 
-  styleProps: styleProp[] = [
+  styleProps: (StyleProp | stylePropsContainer)[] = [
     {
       name: 'display',
       type: StylePropType.ShortEnum,
       EnumValues: ['block', 'flex']
+    },
+    /** flex TODO: 条件显示 */
+    {
+      ifShow (itemConfigStyles: CSSStyleDeclaration , computedStyles: CSSStyleDeclaration) {
+        if(itemConfigStyles.display) return itemConfigStyles.display == 'flex'
+        return computedStyles.display == 'flex'
+      },
+      styleProps: [
+        {
+          name: 'flexDirection',
+          type: StylePropType.LongEnum,
+          EnumValues: [
+            'row',
+            'row-reverse',
+            'column',
+            'column-reverse']
+        },
+        {
+          name: 'flexWrap',
+          type: StylePropType.LongEnum,
+          EnumValues: [
+            'nowrap',
+            'wrap',
+            'wrap-reverse']
+        },
+        {
+          name: 'justifyContent',
+          type: StylePropType.LongEnum,
+          EnumValues: [
+            'normal',
+            'flex-start',
+            'flex-end',
+            'center',
+            'space-between',
+            'space-around']
+        },
+        {
+          name: 'alignItems',
+          type: StylePropType.LongEnum,
+          EnumValues: [
+            'normal',
+            'flex-start',
+            'flex-end',
+            'center',
+            'baseline',
+            'stretch']
+        },
+        {
+          name: 'alignContent',
+          type: StylePropType.LongEnum,
+          EnumValues: [
+            'normal',
+            'flex-start',
+            'flex-end',
+            'center',
+            'space-between',
+            'space-around',
+            'stretch']
+        },
+        {
+          name: 'alignSelf',
+          type: StylePropType.LongEnum,
+          EnumValues: [
+            'auto',
+            'flex-start',
+            'flex-end',
+            'center',
+            'baseline',
+            'stretch']
+        },
+        {
+          name: 'justifyContent',
+          type: StylePropType.LongEnum,
+          EnumValues: [
+            'normal',
+            'flex-start',
+            'flex-end',
+            'center',
+            'space-between',
+            'space-around']
+        },
+      ]
     },
     {
       name: 'position',
@@ -128,80 +214,6 @@ export class AsideStyleComponent implements OnInit, DoCheck {
       name: 'overflow',
       type: StylePropType.LongEnum,
       EnumValues: ['visible', 'auto', 'hidden', 'scroll', 'scroll-x', 'scroll-y']
-    },
-    /** flex TODO: 条件显示 */
-    {
-      name: 'flexDirection',
-      type: StylePropType.LongEnum,
-      EnumValues: [
-        'row',
-        'row-reverse',
-        'column',
-        'column-reverse']
-    },
-    {
-      name: 'flexWrap',
-      type: StylePropType.LongEnum,
-      EnumValues: [
-        'nowrap',
-        'wrap',
-        'wrap-reverse']
-    },
-    {
-      name: 'justifyContent',
-      type: StylePropType.LongEnum,
-      EnumValues: [
-        'normal',
-        'flex-start',
-        'flex-end',
-        'center',
-        'space-between',
-        'space-around']
-    },
-    {
-      name: 'alignItems',
-      type: StylePropType.LongEnum,
-      EnumValues: [
-        'normal',
-        'flex-start',
-        'flex-end',
-        'center',
-        'baseline',
-        'stretch']
-    },
-    {
-      name: 'alignContent',
-      type: StylePropType.LongEnum,
-      EnumValues: [
-        'normal',
-        'flex-start',
-        'flex-end',
-        'center',
-        'space-between',
-        'space-around',
-        'stretch']
-    },
-    {
-      name: 'alignSelf',
-      type: StylePropType.LongEnum,
-      EnumValues: [
-        'auto',
-        'flex-start',
-        'flex-end',
-        'center',
-        'baseline',
-        'stretch']
-    },
-    {
-      name: 'justifyContent',
-      type: StylePropType.LongEnum,
-      EnumValues: [
-        'normal',
-        'flex-start',
-        'flex-end',
-        'center',
-        'space-between',
-        'space-around']
     },
   ]
 
@@ -252,26 +264,12 @@ export class AsideStyleComponent implements OnInit, DoCheck {
     }
   }
 
-  handleChangeValue(e, propName: string) {
+  handleChangeValue(e: { value: string, prop: StyleProp }) {
     //TODO: 验证、自动增加单位，或改为单位选框
     // if(unitPxProps.includes(propName)) {
     // }
-    this.itemConfig.style[propName] = e
-  }
-  getValue(propName: string) {
-    let v: string = this.itemConfig.style[propName]
-
-    if (!v) {
-      switch (propName) {
-        case 'width':
-        case 'height':
-          v = 'auto'
-          break
-        default:
-          v = this.computedStyles[propName]
-      }
-    }
-    return v
+    let { value, prop } = e
+    this.itemConfig.style[prop.name] = value
   }
 
 }
