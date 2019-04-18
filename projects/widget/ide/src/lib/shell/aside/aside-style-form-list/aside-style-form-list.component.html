@@ -4,7 +4,9 @@
     <!-- 普通 style prop，直接显示 -->
     <div *ngIf="!prop.ifShow"
       class="form-group li-prop">
-      <label [for]="prop.name">{{camel2Joiner(prop.name, ' ')}}</label>
+      <label class='prop-name'
+        [class.changed]="isPropInItemConfig(prop.name)"
+        [for]="prop.name">{{camel2Joiner(prop.name, ' ')}}</label>
       <ng-container [ngSwitch]="prop.type">
 
         <select *ngSwitchCase='StylePropType.LongEnum'

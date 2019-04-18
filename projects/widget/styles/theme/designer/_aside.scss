@@ -113,7 +113,14 @@
         ul {
             padding: 0;
         }
-
+        .no-selection-tip {
+            text-align: center;
+            width: 200px;
+            padding: 40px 40px;
+            color: #8895a1;
+            font-weight: bold;
+            font-size: 15px;
+        }
         .breadcrumb {
             font-size: 13px;
             margin: 0;
@@ -196,7 +203,19 @@
                 }
 
                 .ul-prop {
-                    .li-prop {}
+                    .li-prop {
+                        .prop-name {
+                            padding: 0 2px;
+                            border-radius: 2px;
+                            &.changed {
+                                color: #ffa870;
+                                background: #f79b6112;
+                            }
+                        }
+                    }
+                    .ul-prop {
+                        padding-left: 15px;
+                    }
                 }
             }
         }

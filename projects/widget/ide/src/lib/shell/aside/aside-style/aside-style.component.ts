@@ -38,16 +38,6 @@ export function camel2Joiner (src: string, joiner = '-') {
   }
 	return result
 }
-// /** 驼峰 -> 大写开头 + 空格 */
-// function camel2CapitalizeSpace (src: string) {
-//   var result = src.replace(/[A-Z]/g, function (match) {	
-// 		return joiner + match.toLowerCase()
-//   })
-//   if(result.slice(0, 1) === joiner){ //如果首字母是大写，执行replace时会多一个_，这里需要去掉
-//     result = result.slice(1);
-//   }
-// 	return result
-// }
 
 @Component({
   selector: 'design-aside-style',
@@ -75,10 +65,6 @@ export class AsideStyleComponent implements OnInit, DoCheck {
     'col-11',
     'col-12',
     'scroll-thin'
-  ];
-
-  displaySelector: string[] = [
-    'flex'
   ];
 
   flexSelectors = {
@@ -150,7 +136,7 @@ export class AsideStyleComponent implements OnInit, DoCheck {
           type: StylePropType.ShortEnum,
           EnumValues: ['block', 'flex']
         },
-        /** flex TODO: 条件显示 */
+        /** flex */
         {
           ifShow (itemConfigStyles: CSSStyleDeclaration , computedStyles: CSSStyleDeclaration) {
             if(itemConfigStyles.display) return itemConfigStyles.display == 'flex'
@@ -237,6 +223,33 @@ export class AsideStyleComponent implements OnInit, DoCheck {
           type: StylePropType.LongEnum,
           EnumValues: ['static', 'relative', 'absolute', 'fixed', 'sticky', 'inherit', 'unset']
         },
+        /** relative, absolute, fixed */
+        {
+          ifShow (itemConfigStyles: CSSStyleDeclaration , computedStyles: CSSStyleDeclaration) {
+            let a = [`relative`, `absolute`, `fixed`]
+            let propName = 'position'
+            if(itemConfigStyles[propName]) return a.includes(itemConfigStyles[propName])
+            return a.includes(computedStyles[propName])
+          },
+          styleProps: [
+            {
+              name: 'top',
+              type: StylePropType.Number
+            },
+            {
+              name: 'right',
+              type: StylePropType.Number
+            },
+            {
+              name: 'bottom',
+              type: StylePropType.Number
+            },
+            {
+              name: 'left',
+              type: StylePropType.Number
+            }
+          ]
+        },
       ]
     }, {
       name: '外观',
@@ -256,14 +269,6 @@ export class AsideStyleComponent implements OnInit, DoCheck {
         {
           name: 'color',
           type: StylePropType.Color,
-        },
-        {
-          name: 'width',
-          type: StylePropType.Number,
-        },
-        {
-          name: 'height',
-          type: StylePropType.Number,
         }
       ]
     }, {
@@ -298,27 +303,8 @@ export class AsideStyleComponent implements OnInit, DoCheck {
 
   path: string[];
 
-  //KeyValueDiffers
-  // styles:{[key: string]: any}={
-  //   'display':'flex',
-  //   'flex-direction':'',
-  //   'flex-wrap':'',
-  //   'flex-flow':'',
-  //   'justify-content':'',
-  //   'align-items':'',
-  //   'align-content':'',
-  //   'order':'',
-  //   'flex':'',
-  //   'align-self':'',
-  //   'font-size':'16px',
-  //   'background':''
-  // }
-  // styles: { [key: string]: any } = {};
-
   itemConfig: { [key: string]: any } = null
   computedStyles: CSSStyleDeclaration = null
-
-  // layoutConfig:layoutConfig;
 
   constructor(private layoutService: LayoutService) {
     this.layoutService.onSelectSettableItem$.subscribe(s => this.selectSettableItem(s));

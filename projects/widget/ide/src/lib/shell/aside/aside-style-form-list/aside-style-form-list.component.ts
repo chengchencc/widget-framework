@@ -40,5 +40,10 @@ export class AsideStyleFormListComponent implements OnInit {
     }
     return v
   }
+  /** 检查 prop 是否在 item.config.styles 中，即修改过了 */
+  isPropInItemConfig (propName: string) {
+    let v: string = this.itemConfigStyles[camel2Joiner(propName, '-')]
+    return v != undefined
+  }
 
 }
