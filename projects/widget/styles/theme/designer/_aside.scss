@@ -115,11 +115,18 @@
         }
 
         .breadcrumb {
-            font-size: 14px;
-            padding: 0px;
+            font-size: 13px;
+            margin: 0;
+            padding: 0 10px;
+            .breadcrumb-item {
+                padding: 3px 4px 3px 0;
+                a {
+                    color: $dsn-color;
+                }
+            }
 
             .breadcrumb-item+.breadcrumb-item {
-                padding-right: "2px";
+                padding: 3px 4px;
 
                 &::before {
                     content: ">";
@@ -160,6 +167,21 @@
                     color: $dsn-form-control-bg!important;
                 }
             }
+            .ng-dropdown-panel .ng-dropdown-panel-items {
+                background-color: $aside-bg;
+                .ng-option {
+                    color: $dsn-color;
+                    line-height: 1.5;
+                    padding: 5px 15px;
+                    min-height: 0;
+                    font-size: 12px;
+                    &.ng-option-selected {
+                        color: $dsn-color;
+                        background: $dsn-brand-color;
+                    }
+                }
+                
+            }
         }
 
         .ul-category {
@@ -178,7 +200,6 @@
                 }
             }
         }
-
         .form-group {
             padding: 0 10px;
             margin: 0;
@@ -200,6 +221,7 @@
             }
             small {
                 line-height: 1.2;
+                vertical-align: text-top;
             }
             .btn-group {
                 display: block;
@@ -259,6 +281,25 @@
                     background: darken($aside-bg, 10%);
                 }
             }
+            .input-group {
+                input {
+
+                }
+                .input-group-btn {
+                    button {
+                        vertical-align: bottom;
+                        border-radius: 0;
+                        background: darken($aside-bg, 10%);
+                        &:hover {
+                            background: $aside-bg;
+                        }
+                    }
+                }
+
+            }
+        }
+        .form-group.setting-item {
+            padding: 4px 10px;
         }
     }
 }
