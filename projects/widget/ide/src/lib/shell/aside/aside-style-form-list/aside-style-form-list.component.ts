@@ -26,9 +26,9 @@ export class AsideStyleFormListComponent implements OnInit {
     this.onChangeValue.emit({ value, prop })
   }
   getValue(propName: string) {
-    let v: string = this.itemConfigStyles[propName]
+    let v: string = this.itemConfigStyles[camel2Joiner(propName, '-')]
 
-    if (!v) {
+    if (v==undefined) {
       switch (propName) {
         case 'width':
         case 'height':
