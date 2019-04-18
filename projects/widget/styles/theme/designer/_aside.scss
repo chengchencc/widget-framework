@@ -192,29 +192,46 @@
         }
 
         .ul-category {
-            >li {
-                .category-title {
-                    background: darken($aside-bg, 16%);
-                    font-size: 13px;
-                    font-weight: bold;
-                    padding: 5px 10px;
-                    cursor: default;
-                    border-bottom: 1px solid black;
-                }
-
-                .ul-prop {
-                    .li-prop {
-                        .prop-name {
-                            padding: 0 2px;
-                            border-radius: 2px;
-                            &.changed {
-                                color: #ffa870;
-                                background: #f79b6112;
+            // TODO: accordion 相关移到更公共的位置，sidebar 也会用到
+            accordion-group {
+                >.panel {
+                    border: none;
+                    background: none;
+                    padding: 0;
+                    .panel-heading {
+                        background: darken($aside-bg, 16%);
+                        padding: 5px 10px;
+                        border-bottom: 1px solid black;
+                        border-radius: 0;
+                        .accordion-toggle {
+                            line-height: 1;
+                            .btn {
+                                color: $dsn-color;
+                                font-size: 13px;
+                                font-weight: bold;
+                                cursor: default;
+                                padding: 0;
+                                line-height: 1;
                             }
                         }
                     }
+                    .panel-body {
+                        padding: 0;
+                    }
                     .ul-prop {
-                        padding-left: 15px;
+                        .li-prop {
+                            .prop-name {
+                                padding: 0 2px;
+                                border-radius: 2px;
+                                &.changed {
+                                    color: #ffa870;
+                                    background: #f79b6112;
+                                }
+                            }
+                        }
+                        .ul-prop {
+                            padding-left: 15px;
+                        }
                     }
                 }
             }

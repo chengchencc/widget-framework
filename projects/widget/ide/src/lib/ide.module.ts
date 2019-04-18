@@ -11,6 +11,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { NgSelectModule } from '@ng-select/ng-select';
 // core
 import { CoreModule } from '@widget/core';
@@ -47,6 +48,7 @@ import { AsideStyleFormListComponent } from './shell/aside/aside-style-form-list
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     ButtonsModule.forRoot(),
+    AccordionModule.forRoot(),
   ],
   declarations: [
     DesignerComponent,

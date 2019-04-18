@@ -2,12 +2,10 @@
 <p *ngIf="!itemConfig" class="no-selection-tip">请选择布局或部件</p>
 
 <div class="setting-container" *ngIf="itemConfig">
-
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-dark">
       <li class="breadcrumb-item" *ngFor="let item of path; let i=index;" [class.active]=" i == path.length"><a
           href="#">{{item}}</a></li>
-      <!-- <li class="breadcrumb-item" aria-current="page" >Data</li> -->
     </ol>
   </nav>
 
@@ -24,37 +22,16 @@
       <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
     </div>
 
-    <ul class="ul-category">
-      <li *ngFor="let category of styleProps">
-        <div class=category-title
-          (click)="category.collapsed=!category.collapsed" >{{category.name}}</div>
+    <accordion class="ul-category">
+      <accordion-group  *ngFor="let category of styleProps"
+        [heading]="category.name"
+        [isOpen]="true" >
         <aside-style-form-list
-          *ngIf="!category.collapsed"
           [propList]='category.styleProps'
           [itemConfigStyles]="itemConfig.style"
           [computedStyles]="computedStyles"
           (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
-      </li>
-    </ul>
-
-    <div class="form-group">
-      <label for="fontSize">font-size</label>
-      <div class="input-group">
-        <input type="text" name="fontSize" id="fontSize" class="form-control" placeholder="font-size"
-          autocomplete="false" aria-describedby="fontSizeHelper">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-secondary dropdown-toggle" aria-label="" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            px
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">px</a>
-            <a class="dropdown-item disabled" href="#">%</a>
-          </div>
-        </span>
-      </div>
-
-      <small id="fontSizeHelper" class="text-muted">font-size</small>
-    </div>
+      </accordion-group>
+    </accordion>
   </form>
 </div>

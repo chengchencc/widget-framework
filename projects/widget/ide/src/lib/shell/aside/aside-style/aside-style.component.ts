@@ -22,10 +22,10 @@ export interface stylePropsContainer {
 export interface stylePropsCategory {
   name: string,
   styleProps: (StyleProp | stylePropsContainer)[],
-  collapsed?: boolean
 }
 export enum StylePropType {
   LongEnum, ShortEnum,
+  //默认有单位，后者无单位
   Number, ScopedNumberWithoutUnit,
   Color,
   Text,
