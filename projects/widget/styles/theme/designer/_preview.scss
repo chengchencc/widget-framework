@@ -33,8 +33,15 @@ widget-preview {
             .setting-tool {
                 display: none;
                 position: absolute;
-                bottom: 0px;
-                left: 0px;
+                right: 0px;
+                top: 0px;
+                .btn {
+                    vertical-align: top;
+                    border: none;
+                    background: $dsn-brand-color;
+                    height: auto;
+                    padding: 0px 10px;
+                }
             }
         }
     }
