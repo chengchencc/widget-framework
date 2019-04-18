@@ -26,18 +26,68 @@ app-designer {
         display: flex;
         flex-wrap: wrap;
         .select-widgets-item {
-            margin: 10px;
-            display: flex;
-            flex-direction: column;
-            /* justify-content: center; */
+            border: $dsn-border;
+            width: 33.33%;
             text-align: center;
             background: darken($dsn-bg, 5%);
             padding: 10px;
             cursor: grab;
+            .widget-name {
+                font-size: 12px;
+                opacity: .6;
+            }
+            &:hover {
+                background: $dsn-bg;
+                .widget-name {
+                    opacity: 1;
+                }
+            }
         }
     }
 
     .modal-content {
         background-color: $dsn-bg;
+    }
+    .btn {
+        font-size: 12px;
+        padding: 3px 10px;
+        height: 24px;
+        border: 1px solid $dsn-form-control-border-color;
+        color: $dsn-form-control-color;
+        text-transform: capitalize;
+        border-radius: 2px;
+        background: lighten($dsn-bg, 10%)
+    }
+
+    /* bs accordion */
+    accordion-group {
+        >.panel {
+            border: none;
+            background: none;
+            padding: 0;
+            .panel-heading {
+                background: darken($aside-bg, 16%);
+                padding: 5px 10px;
+                border-bottom: 1px solid black;
+                border-radius: 0;
+                .accordion-toggle {
+                    line-height: 1;
+                    .btn {
+                        height: auto;
+                        border: none;
+                        color: $dsn-color;
+                        font-size: 13px;
+                        font-weight: bold;
+                        cursor: default;
+                        padding: 0;
+                        line-height: 1;
+                        background: none;
+                    }
+                }
+            }
+            .panel-body {
+                padding: 0;
+            }
+        }
     }
 }

@@ -12,7 +12,9 @@ widget-preview {
         // border: 1px dashed black;
         // padding: $dsn-preview-padding;
         widget-layout {
-            border: 1px dashed black; // padding-bottom: $dsn-preview-padding;
+            // border: 1px dashed black; // padding-bottom: $dsn-preview-padding;
+            outline: 1px dashed #555;
+            box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.1);
             &.is-empty:not(.body) {
                 height: 100px;
             }

@@ -1,17 +1,20 @@
+
 <div class="toolbar">
   <button type="button" class="btn btn-light btn-sm" (click)="staticModal.show()">注册</button>
 </div>
 
-<div class="select-widgets">
-  <!-- <div class="select-widgets-item" appDraggable appDroppable  *ngFor="let item of widgetManifests" draggable="true" (dragstart)="dragStartHandler($event,item)"> -->
-  <div class="select-widgets-item" appDraggable appDroppable *ngFor="let item of widgetManifests"  [passData]="{type:'widget',data:item}">
-    {{item.displayName}}
-    <div class="select-widgets-item" *appDraggableHelper >
-      {{item.displayName}}
+<accordion>
+  <accordion-group heading="示例部件" [isOpen]="true" >
+    <div class="select-widgets">
+      <div class="select-widgets-item" appDraggable appDroppable *ngFor="let item of widgetManifests"  [passData]="{type:'widget',data:item}">
+        <div class="widget-name">{{item.displayName}}</div>
+        <div class="select-widgets-item" *appDraggableHelper >
+            <div class="widget-name">{{item.displayName}}</div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
+  </accordion-group>
+</accordion>
 
 <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: true}" tabindex="-1" role="dialog"
   aria-labelledby="dialog-static-name">
