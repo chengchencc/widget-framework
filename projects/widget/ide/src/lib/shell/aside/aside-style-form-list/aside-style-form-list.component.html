@@ -1,5 +1,6 @@
 
 <div class="ul-prop">
+  <lib-box-input></lib-box-input>
   <ng-container *ngFor="let prop of propList" >
     <!-- 普通 style prop，直接显示 -->
     <div *ngIf="!prop.ifShow"
@@ -26,9 +27,19 @@
           [name]="prop.name"
           [ngModel]="getValue(prop.name)"
           (ngModelChange)="handleChangeValue($event, prop)" >
-          <label *ngFor="let v of prop.EnumValues"
-            class="btn btn-radio"
-            [btnRadio]="v" tabindex="0" role="button">{{camel2Joiner(v, ' ')}}</label>
+          <ng-container *ngIf="!prop.EnumIcons">
+            <label *ngFor="let v of prop.EnumValues"
+              class="btn btn-radio"
+              [btnRadio]="v" tabindex="0" role="button">{{camel2Joiner(v, ' ')}}</label>
+          </ng-container>
+          <ng-container *ngIf="prop.EnumIcons">
+            <label *ngFor="let icon of prop.EnumIcons; index as i"
+              class="btn btn-radio"
+              [ngStyle]="prop.EnumIconStyles ? prop.EnumIconStyles[i] : null"
+              [btnRadio]="prop.EnumValues[i]" tabindex="0" role="button">
+              <i class="material-icons">{{icon}}</i>
+            </label>
+          </ng-container>
         </div>
 
         <input *ngSwitchCase='StylePropType.Text'
@@ -42,6 +53,15 @@
 
         <input *ngSwitchCase='StylePropType.Color'
           type="text"
+          [name]="prop.name"
+          [id]="prop.name"
+          class="form-control"
+          [placeholder]="camel2Joiner(prop.name, ' ')"
+          [ngModel]="getValue(prop.name)"
+          (ngModelChange)="handleChangeValue($event, prop)">
+
+        <input *ngSwitchCase='StylePropType.ScopedNumberWithoutUnit'
+          type="number"
           [name]="prop.name"
           [id]="prop.name"
           class="form-control"

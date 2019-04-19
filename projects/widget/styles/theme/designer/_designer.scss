@@ -82,6 +82,13 @@ app-designer {
         }
         .btn-group {
             display: block;
+
+            .btn-radio {
+                i.material-icons {
+                    font-size: 17px;
+                    width: 17px;
+                }
+            }
         }
 
         .btn-radio {

@@ -34,6 +34,7 @@ import { AsideSettingComponent } from './shell/aside/aside-setting/aside-setting
 import { AsideStructureComponent, AsideStructureTreeComponent } from './shell/aside/aside-structure/aside-structure.component';
 import { AsideEventComponent } from './shell/aside/aside-event/aside-event.component';
 import { AsideStyleFormListComponent } from './shell/aside/aside-style-form-list/aside-style-form-list.component';
+import { BoxInputComponent } from './shell/aside/box-input/box-input.component';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { AsideStyleFormListComponent } from './shell/aside/aside-style-form-list
     AsideStructureTreeComponent,
     AsideEventComponent,
     AsideStyleFormListComponent,
+    BoxInputComponent,
   ],
   providers:[
     DesignerService

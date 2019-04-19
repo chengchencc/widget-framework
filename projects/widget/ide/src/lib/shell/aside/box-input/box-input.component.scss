@@ -1,0 +1,15 @@
+
+.outer {
+    box-sizing: content-box;
+    box-shadow: 0 0 0px 1px $dsn-border-color,
+        inset 0 0 0px 1px $dsn-border-color;
+
+    width: 90px;
+    height: 30px;
+    border-width: 30px 50px;
+    border-style: solid;
+    border-color: lighten($aside-bg, 3%) lighten($aside-bg, 6%);
+    // border: 50px solid $dsn-border-color;
+    // #5d6670;
+    // #5d6670;
+}

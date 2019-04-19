@@ -11,6 +11,8 @@ export interface StyleProp {
   type: StylePropType,
   helperContent?: string,
   EnumValues?: string[],
+  EnumIcons?: string[],
+  EnumIconStyles?: {[k: string]: string}[],
   maxMin?: number[],
   step?: number,
 }
@@ -180,22 +182,16 @@ export class AsideStyleComponent implements OnInit, DoCheck {
           styleProps: [
             {
               name: 'flexDirection',
-              type: StylePropType.LongEnum,
-              EnumValues: [
-                'row',
-                'row-reverse',
-                'column',
-                'column-reverse']
-            },
-            {
+              type: StylePropType.ShortEnum,
+              EnumValues: ['row', 'row-reverse', 'column', 'column-reverse'],
+              EnumIcons: ['arrow_forward', 'arrow_backward', 'arrow_downward', 'arrow_upward'],
+            }, {
               name: 'flexWrap',
-              type: StylePropType.LongEnum,
-              EnumValues: [
-                'nowrap',
-                'wrap',
-                'wrap-reverse']
-            },
-            {
+              type: StylePropType.ShortEnum,
+              EnumValues: ['nowrap', 'wrap', 'wrap-reverse'],
+              EnumIcons: ['close', 'wrap_text', 'wrap_text'],
+              EnumIconStyles: [null, null, {'transform': 'scaleY(-1)'}]
+            }, {
               name: 'justifyContent',
               type: StylePropType.LongEnum,
               EnumValues: [
@@ -205,8 +201,7 @@ export class AsideStyleComponent implements OnInit, DoCheck {
                 'center',
                 'space-between',
                 'space-around']
-            },
-            {
+            }, {
               name: 'alignItems',
               type: StylePropType.LongEnum,
               EnumValues: [
@@ -216,8 +211,7 @@ export class AsideStyleComponent implements OnInit, DoCheck {
                 'center',
                 'baseline',
                 'stretch']
-            },
-            {
+            }, {
               name: 'alignContent',
               type: StylePropType.LongEnum,
               EnumValues: [
@@ -228,8 +222,7 @@ export class AsideStyleComponent implements OnInit, DoCheck {
                 'space-between',
                 'space-around',
                 'stretch']
-            },
-            {
+            }, {
               name: 'alignSelf',
               type: StylePropType.LongEnum,
               EnumValues: [
@@ -239,8 +232,7 @@ export class AsideStyleComponent implements OnInit, DoCheck {
                 'center',
                 'baseline',
                 'stretch']
-            },
-            {
+            }, {
               name: 'justifyContent',
               type: StylePropType.LongEnum,
               EnumValues: [
@@ -270,20 +262,25 @@ export class AsideStyleComponent implements OnInit, DoCheck {
             {
               name: 'top',
               type: StylePropType.Number
-            },
-            {
+            }, {
               name: 'right',
               type: StylePropType.Number
-            },
-            {
+            }, {
               name: 'bottom',
               type: StylePropType.Number
-            },
-            {
+            }, {
               name: 'left',
               type: StylePropType.Number
+            }, {
+              name: 'zIndex',
+              type: StylePropType.ScopedNumberWithoutUnit
             }
           ]
+        }, {
+          name: 'float',
+          type: StylePropType.ShortEnum,
+          EnumValues: ['none', 'left', 'right'],
+          EnumIcons: ['close', 'arrow_backward', 'arrow_forward']
         },
       ]
     }, {
@@ -292,20 +289,16 @@ export class AsideStyleComponent implements OnInit, DoCheck {
         {
           name: 'width',
           type: StylePropType.Number,
-        },
-        {
+        }, {
           name: 'height',
           type: StylePropType.Number,
-        },
-        {
+        }, {
           name: 'margin',
-          type: StylePropType.Text,
-        },
-        {
+          type: StylePropType.Number,
+        }, {
           name: 'padding',
-          type: StylePropType.Text,
-        },
-        {
+          type: StylePropType.Number,
+        }, {
           name: 'overflow',
           type: StylePropType.LongEnum,
           EnumValues: ['visible', 'auto', 'hidden', 'scroll', 'scroll-x', 'scroll-y']
@@ -317,18 +310,53 @@ export class AsideStyleComponent implements OnInit, DoCheck {
         {
           name: 'backgroundColor',
           type: StylePropType.Color,
-        },
-        {
-          name: 'boxShadow',
+        }, {
+          name: 'border',
           type: StylePropType.Text,
-        },
+        }, {
+          name: 'opacity',
+          type: StylePropType.ScopedNumberWithoutUnit,
+          maxMin: [0, 1], //TODO: 滑动条
+        }
+      ]
+    }, {
+      name: '文本',
+      styleProps: [
         {
           name: 'fontSize',
           type: StylePropType.Number,
-        },
-        {
+        }, {
           name: 'color',
           type: StylePropType.Color,
+        }, {
+          name: 'fontWeight',
+          type: StylePropType.ScopedNumberWithoutUnit,
+        }, {
+          name: 'direction',
+          type: StylePropType.ShortEnum,
+          EnumValues: ['ltr', 'rtl'],
+          EnumIcons: ['arrow_forward', 'arrow_backward']
+        }, {
+          name: 'lineHeight',
+          type: StylePropType.Number,
+        }, {
+          name: 'textAlign',
+          type: StylePropType.ShortEnum,
+          EnumValues: ['left', 'center', 'right', 'justify'],
+          EnumIcons: ['format_align_left', 'format_align_center', 'format_align_right', 'format_align_justify'],
+        }, {
+          name: 'textDecoration',
+          type: StylePropType.ShortEnum,
+          EnumValues: ['none', 'underline', 'line-through'],
+          EnumIcons: ['close', 'format_underlined', 'format_strikethrough']
+        }, {
+          name: 'textTransform',
+          type: StylePropType.LongEnum,
+          EnumValues: ['none', 'uppercase', 'capitalize', 'lowercase']
+        }, {
+          name: 'verticalAlign',
+          type: StylePropType.LongEnum,
+          EnumValues: ['baseline', 'sub', 'super', 'top', 'text-top', 'middle', 'bottom', 'text-bottom']
         }
       ]
     }, {
@@ -338,16 +366,13 @@ export class AsideStyleComponent implements OnInit, DoCheck {
           name: 'cursor',
           type: StylePropType.LongEnum,
           EnumValues: ['default', 'auto', 'crosshair', 'pointer', 'move', 'grab', 'grabbing', 'e-resize', 'ne-resize', 'nw-resize', 'n-resize', 'se-resize', 'sw-resize', 's-resize', 'w-resize', 'text', 'help', ]
-        },
-        {
+        }, {
           name: 'boxShadow',
           type: StylePropType.Text,
-        },
-        {
+        }, {
           name: 'transform',
           type: StylePropType.Text,
-        },
-        {
+        }, {
           name: 'transition',
           type: StylePropType.Text,
         }
@@ -391,18 +416,23 @@ export class AsideStyleComponent implements OnInit, DoCheck {
       // 先取出老值 老单位
       let oldV = getRegExpInValue(prop.name, NUM_REGEXP, this.itemConfig.style, this.computedStyles)
       let oldU = getRegExpInValue(prop.name, UNIT_REGEXP, this.itemConfig.style, this.computedStyles)
+      // 如果改成了空值，那改的不是 unit 而是数字，就让结果为 auto
+      if (!value) {
+        value = 'auto'
+      }
       // 如果改的是数字，注意单位
-      if(NUM_REGEXP.test(value)) {
+      else if(NUM_REGEXP.test(value)) {
         value += oldU=='auto' ? 'px' : oldU
       }
       // 如果改的是unit，注意数字
-      else {
+      else if(UNIT_REGEXP.test(value)) {
         if(oldU=='auto' && value!='auto') {
           value = 0 + value
         } else if (oldU!='auto' && value!='auto') {
           value = oldV + value
         } else if (value=='auto') {} // Do nothing
       }
+      
     }
     this.itemConfig.style[camel2Joiner(prop.name)] = value
   }
