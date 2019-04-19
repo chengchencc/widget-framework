@@ -1,7 +1,19 @@
 
 <div class='box-input'>
-    <input class="top" type="number">
-    <input class="bottom" type="number">
-    <input class="left" type="number">
-    <input class="right" type="number">
+    <input class="top"
+      type="number"
+      [ngModel]="values[0]"
+      (ngModelChange)="handleChangeValue($event, 0)" >
+    <input class="right"
+      type="number"
+      [ngModel]="values[1]"
+      (ngModelChange)="handleChangeValue($event, 1)">
+    <input class="bottom"
+      type="number"
+      [ngModel]="values[2]"
+      (ngModelChange)="handleChangeValue($event, 2)">
+    <input class="left"
+      type="number"
+      [ngModel]="values[3]"
+      (ngModelChange)="handleChangeValue($event, 3)">
 </div>

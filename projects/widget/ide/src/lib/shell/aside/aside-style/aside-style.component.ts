@@ -15,6 +15,7 @@ export interface StyleProp {
   EnumIconStyles?: {[k: string]: string}[],
   maxMin?: number[],
   step?: number,
+  boxInputProps?: string[]
 }
 /** 一堆可在指定条件下显示的属性集合，是否显示取决于 ifShow() */
 export interface stylePropsContainer {
@@ -33,6 +34,7 @@ export enum StylePropType {
   Number, ScopedNumberWithoutUnit,
   Color,
   Text,
+  BoxInput,
 }
 /** 驼峰 -> 小写 + 连接符 */
 export function camel2Joiner (src: string, joiner = '-') {
@@ -294,7 +296,8 @@ export class AsideStyleComponent implements OnInit, DoCheck {
           type: StylePropType.Number,
         }, {
           name: 'margin',
-          type: StylePropType.Number,
+          type: StylePropType.BoxInput,
+          boxInputProps: ['margin-top', 'margin-right', 'margin-bottom', 'margin-left']
         }, {
           name: 'padding',
           type: StylePropType.Number,

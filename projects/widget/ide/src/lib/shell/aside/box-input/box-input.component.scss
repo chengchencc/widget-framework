@@ -18,7 +18,7 @@
     }
     input {
         position: absolute;
-        width: 40px;
+        width: 50px;
         margin: 0;
         padding: 0;
         height: 20px;
@@ -36,19 +36,21 @@
             left: 0;
             right: 0;
             margin: 0 auto;
+            transform: translateX(4px);
         }
         &.bottom {
             bottom: -22px;
             left: 0;
             right: 0;
             margin: 0 auto;
+            transform: translateX(4px);
         }
         &.right {
-            right: -35px;
+            right: -49px;
             top: calc(50% - 10px);
         }
         &.left {
-            left: -35px;
+            left: -37px;
             top: calc(50% - 10px);
         }
     }

@@ -25,6 +25,9 @@ export class AsideStyleFormListComponent implements OnInit {
   handleChangeValue (value: string, prop: StyleProp) {
     this.onChangeValue.emit({ value, prop })
   }
+  getValueNums (propNames: string[]) {
+    return propNames.map(name => this.getValueNum(name))
+  }
   getValue (propName: string) {
     return getValue(propName, this.itemConfigStyles, this.computedStyles)
   }

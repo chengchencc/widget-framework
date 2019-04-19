@@ -1,6 +1,5 @@
 
 <div class="ul-prop">
-  <lib-box-input></lib-box-input>
   <ng-container *ngFor="let prop of propList" >
     <!-- 普通 style prop，直接显示 -->
     <div *ngIf="!prop.ifShow"
@@ -88,6 +87,12 @@
             <option value="auto">Auto</option>
           </select>
         </div>
+      
+        <lib-box-input *ngSwitchCase='StylePropType.BoxInput'
+          [propNames]="prop.boxInputProps"
+          [values]="getValueNums(prop.boxInputProps)"
+          (onChange)="handleChangeValue($event.value, $event.prop)"
+           ></lib-box-input>
 
       </ng-container>
       <small id="positionHelper" class="text-muted">{{prop.helperContent || prop.name}}</small>
