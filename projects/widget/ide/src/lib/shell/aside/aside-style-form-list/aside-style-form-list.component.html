@@ -51,24 +51,20 @@
 
         <div *ngSwitchCase='StylePropType.Number'
           class="input-group" >
-          <input type="text"
+          <input type="number"
             [name]="prop.name"
             [id]="prop.name"
             class="form-control"
             [placeholder]="camel2Joiner(prop.name, ' ')"
             [ngModel]="getValue(prop.name)"
             (ngModelChange)="handleChangeValue($event, prop)">
-          <!-- TODO: 改为 select 实现 -->
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-secondary dropdown-toggle" aria-label="" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              px
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">px</a>
-              <a class="dropdown-item disabled" href="#">%</a>
-            </div>
-          </span>
+          <select class="input-group-btn">
+            <option value="px">px</option>
+            <option value="%">%</option>
+            <option value="vw">vw</option>
+            <option value="vh">vh</option>
+            <option value="auto">Auto</option>
+          </select>
         </div>
 
       </ng-container>

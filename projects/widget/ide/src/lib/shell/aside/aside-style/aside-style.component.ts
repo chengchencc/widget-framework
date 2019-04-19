@@ -252,26 +252,6 @@ export class AsideStyleComponent implements OnInit, DoCheck {
         },
       ]
     }, {
-      name: '外观',
-      styleProps: [
-        {
-          name: 'backgroundColor',
-          type: StylePropType.Color,
-        },
-        {
-          name: 'boxShadow',
-          type: StylePropType.Text,
-        },
-        {
-          name: 'fontSize',
-          type: StylePropType.Number,
-        },
-        {
-          name: 'color',
-          type: StylePropType.Color,
-        }
-      ]
-    }, {
       name: '尺寸',
       styleProps: [
         {
@@ -296,7 +276,48 @@ export class AsideStyleComponent implements OnInit, DoCheck {
           EnumValues: ['visible', 'auto', 'hidden', 'scroll', 'scroll-x', 'scroll-y']
         },
       ]
-    }
+    }, {
+      name: '外观',
+      styleProps: [
+        {
+          name: 'backgroundColor',
+          type: StylePropType.Color,
+        },
+        {
+          name: 'boxShadow',
+          type: StylePropType.Text,
+        },
+        {
+          name: 'fontSize',
+          type: StylePropType.Number,
+        },
+        {
+          name: 'color',
+          type: StylePropType.Color,
+        }
+      ]
+    }, {
+      name: '效果',
+      styleProps: [
+        {
+          name: 'cursor',
+          type: StylePropType.LongEnum,
+          EnumValues: ['default', 'auto', 'crosshair', 'pointer', 'move', 'grab', 'grabbing', 'e-resize', 'ne-resize', 'nw-resize', 'n-resize', 'se-resize', 'sw-resize', 's-resize', 'w-resize', 'text', 'help', ]
+        },
+        {
+          name: 'boxShadow',
+          type: StylePropType.Text,
+        },
+        {
+          name: 'transform',
+          type: StylePropType.Text,
+        },
+        {
+          name: 'transition',
+          type: StylePropType.Text,
+        }
+      ]
+    },
   ]
 
   config: any;

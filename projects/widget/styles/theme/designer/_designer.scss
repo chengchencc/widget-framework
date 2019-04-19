@@ -139,16 +139,26 @@ app-designer {
         }
         .input-group {
             input {
-
+                width: auto;
+                adding-right: 40px;
             }
             .input-group-btn {
-                button {
-                    vertical-align: bottom;
-                    border-radius: 0;
-                    background: darken($aside-bg, 10%);
-                    &:hover {
-                        background: $aside-bg;
-                    }
+                position: absolute;
+                right: 0;
+                height: 22px;
+                z-index: 10;
+                margin: 1px;
+                border: none;
+                color: $dsn-color;
+                font-size: 12px;
+                vertical-align: bottom;
+                border-radius: 0;
+                background: darken($aside-bg, 10%);
+                &:hover {
+                    background: $aside-bg;
+                }
+                &:focus {
+                    outline: none;
                 }
             }
 

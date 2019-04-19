@@ -9,7 +9,7 @@ import { GridType, CompactType, DisplayGrid } from '../gridster/gridsterConfig.i
 import { ToastrService, Toast } from 'ngx-toastr';
 import { GridsterItem } from '../gridster/gridsterItem.interface';
 import { WidgetLoaderManifest } from '../loader/widget-loader';
-import { LayoutConfig,LayoutTemplate } from './layout.interface';
+import { LayoutConfig, LayoutTemplate } from './layout.interface';
 
 
 
@@ -17,9 +17,9 @@ import { LayoutConfig,LayoutTemplate } from './layout.interface';
 export class LayoutService {
 
   //选中设置元素
-  onSelectSettableItem$:Observable<WidgetSettableDirective>
+  onSelectSettableItem$: Observable<WidgetSettableDirective>
   private onSelectSettableItemSubject = new Subject<WidgetSettableDirective>();
-  selectedSettableItem:WidgetSettableDirective;
+  selectedSettableItem: WidgetSettableDirective;
 
   //布局选中事件
   onLayoutActived$: Observable<LayoutComponent>;
@@ -33,7 +33,7 @@ export class LayoutService {
   // onWidgetActived$: Observable<ModuleInfo>;
   // private widgetActivedSubject = new Subject<ModuleInfo>();
 
-  self:LayoutService = this;
+  self: LayoutService = this;
 
   //布局配置信息
   layoutConfig: LayoutConfig;
@@ -70,7 +70,7 @@ export class LayoutService {
         id: null,
         classes: ["grid"],
         style: null,
-        settings:null,
+        settings: null,
         layout: [],
         type: "grid",
         content: []
@@ -214,7 +214,7 @@ export class LayoutService {
     parent: null
   };
 
-  constructor(private store: Store,private toast:ToastrService) {
+  constructor(private store: Store, private toast: ToastrService) {
     this.layoutConfig = this.load();
     console.log("first loaded layout config...", this.layoutConfig);
     this.loadLayoutTemplates();
@@ -241,7 +241,7 @@ export class LayoutService {
    * @param layout 
    */
   remove(layout: LayoutConfig) {
-    if(layout.id =="0"){
+    if (layout.id == "0") {
       this.toast.warning("body cannot be removed!")
       return;
     }
@@ -259,16 +259,16 @@ export class LayoutService {
 
     console.log("layout service move ::", event);
     console.log(typeof event.data);
-    let droppedLayoutConfig:LayoutConfig;
+    let droppedLayoutConfig: LayoutConfig;
     //拖动的是widget
     if (event.data.type === "widget") {
       const widgetManifest = <WidgetLoaderManifest>event.data.data;
-      droppedLayoutConfig={
-        id:"",
-        layout:[],
-        type:'widget',
-        content:{
-          name:widgetManifest.name
+      droppedLayoutConfig = {
+        id: "",
+        layout: [],
+        type: 'widget',
+        content: {
+          name: widgetManifest.name
         }
       }
     } else {
@@ -302,7 +302,7 @@ export class LayoutService {
       pathArray: template.pathArray,
       parent: parent,
       type: template.type,
-      content:template.content
+      content: template.content
     }
 
 
@@ -368,10 +368,10 @@ export class LayoutService {
    * 选中可设置项
    * @param item settable item
    */
-  selectSettable(item:WidgetSettableDirective){
+  selectSettable(item: WidgetSettableDirective) {
     this.selectedSettableItem = item;
     this.onSelectSettableItemSubject.next(item);
-  } 
+  }
 
   /**
    * 保存页面配置信息
