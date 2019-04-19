@@ -7,6 +7,7 @@ import { WidgetSettableDirective } from '@widget/core';
 /** 默认单位为 px 的属性列表 */
 // const unitPxProps = ['width', 'height', 'margin']
 
+/** 一条 style 属性信息 */
 export interface StyleProp {
   name: string,
   type: StylePropType,
@@ -15,14 +16,17 @@ export interface StyleProp {
   maxMin?: number[],
   step?: number,
 }
+/** 一堆可在指定条件下显示的属性集合，是否显示取决于 ifShow() */
 export interface stylePropsContainer {
   ifShow: (itemConfigStyles: CSSStyleDeclaration, computedStyles: CSSStyleDeclaration) => boolean,
   styleProps: StyleProp[]
 }
+/** 一个样式属性分类 */
 export interface stylePropsCategory {
   name: string,
   styleProps: (StyleProp | stylePropsContainer)[],
 }
+/** 属性数据类型 */
 export enum StylePropType {
   LongEnum, ShortEnum,
   //默认有单位，后者无单位
@@ -126,7 +130,7 @@ export class AsideStyleComponent implements OnInit, DoCheck {
   }
 
   StylePropType = StylePropType
-
+  /** 固定 style 属性信息列表 */
   styleProps: stylePropsCategory[] =[
     {
       name: '布局',

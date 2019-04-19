@@ -27,7 +27,7 @@ export class AsideStyleFormListComponent implements OnInit {
   }
   getValue(propName: string) {
     let v: string = this.itemConfigStyles[camel2Joiner(propName, '-')]
-
+    // 如果用户未设置，就去 computed Styles 中取
     if (v==undefined) {
       switch (propName) {
         case 'width':
@@ -39,6 +39,18 @@ export class AsideStyleFormListComponent implements OnInit {
       }
     }
     return v
+  }
+  // 取出 数字+单位 中的 数字
+  getNumOfValue (propName: string) {
+    let result = String(this.getValue(propName)).match(/^[\d.]+/)
+    // 以防未匹配到
+    return result ? result[0] : ''
+  }
+  // 取出 数字+单位 中的 单位
+  getUnitOfValue (propName: string) {
+    let result = String(this.getValue(propName)).match(/[^\d.]+$/)
+    // 以防未匹配到
+    return result ? result[0] : ''
   }
   /** 检查 prop 是否在 item.config.styles 中，即修改过了 */
   isPropInItemConfig (propName: string) {
