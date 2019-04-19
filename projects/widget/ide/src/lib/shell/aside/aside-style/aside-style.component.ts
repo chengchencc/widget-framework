@@ -4,8 +4,6 @@ import { LayoutComponent } from '@widget/core';
 import { WidgetSettableDirective } from '@widget/core';
 
 //TODO: 放这？
-/** 默认单位为 px 的属性列表 */
-// const unitPxProps = ['width', 'height', 'margin']
 
 /** 一条 style 属性信息 */
 export interface StyleProp {
@@ -42,6 +40,39 @@ export function camel2Joiner (src: string, joiner = '-') {
   }
 	return result
 }
+/**
+ * 根据属性名取已设置的值：
+ * 如果用户已设置，取用户的；否则去 computed Styles 中取
+ * */
+export function getValue(propName: string,
+  itemConfigStyles: CSSStyleDeclaration,
+  computedStyles: CSSStyleDeclaration) {
+  let v: string = itemConfigStyles[camel2Joiner(propName, '-')]
+  // 如果用户未设置
+  if (v==undefined) { //!v 会把空串算作假
+    switch (propName) {
+      case 'width':
+      case 'height':
+        v = 'auto'
+        break
+      default:
+        v = computedStyles[propName]
+    }
+  }
+  return v
+}
+// 取出 数字+单位 中的 某某（根据正则）
+export function getRegExpInValue (propName: string,
+  regExp: RegExp,
+  itemConfigStyles: CSSStyleDeclaration,
+  computedStyles: CSSStyleDeclaration) {
+  let result = String(getValue(propName, itemConfigStyles, computedStyles)).match(regExp)
+  // 以防未匹配到
+  return result ? result[0] : ''
+}
+/** 从 数字+单位 中找出 数字 和 单位 的正则 */
+export const NUM_REGEXP: RegExp = /^[\d.]+/
+export const UNIT_REGEXP: RegExp = /[^\d.]+$/
 
 @Component({
   selector: 'design-aside-style',
@@ -353,12 +384,27 @@ export class AsideStyleComponent implements OnInit, DoCheck {
   }
 
   handleChangeValue(e: { value: string, prop: StyleProp }) {
-    //TODO: 验证、自动增加单位，或改为单位选框
-    // if(unitPxProps.includes(propName)) {
-    // }
+    //TODO: 文本验证
     let { value, prop } = e
+    // 如果有单位：
+    if(prop.type==StylePropType.Number) {
+      // 先取出老值 老单位
+      let oldV = getRegExpInValue(prop.name, NUM_REGEXP, this.itemConfig.style, this.computedStyles)
+      let oldU = getRegExpInValue(prop.name, UNIT_REGEXP, this.itemConfig.style, this.computedStyles)
+      // 如果改的是数字，注意单位
+      if(NUM_REGEXP.test(value)) {
+        value += oldU=='auto' ? 'px' : oldU
+      }
+      // 如果改的是unit，注意数字
+      else {
+        if(oldU=='auto' && value!='auto') {
+          value = 0 + value
+        } else if (oldU!='auto' && value!='auto') {
+          value = oldV + value
+        } else if (value=='auto') {} // Do nothing
+      }
+    }
     this.itemConfig.style[camel2Joiner(prop.name)] = value
   }
-
 
 }

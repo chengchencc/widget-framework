@@ -56,10 +56,10 @@
             [id]="prop.name"
             class="form-control"
             [placeholder]="camel2Joiner(prop.name, ' ')"
-            [ngModel]="getNumOfValue(prop.name)"
+            [ngModel]="getValueNum(prop.name)"
             (ngModelChange)="handleChangeValue($event, prop)">
           <select class="input-group-btn"
-            [ngModel]="getUnitOfValue(prop.name)"
+            [ngModel]="getValueUnit(prop.name)"
             (ngModelChange)="handleChangeValue($event, prop)">
             <option value="px">px</option>
             <option value="%">%</option>
