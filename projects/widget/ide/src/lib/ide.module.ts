@@ -33,6 +33,7 @@ import { AsideStructureComponent, AsideStructureTreeComponent } from './shell/as
 import { AsideEventComponent } from './shell/aside/aside-event/aside-event.component';
 
 import { Widget_Core_Config_Token, WidgetCoreConfig } from '@widget/core/src/lib/core.config';
+import { ToastrModule } from 'ngx-toastr';
 
 // import { OverlayModule } from "@angular/cdk/overlay";
 
@@ -54,6 +55,12 @@ const widgetCoreConfig:WidgetCoreConfig={
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right'
+      // positionClass: 'toast-bottom-center'
+      // positionClass: 'toast-bottom-full-width'
+    })
   ],
   declarations: [
     DesignerComponent,
@@ -70,6 +77,9 @@ const widgetCoreConfig:WidgetCoreConfig={
     AsideStructureComponent,
     AsideStructureTreeComponent,
     AsideEventComponent
+  ],
+  exports:[
+    DesignerComponent
   ],
   providers:[
     DesignerService,

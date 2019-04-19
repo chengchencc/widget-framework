@@ -1,0 +1,64 @@
+[
+    {
+        "name":"demo-widget",
+        "displayName":"Demo",
+        "previewUrl":"",
+        "path":"DemoWidgetModule",
+        "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
+        "moduleName":"DemoWidgetModule",
+        "description":"by angular library",
+        "registered":true
+    },
+    {
+        "name":"demo-widget-nav",
+        "displayName":"Demo-nav",
+        "previewUrl":"",
+        "path":"DemoWidgetModule",
+        "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
+        "moduleName":"DemoWidgetModule",
+        "description":"by angular library",
+        "registered":true
+    },
+    {
+        "name":"demo-widget-form-login",
+        "displayName":"formLogin",
+        "previewUrl":"",
+        "path":"DemoWidgetModule",
+        "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
+        "moduleName":"DemoWidgetModule",
+        "description":"by angular library",
+        "registered":true,
+        "grid":{
+            "cols":3,
+            "rows":1
+        }
+    },
+    {
+        "name":"demo-widget-jumbotron",
+        "displayName":"jumbotron",
+        "previewUrl":"",
+        "path":"DemoWidgetModule",
+        "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
+        "moduleName":"DemoWidgetModule",
+        "description":"by angular library",
+        "registered":true,
+        "grid":{
+            "cols":5,
+            "rows":3
+        }
+    },
+    {
+        "name":"demo-widget-card",
+        "displayName":"Card",
+        "previewUrl":"",
+        "path":"DemoWidgetModule",
+        "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
+        "moduleName":"DemoWidgetModule",
+        "description":"by angular library",
+        "registered":true,
+        "grid":{
+            "cols":2,
+            "rows":1
+        }
+    }
+]

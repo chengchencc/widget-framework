@@ -6,7 +6,6 @@ import { WidgetDragEvent } from '../dnd/draggable-model';
 import { Store } from '../store/store';
 import { WidgetSettableDirective } from '../settable/widget-settable.directive';
 import { GridType, CompactType, DisplayGrid } from '../gridster/gridsterConfig.interface';
-import { ToastrService, Toast } from 'ngx-toastr';
 import { GridsterItem } from '../gridster/gridsterItem.interface';
 import { WidgetLoaderManifest } from '../loader/widget-loader';
 import { LayoutConfig,LayoutTemplate } from './layout.interface';
@@ -214,7 +213,7 @@ export class LayoutService {
     parent: null
   };
 
-  constructor(private store: Store,private toast:ToastrService) {
+  constructor(private store: Store) {
     this.layoutConfig = this.load();
     console.log("first loaded layout config...", this.layoutConfig);
     this.loadLayoutTemplates();
@@ -242,7 +241,9 @@ export class LayoutService {
    */
   remove(layout: LayoutConfig) {
     if(layout.id =="0"){
-      this.toast.warning("body cannot be removed!")
+      // this.toast.warning("body cannot be removed!");
+      throw new Error("body cannot be removed!");
+      
       return;
     }
 
@@ -305,12 +306,7 @@ export class LayoutService {
       content:template.content
     }
 
-
     parent.layout.push(current);
-
-    // current.id = `${parent.id}-${parent.layout.length}`
-    // current.parent = parent;
-    // current.path = currentPathArray.join(".");
 
     template.layout.forEach((child) => {
       this._recursiveGenerateLayoutPath(current, child);
@@ -404,13 +400,11 @@ export class LayoutService {
   }
 
   saveLayoutTemplate() {
-    // console.log("save custom layout template", this._serializeLayout(this.customLayoutTemplates));
-    // window.localStorage.setItem("layout-template", this._serializeLayout(this.customLayoutTemplates));
-    this.store.saveCustomLayoutTemplate(this._serializeLayout(this.customLayoutTemplates));
+     this.store.saveCustomLayoutTemplate(this._serializeLayout(this.customLayoutTemplates));
   }
 
   loadLayoutTemplates = () => {
-    let tpls = this.store.loadCustomLayoutTemplate(); //window.localStorage.getItem("layout-template");
+    let tpls = this.store.loadCustomLayoutTemplate();
     if (tpls) {
       this.customLayoutTemplates = JSON.parse(tpls);
     }

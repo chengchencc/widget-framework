@@ -1,0 +1,31 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/app",
+    "types": []
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ],
+  "paths": {
+    "@widget/core": [
+      "Projects/widget/core"
+    ],
+    "@widget/core/*": [
+      "Projects/widget/core/*"
+    ],
+    "@widget/ide": [
+      "Projects/widget/ide"
+    ],
+    "@widget/ide/*": [
+      "Projects/widget/ide/*"
+    ],
+    "demo-widget": [
+      "dist/demo-widget"
+    ],
+    "demo-widget/*": [
+      "dist/demo-widget/*"
+    ]
+  }
+}
