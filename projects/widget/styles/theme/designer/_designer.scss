@@ -168,8 +168,15 @@ app-designer {
                     outline: none;
                 }
             }
-
         }
+
+    }
+    .box-input {
+        width: 100%!important;
+        height: 100px!important;
+        box-shadow: 0 0 0px 1px $dsn-border-color,
+            inset 0 0 0px 1px $dsn-border-color!important;
+        border-color: lighten($aside-bg, 5%) lighten($aside-bg, 9%)!important;
     }
 
     /* bs accordion */

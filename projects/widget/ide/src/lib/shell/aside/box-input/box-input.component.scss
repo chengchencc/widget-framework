@@ -1,15 +1,55 @@
 
-.outer {
-    box-sizing: content-box;
-    box-shadow: 0 0 0px 1px $dsn-border-color,
-        inset 0 0 0px 1px $dsn-border-color;
-
+.box-input {
+    box-sizing: border-box;
+    border-width: 24px 36px;
+    border-style: solid;
+    opacity: .8;
+    position: relative;
+    cursor: ns-resize;
+    // 下面 5 个应该被自定义覆盖
+    box-shadow: 0 0 0px 1px purple,
+        inset 0 0 0px 1px purple;
+    border-color: lighten(purple, 13%) lighten(purple, 16%);
     width: 90px;
     height: 30px;
-    border-width: 30px 50px;
-    border-style: solid;
-    border-color: lighten($aside-bg, 3%) lighten($aside-bg, 6%);
-    // border: 50px solid $dsn-border-color;
-    // #5d6670;
-    // #5d6670;
+
+    &:hover {
+        opacity: 1;
+    }
+    input {
+        position: absolute;
+        width: 40px;
+        margin: 0;
+        padding: 0;
+        height: 20px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        &:focus {
+            outline: none;
+            background: #ffffff2e;
+        }
+        &.top {
+            top: -22px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+        &.bottom {
+            bottom: -22px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+        &.right {
+            right: -35px;
+            top: calc(50% - 10px);
+        }
+        &.left {
+            left: -35px;
+            top: calc(50% - 10px);
+        }
+    }
 }
