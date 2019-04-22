@@ -75,7 +75,14 @@ app-designer {
             outline: 0;
             box-shadow: none;
         }
-
+        .drag-input {
+            &-x {
+                cursor: ew-resize;
+            }
+            &-y {
+                cursor: ns-resize;
+            }
+        }
         label {
             font-size: 12px;
             margin: 0;

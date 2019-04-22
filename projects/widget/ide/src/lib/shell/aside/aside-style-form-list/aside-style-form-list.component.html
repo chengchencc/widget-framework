@@ -7,12 +7,26 @@
       <!-- 3-9 结构 -->
       <ng-container>
         <div class='col-sm-3'>
-        <label class='prop-name'
+        <!-- TODO: 有点冗余咋整 -->
+        <!-- normal label -->
+        <label *ngIf="prop.type!=StylePropType.Number && prop.type!=StylePropType.ScopedNumberWithoutUnit"
+          class='prop-name'
+          [tooltip]="prop.tip || prop.name"
+          [delay]="500"
+          [class.changed]="isPropInItemConfig(prop.name)"
+          [for]="prop.name">{{camel2Joiner(prop.name, ' ')}}</label>
+        <!-- drag input label -->
+        <label *ngIf="prop.type==StylePropType.Number || prop.type==StylePropType.ScopedNumberWithoutUnit"
+          class='prop-name drag-input drag-input-x'
+          libDragInput='false'
+          [modal]="getValue(prop.name)"
+          (changeValue)="handleChangeValue($event, prop)"
           [tooltip]="prop.tip || prop.name"
           [delay]="500"
           [class.changed]="isPropInItemConfig(prop.name)"
           [for]="prop.name">{{camel2Joiner(prop.name, ' ')}}</label>
         </div>
+          <!-- [openDragInput]="prop.type==StylePropType.Number || prop.type==StylePropType.ScopedNumberWithoutUnit" -->
         <div class=col-sm-9>
           <ng-container [ngSwitch]="prop.type">
 

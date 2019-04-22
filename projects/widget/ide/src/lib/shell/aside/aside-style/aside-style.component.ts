@@ -2,6 +2,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { LayoutService } from '@widget/core';
 import { LayoutComponent } from '@widget/core';
 import { WidgetSettableDirective } from '@widget/core';
+import { NUM_REGEXP, UNIT_REGEXP } from '../../../utils/util';
 
 //TODO: 放这？
 
@@ -74,9 +75,6 @@ export function getRegExpInValue (propName: string,
   // 以防未匹配到
   return result ? result[0] : ''
 }
-/** 从 数字+单位 中找出 数字 和 单位 的正则 */
-export const NUM_REGEXP: RegExp = /^[\d.]+/
-export const UNIT_REGEXP: RegExp = /[^\d.]+$/
 
 @Component({
   selector: 'design-aside-style',

@@ -35,6 +35,7 @@ import { AsideStructureComponent, AsideStructureTreeComponent } from './shell/as
 import { AsideEventComponent } from './shell/aside/aside-event/aside-event.component';
 import { AsideStyleFormListComponent } from './shell/aside/aside-style-form-list/aside-style-form-list.component';
 import { BoxInputComponent } from './shell/aside/box-input/box-input.component';
+import { DragInputDirective } from './directives/drag-input.directive';
 
 @NgModule({
   imports: [
@@ -68,6 +69,7 @@ import { BoxInputComponent } from './shell/aside/box-input/box-input.component';
     AsideEventComponent,
     AsideStyleFormListComponent,
     BoxInputComponent,
+    DragInputDirective,
   ],
   providers:[
     DesignerService
