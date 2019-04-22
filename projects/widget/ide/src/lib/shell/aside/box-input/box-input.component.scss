@@ -29,7 +29,8 @@
         text-align: center;
         &:focus {
             outline: none;
-            background: #ffffff2e;
+            box-shadow: none;
+            background: #ffffff1c;
         }
         &.top {
             top: -22px;

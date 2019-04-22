@@ -262,17 +262,9 @@ export class AsideStyleComponent implements OnInit, DoCheck {
           },
           styleProps: [
             {
-              name: 'top',
-              type: StylePropType.Number
-            }, {
-              name: 'right',
-              type: StylePropType.Number
-            }, {
-              name: 'bottom',
-              type: StylePropType.Number
-            }, {
-              name: 'left',
-              type: StylePropType.Number
+              name: 'offset',
+              type: StylePropType.BoxInput,
+              boxInputProps: ['top', 'right', 'bottom', 'left']
             }, {
               name: 'zIndex',
               type: StylePropType.ScopedNumberWithoutUnit
@@ -300,7 +292,8 @@ export class AsideStyleComponent implements OnInit, DoCheck {
           boxInputProps: ['margin-top', 'margin-right', 'margin-bottom', 'margin-left']
         }, {
           name: 'padding',
-          type: StylePropType.Number,
+          type: StylePropType.BoxInput,
+          boxInputProps: ['padding-top', 'padding-right', 'padding-bottom', 'padding-left']
         }, {
           name: 'overflow',
           type: StylePropType.LongEnum,

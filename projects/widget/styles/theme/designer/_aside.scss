@@ -109,13 +109,19 @@
                 border-width: 0 0 0 1px;
             }
         }
+        design-aside-style,
+        design-aside-setting,
+        design-aside-structure,
+        design-aside-event {
+            width: 100%;
+        }
 
         ul {
             padding: 0;
         }
         .no-selection-tip {
             text-align: center;
-            width: 200px;
+            width: 100%;
             padding: 40px 40px;
             color: #8895a1;
             font-weight: bold;
@@ -199,6 +205,15 @@
                             .prop-name {
                                 padding: 0 2px;
                                 border-radius: 2px;
+                                line-height: 2;
+                                font-family: sans-serif;
+                                font-weight: 400;
+                                letter-spacing: -0.1px;
+                                // color: #ffffffb3;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                
                                 &.changed {
                                     color: #ffa870;
                                     background: #f79b6112;
@@ -206,7 +221,7 @@
                             }
                         }
                         .ul-prop {
-                            padding-left: 15px;
+                            padding-left: 10px;
                         }
                     }
                 }
