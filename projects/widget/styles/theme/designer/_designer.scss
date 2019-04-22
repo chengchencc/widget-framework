@@ -81,6 +81,12 @@ app-designer {
             margin: 0;
             text-transform: capitalize;
         }
+        .tooltip {
+            .tooltip-inner {
+                transform: translateX(30%);
+                font-size: 12px;
+            }
+        }
         small {
             line-height: 1.2;
             vertical-align: text-top;
@@ -216,3 +222,4 @@ app-designer {
         }
     }
 }
+
