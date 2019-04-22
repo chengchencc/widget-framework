@@ -403,15 +403,17 @@ export class AsideStyleComponent implements OnInit, DoCheck {
   }
 
   handleChangeValue(e: { value: string, prop: StyleProp }) {
-    //TODO: 文本验证
+    //TODO: 文本验证，数字限制（如 width, opacity > 0），负号处理
+    
     let { value, prop } = e
+    value = String(value)
     // 如果有单位：
     if(prop.type==StylePropType.Number) {
       // 先取出老值 老单位
       let oldV = getRegExpInValue(prop.name, NUM_REGEXP, this.itemConfig.style, this.computedStyles)
       let oldU = getRegExpInValue(prop.name, UNIT_REGEXP, this.itemConfig.style, this.computedStyles)
       // 如果改成了空值，那改的不是 unit 而是数字，就让结果为 auto
-      if (!value) {
+      if (value!='0' && value=='' || value==undefined) {
         value = 'auto'
       }
       // 如果改的是数字，注意单位

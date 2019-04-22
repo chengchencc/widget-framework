@@ -23,7 +23,7 @@ export class DragInputDirective {
   axis: 'x' | 'y' = 'x'
   /** 控制速度 */
   @Input()
-  speed = .5
+  speed = .4
   /** 值输入 */
   @Input()
   modal: string
@@ -41,8 +41,8 @@ export class DragInputDirective {
   onMouseDown (e) {
     // 取出其中的数字
     let match = String(this.modal).match(NUM_REGEXP)
-    // 如果没有 就不用继续了
-    if(!match) return
+    // 如果没有，当作 0 处理
+    if(!match) this._downModal = 0
     //记录位置，flag
     let v = e[this.axis]
     this._down = true
