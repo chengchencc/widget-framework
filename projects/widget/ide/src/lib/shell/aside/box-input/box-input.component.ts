@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StyleProp, StylePropType } from '../aside-style/aside-style.component';
+import { StyleProp, StylePropType } from '../../../utils/util'
 
 @Component({
   selector: 'lib-box-input',
@@ -27,7 +27,11 @@ export class BoxInputComponent implements OnInit {
       }
     })
   }
-
-
+  handleDragChangeValue (v) {
+    this.handleChangeValue(v, 0)
+    this.handleChangeValue(v, 1)
+    this.handleChangeValue(v, 2)
+    this.handleChangeValue(v, 3)
+  }
 
 }

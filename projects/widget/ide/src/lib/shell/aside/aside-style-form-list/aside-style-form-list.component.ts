@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StylePropType, StyleProp, stylePropsContainer, camel2Joiner, stylePropsCategory, getRegExpInValue, getValue } from '../aside-style/aside-style.component';
-import { NUM_REGEXP, UNIT_REGEXP } from '../../../utils/util';
+import { camel2Joiner, getRegExpInValue, getValue } from '../aside-style/aside-style.component';
+import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, StylePropType } from '../../../utils/util';
 
 @Component({
   selector: 'aside-style-form-list',
@@ -42,8 +42,20 @@ export class AsideStyleFormListComponent implements OnInit {
   }
   /** 检查 prop 是否在 item.config.styles 中，即修改过了 */
   isPropInItemConfig (propName: string) {
-    let v: string = this.itemConfigStyles[camel2Joiner(propName, '-')]
-    return v != undefined
+    let propValue: string = this.itemConfigStyles[camel2Joiner(propName, '-')]
+    // 有些属性有从属关系，子属性改变，它本身 或 父属性 都算作修改过。如 box-input。
+    if(propValue == undefined) {
+      let prop = getStyleProp(propName)
+      if(prop.type == StylePropType.BoxInput) {
+        for(let iPropName of prop.boxInputProps) {
+          let propValue: string = this.itemConfigStyles[camel2Joiner(iPropName, '-')]
+          if(propValue!=undefined) return true
+        }
+      }
+    } else {
+      return true
+    }
+    return false
   }
 
 }
