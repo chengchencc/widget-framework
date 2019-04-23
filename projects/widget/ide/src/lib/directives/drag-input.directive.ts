@@ -41,13 +41,12 @@ export class DragInputDirective {
   onMouseDown (e) {
     // 取出其中的数字
     let match = String(this.modal).match(NUM_REGEXP)
-    // 如果没有，当作 0 处理
-    if(!match) this._downModal = 0
     //记录位置，flag
     let v = e[this.axis]
+
     this._down = true
     this._downV = v
-    this._downModal = parseInt(match[0])
+    this._downModal = match ? parseInt(match[0]) : 0 // 如果没有数字，当作 0 处理
   }
 
   onMouseMove = e => {

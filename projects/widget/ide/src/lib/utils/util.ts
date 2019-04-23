@@ -8,7 +8,8 @@ export interface StyleProp {
   EnumValues?: string[],
   EnumIcons?: string[],
   EnumIconStyles?: { [k: string]: string }[],
-  maxMin?: number[],
+  min?: number,
+  max?: number,
   step?: number,
   boxInputProps?: string[]
 }
@@ -150,9 +151,11 @@ export const styleProps: stylePropsCategory[] = [
       {
         name: 'width',
         type: StylePropType.Number,
+        min: 0,
       }, {
         name: 'height',
         type: StylePropType.Number,
+        min: 0,
       }, {
         name: 'margin',
         type: StylePropType.BoxInput,
@@ -179,7 +182,8 @@ export const styleProps: stylePropsCategory[] = [
       }, {
         name: 'opacity',
         type: StylePropType.ScopedNumberWithoutUnit,
-        maxMin: [0, 1], //TODO: 滑动条
+        min: 0, //TODO: 滑动条
+        max: 1
       }
     ]
   }, {
@@ -188,6 +192,7 @@ export const styleProps: stylePropsCategory[] = [
       {
         name: 'fontSize',
         type: StylePropType.Number,
+        min: 0,
       }, {
         name: 'color',
         type: StylePropType.Color,
@@ -244,7 +249,18 @@ export const styleProps: stylePropsCategory[] = [
 ]
 export function getStyleProp (propName: string) {
   for (let category of styleProps) {
-    for (let prop of category.styleProps) {
+    let resultProp = getStylePropRecursively(category.styleProps, propName)
+    if(resultProp) return resultProp
+  }
+}
+/** 递归查找 prop，被上面调用 */
+function getStylePropRecursively (props: (StyleProp|stylePropsContainer)[], propName: string) {
+  for (let prop of props) {
+    // 如果是 container，那还需要递归查找子 props
+    if (prop['ifShow']) {
+      let resultProp = getStylePropRecursively((<stylePropsContainer>prop).styleProps, propName)
+      if(resultProp) return resultProp
+    } else {
       if (prop['name'] && prop['name'] == propName) return <StyleProp>prop
     }
   }
@@ -253,3 +269,12 @@ export function getStyleProp (propName: string) {
 export const NUM_REGEXP: RegExp = /^-?[\d.]+/
 export const UNIT_REGEXP: RegExp = /[^\d.]+$/
 
+export function clamp (v: number, min = -Infinity, max = Infinity) {
+  if(v < min) {
+    return min
+  } else if (v > max) {
+    return max
+  } else {
+    return v
+  }
+}
