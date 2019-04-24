@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Optional, ViewChild, ElementRef, HostBinding } from '@angular/core';
 
-import { ToastrService } from 'ngx-toastr';
 import { GridsterItem, GridsterConfig, GridsterComponent, GridsterComponentInterface, GridType, CompactType, DisplayGrid } from '../../../gridster';
 import { LayoutConfig } from '../../layout.interface';
 import { deepClone } from '../../../utils/object';
@@ -9,6 +8,7 @@ import { DroppableService } from '../../../dnd/droppable.service';
 import { WidgetDragEvent } from '../../../dnd/draggable-model';
 import { WidgetLoaderManifest } from '../../../loader/widget-loader';
 import { GridsterUtils } from '../../../gridster/gridsterUtils.service';
+import { WidgetError,ErrorType } from '../../../common/WidgetError';
 
 @Component({
   selector: 'gridster-container',
@@ -56,8 +56,7 @@ export class GridsterContainerComponent implements OnInit {
 
   constructor(@Optional() private settable: WidgetSettableDirective,
     private dndService: DroppableService,
-    private elementRef:ElementRef,
-    private toast:ToastrService
+    private elementRef:ElementRef
   ) { }
 
 
@@ -80,7 +79,7 @@ export class GridsterContainerComponent implements OnInit {
     if(event.data.type !== "widget"){
       // console.log();
       // this.elementRef.nativeElement.style.cursor="not-allowed";
-      this.toast.info("cannot !");
+      throw new WidgetError("cannot",ErrorType.warning);
       return;
     }
 

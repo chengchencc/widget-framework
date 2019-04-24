@@ -14,14 +14,12 @@ const Widget_Manifest_Url = "/assets/widgets/widget.manifest.json";
 @Injectable()
 export class Store implements StoreInterface {
 
-    /**
-     *
-     */
     constructor(private http:HttpClient) {
+        
     }
 
     whoAmI(): string {
-        return "store";
+        return "this is default web browser store.";
     }
 
     /**

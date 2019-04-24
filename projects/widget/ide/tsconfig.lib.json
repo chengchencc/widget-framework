@@ -29,4 +29,5 @@
     "src/test.ts",
     "**/*.spec.ts"
   ]
+
 }

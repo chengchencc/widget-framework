@@ -20,16 +20,16 @@
     ],
     "paths": {
       "@widget/core": [
-        "Projects/widget/core"
+        "dist/widget/core"
       ],
       "@widget/core/*": [
-        "Projects/widget/core/*"
+        "dist/widget/core/*"
       ],
       "@widget/ide": [
-        "Projects/widget/ide"
+        "dist/widget/ide"
       ],
       "@widget/ide/*": [
-        "Projects/widget/ide/*"
+        "dist/widget/ide/*"
       ],
       "demo-widget": [
         "dist/demo-widget"
@@ -38,5 +38,6 @@
         "dist/demo-widget/*"
       ]
     }
-  }
+  },
+  "exclude": ["dist"]
 }

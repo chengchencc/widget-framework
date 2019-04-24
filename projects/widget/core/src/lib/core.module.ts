@@ -40,21 +40,21 @@ import { Store } from './store/store';
     SettingsGridComponent
   ],
   providers: [
-    Store,
-    WidgetLoader,
-    LayoutService,
-    PageService,
-    {provide:Widget_Core_Config_Token,useValue:DefaultWidgetCoreConfig}
+    // Store,
+    // WidgetLoader,
+    // LayoutService,
+    // PageService,
+    // {provide:Widget_Core_Config_Token,useValue:DefaultWidgetCoreConfig}
   ],
   exports: [
-    LayoutComponent,
-    PreviewComponent,
-    WidgetContainerComponent,
-    WidgetSettableDirective,
-    GridsterContainerComponent,
-    SettingsGridComponent,
-    DraggableModule,
-    GridsterModule
+    // LayoutComponent,
+    // PreviewComponent,
+    // WidgetContainerComponent,
+    // WidgetSettableDirective,
+    // GridsterContainerComponent,
+    // SettingsGridComponent,
+    // DraggableModule,
+    // GridsterModule
   ]
 })
 export class CoreModule {

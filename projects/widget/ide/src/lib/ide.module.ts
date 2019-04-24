@@ -13,7 +13,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 // core
 import { CoreModule } from '@widget/core';
-import { DraggableModule } from '@widget/core';
+// import { DraggableModule } from '@widget/core';
 
 //child component
 import { HeaderComponent } from './shell/header/header.component';
@@ -32,7 +32,7 @@ import { AsideSettingComponent } from './shell/aside/aside-setting/aside-setting
 import { AsideStructureComponent, AsideStructureTreeComponent } from './shell/aside/aside-structure/aside-structure.component';
 import { AsideEventComponent } from './shell/aside/aside-event/aside-event.component';
 
-import { Widget_Core_Config_Token, WidgetCoreConfig } from '@widget/core/src/lib/core.config';
+import { Widget_Core_Config_Token, WidgetCoreConfig } from '@widget/core';
 import { ToastrModule } from 'ngx-toastr';
 
 // import { OverlayModule } from "@angular/cdk/overlay";
@@ -49,7 +49,7 @@ const widgetCoreConfig:WidgetCoreConfig={
     FormsModule,
     TabsModule.forRoot(),
     CoreModule,
-    DraggableModule,
+    // DraggableModule,
     NgSelectModule,
     TabsModule.forRoot(),
     CollapseModule.forRoot(),
