@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/*-e2e": true,
+        "**/*.spec.ts": true,
+        "**/widget-ide": true
+    }
+}
