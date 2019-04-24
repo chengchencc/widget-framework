@@ -2,7 +2,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -10,33 +9,29 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "importHelpers": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
-      "es2017",
+      "es2018",
       "dom"
     ],
     "paths": {
-      "@widget/core": [
-        "Projects/widget/core"
+      "widget-core": [
+        "dist/widget-core"
       ],
-      "@widget/core/*": [
-        "Projects/widget/core/*"
+      "widget-core/*": [
+        "dist/widget-core/*"
       ],
-      "@widget/ide": [
-        "Projects/widget/ide"
+      "widget-ide": [
+        "dist/widget-ide"
       ],
-      "@widget/ide/*": [
-        "Projects/widget/ide/*"
-      ],
-      "demo-widget": [
-        "dist/demo-widget"
-      ],
-      "demo-widget/*": [
-        "dist/demo-widget/*"
+      "widget-ide/*": [
+        "dist/widget-ide/*"
       ]
     }
-  }
+  },
+  "exclude": ["dist"]
 }

@@ -1,0 +1,42 @@
+@import './variables';
+@import './header';
+@import './sidebar';
+@import './content';
+@import './aside';
+@import './footer';
+@import './preview';
+widget-ide {
+    display: flex;
+    flex-direction: column;
+    height: 100%; // color: $dsn-color;
+    main {
+        flex: auto;
+        display: flex;
+        flex-direction: row;
+    }
+    @include design-header;
+    @include design-sidebar;
+    @include design-content;
+    @include design-aside;
+    @include design-footer;
+    .setting-container {
+        padding: 10px;
+    }
+    .select-widgets {
+        display: flex;
+        flex-wrap: wrap;
+        .select-widgets-item {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            text-align: center;
+            background: darken($dsn-bg, 5%);
+            padding: 10px;
+            cursor: grab;
+        }
+    }
+    .modal-content {
+        background-color: $dsn-bg;
+    }
+}
