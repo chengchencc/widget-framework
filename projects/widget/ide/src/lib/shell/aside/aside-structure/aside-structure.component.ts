@@ -19,11 +19,28 @@ export class AsideStructureComponent implements OnInit {
   }
 }
 
+const typeIconMap = {
+  body: `web_asset`,
+  div: `check_box_outline_blank`,
+  widget: `widgets`,
+  // grid: `grid_on`,
+  grid: `apps`,
+  group: `view_week`,
+}
 @Component({
   selector: 'design-aside-structure-tree',
   template: `
-  <a>{{config.type}}({{config.id}})</a>
-  <ul>
+  <a class="node"
+    [class.collapsed]="collapsed" >
+    <i *ngIf="!config.layout.length"
+      class="material-icons arrow-placeholder"></i>
+    <i *ngIf="config.layout.length"
+      class="material-icons arrow"
+      (click)="handleToggleCollapse()" >{{collapsed ? 'chevron_right': 'expand_more'}}</i>
+    <i class="material-icons type">{{icon(config)}}</i>
+      {{config.type}}({{config.id}})
+  </a>
+  <ul class="children-ul">
     <li *ngFor="let item of config.layout">
       <design-aside-structure-tree [config]="item"></design-aside-structure-tree>
     </li>
@@ -35,11 +52,21 @@ export class AsideStructureComponent implements OnInit {
 })
 export class AsideStructureTreeComponent implements OnInit {
 
-  @Input() config:LayoutConfig;
+  @Input() config: LayoutConfig;
+
+  collapsed = false
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  icon (config) {
+    return typeIconMap[config.type]
+  }
+  /** 当点击收起/展开 */
+  handleToggleCollapse () {
+    this.collapsed = !this.collapsed
   }
 
 }

@@ -1,5 +1,6 @@
 //basic
 $dsn-bg:#3b424a;
+$dsn-brand-color: #2589eb;
 $dsn-hover-bg:lighten($dsn-bg, 10%);
 $dsn-active-bg:lighten($dsn-bg, 10%);
 $dsn-color:rgba($white, .8);
@@ -15,8 +16,6 @@ $dsn-tab-active-bg:$dsn-bg;
 $dsn-form-control-bg: lighten($dsn-bg, 15%);
 $dsn-form-control-color:$dsn-color;
 $dsn-form-control-border-color: $dsn-border-color;
-
-$dsn-brand-color: #2589eb;
 
 //header
 $header-bg:darken($dsn-bg, 5%);

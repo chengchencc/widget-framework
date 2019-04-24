@@ -233,4 +233,57 @@
             padding: 4px 10px;
         }
     }
+
+
+    design-aside-structure-tree {
+        display: flex;
+        flex-direction: column;
+        user-select: none;
+        .node {
+            font-size: 12px;
+            cursor: pointer;
+            padding: 5px 0;
+            padding-left: 1000px;
+            opacity: 1;
+            margin-left: -1000px;
+            &:hover {
+                background: scale-color($dsn-brand-color, $alpha: -20);
+            }
+            &.active {
+                background: $dsn-brand-color;
+            }
+            &.collapsed {
+
+            }
+            i.material-icons {
+                &.arrow {
+                    vertical-align: middle;
+                    font-size: 16px;
+                    opacity: .6;
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+                &.arrow-placeholder {
+                    width: 16px;
+                }
+                &.type {
+                    opacity: .8;
+                    font-size: 16px;
+                    vertical-align: middle;
+                }
+            }
+        }
+        ul.children-ul {
+            list-style: none;
+            padding-left: 5px;
+            border-left: 1px solid scale-color($color: $dsn-color, $alpha: -80);
+            margin-left: 7.5px;
+            > li {
+            }
+        }
+        .node.collapsed + ul.children-ul {
+            display: none;
+        }
+    }
 }
