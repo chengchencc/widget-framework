@@ -1,0 +1,173 @@
+@mixin design-sidebar {
+    design-sidebar {
+        display: flex;
+        flex: none;
+        width: $sidebar-width;
+        background-color: $sidebar-bg;
+        border-right: $dsn-border;
+        color: $dsn-color;
+        user-select: none;
+        height: 100%;
+
+        .tab-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        .nav-tabs {
+            flex-direction: column;
+            background: $dsn-tab-bg;
+            border: none;
+            border-right: $dsn-border;
+
+            .nav-item {
+                border: $dsn-border;
+                margin-right: -1px;
+
+                &:first-child {
+                    border-top: 0px;
+                }
+
+                &.active {
+                    border-right: none;
+                }
+            }
+
+            .nav-link {
+                color: $dsn-color;
+                opacity: .45;
+                border: none;
+                padding: 0.3rem 0.5rem;
+                border-radius: 0px;
+
+                &:hover {
+                    // background-color: $dsn-tab-active-bg;
+                    opacity: .8;
+                    color: $dsn-active-color;
+                }
+
+                &.active {
+                    background-color: $dsn-tab-bg;
+                    opacity: 1;
+                    color: $dsn-active-color;
+                }
+            }
+        }
+
+        .tab-content {
+            flex: auto;
+            // padding-left: 5px;
+            overflow: auto;
+
+            &>.tab-pane.active {
+                display: flex;
+                width: 100%;
+                height: 100%;
+
+                // border-left: 1px solid #1a1d20;
+                .panel {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+
+                    &-header {
+                        padding: 10px;
+                        font-size: 14px;
+                        opacity: .8;
+                        font-weight: bold;
+                    }
+
+                    &-body {
+                        .toolbar {
+                            padding: 5px;
+                        }
+                    }
+                }
+            }
+
+            &::-webkit-scrollbar {
+                width: 7px;
+                height: 10px;
+            }
+
+            &::-webkit-scrollbar-corner {
+                background-color: $dsn-hover-bg;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-left: 2px solid transparent;
+                // border-radius: 10px;
+                background-color: $dsn-hover-bg;
+                border-style: solid;
+                border-color: transparent;
+                border-width: 0 0 0 1px;
+                background-clip: content-box;
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color: $dsn-border; //lighten($primary, 30.5%); //#e5e5e5;
+                border-left: 2px solid transparent;
+                background-clip: padding-box;
+                border-style: solid;
+                border-color: $dsn-border;
+                border-width: 0 0 0 1px;
+            }
+        }
+        design-aside-style,
+        design-aside-setting,
+        design-aside-structure,
+        design-aside-event {
+            width: 100%;
+        }
+
+        .form-control {
+            background-color: $dsn-form-control-bg;
+            border: 1px solid $dsn-form-control-border-color;
+            color: $dsn-form-control-color;
+
+            &:focus {
+                color: $dsn-form-control-color;
+                background-color: $dsn-bg;
+            }
+
+            option {
+                color: $dsn-form-control-color;
+            }
+            i.material-icons {
+                &.arrow {
+                    vertical-align: middle;
+                    font-size: 16px;
+                    opacity: .6;
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+                &.arrow-placeholder {
+                    width: 16px;
+                }
+                &.type {
+                    opacity: .8;
+                    font-size: 16px;
+                    vertical-align: middle;
+                }
+            }
+            .id {
+                opacity: .7;
+            }
+        }
+        ul.children-ul {
+            list-style: none;
+            padding-left: 5px;
+            border-left: 1px solid scale-color($color: $dsn-color, $alpha: -80);
+            margin-left: 7.5px;
+            > li {
+            }
+        }
+        .node.collapsed + ul.children-ul {
+            display: none;
+        }
+
+
+    }
+}
