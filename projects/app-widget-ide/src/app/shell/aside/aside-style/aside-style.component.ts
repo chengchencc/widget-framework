@@ -1,46 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
 import { SettingService } from 'projects/widget-core/src/lib/settable/setting.sevice';
-import { NUM_REGEXP, UNIT_REGEXP, styleProps, StylePropType, StyleProp, clamp } from '../../../utils';
-
-/** 驼峰 -> 小写 + 连接符 */
-export function camel2Joiner (src: string, joiner = '-') {
-	let result = src.replace(/[A-Z]/g, match => joiner + match.toLowerCase())
-  if(result.slice(0, 1) === joiner){ //如果首字母是大写，执行replace时会多一个_，这里需要去掉
-    result = result.slice(1);
-  }
-	return result
-}
-/**
- * 根据属性名取已设置的值：
- * 如果用户已设置，取用户的；否则去 computed Styles 中取
- * */
-export function getValue(propName: string,
-  itemConfigStyles: CSSStyleDeclaration,
-  computedStyles: CSSStyleDeclaration) {
-  let v: string = itemConfigStyles[camel2Joiner(propName, '-')]
-  // 如果用户未设置
-  if (v==undefined) { //!v 会把空串算作假
-    switch (propName) {
-      case 'width':
-      case 'height':
-        v = 'auto'
-        break
-      default:
-        v = computedStyles[propName]
-    }
-  }
-  return v
-}
-// 取出 数字+单位 中的 某某（根据正则）
-export function getRegExpInValue (propName: string,
-  regExp: RegExp,
-  itemConfigStyles: CSSStyleDeclaration,
-  computedStyles: CSSStyleDeclaration) {
-  let result = String(getValue(propName, itemConfigStyles, computedStyles)).match(regExp)
-  // 以防未匹配到
-  return result ? result[0] : ''
-}
+import { NUM_REGEXP, UNIT_REGEXP, styleProps, StylePropType, StyleProp, clamp, getRegExpInValue, camel2Joiner } from '../../../utils';
 
 @Component({
   selector: 'design-aside-style',

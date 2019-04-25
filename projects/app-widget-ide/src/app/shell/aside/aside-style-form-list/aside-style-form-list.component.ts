@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { camel2Joiner, getRegExpInValue, getValue } from '../aside-style/aside-style.component';
-import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, StylePropType } from '../../../utils';
+import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, StylePropType, camel2Joiner, getRegExpInValue, getValue } from '../../../utils';
 
 @Component({
   selector: 'aside-style-form-list',
