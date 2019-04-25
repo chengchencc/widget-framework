@@ -10,9 +10,11 @@ import { SettingService } from './setting.sevice';
 export class WidgetSettableDirective {
     @Input()
     config: LayoutConfig;
-
     @Output()
     onSelected = new EventEmitter<boolean>();
+
+    @HostBinding("class") class: string
+    @HostBinding('style') style: SafeStyle
 
     _classes: string[] = [];
     selected: boolean = false;
@@ -26,6 +28,10 @@ export class WidgetSettableDirective {
         // @Optional() public widget: WidgetContainerComponent
     ) {
         this.settingService.onChangeConfig$.subscribe(c => this.handleChangeConfig(c))
+    }
+
+    ngOnInit() {
+        this.updateConfig(this.config)
     }
 
     @HostListener("click", ['$event'])
@@ -42,8 +48,6 @@ export class WidgetSettableDirective {
         this.onSelected.emit(this.selected);
     }
 
-    @HostBinding("class") class: string
-
     addOrRemove(express: boolean, className: string) {
         if (express) {
             if (!this._classes.includes(className)) {
@@ -55,19 +59,13 @@ export class WidgetSettableDirective {
             }
         }
     }
-
-    @HostBinding('style') style: SafeStyle
-    // get myStyle(): SafeStyle {
-    //     console.count('get myStyle') //TODO: 鼠标移动的每帧都调用？
-    //     console.log(this.elementRef)
-    //     let styleString = this.getStyle();
-    //     return this.sanitizer.bypassSecurityTrustStyle(styleString);
-    // }
-
     /** 当 config 变化，更新 style */
-    handleChangeConfig (config: LayoutConfig) {
+    handleChangeConfig () {
         console.count('get myStyle') //TODO: 鼠标移动的每帧都调用？
         console.log(this.elementRef)
+        this.updateConfig(this.config)
+    }
+    updateConfig (config: LayoutConfig) {
         // style
         let styleString = this.getStyle(config);
         this.style = this.sanitizer.bypassSecurityTrustStyle(styleString);
@@ -80,7 +78,7 @@ export class WidgetSettableDirective {
         this.addOrRemove(this.selected, "selected");
 
         let result = this._classes.join(" ");
-        return result;
+        this.class = result;
     }
 
     getStyle(config: LayoutConfig): string {
