@@ -12,6 +12,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 // core
 import { WidgetCoreModule } from 'projects/widget-core/src/lib/widget-core.module';
 // import { WidgetCoreModule } from 'widget-core';
@@ -27,12 +29,16 @@ import { SidebarInfoComponent } from './sidebar/sidebar-info/sidebar-info.compon
 import { SidebarLayoutComponent } from './sidebar/sidebar-layout/sidebar-layout.component';
 import { SidebarWidgetComponent } from './sidebar/sidebar-widget/sidebar-widget.component';
 
-//services
-import { DesignerService } from '../services/designer.service';
 import { AsideStyleComponent } from './aside/aside-style/aside-style.component';
 import { AsideSettingComponent } from './aside/aside-setting/aside-setting.component';
 import { AsideStructureComponent, AsideStructureTreeComponent } from './aside/aside-structure/aside-structure.component';
 import { AsideEventComponent } from './aside/aside-event/aside-event.component';
+import { AsideStyleFormListComponent } from './aside/aside-style-form-list/aside-style-form-list.component';
+import { BoxInputComponent } from './aside/box-input/box-input.component';
+import { DragInputDirective } from '../directives/drag-input.directive';
+
+//services
+import { DesignerService } from '../services/designer.service';
 
 import { Widget_Core_Config_Token, WidgetCoreConfig } from 'projects/widget-core/src/lib/core.config';
 import { ToastrModule } from 'ngx-toastr';
@@ -58,6 +64,8 @@ const widgetCoreConfig:WidgetCoreConfig={
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    ButtonsModule.forRoot(),
+    AccordionModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-bottom-right'
@@ -79,7 +87,10 @@ const widgetCoreConfig:WidgetCoreConfig={
     AsideSettingComponent,
     AsideStructureComponent,
     AsideStructureTreeComponent,
-    AsideEventComponent
+    AsideEventComponent,
+    AsideStyleFormListComponent,
+    BoxInputComponent,
+    DragInputDirective,
   ],
   exports:[
     WidgetIdeComponent

@@ -6,6 +6,7 @@ import { SettingService } from './setting.sevice';
 
 @Directive({
     selector: '[appSettable]',
+    exportAs:'appSettable'
 })
 export class WidgetSettableDirective {
     @Input()
@@ -24,12 +25,16 @@ export class WidgetSettableDirective {
         private sanitizer: DomSanitizer,
         private settingService:SettingService
         // @Optional() public widget: WidgetContainerComponent
-    ) { }
+    ) { 
+    
+    }
 
     @HostListener("click", ['$event'])
     select(event: MouseEvent) {
         event.stopPropagation();
         event.preventDefault();
+
+        console.log(this.elementRef);
 
         this.settingService.activeSettable(this);
  
@@ -68,6 +73,7 @@ export class WidgetSettableDirective {
 
     @HostBinding('style')
     get myStyle(): SafeStyle {
+        // console.count('get myStyle') //TODO: 鼠标移动的每帧都调用？
         let styleString = this.getStyle();
         return this.sanitizer.bypassSecurityTrustStyle(styleString);
     }

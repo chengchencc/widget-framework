@@ -1,4 +1,4 @@
-<!-- <ng-content></ng-content> -->
+<ng-content></ng-content>
 
 <!-- <widget-layout *ngFor="let item of config.layout" [config]="item" appDropzone (drop)="move($event,item)">
   <ng-content></ng-content>
@@ -8,25 +8,31 @@
 
   <ng-container [ngSwitch]="item.type">
     <!-- widget -->
-    <widget-container *ngSwitchCase="'widget'" [info]="item.content" appSettable [config]="item"></widget-container>
-    <!-- grid -->
-    <!-- <gridster [options]="item.settings" appSettable [config]="item" appDropzone style="background-color:red">
-      <gridster-item *ngFor="let gridItems of item.content" [item]="gridItems"></gridster-item>
-    </gridster> -->
-
+    <widget-container *ngSwitchCase="'widget'" [info]="item.content" appSettable [config]="item">
+      
+    </widget-container>
+    
     <gridster-container *ngSwitchCase="'grid'" [config]="item"></gridster-container>
 
-    <widget-layout *ngSwitchDefault [config]="item" appDropzone appSettable (onDragDrop)="move($event,item)">
+    <widget-layout *ngSwitchDefault [config]="item" appDropzone appSettable #settableItem="appSettable" (onDragDrop)="move($event,item)">
       <!-- <ng-content></ng-content> -->
+
+      <div class="setting-tool">
+        <button type="button" class="btn btn-dark btn-sm">{{item.id}}</button>
+        <button type="button" class="btn btn-dark btn-sm" (click)="selectParent(settableItem)">parent</button>
+        <button type="button" class="btn btn-dark btn-sm">setting</button>
+        <button type="button" class="btn btn-dark btn-sm" (click)="removeSelf()">remove</button>
+        <button type="button" class="btn btn-dark btn-sm" (click)="saveAsTemplate()">saveAsNewTpl</button>
+      </div>
     </widget-layout>
   </ng-container>
 
 </ng-container>
 
-<div class="setting-tool">
+<!-- <div class="setting-tool">
   <button type="button" class="btn btn-dark btn-sm">{{config.id}}</button>
   <button type="button" class="btn btn-dark btn-sm" (click)="selectParent($event)">parent</button>
   <button type="button" class="btn btn-dark btn-sm">setting</button>
   <button type="button" class="btn btn-dark btn-sm" (click)="removeSelf()">remove</button>
   <button type="button" class="btn btn-dark btn-sm" (click)="saveAsTemplate()">saveAsNewTpl</button>
-</div>
+</div> -->

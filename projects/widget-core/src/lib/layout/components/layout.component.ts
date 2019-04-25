@@ -89,11 +89,12 @@ export class LayoutComponent implements OnInit {
   }
   //选择上级
   selectParent(event: MouseEvent) {
-    if (this._parent) {
-      //this._parent.select(event);
-      console.log(this.settable);
-    this.settable.parent.select(event);
-  }
+    console.log("settabledirective::",event);
+  //   if (this._parent) {
+  //     //this._parent.select(event);
+  //     console.log(this.settable);
+  //   this.settable.parent.select(event);
+  // }
   }
 
   openModalWithComponent(callback: any) {

@@ -15,11 +15,6 @@ import { WidgetLoaderManifest } from './widget.interface';
 @Injectable()
 export class LayoutService {
 
-  //选中设置元素
-  // onSelectSettableItem$:Observable<WidgetSettableDirective>
-  // private onSelectSettableItemSubject = new Subject<WidgetSettableDirective>();
-  // selectedSettableItem:WidgetSettableDirective;
-
   //布局选中事件
   onLayoutActived$: Observable<LayoutComponent>;
   private layoutSelectedSubject = new Subject<LayoutComponent>();
@@ -28,11 +23,7 @@ export class LayoutService {
   onActivedLayoutSettingsChanged$: Observable<any>;
   private activedLayoutSettingsChangeSubject = new Subject<any>();
 
-  //widget选中事件
-  // onWidgetActived$: Observable<ModuleInfo>;
-  // private widgetActivedSubject = new Subject<ModuleInfo>();
-
-  self:LayoutService = this;
+  self: LayoutService = this;
 
   //布局配置信息
   layoutConfig: LayoutConfig;
@@ -69,7 +60,7 @@ export class LayoutService {
         id: null,
         classes: ["grid"],
         style: null,
-        settings:null,
+        settings: null,
         layout: [],
         type: "grid",
         content: []
@@ -260,16 +251,16 @@ export class LayoutService {
 
     console.log("layout service move ::", event);
     console.log(typeof event.data);
-    let droppedLayoutConfig:LayoutConfig;
+    let droppedLayoutConfig: LayoutConfig;
     //拖动的是widget
     if (event.data.type === "widget") {
       const widgetManifest = <WidgetLoaderManifest>event.data.data;
-      droppedLayoutConfig={
-        id:"",
-        layout:[],
-        type:'widget',
-        content:{
-          name:widgetManifest.name
+      droppedLayoutConfig = {
+        id: "",
+        layout: [],
+        type: 'widget',
+        content: {
+          name: widgetManifest.name
         }
       }
     } else {
@@ -303,7 +294,7 @@ export class LayoutService {
       pathArray: template.pathArray,
       parent: parent,
       type: template.type,
-      content:template.content
+      content: template.content
     }
 
     parent.layout.push(current);

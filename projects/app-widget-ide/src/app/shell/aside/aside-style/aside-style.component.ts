@@ -1,10 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
 import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
 import { SettingService } from 'projects/widget-core/src/lib/settable/setting.sevice';
-// import { LayoutService } from 'widget-core';
-// import { LayoutComponent } from 'widget-core';
-// import { WidgetSettableDirective } from 'widget-core';
+import { NUM_REGEXP, UNIT_REGEXP, styleProps, StylePropType, StyleProp, clamp, getRegExpInValue, camel2Joiner } from '../../../utils';
 
 @Component({
   selector: 'design-aside-style',
@@ -12,7 +9,6 @@ import { SettingService } from 'projects/widget-core/src/lib/settable/setting.se
   styleUrls: ['./aside-style.component.scss']
 })
 export class AsideStyleComponent implements OnInit,DoCheck  {
-
 
   classes:string[]=[
     "body",
@@ -34,97 +30,18 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     "col-12",
     "scroll-thin"
   ];
+  StylePropType = StylePropType
+  styleProps = styleProps
 
-  displaySelector:string[] = [
-    "flex"
-  ];
+  config: any;
+  path: string[];
+  itemConfig: { [key: string]: any } = null
+  computedStyles: CSSStyleDeclaration = null
 
-  flexSelectors={
-    position:[
-      "relative",
-      "absolute",
-      "fixed",
-      "static",
-      "sticky",
-      "inherit",
-      "unset"
-    ],
-    display:[
-      "block",
-      "flex"
-    ],
-    direction:[
-      "row",
-      "row-reverse",
-      "column",
-      "column-reverse"
-    ],
-    wrap:[
-      "nowrap", 
-      "wrap", 
-      "wrap-reverse"
-    ],
-    justifyContent:[
-      "flex-start", 
-      "flex-end", 
-      "center", 
-      "space-between", 
-      "space-around"
-    ],
-    alignItems:[
-      "flex-start", 
-      "flex-end", 
-      "center", 
-      "baseline", 
-      "stretch"
-    ],
-    alignContent:[
-      "flex-start",
-      "flex-end",
-      "center",
-      "space-between",
-      "space-around",
-      "stretch"
-    ],
-    alignSelf:[
-      "auto",
-      "flex-start",
-      "flex-end",
-      "center",
-      "baseline",
-      "stretch"
-    ],
-    
-  }
-
-  config:any;
-
-  path:string[];
-
-  //KeyValueDiffers
-  // styles:{[key: string]: any}={
-  //   "display":"flex",
-  //   "flex-direction":"",
-  //   "flex-wrap":"",
-  //   "flex-flow":"",
-  //   "justify-content":"",
-  //   "align-items":"",
-  //   "align-content":"",
-  //   "order":"",
-  //   "flex":"",
-  //   "align-self":"",
-  //   "font-size":"16px",
-  //   "background":""
-  // }
-  styles:{[key: string]: any}={};
-
-  // layoutConfig:layoutConfig;
-
-  constructor(private settingService:SettingService) {    
+  constructor(private settingService: SettingService) {    
     //TODO:取消注释
-    this.settingService.onSelectSettableItem$.subscribe(s=>this.selecteSettableItem(s));
-
-   }
+    this.settingService.onSelectSettableItem$.subscribe(s=>this.selectSettableItem(s));
+  }
 
   ngOnInit() {
     // this.getStyle();
@@ -134,20 +51,58 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     // this.getStyle();
   }
 
-  selecteSettableItem(item:WidgetSettableDirective){
-    console.log("====================");
-    if(item){
-      this.config = item.config;
-      item.config.style = item.config.style || {};
-      this.styles = item.config.style;
-      let computedStyles:CSSStyleDeclaration = getComputedStyle(item.elementRef.nativeElement);
-      this.styles.display = computedStyles.display;
-      this.styles["flex-direction"] = computedStyles.flexDirection;
-
-      this.path = item.getPath();
-
+  selectSettableItem(item: WidgetSettableDirective) {
+    if (item) {
+      item.config.style = item.config.style || {}
+      this.itemConfig = item.config
+      this.computedStyles = getComputedStyle(item.elementRef.nativeElement)
+      this.path = item.getPath()
     }
   }
 
+  /**
+   * 注意：Number 类型的 e.value 不带单位，单位在后面代码里取
+   */
+  handleChangeValue(e: { value: string|number, prop: StyleProp }) {
+    //TODO: 文本验证，错误给出提示；
+    
+    let { value, prop } = e
+
+    // 如果有 minMax 限制
+    if(prop.min!=undefined || prop.max!=undefined) {
+      value = String(value)
+      // 还是个数字
+      if(NUM_REGEXP.test(value)) {
+        // 把数字限制在这个范围内
+        value = clamp(parseInt(value), prop.min, prop.max)
+      }
+    }
+
+    // 如果有单位：
+    if(prop.type==StylePropType.Number) {
+      value = String(value) //转成字符串后面再比较 省的把 0 当空串
+      // 先取出老值 老单位
+      let oldV = getRegExpInValue(prop.name, NUM_REGEXP, this.itemConfig.style, this.computedStyles)
+      let oldU = getRegExpInValue(prop.name, UNIT_REGEXP, this.itemConfig.style, this.computedStyles)
+      // 如果改成了空值，那改的不是 unit 而是数字，就让结果为 auto
+      if (value!='0' && value=='' || value==undefined) {
+        value = 'auto'
+      }
+      // 如果改的是数字，注意单位
+      else if(NUM_REGEXP.test(value)) {
+        value += oldU=='auto' ? 'px' : oldU
+      }
+      // 如果改的是unit，注意数字
+      else if(UNIT_REGEXP.test(value)) {
+        if(oldU=='auto' && value!='auto') {
+          value = 0 + value
+        } else if (oldU!='auto' && value!='auto') {
+          value = oldV + value
+        } else if (value=='auto') {} // Do nothing
+      }
+    }
+
+    this.itemConfig.style[camel2Joiner(prop.name)] = value
+  }
 
 }
