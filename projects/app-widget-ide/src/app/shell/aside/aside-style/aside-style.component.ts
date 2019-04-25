@@ -77,7 +77,7 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
   itemConfig: { [key: string]: any } = null
   computedStyles: CSSStyleDeclaration = null
 
-  constructor(private settingService:SettingService) {    
+  constructor(private settingService: SettingService) {    
     //TODO:取消注释
     this.settingService.onSelectSettableItem$.subscribe(s=>this.selectSettableItem(s));
   }
@@ -108,7 +108,7 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     let { value, prop } = e
 
     // 如果有 minMax 限制
-    if(prop.min || prop.max) {
+    if(prop.min!=undefined || prop.max!=undefined) {
       value = String(value)
       // 还是个数字
       if(NUM_REGEXP.test(value)) {
