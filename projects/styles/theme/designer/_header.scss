@@ -15,6 +15,7 @@
                 .page-title {
                     line-height: 34px;
                     padding: 0px 10px;
+                    font-size: 13px;
                 }
             }
             &-right {
@@ -23,12 +24,20 @@
                 flex-direction: row;
                 justify-content: flex-end;
                 select {
+                    -webkit-appearance : none; /* To gain control over the appearance on WebKit */
+                    -moz-appearance : none; /* To gain control over the appearance on Gecko */
+                    padding: 0 10px;
+                    border-radius: 0;
+                    height: 100%;
+                    font-size: 13px;
                     background: $header-button-bg;
-                    border: 1px solid $header-button-border-color;
-                    border-bottom: none;
-                    border-right: none;
-                    padding: 3px 5px 5px 5px;
+                    border: none;
+                    border-left: 1px solid $header-button-border-color;
+                    // padding: 3px 5px 5px 5px;
                     color: $dsn-color;
+                    &:focus {
+                        outline: none;
+                    }
                 }
             }
         }
@@ -64,6 +73,7 @@
         }
         .btn-preview {
             @include button-variant($header-button-bg, $dsn-border-color); // background-color: transparent;
+            height: auto;
             padding: 4px 10px;
             outline: none;
             border-top: none;

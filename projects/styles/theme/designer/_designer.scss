@@ -20,23 +20,213 @@ widget-ide {
     @include design-aside;
     @include design-footer;
     .setting-container {
-        padding: 10px;
+        // padding: 10px;
     }
     .select-widgets {
         display: flex;
         flex-wrap: wrap;
         .select-widgets-item {
-            margin: 10px;
-            display: flex;
-            flex-direction: column;
-            /* justify-content: center; */
+            border: $dsn-border;
+            width: 33.33%;
             text-align: center;
             background: darken($dsn-bg, 5%);
             padding: 10px;
             cursor: grab;
+            .widget-name {
+                font-size: 12px;
+                opacity: .6;
+            }
+            &:hover {
+                background: $dsn-bg;
+                .widget-name {
+                    opacity: 1;
+                }
+            }
         }
+    }
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+        padding: 0 2px;
+    }
+    .ib {
+        display: inline-block;
     }
     .modal-content {
         background-color: $dsn-bg;
     }
+    .btn {
+        font-size: 12px;
+        padding: 3px 10px;
+        height: 24px;
+        border: 1px solid $dsn-form-control-border-color;
+        color: $dsn-form-control-color;
+        text-transform: capitalize;
+        border-radius: 2px;
+        background: lighten($dsn-bg, 10%)
+    }
+    .form-group {
+        padding: 0 6px;
+        margin: 8px 0;
+        .ng-select {
+            padding: 0;
+        }
+
+        .btn:focus,
+        .btn.focus {
+            outline: 0;
+            box-shadow: none;
+        }
+        .drag-input {
+            &-x {
+                cursor: ew-resize;
+            }
+            &-y {
+                cursor: ns-resize;
+            }
+        }
+        label {
+            font-size: 12px;
+            margin: 0;
+            text-transform: capitalize;
+        }
+        .tooltip {
+            .tooltip-inner {
+                transform: translateX(30%);
+                font-size: 12px;
+            }
+        }
+        small {
+            line-height: 1.2;
+            vertical-align: text-top;
+        }
+        .btn-group {
+            display: block;
+
+            .btn-radio {
+                i.material-icons {
+                    font-size: 17px;
+                    width: 17px;
+                }
+            }
+        }
+
+        .btn-radio {
+            border: $dsn-border;
+            background: lighten($aside-bg, 10%);
+            color: $dsn-color;
+            border-radius: 5px;
+
+            &.active {
+                background: darken($aside-bg, 10%);
+                color: white;
+            }
+
+            &:not(.active):hover {
+                background-color: lighten($dsn-form-control-bg, 5%);
+            }
+        }
+
+        .form-control,
+        .btn {
+            font-size: 12px;
+            padding: 3px 10px;
+            height: 24px;
+            border: 1px solid $dsn-form-control-border-color;
+            color: $dsn-form-control-color;
+            text-transform: capitalize;
+            border-radius: 2px;
+        }
+
+        select {
+            background-color: $dsn-form-control-bg;
+
+            &:focus {
+                color: $dsn-form-control-color;
+                box-shadow: none;
+                background-color: $dsn-form-control-bg;
+            }
+
+            option {
+                color: $dsn-form-control-color;
+            }
+
+            &:hover {
+                background-color: lighten($dsn-form-control-bg, 5%);
+            }
+        }
+
+        input, textarea {
+            background: darken($aside-bg, 10%);
+            
+            &:focus {
+                box-shadow: rgb(52, 144, 235) 0px 0px 0px 1px;
+                background: darken($aside-bg, 10%);
+            }
+        }
+        .input-group {
+            input {
+                width: auto;
+                adding-right: 40px;
+            }
+            .input-group-btn {
+                position: absolute;
+                right: 0;
+                height: 22px;
+                z-index: 10;
+                margin: 1px;
+                border: none;
+                color: $dsn-color;
+                font-size: 12px;
+                vertical-align: bottom;
+                border-radius: 0;
+                background: darken($aside-bg, 10%);
+                &:hover {
+                    background: $aside-bg;
+                }
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+    }
+    .box-input {
+        width: 100%!important;
+        height: 60px!important;
+        box-shadow: 0 0 0px 1px $dsn-border-color,
+            inset 0 0 0px 1px $dsn-border-color!important;
+        border-color: lighten($aside-bg, 7%) lighten($aside-bg, 14%)!important;
+    }
+
+    /* bs accordion */
+    accordion-group {
+        >.panel {
+            border: none;
+            background: none;
+            padding: 0;
+            .panel-heading {
+                background: darken($aside-bg, 16%);
+                padding: 5px 10px;
+                border-bottom: 1px solid black;
+                border-radius: 0;
+                .accordion-toggle {
+                    line-height: 1;
+                    .btn {
+                        height: auto;
+                        border: none;
+                        color: $dsn-color;
+                        font-size: 13px;
+                        font-weight: bold;
+                        cursor: default;
+                        padding: 0;
+                        line-height: 1;
+                        background: none;
+                    }
+                }
+            }
+            .panel-body {
+                padding: 0;
+            }
+        }
+    }
 }
+

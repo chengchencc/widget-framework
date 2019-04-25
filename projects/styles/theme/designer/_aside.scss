@@ -7,39 +7,47 @@
         background-color: $aside-bg;
         border-left: $dsn-border;
         color: $dsn-color;
+
         .tab-container {
             display: flex;
             flex-direction: column;
             width: 100%;
             height: 100%;
         }
+
         .nav-tabs {
             flex-direction: row;
             background: $dsn-tab-bg;
             border: none;
             border-right: $dsn-border;
             flex: none;
+
             .nav-item {
                 margin-right: -1px;
                 border: $dsn-border;
                 border-top: none;
+
                 &:first-child {
                     border-left: 0px;
                 }
+
                 &.active {
                     border-bottom: none;
                 }
             }
+
             .nav-link {
                 color: $dsn-color;
                 border: none;
                 padding: 0px;
                 padding-top: 5px;
                 border-radius: 0px;
+
                 &:hover {
                     // background-color: $dsn-tab-active-bg;
                     color: $dsn-active-color;
-                } 
+                }
+
                 &.active {
                     background-color: $dsn-tab-active-bg;
                     color: $dsn-active-color;
@@ -47,34 +55,42 @@
                 }
             }
         }
+
         .tab-content {
             flex: auto;
-            padding-left: 5px;
+            // padding-left: 5px;
             overflow: auto;
+
             &>.tab-pane.active {
                 display: flex;
                 width: 100%;
                 height: 100%; // border: 1px solid black;
+
                 // border-right: 0px;
                 // border-left: $dsn-border;
                 .panel {
                     display: flex;
                     flex-direction: column;
                     width: 100%;
+
                     &-header {
                         padding: 10px;
                         border-bottom: $dsn-border;
                     }
+
                     &-body {}
                 }
             }
+
             &::-webkit-scrollbar {
                 width: 7px;
                 height: 10px;
             }
+
             &::-webkit-scrollbar-corner {
                 background-color: $dsn-hover-bg;
             }
+
             &::-webkit-scrollbar-thumb {
                 border-left: 2px solid transparent; // border-radius: 10px;
                 background-color: $dsn-hover-bg;
@@ -83,6 +99,7 @@
                 border-width: 0 0 0 1px;
                 background-clip: content-box;
             }
+
             &::-webkit-scrollbar-track {
                 background-color: $dsn-border; //lighten($primary, 30.5%); //#e5e5e5;
                 border-left: 2px solid transparent;
@@ -92,31 +109,184 @@
                 border-width: 0 0 0 1px;
             }
         }
+        design-aside-style,
+        design-aside-setting,
+        design-aside-structure,
+        design-aside-event {
+            width: 100%;
+        }
 
-        .breadcrumb{
-            font-size: 14px;
-            padding: 0px;
-        
-            .breadcrumb-item + .breadcrumb-item{
-                padding-right: "2px";
-                &::before{
+        ul {
+            padding: 0;
+        }
+        .no-selection-tip {
+            text-align: center;
+            width: 100%;
+            padding: 40px 40px;
+            color: #8895a1;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .breadcrumb {
+            font-size: 13px;
+            margin: 0;
+            padding: 0 10px;
+            .breadcrumb-item {
+                padding: 3px 4px 3px 0;
+                a {
+                    color: $dsn-color;
+                }
+            }
+
+            .breadcrumb-item+.breadcrumb-item {
+                padding: 3px 4px;
+
+                &::before {
                     content: ">";
                     padding-right: "2px";
                 }
             }
         }
+        .ng-select.ng-select-multiple {
+            .ng-select-container {
+                background: darken($aside-bg, 10%);
+                padding: 3px;
+                border: 1px solid $dsn-border-color;
+                border-radius: 5px;
+                .ng-arrow, .ng-clear {
+                    color: $dsn-form-control-bg;
+                }
+                .ng-value-container {
+                    border: none;
+                    .ng-value {
+                        background-color: $dsn-brand-color!important;
+                        padding: 0px 5px 2px;
+                        margin: 2px;
+                        .ng-value-label {
+                            font-size: 12px;
+                            font-weight: normal;
+                        }
+                    }
+                }
+            }
+            &.ng-select-focused {
+                .ng-select-container {
+                    border: 1px solid $dsn-brand-color;
+                }
+                .ng-select-container:after {
+                    border: none;
+                }
+                .ng-arrow {
+                    color: $dsn-form-control-bg!important;
+                }
+            }
+            .ng-dropdown-panel .ng-dropdown-panel-items {
+                background-color: $aside-bg;
+                .ng-option {
+                    color: $dsn-color;
+                    line-height: 1.5;
+                    padding: 5px 15px;
+                    min-height: 0;
+                    font-size: 12px;
+                    &.ng-option-selected {
+                        color: $dsn-color;
+                        background: $dsn-brand-color;
+                    }
+                }
+                
+            }
+        }
 
-        .form-control {
-            background-color: $dsn-form-control-bg;
-            border: 1px solid $dsn-form-control-border-color;
-            color: $dsn-form-control-color;
-            &:focus {
-                color: $dsn-form-control-color;
-                background-color: $dsn-bg;
+        .ul-category {
+            accordion-group {
+                >.panel {
+                    .ul-prop {
+                        .li-prop {
+                            .prop-name {
+                                padding: 0 2px;
+                                border-radius: 2px;
+                                line-height: 2;
+                                font-family: sans-serif;
+                                font-weight: 400;
+                                letter-spacing: -0.1px;
+                                // color: #ffffffb3;
+                                max-width: 100%;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                user-select: none;
+                                
+                                &.changed {
+                                    color: #ffa870;
+                                    background: #f79b6112;
+                                }
+                            }
+                        }
+                        .ul-prop {
+                            padding-left: 10px;
+                        }
+                    }
+                }
             }
-            option {
-                color: $dsn-form-control-color;
+        }
+        .form-group.setting-item {
+            padding: 4px 10px;
+        }
+    }
+
+
+    design-aside-structure-tree {
+        display: flex;
+        flex-direction: column;
+        user-select: none;
+        .node {
+            font-size: 12px;
+            cursor: pointer;
+            padding: 5px 0;
+            padding-left: 1000px;
+            opacity: 1;
+            margin-left: -1000px;
+            &:hover {
+                background: scale-color($dsn-brand-color, $alpha: -20);
             }
+            &.active {
+                background: $dsn-brand-color;
+            }
+            &.collapsed {
+
+            }
+            i.material-icons {
+                &.arrow {
+                    vertical-align: middle;
+                    font-size: 16px;
+                    opacity: .6;
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+                &.arrow-placeholder {
+                    width: 16px;
+                }
+                &.type {
+                    opacity: .8;
+                    font-size: 16px;
+                    vertical-align: middle;
+                }
+            }
+            .id {
+                opacity: .7;
+            }
+        }
+        ul.children-ul {
+            list-style: none;
+            padding-left: 5px;
+            border-left: 1px solid scale-color($color: $dsn-color, $alpha: -80);
+            margin-left: 7.5px;
+            > li {
+            }
+        }
+        .node.collapsed + ul.children-ul {
+            display: none;
         }
     }
 }

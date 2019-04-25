@@ -8,6 +8,7 @@
         color: $dsn-color;
         user-select: none;
         height: 100%;
+
         .tab-container {
             display: flex;
             flex-direction: row;
@@ -19,108 +20,95 @@
             background: $dsn-tab-bg;
             border: none;
             border-right: $dsn-border;
+
             .nav-item {
                 border: $dsn-border;
                 margin-right: -1px;
+
                 &:first-child {
                     border-top: 0px;
                 }
+
                 &.active {
                     border-right: none;
                 }
             }
+
             .nav-link {
                 color: $dsn-color;
-                 border: none;
-                 padding: 0.3rem 0.5rem;
-                 border-radius: 0px;
-                 &:hover {
+                opacity: .45;
+                border: none;
+                padding: 0.3rem 0.5rem;
+                border-radius: 0px;
+
+                &:hover {
                     // background-color: $dsn-tab-active-bg;
+                    opacity: .8;
                     color: $dsn-active-color;
-                } 
+                }
+
                 &.active {
-                    background-color: $dsn-tab-active-bg;
+                    background-color: $dsn-tab-bg;
+                    opacity: 1;
                     color: $dsn-active-color;
                 }
             }
         }
+
         .tab-content {
             flex: auto;
-            padding-left: 5px;
+            // padding-left: 5px;
             overflow: auto;
-            
+
             &>.tab-pane.active {
                 display: flex;
                 width: 100%;
                 height: 100%;
-                border-left: 1px solid #1a1d20;
+
+                // border-left: 1px solid #1a1d20;
                 .panel {
                     display: flex;
                     flex-direction: column;
                     width: 100%;
+
                     &-header {
                         padding: 10px;
-                        border-bottom: $dsn-border;
+                        font-size: 14px;
+                        opacity: .8;
+                        font-weight: bold;
                     }
+
                     &-body {
-    
-                        // .select-widgets{
-    
-                        //     padding: 10px;
-                        //     display: flex;
-                        //     flex-wrap: wrap;
-    
-                        //     .select-widgets-item {
-                        //         width: 100px;
-                        //         height: 100px;
-                        //         text-align: center;
-                        //         vertical-align: middle;
-                        //         display: flex;
-                        //         justify-content: center;
-                        //         flex-direction: column;
-                        //         background: red;
-                        //         margin-left: 1px;
-                        //         margin-bottom: 1px;
-                        //         align-items: center;
-                        //         position: relative;
-                            
-                        //         .toolbar {
-                        //             position: absolute;
-                        //             display: block;
-                        //             top: 0;
-                        //             right: 0;
-                        //             // &:hover{
-                        //             //     display: block;
-                        //             // }
-                        //         }
-                        //     }
-                        // }
-    
-                       
+                        .toolbar {
+                            padding: 5px;
+                        }
                     }
                 }
             }
-    
+
             &::-webkit-scrollbar {
                 width: 7px;
                 height: 10px;
             }
+
             &::-webkit-scrollbar-corner {
                 background-color: $dsn-hover-bg;
             }
+
             &::-webkit-scrollbar-thumb {
                 border-left: 2px solid transparent;
                 // border-radius: 10px;
-                 background-color: $dsn-hover-bg;
+                background-color: $dsn-hover-bg;
                 border-style: solid;
                 border-color: transparent;
                 border-width: 0 0 0 1px;
                 background-clip: content-box;
             }
+
             &::-webkit-scrollbar-track {
-                background-color:$dsn-border; //lighten($primary, 30.5%); //#e5e5e5;
+                background-color: $dsn-border; //lighten($primary, 30.5%); //#e5e5e5;
                 border-left: 2px solid transparent;
-                 background-clip: padding-box;
+                background-clip: padding-box;
                 border-style: solid;
                 border-color: $dsn-border;
                 border-width: 0 0 0 1px;
@@ -131,10 +119,12 @@
             background-color: $dsn-form-control-bg;
             border: 1px solid $dsn-form-control-border-color;
             color: $dsn-form-control-color;
+
             &:focus {
                 color: $dsn-form-control-color;
                 background-color: $dsn-bg;
             }
+
             option {
                 color: $dsn-form-control-color;
             }

@@ -1,149 +1,37 @@
-<!-- <p>
-  style works!
-</p> -->
 
-<!-- <div>css selector</div>
-<div>layout style</div>
-<div>background</div>
-<div>border</div>
-<div>shadows</div>
-<div>Typography</div> -->
+<p *ngIf="!itemConfig" class="no-selection-tip">请选择布局或部件</p>
 
-<p *ngIf="!config">请选择布局或部件......</p>
+<div class="setting-container" *ngIf="itemConfig">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-dark">
+      <li class="breadcrumb-item" *ngFor="let item of path; let i=index;" [class.active]=" i == path.length"><a
+          href="#">{{item}}</a></li>
+    </ol>
+  </nav>
 
-<div class="setting-container" *ngIf="config">
+  <form>
+    <div class="form-group setting-item">
+      <label for="classes">class</label>
+      <ng-select
+        [items]="classes"
+        autofocus
+        name="classes"
+        [multiple]="true"
+        [(ngModel)]="itemConfig['classes']" >
+      </ng-select>
+      <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
+    </div>
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-dark">
-            <li class="breadcrumb-item" *ngFor="let item of path; let i=index;" [class.active]=" i == path.length"><a href="#">{{item}}</a></li>
-            <!-- <li class="breadcrumb-item" aria-current="page" >Data</li> -->
-        </ol>
-    </nav>
-
-    <form>
-
-        <div class="form-group setting-item">
-            <label for="classes">class</label>
-            <!-- <select class="form-control form-control-sm" name="classes" [(ngModel)]="config.classes">
-        <option value="">未设置</option>
-        <option *ngFor="let item of classes" value="item">{{item}}</option>
-      </select> -->
-
-            <ng-select [items]="classes" autofocus name="classes" [multiple]="true" [(ngModel)]="config.classes">
-            </ng-select>
-            <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
-        </div>
-
-        <div class="form-group">
-            <label for="position">position</label>
-            <select class="form-control form-control-sm" name="position" id="position" [(ngModel)]="styles['position']">
-        <option *ngFor="let item of flexSelectors.position" [value]="item">{{item}}</option>
-      </select>
-            <small id="positionHelper" class="text-muted">position</small>
-        </div>
-
-        <div class="form-group">
-            <label for="display">display</label>
-            <!-- <input type="text" name="display" id="display" class="form-control" placeholder="display" aria-describedby="displayHelper"
-        [(ngModel)]="styles['display']"> -->
-
-            <select class="form-control form-control-sm" name="display" id="display" [(ngModel)]="styles['display']">
-        <option *ngFor="let item of flexSelectors.display" [value]="item">{{item}}</option>
-      </select>
-
-            <small id="displayHelper" class="text-muted">display</small>
-        </div>
-
-        <div class="form-group">
-            <label for="flex-direction">flex-direction</label>
-            <!-- <input type="text" name="flex-direction" id="flex-direction" class="form-control" placeholder="flex-direction" aria-describedby="flex-direction" [(ngModel)]="styles['flex-direction']"> -->
-            <select class="form-control form-control-sm" name="flex-direction" id="flex-direction" [(ngModel)]="styles['flex-direction']">
-        <option *ngFor="let item of flexSelectors.direction" [value]="item">{{item}}</option>
-      </select>
-            <small id="flex-direction" class="text-muted">flex-direction</small>
-        </div>
-
-        <div class="form-group">
-            <label for="flex-wrap">flex-wrap</label>
-            <!-- <input type="text" name="flex-wrap" id="flex-wrap" class="form-control" placeholder="flex-wrap" aria-describedby="flex-wrap" [(ngModel)]="styles['flex-wrap']"> -->
-            <select class="form-control form-control-sm" name="flex-wrap" id="flex-wrap" [(ngModel)]="styles['flex-wrap']">
-        <option *ngFor="let item of flexSelectors.wrap" [value]="item">{{item}}</option>
-      </select>
-            <small id="flex-wrap" class="text-muted">flex-wrap</small>
-        </div>
-
-        <!-- <div class="form-group">
-      <label for="flex-flow">flex-flow</label>
-      <input type="search" name="flex-flow" id="flex-flow" class="form-control" placeholder="flex-flow" aria-describedby="flex-flow" [(ngModel)]="styles['flex-flow']">
-      <small id="flex-flow" class="text-muted">flex-flow</small>
-    </div> -->
-
-        <div class="form-group">
-            <label for="justify-content">justify-content</label>
-            <select class="form-control form-control-sm" name="justify-content" id="justify-content" [(ngModel)]="styles['justify-content']">
-        <option *ngFor="let item of flexSelectors.justifyContent" [value]="item">{{item}}</option>
-      </select>
-        </div>
-
-        <div class="form-group">
-            <label for="align-items">align-items</label>
-            <select class="form-control form-control-sm" name="align-items" id="align-items" [(ngModel)]="styles['align-items']">
-        <option *ngFor="let item of flexSelectors.alignItems" [value]="item">{{item}}</option>
-      </select>
-        </div>
-
-        <div class="form-group">
-            <label for="flex">flex</label>
-            <input type="text" name="flex" id="flex" class="form-control" placeholder="flex" aria-describedby="flex" [(ngModel)]="styles['flex']">
-            <small id="flex" class="text-muted">flex</small>
-        </div>
-
-        <div class="form-group">
-            <label for="background">background</label>
-            <input type="text" name="background" id="background" class="form-control" placeholder="background" aria-describedby="backgroundhelper" [(ngModel)]="styles['background']">
-            <small id="backgroundhelper" class="text-muted">background</small>
-        </div>
-        <div class="form-group">
-            <label for="boxShadow">boxShadow</label>
-            <input type="text" name="boxShadow" id="boxShadow" class="form-control" placeholder="boxShadow" aria-describedby="boxShadowhelper" [(ngModel)]="styles['box-shadow']">
-            <small id="boxShadowhelper" class="text-muted">boxShadow</small>
-        </div>
-
-        <div class="form-group">
-            <label for="fontSize">font-size</label>
-            <div class="input-group">
-                <input type="text" name="fontSize" id="fontSize" class="form-control" placeholder="font-size" autocomplete="false" aria-describedby="fontSizeHelper">
-                <span class="input-group-btn">
-          <button type="button" class="btn btn-secondary dropdown-toggle" aria-label="" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            px
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">px</a>
-            <a class="dropdown-item disabled" href="#">%</a>
-          </div>
-        </span>
-            </div>
-
-            <small id="fontSizeHelper" class="text-muted">font-size</small>
-        </div>
-
-        <!-- height -->
-        <div class="form-group">
-            <label for="height">height</label>
-            <input type="text" name="height" id="height" class="form-control" placeholder="height" aria-describedby="heighthelper" [(ngModel)]="styles['height']">
-            <small id="heighthelper" class="text-muted">height</small>
-        </div>
-
-
-        <!-- width -->
-        <div class="form-group">
-            <label for="width">width</label>
-            <input type="text" name="width" id="width" class="form-control" placeholder="width" aria-describedby="widththelper" [(ngModel)]="styles['width']">
-            <small id="widththelper" class="text-muted">width</small>
-        </div>
-
-
-    </form>
-
+    <accordion class="ul-category">
+      <accordion-group  *ngFor="let category of styleProps"
+        [heading]="category.name"
+        [isOpen]="true" >
+        <aside-style-form-list
+          [propList]='category.styleProps'
+          [itemConfigStyles]="itemConfig.style"
+          [computedStyles]="computedStyles"
+          (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
+      </accordion-group>
+    </accordion>
+  </form>
 </div>
