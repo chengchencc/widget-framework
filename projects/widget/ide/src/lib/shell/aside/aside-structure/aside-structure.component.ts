@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { LayoutConfig } from '@widget/core';
+import { LayoutConfig, WidgetSettableDirective } from '@widget/core';
 import { LayoutService } from '@widget/core';
 
 @Component({
@@ -9,13 +9,19 @@ import { LayoutService } from '@widget/core';
 })
 export class AsideStructureComponent implements OnInit {
 
-  layoutConfig:LayoutConfig;
+  layoutConfig: LayoutConfig;
+  selectedItem: WidgetSettableDirective
 
   constructor(private layoutService:LayoutService) {
     this.layoutConfig = layoutService.layoutConfig;
-   }
+    this.layoutService.onSelectSettableItem$.subscribe(s => this.handleSelectSettableItem(s));
+  }
 
   ngOnInit() {
+  }
+
+  handleSelectSettableItem (item: WidgetSettableDirective) {
+    this.selectedItem = item
   }
 }
 
@@ -23,7 +29,6 @@ const typeIconMap = {
   body: `web_asset`,
   div: `check_box_outline_blank`,
   widget: `widgets`,
-  // grid: `grid_on`,
   grid: `apps`,
   group: `view_week`,
 }
@@ -31,6 +36,7 @@ const typeIconMap = {
   selector: 'design-aside-structure-tree',
   template: `
   <a class="node"
+    [class.active]="active()"
     [class.collapsed]="collapsed" >
     <i *ngIf="!config.layout.length"
       class="material-icons arrow-placeholder"></i>
@@ -38,11 +44,14 @@ const typeIconMap = {
       class="material-icons arrow"
       (click)="handleToggleCollapse()" >{{collapsed ? 'chevron_right': 'expand_more'}}</i>
     <i class="material-icons type">{{icon(config)}}</i>
-      {{config.type}}({{config.id}})
+      {{config.type}}
+      <span class="id">({{config.id}})</span>
   </a>
   <ul class="children-ul">
     <li *ngFor="let item of config.layout">
-      <design-aside-structure-tree [config]="item"></design-aside-structure-tree>
+      <design-aside-structure-tree
+        [config]="item"
+        [selectedItem]="selectedItem" ></design-aside-structure-tree>
     </li>
   </ul>
   `,
@@ -52,7 +61,8 @@ const typeIconMap = {
 })
 export class AsideStructureTreeComponent implements OnInit {
 
-  @Input() config: LayoutConfig;
+  @Input() config: LayoutConfig
+  @Input() selectedItem: WidgetSettableDirective
 
   collapsed = false
 
@@ -67,6 +77,9 @@ export class AsideStructureTreeComponent implements OnInit {
   /** 当点击收起/展开 */
   handleToggleCollapse () {
     this.collapsed = !this.collapsed
+  }
+  active () {
+    return this.selectedItem && this.selectedItem.config.id==this.config.id
   }
 
 }

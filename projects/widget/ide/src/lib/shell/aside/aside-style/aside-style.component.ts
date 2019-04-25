@@ -157,8 +157,8 @@ export class AsideStyleComponent implements OnInit, DoCheck {
     if (item) {
       item.config.style = item.config.style || {}
       this.itemConfig = item.config
-      this.computedStyles = getComputedStyle(item.elementRef.nativeElement);
-      this.path = item.getPath();
+      this.computedStyles = getComputedStyle(item.elementRef.nativeElement)
+      this.path = item.getPath()
     }
   }
 
