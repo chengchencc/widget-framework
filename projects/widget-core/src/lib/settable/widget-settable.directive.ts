@@ -24,7 +24,9 @@ export class WidgetSettableDirective {
         private sanitizer: DomSanitizer,
         private settingService:SettingService
         // @Optional() public widget: WidgetContainerComponent
-    ) { }
+    ) {
+        this.settingService.onChangeConfig$.subscribe(c => this.handleChangeConfig(c))
+    }
 
     @HostListener("click", ['$event'])
     select(event: MouseEvent) {
@@ -40,19 +42,7 @@ export class WidgetSettableDirective {
         this.onSelected.emit(this.selected);
     }
 
-    @HostBinding("class")
-    public get classes(): string {
-        if (this.config && this.config.classes) {
-            this._classes = [...this.config.classes];
-        }
-
-        this.addOrRemove(this.config.layout && this.config.layout.length == 0, "is-empty")
-
-        this.addOrRemove(this.selected, "selected");
-
-        let result = this._classes.join(" ");
-        return result;
-    }
+    @HostBinding("class") class: string
 
     addOrRemove(express: boolean, className: string) {
         if (express) {
@@ -66,18 +56,38 @@ export class WidgetSettableDirective {
         }
     }
 
-    @HostBinding('style')
-    get myStyle(): SafeStyle {
-        // console.count('get myStyle') //TODO: 鼠标移动的每帧都调用？
-        let styleString = this.getStyle();
-        return this.sanitizer.bypassSecurityTrustStyle(styleString);
+    @HostBinding('style') style: SafeStyle
+    // get myStyle(): SafeStyle {
+    //     console.count('get myStyle') //TODO: 鼠标移动的每帧都调用？
+    //     console.log(this.elementRef)
+    //     let styleString = this.getStyle();
+    //     return this.sanitizer.bypassSecurityTrustStyle(styleString);
+    // }
+
+    /** 当 config 变化，更新 style */
+    handleChangeConfig (config: LayoutConfig) {
+        console.count('get myStyle') //TODO: 鼠标移动的每帧都调用？
+        console.log(this.elementRef)
+        // style
+        let styleString = this.getStyle(config);
+        this.style = this.sanitizer.bypassSecurityTrustStyle(styleString);
+
+        // class
+        if (config && config.classes) {
+            this._classes = [...config.classes];
+        }
+        this.addOrRemove(config.layout && config.layout.length == 0, "is-empty")
+        this.addOrRemove(this.selected, "selected");
+
+        let result = this._classes.join(" ");
+        return result;
     }
 
-    getStyle(): string {
+    getStyle(config: LayoutConfig): string {
         var styleString = "";
-        for (const key in this.config.style) {
-            if (this.config.style.hasOwnProperty(key)) {
-                const value = this.config.style[key];
+        for (const key in config.style) {
+            if (config.style.hasOwnProperty(key)) {
+                const value = config.style[key];
                 if (value) {
                     styleString += `${key}:${value};`;
                 }

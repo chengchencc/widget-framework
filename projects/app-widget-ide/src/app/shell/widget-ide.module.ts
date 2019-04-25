@@ -33,8 +33,8 @@ import { AsideStyleComponent } from './aside/aside-style/aside-style.component';
 import { AsideSettingComponent } from './aside/aside-setting/aside-setting.component';
 import { AsideStructureComponent, AsideStructureTreeComponent } from './aside/aside-structure/aside-structure.component';
 import { AsideEventComponent } from './aside/aside-event/aside-event.component';
-import { AsideStyleFormListComponent } from './aside/aside-style-form-list/aside-style-form-list.component';
-import { BoxInputComponent } from './aside/box-input/box-input.component';
+import { AsideStyleFormListComponent } from './aside/aside-style/aside-style-form-list/aside-style-form-list.component';
+import { BoxInputComponent } from './aside/aside-style/box-input/box-input.component';
 import { DragInputDirective } from '../directives/drag-input.directive';
 
 //services

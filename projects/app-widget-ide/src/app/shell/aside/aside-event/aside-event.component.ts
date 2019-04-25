@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WidgetContainerComponent } from 'projects/widget-core/src/lib/layout/components/widget-container/widget-container.component';
 import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
 import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
-// import { LayoutService } from 'widget-core';
-// import { WidgetSettableDirective } from 'widget-core';
-// import { WidgetContainerComponent } from 'widget-core';
+import { SettingService } from 'projects/widget-core/src/public-api';
 
 @Component({
   selector: 'design-aside-event',
@@ -13,25 +11,25 @@ import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/w
 })
 export class AsideEventComponent implements OnInit {
 
-  registed:any[]=[];
+  registed:any[]=[1, 2, 3, 4];
 
-  publisher: WidgetContainerComponent;
+  publisher: WidgetContainerComponent
   subscriber: WidgetContainerComponent;
 
   s:string;
   p:string;
 
-  constructor(private layoutService: LayoutService) {
+  constructor(private settingService: SettingService) {
     //TODO:取消注释
-    // this.layoutService.onSelectSettableItem$.subscribe(s => this.selecteSettableItem(s));
-
+    this.settingService.onSelectSettableItem$.subscribe(s => this.selectSettableItem(s));
+    // this.publisher.widgetFactory.inputs
   }
 
   ngOnInit() {
   }
 
-  selecteSettableItem(directive: WidgetSettableDirective) {
-    console.log(directive);
+  selectSettableItem(directive: WidgetSettableDirective) {
+    // console.log(directive);
 
     // if (directive && directive.widget) {
 

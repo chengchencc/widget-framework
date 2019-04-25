@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectionStrategy } from '@angular/core';
 import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
 import { SettingService } from 'projects/widget-core/src/lib/settable/setting.sevice';
 import { NUM_REGEXP, UNIT_REGEXP, styleProps, StylePropType, StyleProp, clamp, getRegExpInValue, camel2Joiner } from '../../../utils';
@@ -6,7 +6,8 @@ import { NUM_REGEXP, UNIT_REGEXP, styleProps, StylePropType, StyleProp, clamp, g
 @Component({
   selector: 'design-aside-style',
   templateUrl: './aside-style.component.html',
-  styleUrls: ['./aside-style.component.scss']
+  styleUrls: ['./aside-style.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AsideStyleComponent implements OnInit,DoCheck  {
 
@@ -103,6 +104,8 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     }
 
     this.itemConfig.style[camel2Joiner(prop.name)] = value
+    /** 告知 setting.service -> settable.dir config 变了 */
+    this.settingService.changeConfig(this.itemConfig)
   }
 
 }
