@@ -30,10 +30,11 @@ export class SettingService {
         this.selectedSettableItem = item;
         this.selectedSettableItem.selected = true;
         this.onSelectSettableItemSubject.next(item);
+        this.onChangeConfigSubject$.next()
     }
 
     changeConfig (config) {
-        this.onChangeConfigSubject$.next(config)
+        this.onChangeConfigSubject$.next()
     }
 
 }
