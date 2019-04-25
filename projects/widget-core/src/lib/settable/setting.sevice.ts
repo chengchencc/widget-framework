@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { WidgetSettableDirective } from './widget-settable.directive';
+import { LayoutConfig } from '../common/layout.interface';
 
 /**
  * 部件配置服务
@@ -12,8 +13,12 @@ export class SettingService {
     private onSelectSettableItemSubject = new Subject<WidgetSettableDirective>();
     selectedSettableItem: WidgetSettableDirective;
 
+    public onChangeConfig$: Observable<LayoutConfig>
+    private onChangeConfigSubject$ = new Subject<LayoutConfig>()
+
     constructor() {
         this.onSelectSettableItem$ = this.onSelectSettableItemSubject.asObservable();
+        this.onChangeConfig$ = this.onChangeConfigSubject$.asObservable();
     }
 
     /**
@@ -25,6 +30,10 @@ export class SettingService {
         this.selectedSettableItem = item;
         this.selectedSettableItem.selected = true;
         this.onSelectSettableItemSubject.next(item);
+    }
+
+    changeConfig (config) {
+        this.onChangeConfigSubject$.next(config)
     }
 
 }

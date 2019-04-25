@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, StylePropType, camel2Joiner, getRegExpInValue, getValue } from '../../../utils';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, StylePropType, camel2Joiner, getRegExpInValue, getValue } from '../../../../utils';
 
 @Component({
   selector: 'aside-style-form-list',
   templateUrl: './aside-style-form-list.component.html',
-  styleUrls: ['./aside-style-form-list.component.css']
+  styleUrls: ['./aside-style-form-list.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AsideStyleFormListComponent implements OnInit {
 

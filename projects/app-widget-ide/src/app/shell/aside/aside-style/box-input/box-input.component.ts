@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StyleProp, StylePropType } from '../../../utils'
+import { StyleProp, StylePropType } from '../../../../utils'
 
 @Component({
   selector: 'lib-box-input',
