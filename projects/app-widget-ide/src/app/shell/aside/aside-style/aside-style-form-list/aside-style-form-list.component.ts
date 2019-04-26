@@ -5,7 +5,7 @@ import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, 
   selector: 'aside-style-form-list',
   templateUrl: './aside-style-form-list.component.html',
   styleUrls: ['./aside-style-form-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AsideStyleFormListComponent implements OnInit {
 

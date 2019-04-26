@@ -1,5 +1,7 @@
 import { Directive, ElementRef, HostListener, Output, EventEmitter, Input, NgZone } from '@angular/core';
 import { NUM_REGEXP } from '../utils';
+import { Subject } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
 
 @Directive({
   selector: '[libDragInput]'
@@ -17,43 +19,46 @@ export class DragInputDirective {
   @Input()
   modal: string
 
-  private _down = false
   private _downV = 0
   private _downModal: number
+  // 借用它来实现防抖
+  private _mousemoveSubject = new Subject<any>()
 
   constructor(private el: ElementRef, private zone: NgZone) {
     this.zone.runOutsideAngular(() => {
-      this.el.nativeElement.addEventListener('pointerdown', this.onMouseDown)
       document.addEventListener('pointerup', this.endDrag)
       document.addEventListener('pointercancel', this.endDrag)
     })
   }
 
-  // @HostListener('mousedown', [`$event`])
+  ngOnInit () {
+    this._mousemoveSubject.pipe(throttleTime(100)).subscribe(e => {
+      this.onThrottledMouseMove(e)
+    })
+  }
+
+  @HostListener('pointerdown', [`$event`])
   onMouseDown = e => {
     // 取出其中的数字
     let match = String(this.modal).match(NUM_REGEXP)
     //记录位置，flag
     let v = e[this.axis]
 
-    this._down = true
     this._downV = v
     this._downModal = match ? parseInt(match[0]) : 0 // 如果没有数字，当作 0 处理
     // this.zone.runOutsideAngular(() => {
       document.addEventListener('pointermove', this.onMouseMove)
     // })
   }
-
   onMouseMove = e => {
-    if(!this._down) return
+    this._mousemoveSubject.next(e)
+  }
+  onThrottledMouseMove = e => {
     let v = e[this.axis]
     let result = Math.round(this._downModal + (v-this._downV)*this.speed)
     this.changeValue.emit(result)
-    console.log(result)
   }
-
   endDrag = () => {
-    this._down = false
     document.removeEventListener('pointermove', this.onMouseMove)
   }
 }
