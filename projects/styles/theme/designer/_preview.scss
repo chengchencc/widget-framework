@@ -33,6 +33,7 @@ widget-preview {
             .setting-tool {
                 display: none;
                 position: absolute;
+                z-index: $zindex-settable-toolbar;
                 right: 0px;
                 top: 0px;
                 .btn {

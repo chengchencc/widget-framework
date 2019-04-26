@@ -34,6 +34,16 @@ export class DroppableService {
     this.dragStartSubject.next(event);
   }
   onDragMove(event: WidgetDragEvent): void {
+
+//TODO:需要考虑性能优化。网上找的方法，貌似不太管用，可能放的位置不对。移动完元素之后，延迟一段时间
+// let move = document.onmousemove;
+// document.onmousemove = null;
+// setTimeout(function(){
+//   document.onmousemove = move;
+// },30);
+
+    console.log("moving============");
+
     this.closedDirective = this.getClosedDirective(event);
     this.dragMoveSubject.next(event);
   }
@@ -42,35 +52,30 @@ export class DroppableService {
   }
 
   getClosedDirective(event: WidgetDragEvent) {
+    let closedDirective:Distance = null;
     const distances = this.dropzoneDirectiveInstance.map((current) => {
       let e = event.event;
       if (this.isInside(e, current.clientRect)) {
-        return {
-          directive: current,
-          distance: this.calcDistance(e, current.clientRect)
-        };
-      }
-      else
-        return {
-          directive:current,
-          distance:99999
-        };
-
-    });
-
-    let closed:Distance = null;
-    distances.forEach(data=>{
-      if (!closed) {
-        closed = data;
-      }else{
-        if(data.distance < closed.distance){
-          closed = data;
+        if(!closedDirective){
+          closedDirective = {
+            directive: current,
+            distance: this.calcDistance(e, current.clientRect)
+          }
+        }else{
+          const calcDistance = this.calcDistance(e,current.clientRect);
+          if(closedDirective.distance > calcDistance){
+            closedDirective = {
+              directive:current,
+              distance:calcDistance
+            }
+          }
         }
       }
-
     });
 
-    return closed.distance>10000?null:closed.directive;
+    console.log(closedDirective);
+
+    return closedDirective ? closedDirective.directive : null;
   }
 
   calcDistance(event: PointerEvent, clientRect: ClientRect) {
@@ -82,6 +87,9 @@ export class DroppableService {
 
 
   private isInside(event: PointerEvent, clientRect: ClientRect) {
+
+    console.log(clientRect);
+
     return event.clientX >= clientRect.left &&
       event.clientX <= clientRect.right &&
       event.clientY >= clientRect.top &&

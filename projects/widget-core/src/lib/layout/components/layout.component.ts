@@ -64,45 +64,6 @@ export class LayoutComponent implements OnInit {
     this.layoutService.move(event, ref);
   }
 
-  /**
-   * 移除自己
-   */
-  removeSelf() {
-    //第一种移除方式，通过lodash
-    this.layoutService.remove(this.config);
-    //第二种移除方式，通过parent，remove掉即可
-    // var index = this._parent.config.layout.indexOf(this.config);
-    // this._parent.config.layout.splice(index,1);
-  }
-
-  saveAsTemplate() {
-
-    this.openModalWithComponent((tplName) => {
-      this.layoutService.addLayoutTemplate({
-        name: tplName,
-        id: "",
-        layoutConfig: this.config
-      });
-    });
 
 
-  }
-  //选择上级
-  selectParent(event: MouseEvent) {
-    console.log("settabledirective::",event);
-  //   if (this._parent) {
-  //     //this._parent.select(event);
-  //     console.log(this.settable);
-  //   this.settable.parent.select(event);
-  // }
-  }
-
-  openModalWithComponent(callback: any) {
-    const initialState = {
-      title: '请输入模板名称',
-      onOk: callback
-    };
-    // this.bsModalRef = this.modalService.show(CreateTemplateModalComponent, {initialState});
-    // this.bsModalRef.content.closeBtnName = 'Close';
-  }
 }
