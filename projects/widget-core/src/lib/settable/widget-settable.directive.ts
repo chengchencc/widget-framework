@@ -1,9 +1,7 @@
 import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
-// import { LayoutService } from '../common/layout.service';
 import { LayoutConfig } from '../common/layout.interface';
 import { SettingService } from './setting.sevice';
-import { LayoutService } from '../common/layout.service';
 
 @Directive({
     selector: '[appSettable]',
@@ -32,15 +30,13 @@ export class WidgetSettableDirective {
     }
 
     ngOnInit() {
-        this.updateConfig(this.config)
+        this.updateClassNStyle(this.config)
     }
 
     @HostListener("click", ['$event'])
     select(event: MouseEvent) {
         event.stopPropagation();
         event.preventDefault();
-
-        console.log(this.elementRef);
 
         this.settingService.activeSettable(this);
 
@@ -101,11 +97,10 @@ export class WidgetSettableDirective {
     }
     /** 当 config 变化，更新 style */
     handleChangeConfig(c) {
-        console.count('get myStyle') //TODO: 鼠标移动的每帧都调用？
-        console.log(this.elementRef)
-        this.updateConfig(this.config)
+        this.updateClassNStyle(this.config)
     }
-    updateConfig(config: LayoutConfig) {
+    /** 根据 config 更新 class, style */
+    updateClassNStyle (config: LayoutConfig) {
         // style
         let styleString = this.getStyle(config);
         this.style = this.sanitizer.bypassSecurityTrustStyle(styleString);

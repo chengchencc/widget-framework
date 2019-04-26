@@ -1,16 +1,5 @@
-import { Directive, ElementRef, HostListener, Output, EventEmitter, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Output, EventEmitter, Input, NgZone } from '@angular/core';
 import { NUM_REGEXP } from '../utils';
-
-let moveCbs = []
-let upCbs = []
-let x = 0
-let y = 0
-document.onmousemove = e => {
-  moveCbs.forEach(cb => cb(e))
-}
-document.onmouseup = () => {
-  upCbs.forEach(cb => cb())
-}
 
 @Directive({
   selector: '[libDragInput]'
@@ -32,13 +21,16 @@ export class DragInputDirective {
   private _downV = 0
   private _downModal: number
 
-  constructor(private el: ElementRef) {
-    moveCbs.push(this.onMouseMove)
-    upCbs.push(this.endDrag)
+  constructor(private el: ElementRef, private zone: NgZone) {
+    this.zone.runOutsideAngular(() => {
+      this.el.nativeElement.addEventListener('pointerdown', this.onMouseDown)
+      document.addEventListener('pointerup', this.endDrag)
+      document.addEventListener('pointercancel', this.endDrag)
+    })
   }
 
-  @HostListener('mousedown', [`$event`])
-  onMouseDown (e) {
+  // @HostListener('mousedown', [`$event`])
+  onMouseDown = e => {
     // 取出其中的数字
     let match = String(this.modal).match(NUM_REGEXP)
     //记录位置，flag
@@ -47,6 +39,9 @@ export class DragInputDirective {
     this._down = true
     this._downV = v
     this._downModal = match ? parseInt(match[0]) : 0 // 如果没有数字，当作 0 处理
+    // this.zone.runOutsideAngular(() => {
+      document.addEventListener('pointermove', this.onMouseMove)
+    // })
   }
 
   onMouseMove = e => {
@@ -59,5 +54,6 @@ export class DragInputDirective {
 
   endDrag = () => {
     this._down = false
+    document.removeEventListener('pointermove', this.onMouseMove)
   }
 }

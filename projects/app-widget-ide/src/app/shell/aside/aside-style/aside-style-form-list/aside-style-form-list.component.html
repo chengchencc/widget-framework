@@ -18,7 +18,7 @@
         <!-- drag input label -->
         <label *ngIf="prop.type==StylePropType.Number || prop.type==StylePropType.ScopedNumberWithoutUnit"
           class='prop-name drag-input drag-input-x'
-          libDragInput='false'
+          libDragInput
           [modal]="getValue(prop.name)"
           (changeValue)="handleChangeValue($event, prop)"
           [tooltip]="prop.tip || prop.name"
