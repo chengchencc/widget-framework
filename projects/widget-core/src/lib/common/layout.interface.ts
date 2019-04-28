@@ -12,7 +12,9 @@ export interface LayoutConfig extends ISettable {
     type:'body'|'div'|'grid'|'group'|'widget',
     pathArray?:string[],
     content?:WidgetInfo|GridsterItem|any
+    style?: ConfigStyle
 }
+export interface ConfigStyle { [propName: string]: string }
 
 /**
  * 页面布局模板存储结构

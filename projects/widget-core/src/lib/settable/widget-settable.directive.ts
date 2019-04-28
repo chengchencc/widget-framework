@@ -14,10 +14,15 @@ export class WidgetSettableDirective {
     onSelected = new EventEmitter<boolean>();
 
     @HostBinding("class") class: string
+    // get class () {}
     @HostBinding('style') style: SafeStyle
+    @HostBinding('class.selected')
+    get selected () {
+        return this == this.settingService.selectedSettable
+    }
 
     _classes: string[] = [];
-    selected: boolean = false;
+    // selected: boolean = false;
 
     constructor(
         @SkipSelf() @Optional() public parent: WidgetSettableDirective,
@@ -29,23 +34,29 @@ export class WidgetSettableDirective {
         this.settingService.onChangeConfig$.subscribe(c => this.handleChangeConfig(c))
     }
 
+
     ngOnInit() {
         this.updateClassNStyle(this.config)
+
+        // 把自己注册到 map 里
+        this.settingService.configSettableMap[this.config.id] = this
     }
 
     @HostListener("click", ['$event'])
-    select(event: MouseEvent) {
+    handleClick(event: MouseEvent) {
         event.stopPropagation();
         event.preventDefault();
 
-        this.settingService.activeSettable(this);
-
+        // this.settingService.activeSettable(this);
+        this.settingService.selectSettable(this);
+    }
+    onSelect() {
         this.onSelected.emit(this.selected);
     }
-    unselect() {
-        if (this.selected) this.selected = false;
-        this.onSelected.emit(this.selected);
-    }
+    // unselect() {
+    //     if (this.selected) this.selected = false;
+    //     this.onSelected.emit(this.selected);
+    // }
 
     /**
      * 移除自己

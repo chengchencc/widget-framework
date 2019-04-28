@@ -1,4 +1,4 @@
-
+import { ConfigStyle } from 'projects/widget-core/src/lib/common/layout.interface';
 
 /** 一条 style 属性信息 */
 export interface StyleProp {
@@ -15,7 +15,7 @@ export interface StyleProp {
   }
   /** 一堆可在指定条件下显示的属性集合，是否显示取决于 ifShow() */
   export interface stylePropsContainer {
-    ifShow: (itemConfigStyles: CSSStyleDeclaration, computedStyles: CSSStyleDeclaration) => boolean,
+    ifShow: (configStyle: ConfigStyle, computedStyles: CSSStyleDeclaration) => boolean,
     styleProps: StyleProp[]
   }
   /** 一个样式属性分类 */
@@ -33,7 +33,6 @@ export interface StyleProp {
     BoxInput,
   }
   
-  
   export const styleProps: stylePropsCategory[] = [
     {
       name: '布局',
@@ -45,8 +44,9 @@ export interface StyleProp {
         },
         /** flex */
         {
-          ifShow(itemConfigStyles: CSSStyleDeclaration, computedStyles: CSSStyleDeclaration) {
-            if (itemConfigStyles.display) return itemConfigStyles.display == 'flex'
+          ifShow(configStyle: ConfigStyle, computedStyles: CSSStyleDeclaration) {
+            if (!configStyle) return false
+            if (configStyle.display) return configStyle.display == 'flex'
             return computedStyles.display == 'flex'
           },
           styleProps: [
@@ -122,10 +122,11 @@ export interface StyleProp {
         },
         /** relative, absolute, fixed */
         {
-          ifShow(itemConfigStyles: CSSStyleDeclaration, computedStyles: CSSStyleDeclaration) {
+          ifShow(configStyle: ConfigStyle, computedStyles: CSSStyleDeclaration) {
+            if (!configStyle) return false
             let a = [`relative`, `absolute`, `fixed`]
             let propName = 'position'
-            if (itemConfigStyles[propName]) return a.includes(itemConfigStyles[propName])
+            if (configStyle[propName]) return a.includes(configStyle[propName])
             return a.includes(computedStyles[propName])
           },
           styleProps: [
@@ -292,28 +293,32 @@ export function camel2Joiner (src: string, joiner = '-') {
  * 如果用户已设置，取用户的；否则去 computed Styles 中取
  * */
 export function getValue(propName: string,
-  itemConfigStyles: CSSStyleDeclaration,
+  configStyles: ConfigStyle,
   computedStyles: CSSStyleDeclaration) {
-  let v: string = itemConfigStyles[camel2Joiner(propName, '-')]
+  // 如果有 config style
+  if(configStyles) {
+    let v: string = configStyles[camel2Joiner(propName, '-')]
+    // 且有当前 prop
+    if(v!=undefined) return v
+  }
+  let v: string
   // 如果用户未设置
-  if (v==undefined) { //!v 会把空串算作假
-    switch (propName) {
-      case 'width':
-      case 'height':
-        v = 'auto'
-        break
-      default:
-        v = computedStyles[propName]
-    }
+  switch (propName) {
+    case 'width':
+    case 'height':
+      v = 'auto'
+      break
+    default:
+      v = computedStyles[propName]
   }
   return v
 }
 // 取出 数字+单位 中的 某某（根据正则）
 export function getRegExpInValue (propName: string,
   regExp: RegExp,
-  itemConfigStyles: CSSStyleDeclaration,
+  configStyle: ConfigStyle,
   computedStyles: CSSStyleDeclaration) {
-  let result = String(getValue(propName, itemConfigStyles, computedStyles)).match(regExp)
+  let result = String(getValue(propName, configStyle, computedStyles)).match(regExp)
   // 以防未匹配到
   return result ? result[0] : ''
 }

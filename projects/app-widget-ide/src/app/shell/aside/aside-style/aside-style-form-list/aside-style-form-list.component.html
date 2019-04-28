@@ -122,10 +122,10 @@
       <!-- TODO: 其他结构 -->
     </div>
     <!-- style props 容器 -->
-    <ng-container *ngIf="prop.ifShow && prop.ifShow(itemConfigStyles, computedStyles)">
+    <ng-container *ngIf="prop.ifShow && prop.ifShow(configStyle, computedStyles)">
       <aside-style-form-list
         [propList]="prop.styleProps"
-        [itemConfigStyles]="itemConfigStyles"
+        [configStyle]="configStyle"
         [computedStyles]="computedStyles"
         (onChangeValue)="handleChangeValue($event.value, $event.prop)" ></aside-style-form-list>
     </ng-container>

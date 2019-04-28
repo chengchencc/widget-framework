@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, HostBinding } from '@angular/core';
 import { LayoutConfig } from 'projects/widget-core/src/lib/common/layout.interface';
 import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
 import { SettingService, WidgetSettableDirective } from 'projects/widget-core/src/public-api';
@@ -14,17 +14,17 @@ export class AsideStructureComponent implements OnInit {
   selectedItem: WidgetSettableDirective
 
   constructor(private layoutService:LayoutService,
-    private settingService: SettingService) {
+    public settingService: SettingService) {
     this.layoutConfig = this.layoutService.layoutConfig;
-    this.settingService.onSelectSettableItem$.subscribe(s => this.handleSelectSettableItem(s));
+    // this.settingService.onSelectSettableItem$.subscribe(s => this.handleSelectSettableItem(s));
   }
 
   ngOnInit() {
   }
 
-  handleSelectSettableItem (item: WidgetSettableDirective) {
-    this.selectedItem = item
-  }
+  // handleSelectSettableItem (item: WidgetSettableDirective) {
+  //   this.selectedItem = item
+  // }
 }
 
 const typeIconMap = {
@@ -52,8 +52,7 @@ const typeIconMap = {
   <ul class="children-ul">
     <li *ngFor="let item of config.layout">
       <design-aside-structure-tree
-        [config]="item"
-        [selectedItem]="selectedItem" ></design-aside-structure-tree>
+        [config]="item" ></design-aside-structure-tree>
     </li>
   </ul>
   `,
@@ -64,11 +63,10 @@ const typeIconMap = {
 export class AsideStructureTreeComponent implements OnInit {
 
   @Input() config: LayoutConfig
-  @Input() selectedItem: WidgetSettableDirective
 
   collapsed = false
 
-  constructor() { }
+  constructor(public settingService: SettingService) { }
 
   ngOnInit() {
   }
@@ -81,7 +79,8 @@ export class AsideStructureTreeComponent implements OnInit {
     this.collapsed = !this.collapsed
   }
   active () {
-    return this.selectedItem && this.selectedItem.config.id==this.config.id
+    let { selectedSettable } = this.settingService
+    return selectedSettable && selectedSettable.config.id==this.config.id
   }
 
 }

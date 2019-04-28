@@ -21,7 +21,7 @@ export class AsideEventComponent implements OnInit {
 
   constructor(private settingService: SettingService) {
     //TODO:取消注释
-    this.settingService.onSelectSettableItem$.subscribe(s => this.selectSettableItem(s));
+    // this.settingService.onSelectSettableItem$.subscribe(s => this.selectSettableItem(s));
     // this.publisher.widgetFactory.inputs
   }
 

@@ -10,8 +10,6 @@ import { GridsterItem } from '../gridster/gridsterItem.interface';
 import { LayoutConfig,LayoutTemplate } from './layout.interface';
 import { WidgetLoaderManifest } from './widget.interface';
 
-
-
 @Injectable()
 export class LayoutService {
 
@@ -201,7 +199,7 @@ export class LayoutService {
     classes: ['body'],
     type: "body",
     layout: [],
-    parent: null
+    parent: null,
   };
 
   constructor(private store: Store) {
