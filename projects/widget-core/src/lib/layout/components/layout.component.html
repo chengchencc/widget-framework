@@ -8,8 +8,14 @@
 
   <ng-container [ngSwitch]="item.type">
     <!-- widget -->
-    <widget-container *ngSwitchCase="'widget'" [info]="item.content" appSettable [config]="item">
-      
+    <widget-container *ngSwitchCase="'widget'" [info]="item.content" appSettable #settableItem="appSettable" [config]="item">
+      <div class="setting-tool">
+        <button type="button" class="btn btn-dark btn-sm">{{item.id}}</button>
+        <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.selectParent($event)">parent</button>
+        <button type="button" class="btn btn-dark btn-sm">setting</button>
+        <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.removeSelf()">remove</button>
+        <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.saveAsTemplate()">saveAsNewTpl</button>
+      </div>
     </widget-container>
 
     <gridster-container *ngSwitchCase="'grid'" [config]="item"></gridster-container>

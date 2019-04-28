@@ -1,11 +1,23 @@
-<gridster [options]="options" appSettable [config]="config" (onSelected)="onSelected($event)" appDropzone (onDragDrop)="onDrop($event)" (onDragOver)="onDragOver($event)"
+<gridster [options]="options" appSettable #settableItem="appSettable" [config]="config" (onSelected)="onSelected($event)" appDropzone (onDragDrop)="onDrop($event)" (onDragOver)="onDragOver($event)"
   (onDragLeave)="onDragLeave($event)">
   <ng-container *ngFor="let item of gridItems">
     <gridster-item *ngIf="item['layout']" [item]="item">
-      <widget-container [info]="item['layout'].content" appSettable [config]="item['layout']"></widget-container>
+      <widget-container [info]="item['layout'].content" appSettable #settableItem="appSettable" [config]="item['layout']">
+        <div class="setting-tool">
+          <button type="button" class="btn btn-dark btn-sm">{{item['layout'].id}}</button>
+          <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.selectParent($event)">parent</button>
+          <button type="button" class="btn btn-dark btn-sm">setting</button>
+          <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.removeSelf()">remove</button>
+          <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.saveAsTemplate()">saveAsNewTpl</button>
+        </div>
+      </widget-container>
     </gridster-item>
   </ng-container>
 </gridster>
 <div class="setting-tool">
-  <button type="button" class="btn btn-dark btn-sm" (click)="selectParent($event)">parent</button>
+  <button type="button" class="btn btn-dark btn-sm">{{config.id}}</button>
+  <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.selectParent($event)">parent</button>
+  <button type="button" class="btn btn-dark btn-sm">setting</button>
+  <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.removeSelf()">remove</button>
+  <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.saveAsTemplate()">saveAsNewTpl</button>
 </div>
