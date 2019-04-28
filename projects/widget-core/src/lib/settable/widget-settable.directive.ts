@@ -20,6 +20,10 @@ export class WidgetSettableDirective {
     get selected () {
         return this == this.settingService.selectedSettable
     }
+    @HostBinding('class.hovering')
+    get hovering () {
+        return this == this.settingService.hoveringSettable
+    }
 
     _classes: string[] = [];
     // selected: boolean = false;
@@ -47,17 +51,20 @@ export class WidgetSettableDirective {
         event.stopPropagation();
         event.preventDefault();
 
-        // this.settingService.activeSettable(this);
         this.settingService.selectSettable(this);
     }
+    @HostListener('mouseenter')
+    handleEnter () {
+        this.settingService.enterSettable(this)
+    }
+    @HostListener('mouseleave')
+    handleLeave () {
+        this.settingService.leaveSettable()
+    }
+
     onSelect() {
         this.onSelected.emit(this.selected);
     }
-    // unselect() {
-    //     if (this.selected) this.selected = false;
-    //     this.onSelected.emit(this.selected);
-    // }
-
     /**
      * 移除自己
      */

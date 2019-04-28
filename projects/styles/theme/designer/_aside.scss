@@ -246,7 +246,7 @@
             padding-left: 1000px;
             opacity: 1;
             margin-left: -1000px;
-            &:hover {
+            &:hover, &.hovering {
                 background: scale-color($dsn-brand-color, $alpha: -20);
             }
             &.active {

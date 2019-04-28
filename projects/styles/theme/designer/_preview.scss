@@ -20,7 +20,7 @@ widget-preview {
             }
         }
         [appSettable],gridster-container {
-            &.selected {
+            &.selected, &.hovering {
                 // border: 2px solid $blue;
                 outline: 1px solid $blue;
                 // box-shadow: 0px 0px 10px 0px $blue;
@@ -42,6 +42,8 @@ widget-preview {
                     background: $dsn-brand-color;
                     height: auto;
                     padding: 0px 10px;
+                    border-radius: 0;
+                    border-right: 1px solid #ffffff33
                 }
             }
         }

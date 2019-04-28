@@ -38,7 +38,11 @@ const typeIconMap = {
   selector: 'design-aside-structure-tree',
   template: `
   <a class="node"
+    (mouseenter)=handleHoverNode()
+    (mouseleave)=handleLeaveNode()
+    (click)="handleClickNode()"
     [class.active]="active()"
+    [class.hovering]="hovering()"
     [class.collapsed]="collapsed" >
     <i *ngIf="!config.layout.length"
       class="material-icons arrow-placeholder"></i>
@@ -78,9 +82,22 @@ export class AsideStructureTreeComponent implements OnInit {
   handleToggleCollapse () {
     this.collapsed = !this.collapsed
   }
+  handleClickNode () {
+    this.settingService.selectSettable(this.config.id)
+  }
+  handleHoverNode () {
+    this.settingService.enterSettable(this.config.id)
+  }
+  handleLeaveNode () {
+    this.settingService.leaveSettable()
+  }
   active () {
     let { selectedSettable } = this.settingService
     return selectedSettable && selectedSettable.config.id==this.config.id
+  }
+  hovering () {
+    let { hoveringSettable } = this.settingService
+    return hoveringSettable && hoveringSettable.config.id==this.config.id
   }
 
 }

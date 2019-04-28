@@ -10,16 +10,13 @@ import { LayoutService } from '../common/layout.service';
 @Injectable()
 export class SettingService {
     /** config -> settable 映射关系 */
-    configSettableMap: { [configId: string]: WidgetSettableDirective } = {}
+    public configSettableMap: { [configId: string]: WidgetSettableDirective } = {}
     /** 当前选中项 */
-    // selectedConfig: LayoutConfig
-    selectedSettable: WidgetSettableDirective
+    public selectedSettable: WidgetSettableDirective
+    /** 当前鼠标进入项 */
+    public hoveringSettable: WidgetSettableDirective
 
-    //选中设置元素
-    // onSelectSettableItem$: Observable<WidgetSettableDirective>
-    // private onSelectSettableItemSubject = new Subject<WidgetSettableDirective>();
-    // selectedSettableItem: WidgetSettableDirective;
-
+    //TODO: remove
     public onChangeConfig$: Observable<LayoutConfig>
     private onChangeConfigSubject$ = new Subject<LayoutConfig>()
 
@@ -47,15 +44,17 @@ export class SettingService {
     selectSettable (configIdOrSettable: string | WidgetSettableDirective) {
         this.selectedSettable = typeof configIdOrSettable=='string' ? this.configSettableMap[configIdOrSettable] : configIdOrSettable
     }
+    /** hover */
+    enterSettable (configIdOrSettable: string | WidgetSettableDirective) {
+        this.hoveringSettable = typeof configIdOrSettable=='string' ? this.configSettableMap[configIdOrSettable] : configIdOrSettable
+    }
+    leaveSettable () {
+        this.hoveringSettable = null
+    }
 
     //TODO: remove
     changeConfig (config) {
         this.onChangeConfigSubject$.next()
     }
-
-    // removeLayout(layout:LayoutConfig){
-    //     this.layoutService.remove(layout);
-    // }
-
 
 }
