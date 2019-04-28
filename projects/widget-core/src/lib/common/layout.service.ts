@@ -9,6 +9,7 @@ import { GridType, CompactType, DisplayGrid } from '../gridster/gridsterConfig.i
 import { GridsterItem } from '../gridster/gridsterItem.interface';
 import { LayoutConfig,LayoutTemplate } from './layout.interface';
 import { WidgetLoaderManifest } from './widget.interface';
+import { DefaultLayoutTemplates, DefaultLayout } from './layout-default';
 
 
 
@@ -30,179 +31,11 @@ export class LayoutService {
   //当前激活选中的布局
   activedLayout: LayoutComponent;
   //系统布局模板
-  layoutTemplates: LayoutTemplate[] = [
-    {
-      id: "div",
-      name: "div",
-      layoutConfig: {
-        id: null,
-        classes: ["div"],
-        style: null,
-        layout: [],
-        type: "div"
-      }
-    },
-    {
-      id: "container",
-      name: "container",
-      layoutConfig: {
-        id: null,
-        classes: ["container"],
-        style: null,
-        layout: [],
-        type: "div"
-      }
-    },
-    {
-      id: "grid",
-      name: "grid",
-      layoutConfig: {
-        id: null,
-        classes: ["grid"],
-        style: null,
-        settings: null,
-        layout: [],
-        type: "grid",
-        content: []
-      }
-    },
-    {
-      id: "row-66",
-      name: "row-66",
-      layoutConfig: {
-        id: null,
-        classes: ["row"],
-        style: null,
-        type: "group",
-        layout: [
-          {
-            id: null,
-            classes: ["col-6"],
-            style: null,
-            type: "div",
-            layout: []
-          },
-          {
-            id: null,
-            classes: ["col-6"],
-            style: null,
-            type: "div",
-            layout: []
-          }
-        ]
-      }
-    },
-    {
-      id: "row-4-8",
-      name: "row-4-8",
-      layoutConfig: {
-        id: null,
-        classes: ["row"],
-        style: null,
-        type: "group",
-        layout: [
-          {
-            id: null,
-            classes: ["col-4"],
-            style: null,
-            type: "div",
-            layout: []
-          },
-          {
-            id: null,
-            classes: ["col-8"],
-            style: null,
-            type: "div",
-            layout: []
-          }
-        ]
-      }
-    },
-    {
-      id: "row-4-4-4",
-      name: "row-4-4-4",
-      layoutConfig: {
-        id: null,
-        classes: ["row"],
-        style: null,
-        type: "group",
-        layout: [
-          {
-            id: null,
-            classes: ["col-4"],
-            style: null,
-            type: "div",
-            layout: []
-          },
-          {
-            id: null,
-            classes: ["col-4"],
-            style: null,
-            type: "div",
-            layout: []
-          },
-          {
-            id: null,
-            classes: ["col-4"],
-            style: null,
-            type: "div",
-            layout: []
-          }
-        ]
-      }
-    },
-    {
-      id: "row-3-3-3",
-      name: "row-3-3-3",
-      layoutConfig: {
-        id: null,
-        classes: ["row"],
-        style: null,
-        type: "group",
-        layout: [
-          {
-            id: null,
-            classes: ["col-3"],
-            style: null,
-            type: "div",
-            layout: []
-          },
-          {
-            id: null,
-            classes: ["col-3"],
-            style: null,
-            type: "div",
-            layout: []
-          },
-          {
-            id: null,
-            classes: ["col-3"],
-            style: null,
-            type: "div",
-            layout: []
-          },
-          {
-            id: null,
-            classes: ["col-3"],
-            style: null,
-            type: "div",
-            layout: []
-          }
-        ]
-      }
-    },
-  ];
+  layoutTemplates: LayoutTemplate[] = DefaultLayoutTemplates;
   //自定义布局模板
   customLayoutTemplates: LayoutTemplate[] = [];
   //默认布局
-  defaultLayout: LayoutConfig = {
-    id: '0',
-    path: null,
-    classes: ['body'],
-    type: "body",
-    layout: [],
-    parent: null
-  };
+  defaultLayout: LayoutConfig = DefaultLayout;
 
   constructor(private store: Store) {
     this.layoutConfig = this.load();
