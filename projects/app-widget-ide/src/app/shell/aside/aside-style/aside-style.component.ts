@@ -66,7 +66,6 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
    */
   handleChangeValue(e: { value: string|number, prop: StyleProp }) {
     //TODO: 文本验证，错误给出提示；
-    
     let { value, prop } = e
 
     // 如果有 minMax 限制
