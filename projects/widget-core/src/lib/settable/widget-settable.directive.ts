@@ -2,7 +2,6 @@ import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, Elemen
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 import { LayoutConfig } from '../common/layout.interface';
 import { SettingService } from './setting.sevice';
-import { Log } from '../utils';
 
 @Directive({
     selector: '[appSettable]',
@@ -19,11 +18,12 @@ export class WidgetSettableDirective {
     @HostBinding('style') style: SafeStyle
     @HostBinding('class.selected')
     get selected () {
-        this.log.log("settableDirective::检查当前组件是否选中",this);
+        console.log("settableDirective::get selected::",this);
         return this == this.settingService.selectedSettable;
     }
     @HostBinding('class.hovering')
     get hovering () {
+        console.log("settableDirective::get hovering::",this);
         return this == this.settingService.hoveringSettable;
     }
 
@@ -34,8 +34,7 @@ export class WidgetSettableDirective {
         @SkipSelf() @Optional() public parent: WidgetSettableDirective,
         public elementRef: ElementRef,
         private sanitizer: DomSanitizer,
-        private settingService: SettingService,
-        private log:Log
+        private settingService: SettingService
         // @Optional() public widget: WidgetContainerComponent
     ) {
         this.settingService.onChangeConfig$.subscribe(c => this.handleChangeConfig(c))
