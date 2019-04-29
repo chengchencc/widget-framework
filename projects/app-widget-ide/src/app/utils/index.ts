@@ -102,17 +102,7 @@ export interface StyleProp {
                 'center',
                 'baseline',
                 'stretch']
-            }, {
-              name: 'justifyContent',
-              type: StylePropType.LongEnum,
-              EnumValues: [
-                'normal',
-                'flex-start',
-                'flex-end',
-                'center',
-                'space-between',
-                'space-around']
-            },
+            }
           ]
         },
         {
@@ -144,7 +134,35 @@ export interface StyleProp {
           type: StylePropType.ShortEnum,
           EnumValues: ['none', 'left', 'right'],
           EnumIcons: ['close', 'arrow_backward', 'arrow_forward']
-        },
+        }, {
+          name: 'order',
+          type: StylePropType.ScopedNumberWithoutUnit,
+        }, {
+          name: 'flexGrow',
+          type: StylePropType.ScopedNumberWithoutUnit,
+          min: 0,
+        }, {
+          name: 'flexShrink',
+          type: StylePropType.ScopedNumberWithoutUnit,
+          min: 0,
+        }, {
+          name: 'flexBasis',
+          type: StylePropType.Number,
+          min: 0,
+        }, {
+          name: 'flex',
+          type: StylePropType.Text,
+        }, {
+          name: 'alignSelf',
+          type: StylePropType.LongEnum,
+          EnumValues: [
+            'auto',
+            'flex-start',
+            'flex-end',
+            'center',
+            'baseline',
+            'stretch']
+        }
       ]
     }, {
       name: '尺寸',
