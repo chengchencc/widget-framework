@@ -89,7 +89,8 @@ export class WidgetSettableDirective {
     selectParent(event: MouseEvent) {
         console.log("settabledirective::", event);
         if (this.parent) {
-            this.parent.select(event);
+            // this.parent.select(event);
+            this.settingService.selectSettable(this.parent)
         }
     }
 

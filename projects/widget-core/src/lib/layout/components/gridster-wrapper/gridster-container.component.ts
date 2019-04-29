@@ -12,6 +12,7 @@ import { GridsterConfig, GridType, CompactType, DisplayGrid } from '../../../gri
 import { GridsterComponent } from '../../../gridster/gridster.component';
 import { GridsterComponentInterface } from '../../../gridster/gridster.interface';
 import { WidgetLoaderManifest } from '../../../common/widget.interface';
+import { SettingService } from '../../../settable/setting.sevice';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class GridsterContainerComponent implements OnInit {
   private gridster: GridsterComponentInterface;
 
   constructor(@Optional() private settable: WidgetSettableDirective,
+    private settingService: SettingService,
     private dndService: DroppableService,
     private elementRef:ElementRef
   ) { }
@@ -73,7 +75,8 @@ export class GridsterContainerComponent implements OnInit {
     if (this.settable && this.settable.parent) {
       //this._parent.select(event);
       console.log(this.settable);
-      this.settable.parent.select(event);
+      // this.settable.parent.select(event);
+      this.settingService.selectSettable(this.settable)
     }
   }
 

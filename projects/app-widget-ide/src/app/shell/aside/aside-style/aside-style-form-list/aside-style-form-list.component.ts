@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, StylePropType, camel2Joiner, getRegExpInValue, getValue } from '../../../../utils';
+import { ConfigStyle } from 'projects/widget-core/src/lib/common/layout.interface';
 
 @Component({
   selector: 'aside-style-form-list',
@@ -10,7 +11,7 @@ import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, 
 export class AsideStyleFormListComponent implements OnInit {
 
   @Input() propList: (StyleProp | stylePropsContainer)[]
-  @Input() configStyle: CSSStyleDeclaration
+  @Input() configStyle: ConfigStyle
   @Input() computedStyles: CSSStyleDeclaration
 
   @Output() onChangeValue = new EventEmitter<{ value: string, prop: StyleProp }>()
