@@ -92,11 +92,11 @@ export class WidgetSettableDirective {
     }
     //选择上级
     selectParent(event: MouseEvent) {
-        console.log("settabledirective::", event);
+        event.stopPropagation()
         if (this.parent) {
-            // this.parent.select(event);
             this.settingService.selectSettable(this.parent)
         }
+        console.log("settabledirective::", event);
     }
 
     openModalWithComponent(callback: any) {
