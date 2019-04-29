@@ -1,5 +1,9 @@
-<widget-layout [config]="layoutConfig" 
+<widget-layout *ngIf="layoutConfig" [config]="layoutConfig" 
   appDropzone
   appSettable
   (onDragDrop)="layoutService.move($event,layoutConfig)">
 </widget-layout>
+
+<div *ngIf="!layoutConfig">
+  正在加载页面配置
+</div>

@@ -8,7 +8,7 @@ export interface LayoutConfig extends ISettable {
     id:string,
     path?:string,
     parent?:LayoutConfig,
-    layout:(LayoutConfig)[],
+    layout:LayoutConfig[],
     type:'body'|'div'|'grid'|'group'|'widget',
     pathArray?:string[],
     content?:WidgetInfo|GridsterItem|any
