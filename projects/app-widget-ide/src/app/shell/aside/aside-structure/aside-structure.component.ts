@@ -16,6 +16,7 @@ export class AsideStructureComponent implements OnInit {
   constructor(private layoutService:LayoutService,
     private settingService: SettingService) {
     this.layoutConfig = this.layoutService.layoutConfig;
+    console.log("===================",this.layoutService);
     this.settingService.onSelectSettableItem$.subscribe(s => this.handleSelectSettableItem(s));
   }
 

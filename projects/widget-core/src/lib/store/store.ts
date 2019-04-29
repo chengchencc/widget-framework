@@ -1,7 +1,8 @@
 import { InjectionToken, Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { WidgetLoaderManifest } from '../common/widget.interface';
+import { Page } from '../page/page.interface';
 
 export interface StoreInterface {
     whoAmI(): string;
@@ -49,6 +50,19 @@ export class Store implements StoreInterface {
 
     loadWidgetLoaderManifest():Observable<WidgetLoaderManifest[]>{
         return this.http.get<WidgetLoaderManifest[]>(Widget_Manifest_Url);
+    }
+
+    /**
+     * 加载页面配置信息
+     * @param id pageId
+     */
+    loadPageById(id:string):Observable<Page>{
+        return of(JSON.parse(localStorage.getItem(Page_Layout_Config+"|"+id))); //this.http.get<Page>("");
+    }
+
+    savePage(id:string,pageInfoString:string):Observable<string>{
+        localStorage.setItem(Page_Layout_Config+"|"+id,pageInfoString);
+        return of(id);
     }
 
 } 

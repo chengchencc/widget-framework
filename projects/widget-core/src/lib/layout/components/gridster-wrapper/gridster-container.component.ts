@@ -40,14 +40,14 @@ export class GridsterContainerComponent implements OnInit {
 
 
   public get options(): GridsterConfig {
+    //TODO:需要优化性能
+    return Object.assign({},gridDefaultSettings,this.config.settings);
 
-    // return Object.assign({},gridDefaultSettings,this.config.settings);
+    // if(!this.config.settings){
+    //   this.config.settings = deepClone(gridDefaultSettings);
+    // }
 
-    if(!this.config.settings){
-      this.config.settings = deepClone(gridDefaultSettings);
-    }
-
-    return this.config.settings;
+    // return this.config.settings;
   }
 
   public get gridItems(): GridsterItem[] {
@@ -66,15 +66,6 @@ export class GridsterContainerComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.gridster);
-  }
-
-  //选择上级
-  selectParent(event: MouseEvent) {
-    if (this.settable && this.settable.parent) {
-      //this._parent.select(event);
-      console.log(this.settable);
-      this.settable.parent.select(event);
-    }
   }
 
   onDrop(event:WidgetDragEvent){

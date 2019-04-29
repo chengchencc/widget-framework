@@ -10,21 +10,16 @@ import { GridsterItem } from '../gridster/gridsterItem.interface';
 import { LayoutConfig,LayoutTemplate } from './layout.interface';
 import { WidgetLoaderManifest } from './widget.interface';
 import { DefaultLayoutTemplates, DefaultLayout } from './layout-default';
+import { Log } from '../utils';
 
 
 
 @Injectable()
 export class LayoutService {
-
-  //布局选中事件
-  onLayoutActived$: Observable<LayoutComponent>;
-  private layoutSelectedSubject = new Subject<LayoutComponent>();
-
-  //当前选中的布局配置信息改变事件
-  onActivedLayoutSettingsChanged$: Observable<any>;
-  private activedLayoutSettingsChangeSubject = new Subject<any>();
-
   self: LayoutService = this;
+
+  onLayoutChanged$: Observable<LayoutConfig>
+  private onlayoutChangedSubject = new Subject<LayoutConfig>();
 
   //布局配置信息
   layoutConfig: LayoutConfig;
@@ -37,16 +32,19 @@ export class LayoutService {
   //默认布局
   defaultLayout: LayoutConfig = DefaultLayout;
 
-  constructor(private store: Store) {
-    this.layoutConfig = this.load();
-    console.log("first loaded layout config...", this.layoutConfig);
-    this.loadLayoutTemplates();
-    this.onLayoutActived$ = this.layoutSelectedSubject.asObservable();
+  constructor(private store: Store,private log:Log) {
+    log.log("layoutService :: initial.");
+    
+    this.onLayoutChanged$ = this.onlayoutChangedSubject.asObservable();
 
-    this.onActivedLayoutSettingsChanged$ = this.activedLayoutSettingsChangeSubject.asObservable();
+    // this.layoutConfig = this.load();
+    // this.loadLayoutTemplates();
+  }
 
-    // this.onSelectSettableItem$ = this.onSelectSettableItemSubject.asObservable();
-    // this.onWidgetActived$ = this.widgetActivedSubject.asObservable();
+
+  setLayout(layout:LayoutConfig){
+    this.layoutConfig = layout;
+    this.onlayoutChangedSubject.next(this.layoutConfig);
   }
 
   /**
@@ -176,24 +174,6 @@ export class LayoutService {
       : _.reduce(obj, (cum, next, key) => _.merge(cum, this.flattenKeys(next, [...path, key])), {});
 
   /**
-   * 当布局被选中后，激活的事件
-   * @param component 
-   */
-  activeLayout(component: LayoutComponent) {
-    this.activedLayout = component;
-    this.layoutSelectedSubject.next(component);
-  }
-
-  /**
-   * 选中可设置项
-   * @param item settable item
-   */
-  // selectSettable(item:WidgetSettableDirective){
-  //   this.selectedSettableItem = item;
-  //   this.onSelectSettableItemSubject.next(item);
-  // } 
-
-  /**
    * 保存页面配置信息
    */
   save() {
@@ -216,8 +196,11 @@ export class LayoutService {
       return this.defaultLayout;
     }
   }
-  //模板相关
 
+
+
+
+  //模板相关
   addLayoutTemplate = (tpl: LayoutTemplate) => {
     this.customLayoutTemplates.push(tpl);
     this.saveLayoutTemplate();
