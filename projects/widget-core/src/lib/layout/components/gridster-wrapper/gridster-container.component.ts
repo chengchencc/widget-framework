@@ -70,8 +70,6 @@ export class GridsterContainerComponent implements OnInit {
     console.log(this.gridster);
   }
 
-<<<<<<< HEAD
-=======
   //选择上级
   selectParent(event: MouseEvent) {
     if (this.settable && this.settable.parent) {
@@ -82,7 +80,6 @@ export class GridsterContainerComponent implements OnInit {
     }
   }
 
->>>>>>> ef8d1d3071b86455b93be3e8e757ba8fc71d23ff
   onDrop(event:WidgetDragEvent){
     console.log("onDrop::",event);
     
