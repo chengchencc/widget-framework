@@ -13,13 +13,15 @@ export class AsideStructureComponent implements OnInit {
   layoutConfig: LayoutConfig;
   selectedItem: WidgetSettableDirective
 
-  constructor(private layoutService:LayoutService,
-    public settingService: SettingService) {
-    this.layoutConfig = this.layoutService.layoutConfig;
-    // this.settingService.onSelectSettableItem$.subscribe(s => this.handleSelectSettableItem(s));
-  }
+  constructor(private layoutService: LayoutService,
+    public settingService: SettingService) {  }
 
   ngOnInit() {
+    this.layoutService.onLayoutChanged$.subscribe(s => {
+      setTimeout(() => {
+        this.layoutConfig = s;
+      });
+    })
   }
 
   // handleSelectSettableItem (item: WidgetSettableDirective) {
@@ -75,29 +77,29 @@ export class AsideStructureTreeComponent implements OnInit {
   ngOnInit() {
   }
 
-  icon (config) {
+  icon(config) {
     return typeIconMap[config.type]
   }
   /** 当点击收起/展开 */
-  handleToggleCollapse () {
-    this.collapsed = !this.collapsed
+  handleToggleCollapse() {
+    this.collapsed = !this.collapsed;
   }
-  handleClickNode () {
-    this.settingService.selectSettable(this.config.id)
+  handleClickNode() {
+    this.settingService.selectSettable(this.config.id);
   }
-  handleHoverNode () {
-    this.settingService.enterSettable(this.config.id)
+  handleHoverNode() {
+    this.settingService.enterSettable(this.config.id);
   }
-  handleLeaveNode () {
-    this.settingService.leaveSettable()
+  handleLeaveNode() {
+    this.settingService.leaveSettable();
   }
-  active () {
-    let { selectedSettable } = this.settingService
-    return selectedSettable && selectedSettable.config.id==this.config.id
+  active() {
+    let { selectedSettable } = this.settingService;
+    return selectedSettable && selectedSettable.config.id == this.config.id;
   }
-  hovering () {
-    let { hoveringSettable } = this.settingService
-    return hoveringSettable && hoveringSettable.config.id==this.config.id
+  hovering() {
+    let { hoveringSettable } = this.settingService;
+    return hoveringSettable && hoveringSettable.config.id == this.config.id;
   }
 
 }

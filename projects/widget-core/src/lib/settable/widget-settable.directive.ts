@@ -2,6 +2,7 @@ import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, Elemen
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 import { LayoutConfig } from '../common/layout.interface';
 import { SettingService } from './setting.sevice';
+import { Log } from '../utils';
 
 @Directive({
     selector: '[appSettable]',
@@ -18,11 +19,12 @@ export class WidgetSettableDirective {
     @HostBinding('style') style: SafeStyle
     @HostBinding('class.selected')
     get selected () {
-        return this == this.settingService.selectedSettable
+        this.log.log("settableDirective::检查当前组件是否选中",this);
+        return this == this.settingService.selectedSettable;
     }
     @HostBinding('class.hovering')
     get hovering () {
-        return this == this.settingService.hoveringSettable
+        return this == this.settingService.hoveringSettable;
     }
 
     _classes: string[] = [];
@@ -32,7 +34,8 @@ export class WidgetSettableDirective {
         @SkipSelf() @Optional() public parent: WidgetSettableDirective,
         public elementRef: ElementRef,
         private sanitizer: DomSanitizer,
-        private settingService: SettingService
+        private settingService: SettingService,
+        private log:Log
         // @Optional() public widget: WidgetContainerComponent
     ) {
         this.settingService.onChangeConfig$.subscribe(c => this.handleChangeConfig(c))
@@ -53,11 +56,13 @@ export class WidgetSettableDirective {
 
         this.settingService.selectSettable(this);
     }
-    @HostListener('mouseenter')
+    //TODO:mouse事件会导致angular频繁变化检查，暂时先去掉
+    // @HostListener('mouseenter')
     handleEnter () {
         this.settingService.enterSettable(this)
     }
-    @HostListener('mouseleave')
+    //TODO:mouse事件会导致angular频繁变化检查，暂时先去掉
+    // @HostListener('mouseleave')
     handleLeave () {
         this.settingService.leaveSettable()
     }

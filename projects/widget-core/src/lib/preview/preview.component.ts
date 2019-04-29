@@ -33,14 +33,18 @@ export class PreviewComponent implements OnInit {
 
   @Input()
   public set pageId(v: string) {
-    this.pageService.loadPage(v).subscribe((page) => {
-      if(page){
-        this.pageInfo = page;
-      }else{
-        this.pageInfo = this.initialNewPageInfo(); 
-      }
-      this.pageInfo = page;
-    })
+    //通过异步更新的方式，防止angular二次变化监测报错问题 。参考：https://juejin.im/entry/59f0cc8a6fb9a0452935f979
+    setTimeout(() => {
+      this.pageService.loadPage(v).subscribe((page) => {
+        if(page){
+          this.pageInfo = page;
+        }else{
+          this.pageInfo = this.initialNewPageInfo(); 
+        }
+      })
+    }, 0);
+
+
   }
 
   public get layoutConfig(): LayoutConfig {
