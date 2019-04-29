@@ -13,11 +13,12 @@
       </widget-container>
     </gridster-item>
   </ng-container>
+  <div class="setting-tool">
+    <button type="button" class="btn btn-dark btn-sm">{{config.id}}</button>
+    <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.selectParent($event)">parent</button>
+    <button type="button" class="btn btn-dark btn-sm">setting</button>
+    <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.removeSelf()">remove</button>
+    <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.saveAsTemplate()">saveAsNewTpl</button>
+  </div>
 </gridster>
-<div class="setting-tool">
-  <button type="button" class="btn btn-dark btn-sm">{{config.id}}</button>
-  <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.selectParent($event)">parent</button>
-  <button type="button" class="btn btn-dark btn-sm">setting</button>
-  <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.removeSelf()">remove</button>
-  <button type="button" class="btn btn-dark btn-sm" (click)="settableItem.saveAsTemplate()">saveAsNewTpl</button>
-</div>
+
