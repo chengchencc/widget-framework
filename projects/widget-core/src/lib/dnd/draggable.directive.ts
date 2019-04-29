@@ -1,8 +1,8 @@
-import { Directive, EventEmitter, HostBinding, HostListener, Output, ElementRef, Input, NgZone } from '@angular/core';
+import { Directive, EventEmitter, HostBinding, HostListener, Output, ElementRef, Input, NgZone, Renderer2 } from '@angular/core';
 import { WidgetDragEvent } from './draggable-model';
 
 @Directive({
-  selector: '[appDraggable],[appDroppable]'
+  selector: '[appDraggable]'
 })
 export class DraggableDirective {
 
@@ -18,7 +18,11 @@ export class DraggableDirective {
 
   pointerId?: number;
 
-  constructor(public element: ElementRef) {}
+  pointerMoveRemoveListener:any;
+  pointerUpRemoveListener:any;
+  // pointerMoveHandler=this.onPointerDown.bind(this);
+
+  constructor(public element: ElementRef,private _ngZone:NgZone,public renderer: Renderer2) {}
 
   @HostListener('pointerdown', ['$event'])
   onPointerDown (event: PointerEvent): void {
@@ -30,21 +34,28 @@ export class DraggableDirective {
     this.dragging = true;
     this.dragStart.emit({event:event,data:this.passData});
     // 注册 move 事件
-    // this.zone.runOutsideAngular(() => {//TODO: 会导致 dropzone 那边的 drppableService 不发送 dragMove 事件
-      document.addEventListener('pointermove', this.onPointerMove)
-    // })
+    this._ngZone.runOutsideAngular(() => {//会导致 dropzone 那边的 drppableService 不发送 dragMove 事件
+     this.pointerMoveRemoveListener = this.renderer.listen('document', 'pointermove', this.onPointerMove.bind(this));
+    });
+
+    this.pointerUpRemoveListener = this.renderer.listen('document','pointerup',this.onPointerUp.bind(this));
   }
 
   // added after YouTube video: pointercancel
-  @HostListener('document:pointercancel', ['$event'])
-  @HostListener('document:pointerup', ['$event'])
+  // @HostListener('document:pointercancel', ['$event'])
+  // @HostListener('document:pointerup', ['$event'])
   onPointerUp (event: PointerEvent): void {
     if (!this.dragging || event.pointerId !== this.pointerId) {
       return;
     }
+    
+    console.log(DraggableDirective.name," :: onPointerUp :: ",this.pointerId);
+
     this.dragging = false;
     this.dragEnd.emit({event:event,data:this.passData});
-    document.removeEventListener('pointermove', this.onPointerMove)
+    //移除事件注册
+    this.pointerMoveRemoveListener();
+    this.pointerUpRemoveListener();
   }
 
   onPointerMove = (event: PointerEvent) => {

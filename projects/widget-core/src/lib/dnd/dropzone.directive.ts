@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, OnInit, Output, SkipSelf, ViewChildren, QueryList, ContentChildren, ViewChild, ViewContainerRef, ComponentFactoryResolver, ContentChild, AfterContentInit, AfterViewInit, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, OnInit, Output, SkipSelf, ViewChildren, QueryList, ContentChildren, ViewChild, ViewContainerRef, ComponentFactoryResolver, ContentChild, AfterContentInit, AfterViewInit, Input, ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { DroppableService } from './droppable.service';
 import { WidgetDragEvent } from './draggable-model';
 
@@ -24,7 +24,9 @@ export class DropzoneDirective implements OnInit,AfterContentInit,AfterViewInit 
 
   constructor(
     private droppableService: DroppableService,
-    private element: ElementRef
+    private element: ElementRef,
+    private _changeDetectRef:ChangeDetectorRef,
+    private renderer:Renderer2
     ) { }
 
   ngOnInit(): void {
@@ -53,7 +55,9 @@ export class DropzoneDirective implements OnInit,AfterContentInit,AfterViewInit 
       return;
     }
     this.entered = true;
+    this.renderer.addClass(this.element.nativeElement,"dropzone-entered");
     this.onDragOver.emit(event);
+    // this._changeDetectRef.detectChanges();
   }
 
   private dragLeave(event:WidgetDragEvent): void {
@@ -62,15 +66,20 @@ export class DropzoneDirective implements OnInit,AfterContentInit,AfterViewInit 
     }
 
     this.entered = false;
+    this.renderer.removeClass(this.element.nativeElement,"dropzone-entered");
     this.onDragLeave.emit(event);
+    // this._changeDetectRef.detectChanges();
   }
 
   private dragStart(event: WidgetDragEvent): void {
     this.activated = true;
-    //延迟绑定，防止clientRact计算不准的情况。
-    setTimeout(() => {
+    this.renderer.addClass(this.element.nativeElement,"dropzone-activated");
+
+    //因为设置拖拽时，容器自动增加padding方便拖入，故延迟绑定，防止clientRact计算不准的情况。
+    // setTimeout(() => {
       this.clientRect = this.element.nativeElement.getBoundingClientRect();
-    }, 0);
+    // }, 0);
+    // this._changeDetectRef.detectChanges();
   }
 
   private dragEnd(event: WidgetDragEvent): void {
@@ -78,21 +87,14 @@ export class DropzoneDirective implements OnInit,AfterContentInit,AfterViewInit 
       return;
     }
     if (this.entered && this.isClosed(event)) {
-      //  this.append(event);
-      // event.data = this;
-      // event.dropzone = this;
        this.onDragDrop.emit(event);
     }
 
     this.activated = false;
     this.entered = false;
-  }
-
-  private isEventInside(event: WidgetDragEvent) {
-    return event.event.clientX >= this.clientRect.left &&
-    event.event.clientX <= this.clientRect.right &&
-    event.event.clientY >= this.clientRect.top &&
-    event.event.clientY <= this.clientRect.bottom;
+    this.renderer.removeClass(this.element.nativeElement,"dropzone-entered");
+    this.renderer.removeClass(this.element.nativeElement,"dropzone-activated");
+    // this._changeDetectRef.detectChanges();
   }
 
   private isClosed(event:WidgetDragEvent){

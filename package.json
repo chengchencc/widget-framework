@@ -8,8 +8,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "start:eg": "ng serve examples",
-        "start:rt": "ng serve app-widget-runtime",
+        "a:eg": "ng serve examples",
+        "a:rt": "ng serve app-widget-runtime",
         "build:core": "ng build widget-core",
         "build:ide": "ng build widget-ide"
     },

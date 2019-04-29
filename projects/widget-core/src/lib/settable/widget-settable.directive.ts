@@ -18,14 +18,15 @@ export class WidgetSettableDirective {
     @HostBinding('style') style: SafeStyle
     @HostBinding('class.selected')
     get selected () {
-        console.log("settableDirective::get selected::",this);
+        console.log("settableDirective::get selected::",this,this.config.id);
         return this == this.settingService.selectedSettable;
     }
-    @HostBinding('class.hovering')
-    get hovering () {
-        console.log("settableDirective::get hovering::",this);
-        return this == this.settingService.hoveringSettable;
-    }
+    //TODO:考虑到性能问题，暂时先不增加hover事件监听
+    // @HostBinding('class.hovering')
+    // get hovering () {
+    //     console.log("settableDirective::get hovering::",this);
+    //     return this == this.settingService.hoveringSettable;
+    // }
 
     _classes: string[] = [];
     // selected: boolean = false;

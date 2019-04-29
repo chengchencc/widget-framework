@@ -34,16 +34,6 @@ export class DroppableService {
     this.dragStartSubject.next(event);
   }
   onDragMove(event: WidgetDragEvent): void {
-
-//TODO:需要考虑性能优化。网上找的方法，貌似不太管用，可能放的位置不对。移动完元素之后，延迟一段时间
-// let move = document.onmousemove;
-// document.onmousemove = null;
-// setTimeout(function(){
-//   document.onmousemove = move;
-// },30);
-
-    console.log("moving============");
-
     this.closedDirective = this.getClosedDirective(event);
     this.dragMoveSubject.next(event);
   }
@@ -55,7 +45,7 @@ export class DroppableService {
     let closedDirective:Distance = null;
     const distances = this.dropzoneDirectiveInstance.map((current) => {
       let e = event.event;
-      if (this.isInside(e, current.clientRect)) {
+      if (this._isPointerInsideClientRect(e, current.clientRect)) {
         if(!closedDirective){
           closedDirective = {
             directive: current,
@@ -85,15 +75,10 @@ export class DroppableService {
       + (clientRect.bottom - event.clientY);
   }
 
-
-  private isInside(event: PointerEvent, clientRect: ClientRect) {
-
-    console.log(clientRect);
-
-    return event.clientX >= clientRect.left &&
-      event.clientX <= clientRect.right &&
-      event.clientY >= clientRect.top &&
-      event.clientY <= clientRect.bottom;
+  private _isPointerInsideClientRect(event: PointerEvent, clientRect: ClientRect) {
+    console.log(DroppableService.name+" :: _isPointerInsideClientRect :: ",clientRect);
+    const {left,right,top,bottom}=clientRect;
+    return event.clientX >= left && event.clientX <= right && event.clientY >= top && event.clientY <= bottom;
   }
 
 

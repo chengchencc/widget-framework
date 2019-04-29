@@ -17,7 +17,7 @@ export class DroppableDirective {
 
   @HostListener('dragMove', ['$event'])
   onDragMove(event: WidgetDragEvent): void {
-    // console.log("dropable---move");
+    console.log("dropable---move");
     this.droppableService.onDragMove(event);
   }
 
