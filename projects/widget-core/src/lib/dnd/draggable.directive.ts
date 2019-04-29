@@ -18,7 +18,7 @@ export class DraggableDirective {
 
   pointerId?: number;
 
-  constructor(public element: ElementRef, private zone: NgZone) {}
+  constructor(public element: ElementRef) {}
 
   @HostListener('pointerdown', ['$event'])
   onPointerDown (event: PointerEvent): void {

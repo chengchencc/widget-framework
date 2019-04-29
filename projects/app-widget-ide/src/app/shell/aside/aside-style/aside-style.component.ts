@@ -34,14 +34,13 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
   StylePropType = StylePropType
   styleProps = styleProps
 
-  config: any;
-  path: string[];
-  itemConfig: { [key: string]: any } = null
-  computedStyles: CSSStyleDeclaration = null
+  // path: string[];
+  // itemConfig: { [key: string]: any } = null
+  // computedStyles: CSSStyleDeclaration = null
 
-  constructor(private settingService: SettingService) {    
+  constructor(public settingService: SettingService) {    
     //TODO:取消注释
-    this.settingService.onSelectSettableItem$.subscribe(s=>this.selectSettableItem(s));
+    // this.settingService.onSelectSettableItem$.subscribe(s=>this.selectSettableItem(s));
   }
 
   ngOnInit() {
@@ -52,13 +51,16 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     // this.getStyle();
   }
 
-  selectSettableItem(item: WidgetSettableDirective) {
-    if (item) {
-      item.config.style = item.config.style || {}
-      this.itemConfig = item.config
-      this.computedStyles = getComputedStyle(item.elementRef.nativeElement)
-      this.path = item.getPath()
-    }
+  // selectSettableItem(item: WidgetSettableDirective) {
+  //   if (item) {
+  //     item.config.style = item.config.style || {}
+  //     this.itemConfig = item.config
+  //     this.computedStyles = getComputedStyle(item.elementRef.nativeElement)
+  //     this.path = item.getPath()
+  //   }
+  // }
+  computedStyle() {
+    return getComputedStyle(this.settingService.selectedSettable.elementRef.nativeElement)
   }
 
   /**
@@ -67,6 +69,9 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
   handleChangeValue(e: { value: string|number, prop: StyleProp }) {
     //TODO: 文本验证，错误给出提示；
     let { value, prop } = e
+    let { config, elementRef } = this.settingService.selectedSettable
+
+    let computedStyle = this.computedStyle()
 
     // 如果有 minMax 限制
     if(prop.min!=undefined || prop.max!=undefined) {
@@ -82,8 +87,8 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     if(prop.type==StylePropType.Number) {
       value = String(value) //转成字符串后面再比较 省的把 0 当空串
       // 先取出老值 老单位
-      let oldV = getRegExpInValue(prop.name, NUM_REGEXP, this.itemConfig.style, this.computedStyles)
-      let oldU = getRegExpInValue(prop.name, UNIT_REGEXP, this.itemConfig.style, this.computedStyles)
+      let oldV = getRegExpInValue(prop.name, NUM_REGEXP, config.style, computedStyle)
+      let oldU = getRegExpInValue(prop.name, UNIT_REGEXP, config.style, computedStyle)
       // 如果改成了空值，那改的不是 unit 而是数字，就让结果为 auto
       if (value!='0' && value=='' || value==undefined) {
         value = 'auto'
@@ -102,9 +107,10 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
       }
     }
 
-    this.itemConfig.style[camel2Joiner(prop.name)] = value
+    if(!config.style) config.style = {}
+    config.style[camel2Joiner(prop.name)] = <string>value
     /** 告知 setting.service -> settable.dir config 变了 */
-    this.settingService.changeConfig(this.itemConfig)
+    this.settingService.changeConfig(config)
   }
 
 }

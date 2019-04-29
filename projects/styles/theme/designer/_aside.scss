@@ -242,11 +242,11 @@
         .node {
             font-size: 12px;
             cursor: pointer;
-            padding: 5px 0;
+            padding: 4px 0;
             padding-left: 1000px;
             opacity: 1;
             margin-left: -1000px;
-            &:hover {
+            &:hover, &.hovering {
                 background: scale-color($dsn-brand-color, $alpha: -20);
             }
             &.active {
@@ -269,7 +269,7 @@
                 }
                 &.type {
                     opacity: .8;
-                    font-size: 16px;
+                    font-size: 15px;
                     vertical-align: middle;
                 }
             }

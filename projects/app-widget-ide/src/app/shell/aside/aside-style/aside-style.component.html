@@ -1,11 +1,13 @@
 
-<p *ngIf="!itemConfig" class="no-selection-tip">请选择布局或部件</p>
+<p *ngIf="!settingService.selectedSettable" class="no-selection-tip">请选择布局或部件</p>
 
-<div class="setting-container" *ngIf="itemConfig">
+<div class="setting-container" *ngIf="settingService.selectedSettable">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-dark">
-      <li class="breadcrumb-item" *ngFor="let item of path; let i=index;" [class.active]=" i == path.length"><a
-          href="#">{{item}}</a></li>
+      <li *ngFor="let item of settingService.selectedSettable.getPath(); let i=index;"
+        [class.active]="i == settingService.selectedSettable.getPath().length"
+        class="breadcrumb-item" >
+        <a href="#">{{item}}</a></li>
     </ol>
   </nav>
 
@@ -17,7 +19,7 @@
         autofocus
         name="classes"
         [multiple]="true"
-        [(ngModel)]="itemConfig['classes']" >
+        [(ngModel)]="settingService.selectedSettable.config['classes']" >
       </ng-select>
       <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
     </div>
@@ -28,8 +30,8 @@
         [isOpen]="true" >
         <aside-style-form-list
           [propList]='category.styleProps'
-          [itemConfigStyles]="itemConfig.style"
-          [computedStyles]="computedStyles"
+          [configStyle]="settingService.selectedSettable.config.style"
+          [computedStyles]="computedStyle()"
           (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
       </accordion-group>
     </accordion>

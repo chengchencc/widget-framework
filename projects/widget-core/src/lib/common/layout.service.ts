@@ -11,8 +11,6 @@ import { LayoutConfig,LayoutTemplate } from './layout.interface';
 import { WidgetLoaderManifest } from './widget.interface';
 import { DefaultLayoutTemplates, DefaultLayout } from './layout-default';
 
-
-
 @Injectable()
 export class LayoutService {
 
