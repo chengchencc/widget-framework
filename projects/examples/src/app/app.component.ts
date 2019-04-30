@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'examples';
+  setting={
+    name:"成晨",
+    age:23,
+    enable:true,
+    style:{
+      id:1
+    }
+  }
+
+  addAge(){
+    this.setting.style.id++;
+  }
+
 }

@@ -21,8 +21,6 @@ export class LayoutService {
 
   //布局配置信息
   layoutConfig: LayoutConfig;
-  //当前激活选中的布局
-  activedLayout: LayoutComponent;
   //系统布局模板
   layoutTemplates: LayoutTemplate[] = DefaultLayoutTemplates;
   //自定义布局模板
@@ -30,8 +28,8 @@ export class LayoutService {
   //默认布局
   defaultLayout: LayoutConfig = DefaultLayout;
 
-  constructor(private store: Store,private log:Log) {
-    log.log("layoutService :: initial.");
+  constructor(private store: Store) {
+    console.log("layoutService :: initial.");
     
     this.onLayoutChanged$ = this.onlayoutChangedSubject.asObservable();
 

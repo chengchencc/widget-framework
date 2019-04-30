@@ -2,6 +2,9 @@ import { Injectable, Injector, Inject } from '@angular/core';
 import { Widget_Core_Config_Token, WidgetCoreConfig } from '../core.config';
 import { Store } from '../store/store';
 
+/**
+ * 需要明确page service的职责
+ */
 @Injectable()
 export class PageService {
 

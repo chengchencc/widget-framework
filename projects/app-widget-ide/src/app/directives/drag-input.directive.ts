@@ -26,8 +26,9 @@ export class DragInputDirective {
 
   constructor(private el: ElementRef, private zone: NgZone) {
     this.zone.runOutsideAngular(() => {
-      document.addEventListener('pointerup', this.endDrag)
-      document.addEventListener('pointercancel', this.endDrag)
+    //TODO:性能原因，暂时考虑先把配置项拖动调整去掉2019.04.30
+      // document.addEventListener('pointerup', this.endDrag)
+      // document.addEventListener('pointercancel', this.endDrag)
     })
   }
 
@@ -37,7 +38,7 @@ export class DragInputDirective {
     })
   }
 
-  @HostListener('pointerdown', [`$event`])
+  //@HostListener('pointerdown', [`$event`])
   onMouseDown = e => {
     // 取出其中的数字
     let match = String(this.modal).match(NUM_REGEXP)
@@ -46,8 +47,9 @@ export class DragInputDirective {
 
     this._downV = v
     this._downModal = match ? parseInt(match[0]) : 0 // 如果没有数字，当作 0 处理
+    //TODO:性能原因，暂时考虑先把配置项拖动调整去掉2019.04.30
     // this.zone.runOutsideAngular(() => {
-      document.addEventListener('pointermove', this.onMouseMove)
+      // document.addEventListener('pointermove', this.onMouseMove)
     // })
   }
   onMouseMove = e => {
@@ -59,6 +61,7 @@ export class DragInputDirective {
     this.changeValue.emit(result)
   }
   endDrag = () => {
-    document.removeEventListener('pointermove', this.onMouseMove)
+    //TODO:性能原因，暂时考虑先把配置项拖动调整去掉2019.04.30
+    // document.removeEventListener('pointermove', this.onMouseMove)
   }
 }

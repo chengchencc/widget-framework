@@ -1,4 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +11,8 @@ import { WidgetIdeModule } from './shell/widget-ide.module';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    // BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     WidgetIdeModule
   ],

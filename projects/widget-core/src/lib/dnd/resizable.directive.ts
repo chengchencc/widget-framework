@@ -16,7 +16,7 @@ export class ResizableDirective {
   constructor(public element: ElementRef) {
   }
 
-  @HostListener('pointerdown', ['$event'])
+  // @HostListener('pointerdown', ['$event'])
   onPointerDown(event: PointerEvent): void {
     this.clientRect = this.element.nativeElement.getBoundingClientRect();
 
@@ -38,15 +38,15 @@ export class ResizableDirective {
     // this.dragStart.emit({event:event,data:this.passData});
   }
 
-  @HostListener('document:pointermove', ['$event'])
+  // @HostListener('document:pointermove', ['$event'])
   onPointerMove(event: PointerEvent): void {
     if (!this.resizing) return;
     console.log(event);
     this.element.nativeElement.style.width = event.x + 'px';
   }
 
-  @HostListener('document:pointercancel', ['$event'])
-  @HostListener('document:pointerup', ['$event'])
+  // @HostListener('document:pointercancel', ['$event'])
+  // @HostListener('document:pointerup', ['$event'])
   onPointerUp(event: PointerEvent): void {
     if (!this.resizing) return;
     this.resizing = false;
