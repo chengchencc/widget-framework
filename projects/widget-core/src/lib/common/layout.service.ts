@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { LayoutComponent } from '../layout/components/layout.component';
 import * as _ from 'lodash';
 import { WidgetDragEvent } from '../dnd/draggable-model';
 import { Store } from '../store/store';
-// import { WidgetSettableDirective } from '../settable/widget-settable.directive';
 import { GridType, CompactType, DisplayGrid } from '../gridster/gridsterConfig.interface';
 import { GridsterItem } from '../gridster/gridsterItem.interface';
 import { LayoutConfig,LayoutTemplate } from './layout.interface';
 import { WidgetLoaderManifest } from './widget.interface';
 import { DefaultLayoutTemplates, DefaultLayout } from './layout-default';
-import { Log } from '../utils';
 
 @Injectable()
 export class LayoutService {
@@ -29,8 +26,7 @@ export class LayoutService {
   defaultLayout: LayoutConfig = DefaultLayout;
 
   constructor(private store: Store) {
-    console.log("layoutService :: initial.");
-    
+    console.log("layoutService :: ctor.");
     this.onLayoutChanged$ = this.onlayoutChangedSubject.asObservable();
 
     // this.layoutConfig = this.load();
@@ -38,7 +34,8 @@ export class LayoutService {
   }
 
 
-  setLayout(layout:LayoutConfig){
+  initial(layout:LayoutConfig){
+    console.log("layoutService :: initial :: layoutConfig");
     this.layoutConfig = layout;
     this.onlayoutChangedSubject.next(this.layoutConfig);
   }
@@ -75,9 +72,7 @@ export class LayoutService {
    * @param parent 
    */
   move(event: WidgetDragEvent, parent: LayoutConfig) {
-
     console.log("layout service move ::", event);
-    console.log(typeof event.data);
     let droppedLayoutConfig: LayoutConfig;
     //拖动的是widget
     if (event.data.type === "widget") {
@@ -96,8 +91,6 @@ export class LayoutService {
       droppedLayoutConfig = d.layoutConfig;
     }
     this.append(parent, _.cloneDeep(droppedLayoutConfig));
-
-    // return;
   }
 
   /**
@@ -131,69 +124,6 @@ export class LayoutService {
     });
   }
 
-  /**
-   * 递归生成parent引用
-   */
-  _recursiveGenerateParent = (obj: LayoutConfig) => {
-    const parent = obj;
-    obj.layout.forEach((v, i) => {
-      if (!v) return null;
-      v.parent = parent;
-      this._recursiveGenerateParent(v);
-    })
-  }
-
-  /**
-   * 将LayoutConfig序列化为json，忽略掉parent
-   * @param obj LayoutConfig
-   */
-  _serializeLayout(obj: LayoutConfig | LayoutTemplate[]): string {
-    return JSON.stringify(obj, (key, value) => {
-      if (key === "parent") {
-        return undefined;
-      }
-      return value;
-    });
-  }
-
-  /**
-   * 反序列化为LayoutConfig
-   * @param layoutString string
-   */
-  _deserializeLayout(layoutString: string): LayoutConfig {
-    return JSON.parse(layoutString);
-  }
-
-  flattenKeys = (obj, path = []) =>
-    !_.isObject(obj)
-      ? { [path.join('.')]: obj }
-      : _.reduce(obj, (cum, next, key) => _.merge(cum, this.flattenKeys(next, [...path, key])), {});
-
-  /**
-   * 保存页面配置信息
-   */
-  save() {
-    console.log("saving...", this.layoutConfig);
-    var result = this._serializeLayout(this.layoutConfig);
-    console.log(result);
-    this.store.savePageLayoutConfig("pagename", result);
-  }
-  /**
-   * 第一次加载页面布局
-   */
-  load(): LayoutConfig {
-    const s = this.store.loadPageLayoutConfig("pagename");
-    if (s) {
-      var layout = this._deserializeLayout(s);
-      this._recursiveGenerateParent(layout);
-      return layout;
-    }
-    else {
-      return this.defaultLayout;
-    }
-  }
-
-
 
 
   //模板相关
@@ -203,7 +133,7 @@ export class LayoutService {
   }
 
   saveLayoutTemplate() {
-     this.store.saveCustomLayoutTemplate(this._serializeLayout(this.customLayoutTemplates));
+    //  this.store.saveCustomLayoutTemplate(this._serializeLayout(this.customLayoutTemplates));
   }
 
   loadLayoutTemplates = () => {
@@ -224,8 +154,4 @@ export class LayoutService {
     // this.activedLayoutSettingsChangeSubject.next(newValue);
   }
 
-
-  // activeWidget(widgetInfo:ModuleInfo){
-  //   this.widgetActivedSubject.next(widgetInfo);
-  // }
 }

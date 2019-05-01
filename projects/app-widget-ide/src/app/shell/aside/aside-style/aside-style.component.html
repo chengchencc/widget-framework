@@ -19,7 +19,9 @@
         autofocus
         name="classes"
         [multiple]="true"
-        [(ngModel)]="settingService.selectedSettable.config['classes']" >
+        [(ngModel)]="settingService.selectedSettable.config['classes']"
+        (change)="handleChangeClass($event)"
+        >
       </ng-select>
       <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
     </div>

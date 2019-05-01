@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +16,21 @@ export class AppComponent {
     }
   }
 
+  /**
+   *
+   */
+  constructor(private _ngZone:NgZone) {
+    
+    
+  }
+
   addAge(){
     this.setting.style.id++;
   }
-
+  ChangeNotRelateToChangeDetectionComponent(){
+    //this.title="aa";
+    this._ngZone.runOutsideAngular(()=>{
+      console.log("ChangeNotRelateToChangeDetectionComponent...");
+    })
+  }
 }

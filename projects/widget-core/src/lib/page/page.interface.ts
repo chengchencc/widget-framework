@@ -5,7 +5,8 @@ import { LayoutConfig } from '../common/layout.interface';
 /**
  * 一个页面的完整配置信息
  */
-export interface Page{
+export interface PageConfig{
+    id?:string;
     info:PageInfo;
     layout:LayoutConfig;
 }

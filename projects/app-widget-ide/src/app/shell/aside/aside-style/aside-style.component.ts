@@ -39,8 +39,7 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
   // computedStyles: CSSStyleDeclaration = null
 
   constructor(public settingService: SettingService) {    
-    //TODO:取消注释
-    // this.settingService.onSelectSettableItem$.subscribe(s=>this.selectSettableItem(s));
+
   }
 
   ngOnInit() {
@@ -111,6 +110,12 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     config.style[camel2Joiner(prop.name)] = <string>value
     /** 告知 setting.service -> settable.dir config 变了 */
     this.settingService.changeConfig(config)
+  }
+
+  handleChangeClass(e){
+    let { config } = this.settingService.selectedSettable
+
+    this.settingService.changeConfig(config);
   }
 
 }

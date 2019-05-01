@@ -1,4 +1,4 @@
-import { ConfigStyle } from 'projects/widget-core/src/lib/common/layout.interface';
+import { CssStyleConfig } from 'projects/widget-core/src/lib/common/settable.interface';
 
 /** 一条 style 属性信息 */
 export interface StyleProp {
@@ -15,7 +15,7 @@ export interface StyleProp {
   }
   /** 一堆可在指定条件下显示的属性集合，是否显示取决于 ifShow() */
   export interface stylePropsContainer {
-    ifShow: (configStyle: ConfigStyle, computedStyles: CSSStyleDeclaration) => boolean,
+    ifShow: (configStyle: CssStyleConfig, computedStyles: CSSStyleDeclaration) => boolean,
     styleProps: StyleProp[]
   }
   /** 一个样式属性分类 */
@@ -44,7 +44,7 @@ export interface StyleProp {
         },
         /** flex */
         {
-          ifShow(configStyle: ConfigStyle, computedStyles: CSSStyleDeclaration) {
+          ifShow(configStyle: CssStyleConfig, computedStyles: CSSStyleDeclaration) {
             if (!configStyle) return false
             if (configStyle.display) return configStyle.display == 'flex'
             return computedStyles.display == 'flex'
@@ -112,7 +112,7 @@ export interface StyleProp {
         },
         /** relative, absolute, fixed */
         {
-          ifShow(configStyle: ConfigStyle, computedStyles: CSSStyleDeclaration) {
+          ifShow(configStyle: CssStyleConfig, computedStyles: CSSStyleDeclaration) {
             if (!configStyle) return false
             let a = [`relative`, `absolute`, `fixed`]
             let propName = 'position'
@@ -311,7 +311,7 @@ export function camel2Joiner (src: string, joiner = '-') {
  * 如果用户已设置，取用户的；否则去 computed Styles 中取
  * */
 export function getValue(propName: string,
-  configStyles: ConfigStyle,
+  configStyles: CssStyleConfig,
   computedStyles: CSSStyleDeclaration) {
   // 如果有 config style
   if(configStyles) {
@@ -334,7 +334,7 @@ export function getValue(propName: string,
 // 取出 数字+单位 中的 某某（根据正则）
 export function getRegExpInValue (propName: string,
   regExp: RegExp,
-  configStyle: ConfigStyle,
+  configStyle: CssStyleConfig,
   computedStyles: CSSStyleDeclaration) {
   let result = String(getValue(propName, configStyle, computedStyles)).match(regExp)
   // 以防未匹配到

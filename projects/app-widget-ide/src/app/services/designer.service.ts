@@ -4,10 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Store } from 'projects/widget-core/src/lib/store/store';
 import { PageService } from 'projects/widget-core/src/lib/page/page.service';
 import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
-// import { Store } from 'widget-core';
-// import { PageService } from 'widget-core';
-// import { LayoutComponent } from 'widget-core';
-// import { LayoutService } from 'widget-core';
 
 @Injectable()
 export class DesignerService {
@@ -29,8 +25,9 @@ export class DesignerService {
   }
 
   save(){
-    this.layoutService.save();
-    this.toastr.success("success！");
+    this.pageService.save().subscribe((pageId)=>{
+      this.toastr.success("success！");
+    })
   }
 
 }

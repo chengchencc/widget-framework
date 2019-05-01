@@ -34,6 +34,7 @@ export class ChangeDetectionTestComponent implements OnInit,OnChanges,DoCheck {
   ngDoCheck(): void {
     //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
     //Add 'implements DoCheck' to the class.
+    console.log("run ng do check!");
     const changes = this.settingsDiffer.diff(this.settings);
     
     if(changes){

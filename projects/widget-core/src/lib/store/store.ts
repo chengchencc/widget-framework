@@ -2,7 +2,8 @@ import { InjectionToken, Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { WidgetLoaderManifest } from '../common/widget.interface';
-import { Page } from '../page/page.interface';
+import { PageConfig } from '../page/page.interface';
+import { DeserializePageConfig } from '../common/utils';
 
 export interface StoreInterface {
     whoAmI(): string;
@@ -56,8 +57,8 @@ export class Store implements StoreInterface {
      * 加载页面配置信息
      * @param id pageId
      */
-    loadPageById(id:string):Observable<Page>{
-        return of(JSON.parse(localStorage.getItem(Page_Layout_Config+"|"+id))); //this.http.get<Page>("");
+    loadPageById(id:string):Observable<PageConfig>{
+        return of(DeserializePageConfig(localStorage.getItem(Page_Layout_Config+"|"+id))); //this.http.get<Page>("");
     }
 
     savePage(id:string,pageInfoString:string):Observable<string>{

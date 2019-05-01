@@ -2,8 +2,7 @@
     "files.exclude": {
         "**/*-e2e": true,
         "**/*.spec.ts": true,
-        "**/widget-ide": true,
-        "**/app-widget-runtime": true
+        "**/widget-ide": true
     },
     "maven.view": "hierarchical"
 }

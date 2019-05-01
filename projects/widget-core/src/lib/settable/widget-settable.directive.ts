@@ -17,8 +17,8 @@ export class WidgetSettableDirective {
     // get class () {}
     @HostBinding('style') style: SafeStyle
     @HostBinding('class.selected')
-    get selected () {
-        console.log("settableDirective::get selected::",this,this.config.id);
+    get selected() {
+        console.log("settableDirective::get selected::", this, this.config.id);
         return this == this.settingService.selectedSettable;
     }
     //TODO:考虑到性能问题，暂时先不增加hover事件监听
@@ -36,7 +36,6 @@ export class WidgetSettableDirective {
         public elementRef: ElementRef,
         private sanitizer: DomSanitizer,
         private settingService: SettingService
-        // @Optional() public widget: WidgetContainerComponent
     ) {
         this.settingService.onChangeConfig$.subscribe(c => this.handleChangeConfig(c))
     }
@@ -58,12 +57,12 @@ export class WidgetSettableDirective {
     }
     //TODO:mouse事件会导致angular频繁变化检查，暂时先去掉
     // @HostListener('mouseenter')
-    handleEnter () {
+    handleEnter() {
         this.settingService.enterSettable(this)
     }
     //TODO:mouse事件会导致angular频繁变化检查，暂时先去掉
     // @HostListener('mouseleave')
-    handleLeave () {
+    handleLeave() {
         this.settingService.leaveSettable()
     }
 
@@ -75,19 +74,19 @@ export class WidgetSettableDirective {
      */
     removeSelf() {
         //第一种移除方式，通过lodash
-        this.settingService.layoutService.remove(this.config);
+        // this.settingService.layoutService.remove(this.config);
         //第二种移除方式，通过parent，remove掉即可
-        // var index = this._parent.config.layout.indexOf(this.config);
-        // this._parent.config.layout.splice(index,1);
+        var index = this.parent.config.layout.indexOf(this.config);
+        this.parent.config.layout.splice(index, 1);
     }
 
     saveAsTemplate() {
         this.openModalWithComponent((tplName) => {
-            this.settingService.layoutService.addLayoutTemplate({
-                name: tplName,
-                id: "",
-                layoutConfig: this.config
-            });
+            // this.layoutService.addLayoutTemplate({
+            //     name: tplName,
+            //     id: "",
+            //     layoutConfig: this.config
+            // });
         });
     }
     //选择上级
@@ -108,7 +107,7 @@ export class WidgetSettableDirective {
         // this.bsModalRef.content.closeBtnName = 'Close';
     }
 
-    addOrRemove(express: boolean, className: string) {
+    private _toggleClass(express: boolean, className: string) {
         if (express) {
             if (!this._classes.includes(className)) {
                 this._classes.push(className);
@@ -124,7 +123,7 @@ export class WidgetSettableDirective {
         this.updateClassNStyle(this.config)
     }
     /** 根据 config 更新 class, style */
-    updateClassNStyle (config: LayoutConfig) {
+    updateClassNStyle(config: LayoutConfig) {
         // style
         let styleString = this.getStyle(config);
         this.style = this.sanitizer.bypassSecurityTrustStyle(styleString);
@@ -133,8 +132,8 @@ export class WidgetSettableDirective {
         if (config && config.classes) {
             this._classes = [...config.classes];
         }
-        this.addOrRemove(config.layout && config.layout.length == 0, "is-empty")
-        this.addOrRemove(this.selected, "selected");
+        this._toggleClass(config.layout && config.layout.length == 0, "is-empty")
+        this._toggleClass(this.selected, "selected");
 
         let result = this._classes.join(" ");
         this.class = result;
@@ -154,6 +153,7 @@ export class WidgetSettableDirective {
     }
 
     getPath(): string[] {
+        //TODO:目前出来的路径不对，需要完善
         return this.config.id.split("-");
         // let path: string[] = [];
         // path.push(this.config.id);
