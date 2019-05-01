@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, StylePropType, camel2Joiner, getRegExpInValue, getValue } from '../../../../utils';
-import { ConfigStyle } from 'projects/widget-core/src/lib/common/layout.interface';
+import { NUM_REGEXP, UNIT_REGEXP, ConfigEditorProp, ConfigEditorPropsContainer, ConfigEditorType, camel2Joiner, getRegExpInValue } from '../../../../utils';
+import { ConfigEditorData } from 'projects/widget-core/src/lib/common/layout.interface';
 
 @Component({
   selector: 'aside-style-form-list',
@@ -9,48 +9,54 @@ import { ConfigStyle } from 'projects/widget-core/src/lib/common/layout.interfac
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AsideStyleFormListComponent implements OnInit {
+  // 全部属性信息列表
+  @Input() propList: (ConfigEditorProp | ConfigEditorPropsContainer)[]
+  // 实际被修改的数据，用于判断是否已被更改
+  @Input() configEditorData: ConfigEditorData
+  // TODO: 拿走
+  // @Input() computedStyles: CSSStyleDeclaration
+  // 通过属性名拿到值 的函数，调用处提供，下面用
+  @Input() getValue: (propName: string) => any
+  // 外部通过它来修改值
+  @Output() onChangeValue = new EventEmitter<{ value: string, prop: ConfigEditorProp }>()
 
-  @Input() propList: (StyleProp | stylePropsContainer)[]
-  @Input() configStyle: ConfigStyle
-  @Input() computedStyles: CSSStyleDeclaration
-
-  @Output() onChangeValue = new EventEmitter<{ value: string, prop: StyleProp }>()
-
-  StylePropType = StylePropType
+  StylePropType = ConfigEditorType
   camel2Joiner = camel2Joiner
 
   constructor() { }
 
   ngOnInit() {
+    console.count('init list')
   }
 
-  handleChangeValue (value: string, prop: StyleProp) {
+  handleChangeValue (value: string, prop: ConfigEditorProp) {
     this.onChangeValue.emit({ value, prop })
   }
   getValueNums (propNames: string[]) {
     return propNames.map(name => this.getValueNum(name))
   }
-  getValue (propName: string) {
-    return getValue(propName, this.configStyle, this.computedStyles)
-  }
+  // getValue (propName: string) {
+  //   return this.getValue(propName)
+  //   // return getValue(propName, this.configEditorData, this.computedStyles)
+  // }
   // 取出 数字+单位 中的 数字
   getValueNum (propName: string) {
-    return getRegExpInValue(propName, NUM_REGEXP, this.configStyle, this.computedStyles)
+    return getRegExpInValue(propName, NUM_REGEXP, this.getValue)
   }
   // 取出 数字+单位 中的 单位
   getValueUnit (propName: string) {
-    return getRegExpInValue(propName, UNIT_REGEXP, this.configStyle, this.computedStyles)
+    return getRegExpInValue(propName, UNIT_REGEXP, this.getValue)
   }
   /** 检查 prop 是否在 item.config.styles 中，即修改过了 */
   isPropInItemConfig (propName: string) {
-    if (!this.configStyle) return
-    let propValue: string = this.configStyle[camel2Joiner(propName, '-')]
+    if (!this.configEditorData) return
+    let propValue: string = this.configEditorData[camel2Joiner(propName, '-')]
     // 有些属性有从属关系，子属性改变，它本身 或 父属性 都算作修改过。如 box-input。
     if(propValue == undefined) {
-      let prop = getStyleProp(propName)
-      if(prop.type == StylePropType.BoxInput) {
-        for(let iPropName of prop.boxInputProps) {
-          let propValue: string = this.configStyle[camel2Joiner(iPropName, '-')]
+      let prop = this.getPropByNameRecursively(this.propList, propName)
+      if((<ConfigEditorProp>prop).type == ConfigEditorType.BoxInput) {
+        for(let iPropName of (<ConfigEditorProp>prop).boxInputProps) {
+          let propValue: string = this.configEditorData[camel2Joiner(iPropName, '-')]
           if(propValue!=undefined) return true
         }
       }
@@ -60,4 +66,24 @@ export class AsideStyleFormListComponent implements OnInit {
     return false
   }
 
+  /** 递归查找 prop，被上面调用 */
+  getPropByNameRecursively (props: (ConfigEditorProp|ConfigEditorPropsContainer)[], propName: string): (ConfigEditorProp|ConfigEditorPropsContainer) {
+    for (let prop of props) {
+      // 如果是 container，那还需要递归查找子 props
+      if (prop['ifShow']) {
+        let resultProp = this.getPropByNameRecursively((<ConfigEditorPropsContainer>prop).styleProps, propName)
+        if(resultProp) return resultProp
+      } else {
+        if (prop['name'] && prop['name'] == propName) return <ConfigEditorProp>prop
+      }
+    }
+  }
+
+  value (name) {
+    return this.getValue(name)
+  }
+
 }
+
+
+

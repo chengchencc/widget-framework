@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StyleProp, StylePropType } from '../../../../utils'
+import { ConfigEditorProp, ConfigEditorType } from '../../../../utils'
 
 @Component({
   selector: 'lib-box-input',
@@ -11,7 +11,7 @@ export class BoxInputComponent implements OnInit {
   @Input() propNames: string[]
   @Input() values: string[]
 
-  @Output() onChange = new EventEmitter<{ value: string, prop: StyleProp }>()
+  @Output() onChange = new EventEmitter<{ value: string, prop: ConfigEditorProp }>()
 
   constructor() { }
 
@@ -23,7 +23,7 @@ export class BoxInputComponent implements OnInit {
       value: v + 'px',
       prop: {
         name: this.propNames[i],
-        type: StylePropType.Text
+        type: ConfigEditorType.Text
       }
     })
   }

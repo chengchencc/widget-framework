@@ -1,7 +1,6 @@
 import { Component, OnInit, DoCheck, ChangeDetectionStrategy } from '@angular/core';
-import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
 import { SettingService } from 'projects/widget-core/src/lib/settable/setting.sevice';
-import { NUM_REGEXP, UNIT_REGEXP, styleProps, StylePropType, StyleProp, clamp, getRegExpInValue, camel2Joiner } from '../../../utils';
+import { NUM_REGEXP, UNIT_REGEXP, ConfigEditorType, ConfigEditorProp, clamp, getRegExpInValue, camel2Joiner, styleProps } from '../../../utils';
 
 @Component({
   selector: 'design-aside-style',
@@ -9,7 +8,7 @@ import { NUM_REGEXP, UNIT_REGEXP, styleProps, StylePropType, StyleProp, clamp, g
   styleUrls: ['./aside-style.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AsideStyleComponent implements OnInit,DoCheck  {
+export class AsideStyleComponent implements DoCheck {
 
   classes:string[]=[
     "body",
@@ -31,20 +30,52 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     "col-12",
     "scroll-thin"
   ];
-  StylePropType = StylePropType
+  StylePropType = ConfigEditorType
   styleProps = styleProps
+
+  array = [1, 2, 3, 4, {}]
 
   // path: string[];
   // itemConfig: { [key: string]: any } = null
   // computedStyles: CSSStyleDeclaration = null
 
-  constructor(public settingService: SettingService) {    
-    //TODO:取消注释
+  constructor(public settingService: SettingService) {
+    console.log('this.settingService', this.settingService)
+    // TODO:取消注释
     // this.settingService.onSelectSettableItem$.subscribe(s=>this.selectSettableItem(s));
   }
+  // getStyleProps () {
+  //   let a = getStyleProps()
+  //   console.log('a', a)
+  //   return a
+  // }
 
-  ngOnInit() {
-    // this.getStyle();
+  bindedGetValueByPropName () {
+    return this.getValueByPropName.bind(this)
+  }
+  /**
+   * 根据属性名取已设置的值：
+   * 如果用户已设置，取用户的；否则去 computed Styles 中取
+   * */
+  getValueByPropName(propName: string) {
+    let configStyles = this.settingService.selectedSettable.config.style
+    // 如果有 config style
+    if (configStyles) {
+      let v: string = configStyles[camel2Joiner(propName, '-')]
+      // 且有当前 prop
+      if(v!=undefined) return v
+    }
+    let v: string
+    // 如果用户未设置
+    switch (propName) {
+      case 'width':
+      case 'height':
+        v = 'auto'
+        break
+      default:
+        v = this.computedStyle()[propName]
+    }
+    return v
   }
 
   ngDoCheck(): void {
@@ -66,12 +97,12 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
   /**
    * 注意：Number 类型的 e.value 不带单位，单位在后面代码里取
    */
-  handleChangeValue(e: { value: string|number, prop: StyleProp }) {
+  handleChangeValue(e: { value: string|number, prop: ConfigEditorProp }) {
     //TODO: 文本验证，错误给出提示；
     let { value, prop } = e
     let { config, elementRef } = this.settingService.selectedSettable
 
-    let computedStyle = this.computedStyle()
+    // let computedStyle = this.computedStyle()
 
     // 如果有 minMax 限制
     if(prop.min!=undefined || prop.max!=undefined) {
@@ -84,11 +115,11 @@ export class AsideStyleComponent implements OnInit,DoCheck  {
     }
 
     // 如果有单位：
-    if(prop.type==StylePropType.Number) {
+    if(prop.type==ConfigEditorType.Number) {
       value = String(value) //转成字符串后面再比较 省的把 0 当空串
       // 先取出老值 老单位
-      let oldV = getRegExpInValue(prop.name, NUM_REGEXP, config.style, computedStyle)
-      let oldU = getRegExpInValue(prop.name, UNIT_REGEXP, config.style, computedStyle)
+      let oldV = getRegExpInValue(prop.name, NUM_REGEXP, this.getValueByPropName.bind(this))
+      let oldU = getRegExpInValue(prop.name, UNIT_REGEXP, this.getValueByPropName.bind(this))
       // 如果改成了空值，那改的不是 unit 而是数字，就让结果为 auto
       if (value!='0' && value=='' || value==undefined) {
         value = 'auto'
