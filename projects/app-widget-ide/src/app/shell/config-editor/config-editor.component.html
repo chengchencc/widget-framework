@@ -122,11 +122,11 @@
     </div>
     <!-- style props 容器 -->
     <ng-container *ngIf="prop.ifShow && prop.ifShow(getValue)">
-      <aside-style-form-list
+      <config-editor
         [getValue]="getValue"
         [propList]="prop.styleProps"
         [configEditorData]="configEditorData"
-        (onChangeValue)="handleChangeValue($event.value, $event.prop)" ></aside-style-form-list>
+        (onChangeValue)="handleChangeValue($event.value, $event.prop)" ></config-editor>
         <!-- [computedStyles]="computedStyles" -->
       </ng-container>
   </ng-container>

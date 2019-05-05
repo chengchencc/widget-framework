@@ -13,9 +13,10 @@ export class ConfigEditorComponent implements OnInit {
   @Input() propList: (ConfigEditorProp | ConfigEditorPropsContainer)[]
   // 实际被修改的数据，用于判断是否已被更改
   @Input() configEditorData: ConfigEditorData
-  // TODO: 拿走
-  // @Input() computedStyles: CSSStyleDeclaration
-  // 通过属性名拿到值 的函数，调用处提供，下面用
+  /**
+   * 根据属性名，返回此属性显示的值
+   * 注意传入函数时需要 .bind(this)
+   * */
   @Input() getValue: (propName: string) => any
   // 外部通过它来修改值
   @Output() onChangeValue = new EventEmitter<{ value: string, prop: ConfigEditorProp }>()
