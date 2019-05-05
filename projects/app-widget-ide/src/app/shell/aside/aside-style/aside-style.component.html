@@ -29,11 +29,11 @@
       <accordion-group  *ngFor="let category of styleProps"
         [heading]="category.name"
         [isOpen]="true" >
-        <aside-style-form-list
+        <config-editor
           [getValue]='bindedGetValueByPropName()'
           [propList]='category.styleProps'
           [configEditorData]="settingService.selectedSettable.config.style"
-          (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
+          (onChangeValue)="handleChangeValue($event)" ></config-editor>
       </accordion-group>
     </accordion>
   </form>

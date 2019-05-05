@@ -39,8 +39,8 @@
             .nav-link {
                 color: $dsn-color;
                 border: none;
-                padding: 0px;
-                padding-top: 5px;
+                padding: 5px 0 2px;
+                // padding-top: 5px;
                 border-radius: 0px;
 
                 &:hover {
@@ -52,6 +52,10 @@
                     background-color: $dsn-tab-active-bg;
                     color: $dsn-active-color;
                     border-bottom: none;
+                }
+
+                & i.material-icons {
+                    font-size: 22px;
                 }
             }
         }
@@ -160,7 +164,7 @@
                     border: none;
                     .ng-value {
                         background-color: $dsn-brand-color!important;
-                        padding: 0px 5px 2px;
+                        padding: 2px 5px;
                         margin: 2px;
                         .ng-value-label {
                             font-size: 12px;
@@ -206,7 +210,7 @@
                                 padding: 0 2px;
                                 border-radius: 2px;
                                 line-height: 2;
-                                font-family: sans-serif;
+                                // font-family: sans-serif;
                                 font-weight: 400;
                                 letter-spacing: -0.1px;
                                 // color: #ffffffb3;

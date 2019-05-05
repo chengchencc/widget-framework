@@ -9,6 +9,8 @@ widget-ide {
     display: flex;
     flex-direction: column;
     height: 100%; // color: $dsn-color;
+    font-family: 'Arial';
+    font-size: $dsn-font-size;
     main {
         flex: auto;
         display: flex;
@@ -33,7 +35,7 @@ widget-ide {
             padding: 10px;
             cursor: grab;
             .widget-name {
-                font-size: 12px;
+                // font-size: 12px;
                 opacity: .6;
             }
             &:hover {
@@ -54,7 +56,7 @@ widget-ide {
         background-color: $dsn-bg;
     }
     .btn {
-        font-size: 12px;
+        // font-size: 11px;
         padding: 3px 10px;
         height: 24px;
         border: 1px solid $dsn-form-control-border-color;
@@ -84,14 +86,14 @@ widget-ide {
             }
         }
         label {
-            font-size: 12px;
+            // font-size: 12px;
             margin: 0;
             text-transform: capitalize;
         }
         .tooltip {
             .tooltip-inner {
                 transform: translateX(30%);
-                font-size: 12px;
+                font-size: $dsn-font-size;
             }
         }
         small {
@@ -103,7 +105,7 @@ widget-ide {
 
             .btn-radio {
                 i.material-icons {
-                    font-size: 17px;
+                    font-size: 16px;
                     width: 17px;
                 }
             }
@@ -127,7 +129,7 @@ widget-ide {
 
         .form-control,
         .btn {
-            font-size: 12px;
+            font-size: $dsn-font-size;
             padding: 3px 10px;
             height: 24px;
             border: 1px solid $dsn-form-control-border-color;
@@ -175,7 +177,7 @@ widget-ide {
                 margin: 1px;
                 border: none;
                 color: $dsn-color;
-                font-size: 12px;
+                // font-size: 12px;
                 vertical-align: bottom;
                 border-radius: 0;
                 background: darken($aside-bg, 10%);
@@ -214,7 +216,7 @@ widget-ide {
                         height: auto;
                         border: none;
                         color: $dsn-color;
-                        font-size: 13px;
+                        font-size: 12px;
                         font-weight: bold;
                         cursor: default;
                         padding: 0;

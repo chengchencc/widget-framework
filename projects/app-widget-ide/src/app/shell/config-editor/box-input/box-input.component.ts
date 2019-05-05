@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ConfigEditorProp, ConfigEditorType } from '../../../../utils'
+import { ConfigEditorProp, ConfigEditorType } from '../../../utils'
 
 @Component({
   selector: 'lib-box-input',

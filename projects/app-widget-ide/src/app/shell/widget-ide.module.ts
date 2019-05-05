@@ -34,7 +34,7 @@ import { AsideSettingComponent } from './aside/aside-setting/aside-setting.compo
 import { AsideStructureComponent, AsideStructureTreeComponent } from './aside/aside-structure/aside-structure.component';
 import { AsideEventComponent } from './aside/aside-event/aside-event.component';
 import { AsideStyleFormListComponent } from './aside/aside-style/aside-style-form-list/aside-style-form-list.component';
-import { BoxInputComponent } from './aside/aside-style/box-input/box-input.component';
+import { BoxInputComponent } from './config-editor/box-input/box-input.component';
 import { DragInputDirective } from '../directives/drag-input.directive';
 
 //services
@@ -42,6 +42,7 @@ import { DesignerService } from '../services/designer.service';
 
 import { Widget_Core_Config_Token, WidgetCoreConfig } from 'projects/widget-core/src/lib/core.config';
 import { ToastrModule } from 'ngx-toastr';
+import { ConfigEditorComponent } from './config-editor/config-editor.component';
 
 // import { OverlayModule } from "@angular/cdk/overlay";
 
@@ -91,6 +92,7 @@ const widgetCoreConfig:WidgetCoreConfig={
     AsideStyleFormListComponent,
     BoxInputComponent,
     DragInputDirective,
+    ConfigEditorComponent,
   ],
   exports:[
     WidgetIdeComponent
