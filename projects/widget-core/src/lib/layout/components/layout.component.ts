@@ -16,31 +16,11 @@ export class LayoutComponent implements OnInit {
   config: LayoutConfig;
   templates: LayoutTemplate[];
 
-  // _classes: string[] = [];
-
-  // @HostBinding("class.is-empty")
-  // public get isEmpty(): boolean {
-  //   return this.config.layout && this.config.layout.length == 0;
-  // }
-
-  // addOrRemove(express: boolean, className: string) {
-  //   if (express) {
-  //     if (!this._classes.includes(className)) {
-  //       this._classes.push(className);
-  //     }
-  //   } else {
-  //     if (this._classes.includes(className)) {
-  //       this._classes.splice(this._classes.indexOf(className), 1);
-  //     }
-  //   }
-  // }
-
   selected: boolean = false;
 
   private _parent: LayoutComponent;
 
   // bsModalRef: BsModalRef;
-
 
   constructor(
     @SkipSelf() @Optional() parentLayout: LayoutComponent,

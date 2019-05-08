@@ -4,7 +4,7 @@ import { Store } from '../store/store';
 import { PreviewComponent } from '../preview/preview.component';
 import { Observable } from 'rxjs';
 import { serializePageConfig } from '../common/utils';
-
+import * as uuid from 'uuid';
 /**
  * 需要明确page service的职责
  */

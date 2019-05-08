@@ -1,5 +1,11 @@
 <div>
   {{settings | json}}
 </div>
-<button (click)="addAge()" >change age</button>
-<button (click)="addProps()" >add props</button>
+<button (click)="addAge()">change age</button>
+<button (click)="addProps()">add props</button>
+<div>
+  <h1>变化检测：</h1>
+  {{_config | json}}
+  <button (click)="changePath()">ChangeConfigPath</button>
+  <button (click)="addContent()">addContent</button>
+</div>
