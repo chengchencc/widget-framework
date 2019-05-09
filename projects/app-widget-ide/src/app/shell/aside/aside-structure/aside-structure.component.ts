@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input, HostBinding } from '@angular/core';
-import { LayoutConfig } from 'projects/widget-core/src/lib/common/layout.interface';
 import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
 import { SettingService, WidgetSettableDirective } from 'projects/widget-core/src/public-api';
+import { Layout } from 'projects/widget-core/src/lib/common/layout';
 
 @Component({
   selector: 'design-aside-structure',
@@ -10,7 +10,7 @@ import { SettingService, WidgetSettableDirective } from 'projects/widget-core/sr
 })
 export class AsideStructureComponent implements OnInit {
 
-  layoutConfig: LayoutConfig;
+  layoutConfig: Layout;
   selectedItem: WidgetSettableDirective
 
   constructor(private layoutService: LayoutService,
@@ -68,7 +68,7 @@ const typeIconMap = {
 })
 export class AsideStructureTreeComponent implements OnInit {
 
-  @Input() config: LayoutConfig
+  @Input() config: Layout
 
   collapsed = false
 

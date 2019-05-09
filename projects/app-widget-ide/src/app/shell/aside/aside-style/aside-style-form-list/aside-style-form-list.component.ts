@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { NUM_REGEXP, UNIT_REGEXP, getStyleProp, StyleProp, stylePropsContainer, StylePropType, camel2Joiner, getRegExpInValue, getValue } from '../../../../utils';
-import { CssStyleConfig } from 'projects/widget-core/src/lib/common/settable.interface';
+import { CssStyleConfig } from 'projects/widget-core/src/lib/common/layout.interface';
 
 @Component({
   selector: 'aside-style-form-list',

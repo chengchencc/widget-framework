@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, KeyValueDiffers, IterableDiffers } from '@angular/core';
 import { LayoutService } from '../common/layout.service';
-import { LayoutConfig } from '../common/layout.interface';
 import { PageConfig } from '../page/page.interface';
 import { PageService } from '../page/page.service';
 import { DefaultLayout } from '../common/layout-default';
@@ -11,6 +10,7 @@ import { Widget_Core_Config_Token, WidgetCoreConfig } from '../core.config';
 import { Store } from '../store/store';
 import { SettingService } from '../settable/setting.sevice';
 import { Observable } from 'rxjs';
+import { Layout } from '../common/layout';
 
 /**
  * widget core 页面显示组件。
@@ -32,10 +32,19 @@ export class PreviewComponent implements OnInit {
 
   private _pageConfig: PageConfig;
 
+  public layout:Layout;
+
   @Input()
   public set config(v: PageConfig) {
     this._pageConfig = <PageConfig>v;
-    this.layoutService.initial(this._pageConfig.layout);
+
+    this.layout = new Layout(null,this._pageConfig.layout,this._KeyValueDiffer,this._iterableDiffers);
+
+    this.layout.changes.subscribe(change=>{
+      console.log(change);
+    });
+    this.layoutService.initial(this.layout);
+    // this.layoutService.initial(this._pageConfig.layout);
   } 
 
   
@@ -81,16 +90,20 @@ export class PreviewComponent implements OnInit {
   
 
 
-  public get layoutConfig(): LayoutConfig {
-    return this._pageConfig ? this._pageConfig.layout : DefaultLayout;
-  }
+  // public get layoutConfig(): Layout {
+  //   return this._pageConfig ? this._pageConfig.layout : DefaultLayout;
+  // }
+
+
 
   constructor(
     public pageService: PageService, 
     public layoutService: LayoutService,
     public settingService:SettingService,
     @Inject(Widget_Core_Config_Token) private evnConfig: WidgetCoreConfig, 
-    private store:Store ) {}
+    private store:Store,
+    private _KeyValueDiffer:KeyValueDiffers,private _iterableDiffers:IterableDiffers
+     ) {}
 
   ngOnInit() {
     this.pageService.registerPage(this);
@@ -116,7 +129,7 @@ export class PreviewComponent implements OnInit {
         name: "",
         desc: ""
       },
-      layout: DefaultLayout
+      layout: new Layout(null,DefaultLayout,this._KeyValueDiffer,this._iterableDiffers) 
     };
     return newPage;
   }

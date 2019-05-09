@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Optional, ViewChild, ElementRef, HostBinding } from '@angular/core';
 
-import { LayoutConfig } from '../../../common/layout.interface';
 import { deepClone } from '../../../utils/object';
 import { WidgetSettableDirective } from '../../../settable/widget-settable.directive';
 import { DroppableService } from '../../../dnd/droppable.service';
@@ -13,6 +12,8 @@ import { GridsterComponent } from '../../../gridster/gridster.component';
 import { GridsterComponentInterface } from '../../../gridster/gridster.interface';
 import { WidgetLoaderManifest } from '../../../common/widget.interface';
 import { SettingService } from '../../../settable/setting.sevice';
+import { Layout } from '../../../common/layout';
+import { LayoutConfig } from '../../../common/layout.interface';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class GridsterContainerComponent implements OnInit {
   emptyCellMove: Function | null;
   emptyCellExit: Function | null;
 
-  @Input() config: LayoutConfig;
+  @Input() config: Layout;
 
   private _options:GridsterConfig;
 

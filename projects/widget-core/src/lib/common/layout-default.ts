@@ -6,7 +6,6 @@ export const DefaultLayout:LayoutConfig = {
   classes: ['body'],
   type: "body",
   layout: [],
-  parent: null
 };
 
 export const DefaultLayoutTemplates:LayoutTemplate[]=[

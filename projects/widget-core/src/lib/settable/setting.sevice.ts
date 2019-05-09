@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { WidgetSettableDirective } from './widget-settable.directive';
-import { LayoutConfig } from '../common/layout.interface';
+import { Layout } from '../common/layout';
 
 /**
  * 部件配置服务
@@ -16,8 +16,8 @@ export class SettingService {
     public hoveringSettable: WidgetSettableDirective
 
     //TODO: remove
-    public onChangeConfig$: Observable<LayoutConfig>
-    private onChangeConfigSubject$ = new Subject<LayoutConfig>()
+    public onChangeConfig$: Observable<Layout>
+    private onChangeConfigSubject$ = new Subject<Layout>()
 
     constructor() {
         // this.onSelectSettableItem$ = this.onSelectSettableItemSubject.asObservable();

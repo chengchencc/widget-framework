@@ -1,5 +1,5 @@
 import { PageConfig } from '../page/page.interface';
-import { LayoutConfig } from './layout.interface';
+import { Layout } from './layout';
 
 /**
  * 序列化PageConfig,序列化过程中自动忽略掉layoutConfig的parent引用，避免循环引用
@@ -31,7 +31,7 @@ export function DeserializePageConfig(v:string):PageConfig{
   /**
    * 递归生成parent引用
    */
- const _recursiveGenerateParentRef = (obj: LayoutConfig) => {
+ const _recursiveGenerateParentRef = (obj: Layout) => {
     const parent = obj;
     obj.layout.forEach((v, i) => {
       if (!v) return null;

@@ -1,6 +1,6 @@
 import { ComponentFactory, Injector, ComponentRef, InjectionToken } from "@angular/core";
 import { GridsterItem } from '../gridster/gridsterItem.interface';
-import { LayoutConfig } from '../common/layout.interface';
+import { Layout } from '../common/layout';
 
 /**
  * 一个页面的完整配置信息
@@ -8,7 +8,7 @@ import { LayoutConfig } from '../common/layout.interface';
 export interface PageConfig{
     id?:string;
     info:PageInfo;
-    layout:LayoutConfig;
+    layout:Layout;
 }
 /**
  * 页面基本信息

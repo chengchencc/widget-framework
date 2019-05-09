@@ -1,4 +1,4 @@
-import { CssStyleConfig } from 'projects/widget-core/src/lib/common/settable.interface';
+import { CssStyleConfig } from 'projects/widget-core/src/lib/common/layout.interface';
 
 /** 一条 style 属性信息 */
 export interface StyleProp {

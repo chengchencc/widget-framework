@@ -1,7 +1,7 @@
-import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Directive, HostListener, HostBinding, Optional, SkipSelf, Input, ElementRef, Output, EventEmitter, IterableDiffers, KeyValueDiffers, Renderer2 } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
-import { LayoutConfig } from '../common/layout.interface';
 import { SettingService } from './setting.sevice';
+import { Layout } from '../common/layout';
 
 @Directive({
     selector: '[appSettable]',
@@ -9,7 +9,7 @@ import { SettingService } from './setting.sevice';
 })
 export class WidgetSettableDirective {
     @Input()
-    config: LayoutConfig;
+    config: Layout;
     @Output()
     onSelected = new EventEmitter<boolean>();
 
@@ -35,13 +35,17 @@ export class WidgetSettableDirective {
         @SkipSelf() @Optional() public parent: WidgetSettableDirective,
         public elementRef: ElementRef,
         private sanitizer: DomSanitizer,
-        private settingService: SettingService
+        private settingService: SettingService,
+        private _iterableDiffers: IterableDiffers, 
+        private _keyValueDiffers: KeyValueDiffers,
+        private _ngEl: ElementRef, 
+        private _renderer: Renderer2
     ) {
-        this.settingService.onChangeConfig$.subscribe(c => this.handleChangeConfig(c))
     }
 
 
     ngOnInit() {
+        this.settingService.onChangeConfig$.subscribe(c => this.handleChangeConfig(c))
         this.updateClassNStyle(this.config)
 
         // 把自己注册到 map 里
@@ -123,7 +127,7 @@ export class WidgetSettableDirective {
         this.updateClassNStyle(this.config)
     }
     /** 根据 config 更新 class, style */
-    updateClassNStyle(config: LayoutConfig) {
+    updateClassNStyle(config: Layout) {
         // style
         let styleString = this.getStyle(config);
         this.style = this.sanitizer.bypassSecurityTrustStyle(styleString);
@@ -139,7 +143,7 @@ export class WidgetSettableDirective {
         this.class = result;
     }
 
-    getStyle(config: LayoutConfig): string {
+    getStyle(config: Layout): string {
         var styleString = "";
         for (const key in config.style) {
             if (config.style.hasOwnProperty(key)) {

@@ -4,6 +4,7 @@ import { LayoutService } from '../../common/layout.service';
 import { WidgetDragEvent } from '../../dnd/draggable-model';
 import { WidgetSettableDirective } from '../../settable/widget-settable.directive';
 import { LayoutConfig, LayoutTemplate } from '../../common/layout.interface';
+import { Layout } from '../../common/layout';
 
 @Component({
   selector: 'widget-layout',
@@ -13,7 +14,7 @@ import { LayoutConfig, LayoutTemplate } from '../../common/layout.interface';
 export class LayoutComponent implements OnInit {
 
   @Input()
-  config: LayoutConfig;
+  config: Layout;
   templates: LayoutTemplate[];
 
   selected: boolean = false;
@@ -40,8 +41,11 @@ export class LayoutComponent implements OnInit {
   ngAfterViewInit(): void {
   }
 
-  move(event: WidgetDragEvent, ref: LayoutConfig) {
-    this.layoutService.move(event, ref);
+  move(event: WidgetDragEvent, ref: Layout) {
+    // this.layoutService.move(event, ref);
+    //TODO:
+    console.log(event);
+    // this.config.appendNode(event.data.data);
   }
 
 

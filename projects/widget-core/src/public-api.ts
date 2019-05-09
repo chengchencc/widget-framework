@@ -47,7 +47,6 @@ export * from './lib/loader/widget-loader';
 export * from './lib/page/page.interface';
 export * from './lib/page/page.service';
 export * from './lib/preview/preview.component';
-export * from './lib/common/settable.interface';
 export * from './lib/settable/setting.base';
 export * from './lib/settable/widget-settable.directive';
 export * from './lib/store/store';

@@ -7,7 +7,7 @@ export type LayoutType="body" | "div" | "grid" | "group" | "widget";
 
 export const ChangeHistory:LayoutChange[]=[];
 
-export class Layout implements LayoutConfig{
+export class Layout{
     public id: string;
     public path?: string;    
     public type: LayoutType;
@@ -39,10 +39,10 @@ export class Layout implements LayoutConfig{
         this.id = config.id;
         this.path = config.path;
         this.type = config.type;
-        this.classes = config.classes;
-        this.style = config.style;
-        this.settings = config.settings;
-        this.content = config.content;
+        this.classes = config.classes || [];
+        this.style = config.style || {};
+        this.settings = config.settings || {};
+        this.content = config.content || {};
 
         config.layout.forEach(element => {
             this.layout.push(new Layout(this,element,this._KeyValueDiffer,this._iterableDiffers));
@@ -53,6 +53,7 @@ export class Layout implements LayoutConfig{
         this._classesIterableDiffer = this._iterableDiffers.find(this.classes).create();
         this._layoutChildIterableDiffer = this._iterableDiffers.find(this.layout).create();
 
+        this.changes = new Subject<LayoutChange>();
 
         this.changes.subscribe(change=>{
             if(this.parent)
@@ -65,7 +66,7 @@ export class Layout implements LayoutConfig{
     public getNode(path:string){
 
     }
-    public appendNode(node:LayoutConfig){
+    public appendNode(node:Layout){
         this.layout.push(new Layout(this,node,this._KeyValueDiffer,this._iterableDiffers));
         this._doCheck();
     }
