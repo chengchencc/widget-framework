@@ -1,3 +1,11 @@
+/**
+ * @author [chengchen]
+ * @email [chengchen216@hotmail.com]
+ * @create date 2019-05-09 14:33:11
+ * @modify date 2019-05-09 14:33:11
+ * @desc [description]
+ */
+
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { WidgetSettableDirective } from './widget-settable.directive';
@@ -9,15 +17,15 @@ import { Layout } from '../common/layout';
 @Injectable()
 export class SettingService {
     /** config -> settable 映射关系 */
-    public configSettableMap: { [configId: string]: WidgetSettableDirective } = {}
+    public configSettableMap: { [configId: string]: WidgetSettableDirective } = {};
     /** 当前选中项 */
-    public selectedSettable: WidgetSettableDirective
+    public selectedSettable: WidgetSettableDirective;
     /** 当前鼠标进入项 */
-    public hoveringSettable: WidgetSettableDirective
+    public hoveringSettable: WidgetSettableDirective;
 
     //TODO: remove
-    public onChangeConfig$: Observable<Layout>
-    private onChangeConfigSubject$ = new Subject<Layout>()
+    public onChangeConfig$: Observable<Layout>;
+    private onChangeConfigSubject$ = new Subject<Layout>();
 
     constructor() {
         // this.onSelectSettableItem$ = this.onSelectSettableItemSubject.asObservable();
@@ -41,19 +49,19 @@ export class SettingService {
      * @param configIdOrSettable config id 或 settable
      */
     selectSettable (configIdOrSettable: string | WidgetSettableDirective) {
-        this.selectedSettable = typeof configIdOrSettable=='string' ? this.configSettableMap[configIdOrSettable] : configIdOrSettable
+        this.selectedSettable = typeof configIdOrSettable=='string' ? this.configSettableMap[configIdOrSettable] : configIdOrSettable;
     }
     /** hover */
     enterSettable (configIdOrSettable: string | WidgetSettableDirective) {
-        this.hoveringSettable = typeof configIdOrSettable=='string' ? this.configSettableMap[configIdOrSettable] : configIdOrSettable
+        this.hoveringSettable = typeof configIdOrSettable=='string' ? this.configSettableMap[configIdOrSettable] : configIdOrSettable;
     }
     leaveSettable () {
-        this.hoveringSettable = null
+        this.hoveringSettable = null;
     }
 
     //TODO: remove
     changeConfig (config) {
-        this.onChangeConfigSubject$.next()
+        this.onChangeConfigSubject$.next(config);
     }
 
 }

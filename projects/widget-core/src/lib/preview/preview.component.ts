@@ -1,11 +1,16 @@
+/**
+ * @author [chengchen]
+ * @email [chengchen216@hotmail.com]
+ * @create date 2019-05-09 14:32:18
+ * @modify date 2019-05-09 14:32:42
+ * @desc [description]
+ */
 import { Component, OnInit, Input, Inject, KeyValueDiffers, IterableDiffers } from '@angular/core';
 import { LayoutService } from '../common/layout.service';
 import { PageConfig } from '../page/page.interface';
 import { PageService } from '../page/page.service';
 import { DefaultLayout } from '../common/layout-default';
-import { JsonPipe } from '@angular/common';
 import { serializePageConfig, DeserializePageConfig } from '../common/utils';
-import { TypeHelper } from '../utils/type-helper';
 import { Widget_Core_Config_Token, WidgetCoreConfig } from '../core.config';
 import { Store } from '../store/store';
 import { SettingService } from '../settable/setting.sevice';

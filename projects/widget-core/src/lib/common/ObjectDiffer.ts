@@ -1,7 +1,19 @@
-import { IterableDiffers,KeyValueDiffers, KeyValueDiffer, IterableDiffer } from '@angular/core';
+/**
+ * @author [chengchen]
+ * @email [chengchen216@hotmail.com]
+ * @create date 2019-05-09 14:31:31
+ * @modify date 2019-05-09 14:31:31
+ * @desc [description]
+ */
 
+import { IterableDiffers,KeyValueDiffers, KeyValueDiffer, IterableDiffer } from '@angular/core';
 import { TypeHelper } from "../utils/type-helper";
 
+/**
+ * 变更检查对象
+ * 目的：继承此对象的对象所有`值`变化、`子对象值`变更、`对象内的列表内的对象值`变化狗，都能进行变更检测。
+ * TODO:未完成，考虑到变更检查所有子类及列表下的子对象很难实现。
+ */
 export abstract class ObjectDiffer{
 
     private _selfDiffer:KeyValueDiffer<string,any>;

@@ -18,6 +18,7 @@ export class Layout{
     public style?: any;
     public settings?: any;
 
+    /** 变化，通过冒泡的方式向上冒泡 */
     public changes:Subject<LayoutChange>;
 
     private _originConfig:LayoutConfig;
