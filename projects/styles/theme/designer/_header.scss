@@ -8,6 +8,11 @@
         border-bottom: $dsn-border;
         justify-content: center;
         user-select: none;
+        button {
+            i.material-icons {
+                font-size: 22px;
+            }
+        }
         .header {
             &-left {
                 flex-basis: 50%;

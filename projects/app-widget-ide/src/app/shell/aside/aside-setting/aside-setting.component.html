@@ -1,5 +1,12 @@
-<div *ngIf="settings">
 
-    <widget-gridster-settings [settings]="settings" (settingsChange)="onSettingsChanged($event)"></widget-gridster-settings>
+
+<div *ngIf="settings">
+  <!-- <config-editor
+    [getValue]="getValue"
+    [propList]="prop.styleProps"
+    [configEditorData]="configEditorData"
+    (onChangeValue)="handleChangeValue($event.value, $event.prop)" ></config-editor> -->
+
+  <widget-gridster-settings [settings]="settings" (settingsChange)="onSettingsChanged($event)"></widget-gridster-settings>
 
 </div>

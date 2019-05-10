@@ -26,7 +26,6 @@
           [class.changed]="isPropInItemConfig(prop.name)"
           [for]="prop.name">{{camel2Joiner(prop.name, ' ')}}</label>
         </div>
-          <!-- [openDragInput]="prop.type==StylePropType.Number || prop.type==StylePropType.ScopedNumberWithoutUnit" -->
         <div class=col-sm-9>
           <ng-container [ngSwitch]="prop.type">
 
@@ -45,7 +44,7 @@
               btnRadioGroup
               ngDefaultControl
               [name]="prop.name"
-              [ngModel]="getValue(prop.name)"
+              [ngModel]="value(prop.name)"
               (ngModelChange)="handleChangeValue($event, prop)" >
               <ng-container *ngIf="!prop.EnumIcons">
                 <label *ngFor="let v of prop.EnumValues"
@@ -122,12 +121,13 @@
       <!-- TODO: 其他结构 -->
     </div>
     <!-- style props 容器 -->
-    <ng-container *ngIf="prop.ifShow && prop.ifShow(configStyle, computedStyles)">
-      <aside-style-form-list
+    <ng-container *ngIf="prop.ifShow && prop.ifShow(getValue)">
+      <config-editor
+        [getValue]="getValue"
         [propList]="prop.styleProps"
-        [configStyle]="configStyle"
-        [computedStyles]="computedStyles"
-        (onChangeValue)="handleChangeValue($event.value, $event.prop)" ></aside-style-form-list>
-    </ng-container>
+        [configEditorData]="configEditorData"
+        (onChangeValue)="handleChangeValue($event.value, $event.prop)" ></config-editor>
+        <!-- [computedStyles]="computedStyles" -->
+      </ng-container>
   </ng-container>
 </div>

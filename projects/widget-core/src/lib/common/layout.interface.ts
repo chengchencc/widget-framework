@@ -12,9 +12,13 @@ export interface LayoutConfig extends ISettable {
     type:'body'|'div'|'grid'|'group'|'widget',
     pathArray?:string[],
     content?:WidgetInfo|GridsterItem|any
-    style?: ConfigStyle
+    style?: ConfigEditorData
 }
-export interface ConfigStyle { [propName: string]: string }
+/**
+ * 可在 editor panel 生成对应表单的配置信息格式，形如:
+ * height: '168cm'
+ */
+export interface ConfigEditorData { [propName: string]: string }
 
 /**
  * 页面布局模板存储结构

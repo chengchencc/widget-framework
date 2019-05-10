@@ -24,15 +24,16 @@
       <small id="emailHelp" class="form-text text-muted">you can select one class style.</small>
     </div>
 
+    <!-- <div *ngFor="let category of getStyleProps()">{{category}}</div> -->
     <accordion class="ul-category">
       <accordion-group  *ngFor="let category of styleProps"
         [heading]="category.name"
         [isOpen]="true" >
-        <aside-style-form-list
+        <config-editor
+          [getValue]='bindedGetValueByPropName()'
           [propList]='category.styleProps'
-          [configStyle]="settingService.selectedSettable.config.style"
-          [computedStyles]="computedStyle()"
-          (onChangeValue)="handleChangeValue($event)" ></aside-style-form-list>
+          [configEditorData]="settingService.selectedSettable.config.style"
+          (onChangeValue)="handleChangeValue($event)" ></config-editor>
       </accordion-group>
     </accordion>
   </form>
