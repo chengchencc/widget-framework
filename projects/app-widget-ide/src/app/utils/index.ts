@@ -1,9 +1,9 @@
-import { CssStyleConfig } from 'projects/widget-core/src/lib/common/layout.interface';
+import { ConfigEditorData } from 'projects/widget-core/src/lib/common/layout.interface';
 
 /** 一条 style 属性信息 */
-export interface StyleProp {
+export interface ConfigEditorProp {
     name: string,
-    type: StylePropType,
+    type: ConfigEditorType,
     helperContent?: string,
     EnumValues?: string[],
     EnumIcons?: string[],
@@ -13,18 +13,21 @@ export interface StyleProp {
     step?: number,
     boxInputProps?: string[]
   }
+  export interface GetValueFn {
+    (propName: string): string
+  }
   /** 一堆可在指定条件下显示的属性集合，是否显示取决于 ifShow() */
-  export interface stylePropsContainer {
-    ifShow: (configStyle: CssStyleConfig, computedStyles: CSSStyleDeclaration) => boolean,
-    styleProps: StyleProp[]
+  export interface ConfigEditorPropsContainer {
+    ifShow: (getValue: GetValueFn) => boolean,
+    styleProps: ConfigEditorProp[]
   }
   /** 一个样式属性分类 */
-  export interface stylePropsCategory {
+  export interface ConfigEditorPropsCategory {
     name: string,
-    styleProps: (StyleProp | stylePropsContainer)[],
+    styleProps: (ConfigEditorProp | ConfigEditorPropsContainer)[],
   }
   /** 属性数据类型 */
-  export enum StylePropType {
+  export enum ConfigEditorType {
     LongEnum, ShortEnum,
     //默认有单位，后者无单位
     Number, ScopedNumberWithoutUnit,
@@ -33,37 +36,34 @@ export interface StyleProp {
     BoxInput,
   }
   
-  export const styleProps: stylePropsCategory[] = [
-    {
+  export const styleProps = [{
       name: '布局',
       styleProps: [
         {
           name: 'display',
-          type: StylePropType.ShortEnum,
+          type: ConfigEditorType.ShortEnum,
           EnumValues: ['block', 'flex']
         },
         /** flex */
         {
-          ifShow(configStyle: CssStyleConfig, computedStyles: CSSStyleDeclaration) {
-            if (!configStyle) return false
-            if (configStyle.display) return configStyle.display == 'flex'
-            return computedStyles.display == 'flex'
+          ifShow(getValue: GetValueFn) {
+            return getValue('display') == 'flex'
           },
           styleProps: [
             {
               name: 'flexDirection',
-              type: StylePropType.ShortEnum,
+              type: ConfigEditorType.ShortEnum,
               EnumValues: ['row', 'row-reverse', 'column', 'column-reverse'],
               EnumIcons: ['arrow_forward', 'arrow_backward', 'arrow_downward', 'arrow_upward'],
             }, {
               name: 'flexWrap',
-              type: StylePropType.ShortEnum,
+              type: ConfigEditorType.ShortEnum,
               EnumValues: ['nowrap', 'wrap', 'wrap-reverse'],
               EnumIcons: ['close', 'wrap_text', 'wrap_text'],
               EnumIconStyles: [null, null, { 'transform': 'scaleY(-1)' }]
             }, {
               name: 'justifyContent',
-              type: StylePropType.LongEnum,
+              type: ConfigEditorType.LongEnum,
               EnumValues: [
                 'normal',
                 'flex-start',
@@ -73,7 +73,7 @@ export interface StyleProp {
                 'space-around']
             }, {
               name: 'alignItems',
-              type: StylePropType.LongEnum,
+              type: ConfigEditorType.LongEnum,
               EnumValues: [
                 'normal',
                 'flex-start',
@@ -83,7 +83,7 @@ export interface StyleProp {
                 'stretch']
             }, {
               name: 'alignContent',
-              type: StylePropType.LongEnum,
+              type: ConfigEditorType.LongEnum,
               EnumValues: [
                 'normal',
                 'flex-start',
@@ -94,7 +94,7 @@ export interface StyleProp {
                 'stretch']
             }, {
               name: 'alignSelf',
-              type: StylePropType.LongEnum,
+              type: ConfigEditorType.LongEnum,
               EnumValues: [
                 'auto',
                 'flex-start',
@@ -107,54 +107,50 @@ export interface StyleProp {
         },
         {
           name: 'position',
-          type: StylePropType.LongEnum,
+          type: ConfigEditorType.LongEnum,
           EnumValues: ['static', 'relative', 'absolute', 'fixed', 'sticky', 'inherit', 'unset']
         },
         /** relative, absolute, fixed */
         {
-          ifShow(configStyle: CssStyleConfig, computedStyles: CSSStyleDeclaration) {
-            if (!configStyle) return false
-            let a = [`relative`, `absolute`, `fixed`]
-            let propName = 'position'
-            if (configStyle[propName]) return a.includes(configStyle[propName])
-            return a.includes(computedStyles[propName])
+          ifShow(getValue: GetValueFn) {
+            return [`relative`, `absolute`, `fixed`].includes(getValue('position'))
           },
           styleProps: [
             {
               name: 'offset',
-              type: StylePropType.BoxInput,
+              type: ConfigEditorType.BoxInput,
               boxInputProps: ['top', 'right', 'bottom', 'left']
             }, {
               name: 'zIndex',
-              type: StylePropType.ScopedNumberWithoutUnit
+              type: ConfigEditorType.ScopedNumberWithoutUnit
             }
           ]
         }, {
           name: 'float',
-          type: StylePropType.ShortEnum,
+          type: ConfigEditorType.ShortEnum,
           EnumValues: ['none', 'left', 'right'],
           EnumIcons: ['close', 'arrow_backward', 'arrow_forward']
         }, {
           name: 'order',
-          type: StylePropType.ScopedNumberWithoutUnit,
+          type: ConfigEditorType.ScopedNumberWithoutUnit,
         }, {
           name: 'flexGrow',
-          type: StylePropType.ScopedNumberWithoutUnit,
+          type: ConfigEditorType.ScopedNumberWithoutUnit,
           min: 0,
         }, {
           name: 'flexShrink',
-          type: StylePropType.ScopedNumberWithoutUnit,
+          type: ConfigEditorType.ScopedNumberWithoutUnit,
           min: 0,
         }, {
           name: 'flexBasis',
-          type: StylePropType.Number,
+          type: ConfigEditorType.Number,
           min: 0,
         }, {
           name: 'flex',
-          type: StylePropType.Text,
+          type: ConfigEditorType.Text,
         }, {
           name: 'alignSelf',
-          type: StylePropType.LongEnum,
+          type: ConfigEditorType.LongEnum,
           EnumValues: [
             'auto',
             'flex-start',
@@ -169,23 +165,23 @@ export interface StyleProp {
       styleProps: [
         {
           name: 'width',
-          type: StylePropType.Number,
+          type: ConfigEditorType.Number,
           min: 0,
         }, {
           name: 'height',
-          type: StylePropType.Number,
+          type: ConfigEditorType.Number,
           min: 0,
         }, {
           name: 'margin',
-          type: StylePropType.BoxInput,
+          type: ConfigEditorType.BoxInput,
           boxInputProps: ['margin-top', 'margin-right', 'margin-bottom', 'margin-left']
         }, {
           name: 'padding',
-          type: StylePropType.BoxInput,
+          type: ConfigEditorType.BoxInput,
           boxInputProps: ['padding-top', 'padding-right', 'padding-bottom', 'padding-left']
         }, {
           name: 'overflow',
-          type: StylePropType.LongEnum,
+          type: ConfigEditorType.LongEnum,
           EnumValues: ['visible', 'auto', 'hidden', 'scroll', 'scroll-x', 'scroll-y']
         },
       ]
@@ -194,13 +190,13 @@ export interface StyleProp {
       styleProps: [
         {
           name: 'backgroundColor',
-          type: StylePropType.Color,
+          type: ConfigEditorType.Color,
         }, {
           name: 'border',
-          type: StylePropType.Text,
+          type: ConfigEditorType.Text,
         }, {
           name: 'opacity',
-          type: StylePropType.ScopedNumberWithoutUnit,
+          type: ConfigEditorType.ScopedNumberWithoutUnit,
           min: 0, //TODO: 滑动条
           max: 1
         }
@@ -210,39 +206,39 @@ export interface StyleProp {
       styleProps: [
         {
           name: 'fontSize',
-          type: StylePropType.Number,
+          type: ConfigEditorType.Number,
           min: 0,
         }, {
           name: 'color',
-          type: StylePropType.Color,
+          type: ConfigEditorType.Color,
         }, {
           name: 'fontWeight',
-          type: StylePropType.ScopedNumberWithoutUnit,
+          type: ConfigEditorType.ScopedNumberWithoutUnit,
         }, {
           name: 'direction',
-          type: StylePropType.ShortEnum,
+          type: ConfigEditorType.ShortEnum,
           EnumValues: ['ltr', 'rtl'],
           EnumIcons: ['arrow_forward', 'arrow_backward']
         }, {
           name: 'lineHeight',
-          type: StylePropType.Number,
+          type: ConfigEditorType.Number,
         }, {
           name: 'textAlign',
-          type: StylePropType.ShortEnum,
+          type: ConfigEditorType.ShortEnum,
           EnumValues: ['left', 'center', 'right', 'justify'],
           EnumIcons: ['format_align_left', 'format_align_center', 'format_align_right', 'format_align_justify'],
         }, {
           name: 'textDecoration',
-          type: StylePropType.ShortEnum,
+          type: ConfigEditorType.ShortEnum,
           EnumValues: ['none', 'underline', 'line-through'],
           EnumIcons: ['close', 'format_underlined', 'format_strikethrough']
         }, {
           name: 'textTransform',
-          type: StylePropType.LongEnum,
+          type: ConfigEditorType.LongEnum,
           EnumValues: ['none', 'uppercase', 'capitalize', 'lowercase']
         }, {
           name: 'verticalAlign',
-          type: StylePropType.LongEnum,
+          type: ConfigEditorType.LongEnum,
           EnumValues: ['baseline', 'sub', 'super', 'top', 'text-top', 'middle', 'bottom', 'text-bottom']
         }
       ]
@@ -251,39 +247,21 @@ export interface StyleProp {
       styleProps: [
         {
           name: 'cursor',
-          type: StylePropType.LongEnum,
+          type: ConfigEditorType.LongEnum,
           EnumValues: ['default', 'auto', 'crosshair', 'pointer', 'move', 'grab', 'grabbing', 'e-resize', 'ne-resize', 'nw-resize', 'n-resize', 'se-resize', 'sw-resize', 's-resize', 'w-resize', 'text', 'help',]
         }, {
           name: 'boxShadow',
-          type: StylePropType.Text,
+          type: ConfigEditorType.Text,
         }, {
           name: 'transform',
-          type: StylePropType.Text,
+          type: ConfigEditorType.Text,
         }, {
           name: 'transition',
-          type: StylePropType.Text,
+          type: ConfigEditorType.Text,
         }
       ]
-    },
-  ]
-  export function getStyleProp (propName: string) {
-    for (let category of styleProps) {
-      let resultProp = getStylePropRecursively(category.styleProps, propName)
-      if(resultProp) return resultProp
-    }
-  }
-  /** 递归查找 prop，被上面调用 */
-  function getStylePropRecursively (props: (StyleProp|stylePropsContainer)[], propName: string) {
-    for (let prop of props) {
-      // 如果是 container，那还需要递归查找子 props
-      if (prop['ifShow']) {
-        let resultProp = getStylePropRecursively((<stylePropsContainer>prop).styleProps, propName)
-        if(resultProp) return resultProp
-      } else {
-        if (prop['name'] && prop['name'] == propName) return <StyleProp>prop
-      }
-    }
-  }
+    }]
+  
   /** 从 数字+单位 中找出 数字 和 单位 的正则 */
   export const NUM_REGEXP: RegExp = /^-?[\d.]+/
   export const UNIT_REGEXP: RegExp = /[^\d.]+$/
@@ -306,37 +284,14 @@ export function camel2Joiner (src: string, joiner = '-') {
   }
 	return result
 }
-/**
- * 根据属性名取已设置的值：
- * 如果用户已设置，取用户的；否则去 computed Styles 中取
- * */
-export function getValue(propName: string,
-  configStyles: CssStyleConfig,
-  computedStyles: CSSStyleDeclaration) {
-  // 如果有 config style
-  if(configStyles) {
-    let v: string = configStyles[camel2Joiner(propName, '-')]
-    // 且有当前 prop
-    if(v!=undefined) return v
-  }
-  let v: string
-  // 如果用户未设置
-  switch (propName) {
-    case 'width':
-    case 'height':
-      v = 'auto'
-      break
-    default:
-      v = computedStyles[propName]
-  }
-  return v
-}
 // 取出 数字+单位 中的 某某（根据正则）
 export function getRegExpInValue (propName: string,
   regExp: RegExp,
-  configStyle: CssStyleConfig,
-  computedStyles: CSSStyleDeclaration) {
-  let result = String(getValue(propName, configStyle, computedStyles)).match(regExp)
+  getValue: (propName: string) => any,
+  // configStyle: ConfigEditorData,
+  // computedStyles: CSSStyleDeclaration
+  ) {
+  let result = String(getValue(propName)).match(regExp)
   // 以防未匹配到
   return result ? result[0] : ''
 }

@@ -10,7 +10,7 @@ import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/w
 })
 export class AsideSettingComponent implements OnInit {
 
-settings:any;
+  settings: any
 
   constructor() {    
    }
