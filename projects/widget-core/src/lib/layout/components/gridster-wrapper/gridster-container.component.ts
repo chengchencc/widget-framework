@@ -1,3 +1,10 @@
+/**
+ * @author [chengchen]
+ * @email [chengchen216@hotmail.com]
+ * @create date 2019-05-09 15:21:54
+ * @modify date 2019-05-09 15:21:54
+ * @desc [description]
+ */
 import { Component, OnInit, Input, Optional, ViewChild, ElementRef, HostBinding } from '@angular/core';
 
 import { deepClone } from '../../../utils/object';
@@ -95,6 +102,7 @@ export class GridsterContainerComponent implements OnInit {
       // console.log();
       // this.elementRef.nativeElement.style.cursor="not-allowed";
       throw new WidgetError("cannot",ErrorType.warning);
+      // throw new WidgetError("cannot",ErrorType.warning);
       return;
     }
 

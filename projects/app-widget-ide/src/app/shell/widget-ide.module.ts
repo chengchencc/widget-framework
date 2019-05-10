@@ -31,7 +31,7 @@ import { SidebarWidgetComponent } from './sidebar/sidebar-widget/sidebar-widget.
 
 import { AsideStyleComponent } from './aside/aside-style/aside-style.component';
 import { AsideSettingComponent } from './aside/aside-setting/aside-setting.component';
-import { AsideStructureComponent, AsideStructureTreeComponent } from './aside/aside-structure/aside-structure.component';
+import { AsideStructureComponent } from './aside/aside-structure/aside-structure.component';
 import { AsideEventComponent } from './aside/aside-event/aside-event.component';
 import { AsideStyleFormListComponent } from './aside/aside-style/aside-style-form-list/aside-style-form-list.component';
 import { BoxInputComponent } from './aside/aside-style/box-input/box-input.component';
@@ -42,6 +42,7 @@ import { DesignerService } from '../services/designer.service';
 
 import { Widget_Core_Config_Token, WidgetCoreConfig } from 'projects/widget-core/src/lib/core.config';
 import { ToastrModule } from 'ngx-toastr';
+import { AsideStructureTreeComponent } from './aside/aside-structure/aside-structure-tree.component';
 
 // import { OverlayModule } from "@angular/cdk/overlay";
 

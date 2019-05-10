@@ -1,6 +1,5 @@
 import { Component,Input, ViewChild, ViewContainerRef, HostListener, Optional, ComponentFactory, Injector, OnInit } from '@angular/core';
 import { WidgetInfo } from '../../../common/layout.interface';
-import { LayoutService } from '../../../common/layout.service';
 import { WidgetLoader } from '../../../loader/widget-loader';
 
 @Component({
@@ -22,7 +21,6 @@ export class WidgetContainerComponent implements OnInit {
 
   constructor(
     private widgetLoader: WidgetLoader,
-    private layoutService: LayoutService,
     // @Optional() private settable: WidgetSettableDirective
   ) { }
 

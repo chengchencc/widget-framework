@@ -3,7 +3,6 @@ import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from 'projects/widget-core/src/lib/store/store';
 import { PageService } from 'projects/widget-core/src/lib/page/page.service';
-import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
 
 @Injectable()
 export class DesignerService {
@@ -15,7 +14,7 @@ export class DesignerService {
   onTogglePreviewState$: Observable<boolean> = this.togglePreviewSubject.asObservable();
 
 
-  constructor(private store: Store, private pageService: PageService,private layoutService:LayoutService,private toastr: ToastrService) {
+  constructor(private store: Store, private pageService: PageService,private toastr: ToastrService) {
     console.log(this.store.whoAmI());
   }
 
@@ -28,6 +27,9 @@ export class DesignerService {
     this.pageService.save().subscribe((pageId)=>{
       this.toastr.success("success！");
     })
+  }
+  public currentPage(){
+    return this.pageService.currentPage;
   }
 
 }

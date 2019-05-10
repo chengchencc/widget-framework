@@ -1,3 +1,10 @@
+/**
+ * @author [chengchen]
+ * @email [chengchen216@hotmail.com]
+ * @create date 2019-05-09 15:19:10
+ * @modify date 2019-05-09 15:19:10
+ * @desc [description]
+ */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +24,7 @@ import { GridsterModule } from './gridster/gridster.module';
 import { GridsterContainerComponent } from './layout/components/gridster-wrapper/gridster-container.component';
 import { GridsterSettingsComponent } from './layout/components/gridster-settings/gridster-settings.component';
 import { SettingService } from './settable/setting.sevice';
+import { History } from './common/history';
 
 @NgModule({
   imports: [
@@ -40,6 +48,7 @@ import { SettingService } from './settable/setting.sevice';
     LayoutService,
     PageService,
     SettingService,
+    History,
     {provide:Widget_Core_Config_Token,useValue:DefaultWidgetCoreConfig}
   ],
   exports: [    

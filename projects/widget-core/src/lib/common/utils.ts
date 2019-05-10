@@ -1,5 +1,6 @@
 import { PageConfig } from '../page/page.interface';
 import { Layout } from './layout';
+import * as uuid from 'uuid';
 
 /**
  * 序列化PageConfig,序列化过程中自动忽略掉layoutConfig的parent引用，避免循环引用
@@ -38,4 +39,10 @@ export function DeserializePageConfig(v:string):PageConfig{
       v.parent = parent;
       _recursiveGenerateParentRef(v);
     })
+  }
+/**
+ * 生成UUID
+ */
+ export function newUUID (){
+   return uuid.v4();
   }

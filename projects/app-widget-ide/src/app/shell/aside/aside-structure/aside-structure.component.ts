@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input, HostBinding } from '@angular/core';
-import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
-import { SettingService, WidgetSettableDirective } from 'projects/widget-core/src/public-api';
+import { DesignerService } from '../../../services/designer.service';
 import { Layout } from 'projects/widget-core/src/lib/common/layout';
 
 @Component({
@@ -11,95 +10,17 @@ import { Layout } from 'projects/widget-core/src/lib/common/layout';
 export class AsideStructureComponent implements OnInit {
 
   layoutConfig: Layout;
-  selectedItem: WidgetSettableDirective
 
-  constructor(private layoutService: LayoutService,
-    public settingService: SettingService) {  }
+  constructor(private _designService:DesignerService) {  }
 
   ngOnInit() {
-    this.layoutService.onLayoutChanged$.subscribe(s => {
-      setTimeout(() => {
-        this.layoutConfig = s;
-      });
-    })
-  }
-
-  // handleSelectSettableItem (item: WidgetSettableDirective) {
-  //   this.selectedItem = item
-  // }
-}
-
-const typeIconMap = {
-  body: `web_asset`,
-  div: `check_box_outline_blank`,
-  widget: `widgets`,
-  grid: `apps`,
-  group: `view_week`,
-}
-@Component({
-  selector: 'design-aside-structure-tree',
-  template: `
-  <a class="node"
-    (mouseenter)=handleHoverNode()
-    (mouseleave)=handleLeaveNode()
-    (click)="handleClickNode()"
-    [class.active]="active()"
-    [class.hovering]="hovering()"
-    [class.collapsed]="collapsed" >
-    <i *ngIf="!config.layout.length"
-      class="material-icons arrow-placeholder"></i>
-    <i *ngIf="config.layout.length"
-      class="material-icons arrow"
-      (click)="handleToggleCollapse()" >{{collapsed ? 'chevron_right': 'expand_more'}}</i>
-    <i class="material-icons type">{{icon(config)}}</i>
-      {{config.type}}
-      <span class="id">({{config.id}})</span>
-  </a>
-  <ul class="children-ul">
-    <li *ngFor="let item of config.layout">
-      <design-aside-structure-tree
-        [config]="item" ></design-aside-structure-tree>
-    </li>
-  </ul>
-  `,
-  styles: [`
-  
-  `]
-})
-export class AsideStructureTreeComponent implements OnInit {
-
-  @Input() config: Layout
-
-  collapsed = false
-
-  constructor(public settingService: SettingService) { }
-
-  ngOnInit() {
-  }
-
-  icon(config) {
-    return typeIconMap[config.type]
-  }
-  /** 当点击收起/展开 */
-  handleToggleCollapse() {
-    this.collapsed = !this.collapsed;
-  }
-  handleClickNode() {
-    this.settingService.selectSettable(this.config.id);
-  }
-  handleHoverNode() {
-    this.settingService.enterSettable(this.config.id);
-  }
-  handleLeaveNode() {
-    this.settingService.leaveSettable();
-  }
-  active() {
-    let { selectedSettable } = this.settingService;
-    return selectedSettable && selectedSettable.config.id == this.config.id;
-  }
-  hovering() {
-    let { hoveringSettable } = this.settingService;
-    return hoveringSettable && hoveringSettable.config.id == this.config.id;
+    //由于previewComponent 与 当前组件非父子组件，没有加载先后顺序，因此，第一次订阅，previewComponent不一定加载，使用settimeout来延迟绑定
+    setTimeout(() => {
+      this._designService.currentPage().layoutChanged.subscribe(layout=>{
+        this.layoutConfig = layout;
+      });      
+    }, 0);
   }
 
 }
+

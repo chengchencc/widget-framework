@@ -55,6 +55,11 @@ export class WidgetSettableDirective implements DoCheck {
     get selected() {
         return this == this.settingService.selectedSettable;
     }
+    @HostBinding('class.is-empty')
+    get isEmpty()
+    {
+        return this.config.layout && this.config.layout.length==0;
+    }
 
     ngOnInit() {
         //方式2：
@@ -80,7 +85,7 @@ export class WidgetSettableDirective implements DoCheck {
     }
     /** 变更class、style检查，并应用变更 */
     private _checkClassesAndStyleChangesThenApply() {
-        console.log('_checkClassesAndStyleChangesThenApply');
+        // console.log('_checkClassesAndStyleChangesThenApply');
         if (this._classesIterableDiffer) {
             const classesChanges = this._classesIterableDiffer.diff(this._config.classes);
             if (classesChanges) {
@@ -120,9 +125,7 @@ export class WidgetSettableDirective implements DoCheck {
      * 移除自己
      */
     removeSelf() {
-        //通过parent，remove掉即可
-        var index = this.parent.config.layout.indexOf(this.config);
-        this.parent.config.layout.splice(index, 1);
+        this._config.parent.removeNode(this._config);
     }
 
     saveAsTemplate() {
@@ -152,24 +155,18 @@ export class WidgetSettableDirective implements DoCheck {
         // this.bsModalRef.content.closeBtnName = 'Close';
     }
 
-    getStyle(config: Layout): string {
-        var styleString = "";
-        for (const key in config.style) {
-            if (config.style.hasOwnProperty(key)) {
-                const value = config.style[key];
-                if (value) {
-                    styleString += `${key}:${value};`;
-                }
-            }
-        }
-        return styleString;
-    }
-
     getPath(): string[] {
         //TODO:目前出来的路径不对，需要完善
-        return this._config.id.split("-");
-    }
 
+        const path:string[]=[];
+        let next = this._config;
+        while (next) {
+            path.push(next.type);
+            next = next.parent;
+        }
+
+        return path.reverse();
+    }
 
     private _applyClassesIterableChanges(changes: IterableChanges<string>): void {
         changes.forEachAddedItem((record) => {
@@ -179,10 +176,8 @@ export class WidgetSettableDirective implements DoCheck {
                 throw new Error(`classes 仅支持 string 类型！`);
             }
         });
-
         changes.forEachRemovedItem((record) => this._toggleClass(record.item, false));
     }
-
 
     /**
       * Applies a collection of CSS classes to the DOM element.

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { WidgetContainerComponent } from 'projects/widget-core/src/lib/layout/components/widget-container/widget-container.component';
-import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
 import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
 import { SettingService } from 'projects/widget-core/src/public-api';
 

@@ -1,0 +1,14 @@
+<a class="node" (mouseenter)=handleHoverNode() (mouseleave)=handleLeaveNode() (click)="handleClickNode()"
+    [class.active]="active()" [class.hovering]="hovering()" [class.collapsed]="collapsed">
+    <i *ngIf="!config.layout.length" class="material-icons arrow-placeholder"></i>
+    <i *ngIf="config.layout.length" class="material-icons arrow"
+        (click)="handleToggleCollapse()">{{collapsed ? 'chevron_right': 'expand_more'}}</i>
+    <i class="material-icons type">{{icon(config)}}</i>
+    {{config.type}}
+    <!-- <span class="id">({{config.id}})</span> -->
+</a>
+<ul class="children-ul">
+    <li *ngFor="let item of config.layout">
+        <design-aside-structure-tree [config]="item"></design-aside-structure-tree>
+    </li>
+</ul>

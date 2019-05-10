@@ -1,5 +1,10 @@
 <widget-layout *ngIf="layout" [config]="layout" 
   appDropzone
   appSettable
-  (onDragDrop)="layout.appendNode($event)">
+  #settableItem="appSettable"
+  (onDragDrop)="appendLayout($event)">
+  <div class="setting-tool">
+    <button type="button" class="btn btn-dark btn-sm">{{settableItem.getPath().join('>')}}</button>
+    <!-- <button type="button" class="btn btn-dark btn-sm">setting</button> -->
+  </div>
 </widget-layout>

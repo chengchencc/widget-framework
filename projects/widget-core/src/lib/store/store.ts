@@ -58,7 +58,12 @@ export class Store implements StoreInterface {
      * @param id pageId
      */
     loadPageById(id:string):Observable<PageConfig>{
-        return of(DeserializePageConfig(localStorage.getItem(Page_Layout_Config+"|"+id))); //this.http.get<Page>("");
+        const jsonString = localStorage.getItem(Page_Layout_Config+"|"+id);
+        if(jsonString){
+            return of(DeserializePageConfig(jsonString)); //this.http.get<Page>("");
+        }else{
+            return of(null);
+        }
     }
 
     savePage(id:string,pageInfoString:string):Observable<string>{

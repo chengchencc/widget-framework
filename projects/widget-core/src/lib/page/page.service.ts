@@ -2,9 +2,10 @@ import { Injectable, Injector, Inject } from '@angular/core';
 import { Widget_Core_Config_Token, WidgetCoreConfig } from '../core.config';
 import { Store } from '../store/store';
 import { PreviewComponent } from '../preview/preview.component';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { serializePageConfig } from '../common/utils';
 import * as uuid from 'uuid';
+import { Layout } from '../common/layout';
 /**
  * 需要明确page service的职责
  */
@@ -12,6 +13,15 @@ import * as uuid from 'uuid';
 export class PageService {
   
   private _isDesignMode = true;
+  /**
+   * 当前正在配置的页面，暂时只支持配置一个页面
+   */
+  private _currentPage:PreviewComponent;
+
+  public layoutChanged:Subject<Layout> = new Subject<Layout>();
+
+  constructor(@Inject(Widget_Core_Config_Token) private config: WidgetCoreConfig, private store:Store ) {  }
+
   public get isDesignMode(): boolean {
     return this._isDesignMode;
   }
@@ -20,20 +30,18 @@ export class PageService {
   }
 
   /**
-   * 当前正在配置的页面，暂时只支持配置一个页面
+   * 获取当前正在配置的页面
    */
-  private _currentPage:PreviewComponent;
-
-
-  constructor(@Inject(Widget_Core_Config_Token) private config: WidgetCoreConfig, private store:Store ) {
-    console.log(config);
+  public get currentPage() : PreviewComponent {
+    return this._currentPage;
   }
 
   /**
    * 注册当前页面
+   * @internal
    * @param page PreviewComponent
    */
-  registerPage(page:PreviewComponent){
+ registerPage(page:PreviewComponent){
     this._currentPage = page;
   }
 
@@ -53,5 +61,6 @@ export class PageService {
     return this.store.savePage(this._currentPage.pageId,this._currentPage.getSerializedPageConfig());
   }
 
+  public 
 
 }

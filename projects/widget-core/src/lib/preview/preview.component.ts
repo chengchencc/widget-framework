@@ -5,7 +5,7 @@
  * @modify date 2019-05-09 14:32:42
  * @desc [description]
  */
-import { Component, OnInit, Input, Inject, KeyValueDiffers, IterableDiffers } from '@angular/core';
+import { Component, OnInit, Input, Inject, KeyValueDiffers, IterableDiffers, EventEmitter } from '@angular/core';
 import { LayoutService } from '../common/layout.service';
 import { PageConfig } from '../page/page.interface';
 import { PageService } from '../page/page.service';
@@ -16,12 +16,14 @@ import { Store } from '../store/store';
 import { SettingService } from '../settable/setting.sevice';
 import { Observable } from 'rxjs';
 import { Layout } from '../common/layout';
+import { History } from '../common/history';
+import { WidgetDragEvent } from '../dnd';
 
 /**
  * widget core 页面显示组件。
  * 组件依赖 page配置信息，进行渲染显示，page配置信息支持以下两种方式传入：
- * 1.直接通过 @Input() page 传入
- * 2.传入pageId，或者page路径，通过store根据此值去异步获取。此方式需要注入新的store，依赖此store去获取数据
+ * 1.直接通过 `@Input() page `传入
+ * 2.传入`pageId`，或者page路径，通过store根据此值去异步获取。此方式需要注入新的store，依赖此store去获取数据
  */
 @Component({
   selector: 'widget-preview',
@@ -36,28 +38,37 @@ import { Layout } from '../common/layout';
 export class PreviewComponent implements OnInit {
 
   private _pageConfig: PageConfig;
+  public layout: Layout;
+  public layoutChanged:EventEmitter<Layout> = new EventEmitter<Layout>();
 
-  public layout:Layout;
+  constructor(
+    public pageService: PageService,
+    public layoutService: LayoutService,
+    public settingService: SettingService,
+    @Inject(Widget_Core_Config_Token) private evnConfig: WidgetCoreConfig,
+    private store: Store,
+    private history:History,
+    private _KeyValueDiffer: KeyValueDiffers, private _iterableDiffers: IterableDiffers) { }
 
   @Input()
   public set config(v: PageConfig) {
     this._pageConfig = <PageConfig>v;
 
-    this.layout = new Layout(null,this._pageConfig.layout,this._KeyValueDiffer,this._iterableDiffers);
+    this.layout = new Layout(null, this._pageConfig.layout, this._KeyValueDiffer, this._iterableDiffers);
+    
+    this.history.subscribe(this.layout.changes)
 
-    this.layout.changes.subscribe(change=>{
-      console.log(change);
+    this.layoutChanged.subscribe(l=>{
+      this.pageService.layoutChanged.next(l);
     });
-    this.layoutService.initial(this.layout);
-    // this.layoutService.initial(this._pageConfig.layout);
-  } 
+    this.layoutChanged.emit(this.layout);
+    
+    //this.layoutService.initial(this.layout);
+  }
 
-  
-  public get config() : PageConfig {
+  public get config(): PageConfig {
     return this._pageConfig;
   }
-  
-
   // @Input()
   // public set config(v: PageConfig | string) {
   //   if (TypeHelper.isString(v)) {
@@ -69,7 +80,7 @@ export class PreviewComponent implements OnInit {
   @Input()
   public set configString(v: string) {
     this.config = DeserializePageConfig(<string>v);
-  } 
+  }
 
   @Input()
   public set pageId(v: string) {
@@ -88,27 +99,10 @@ export class PreviewComponent implements OnInit {
     }, 0);
   }
 
-  
-  public get pageId() : string {
+
+  public get pageId(): string {
     return this._pageConfig.id;
   }
-  
-
-
-  // public get layoutConfig(): Layout {
-  //   return this._pageConfig ? this._pageConfig.layout : DefaultLayout;
-  // }
-
-
-
-  constructor(
-    public pageService: PageService, 
-    public layoutService: LayoutService,
-    public settingService:SettingService,
-    @Inject(Widget_Core_Config_Token) private evnConfig: WidgetCoreConfig, 
-    private store:Store,
-    private _KeyValueDiffer:KeyValueDiffers,private _iterableDiffers:IterableDiffers
-     ) {}
 
   ngOnInit() {
     this.pageService.registerPage(this);
@@ -121,8 +115,8 @@ export class PreviewComponent implements OnInit {
     return serializePageConfig(this._pageConfig);
   }
 
-  public savePage():Observable<string>{
-    return this.store.savePage(this.pageId,serializePageConfig(this._pageConfig));
+  public savePage(): Observable<string> {
+    return this.store.savePage(this.pageId, serializePageConfig(this._pageConfig));
   }
 
   /**
@@ -134,10 +128,13 @@ export class PreviewComponent implements OnInit {
         name: "",
         desc: ""
       },
-      layout: new Layout(null,DefaultLayout,this._KeyValueDiffer,this._iterableDiffers) 
+      layout: new Layout(null, DefaultLayout, this._KeyValueDiffer, this._iterableDiffers)
     };
     return newPage;
   }
 
+  appendLayout(event:WidgetDragEvent){
+    this.layout.appendNode(event.data.layoutConfig);
+  }
 
 }

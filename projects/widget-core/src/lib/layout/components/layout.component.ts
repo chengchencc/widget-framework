@@ -1,10 +1,18 @@
+/**
+ * @author [chengchen]
+ * @email [chengchen216@hotmail.com]
+ * @create date 2019-05-09 15:20:41
+ * @modify date 2019-05-09 15:20:41
+ * @desc [description]
+ */
+
 import { Component, OnInit, Input, HostListener, SkipSelf, Optional, HostBinding, ElementRef } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
-import { LayoutService } from '../../common/layout.service';
 import { WidgetDragEvent } from '../../dnd/draggable-model';
 import { WidgetSettableDirective } from '../../settable/widget-settable.directive';
-import { LayoutConfig, LayoutTemplate } from '../../common/layout.interface';
 import { Layout } from '../../common/layout';
+import { WidgetLoaderManifest } from '../../common/widget.interface';
+import { LayoutConfig, LayoutTemplate } from '../../common/layout.interface';
 
 @Component({
   selector: 'widget-layout',
@@ -15,7 +23,6 @@ export class LayoutComponent implements OnInit {
 
   @Input()
   config: Layout;
-  templates: LayoutTemplate[];
 
   selected: boolean = false;
 
@@ -25,14 +32,12 @@ export class LayoutComponent implements OnInit {
 
   constructor(
     @SkipSelf() @Optional() parentLayout: LayoutComponent,
-    private layoutService: LayoutService,
     public elementRef: ElementRef,
     private sanitizer: DomSanitizer,
     @Optional() private settable:WidgetSettableDirective
     // private modalService: BsModalService
   ) {
     this._parent = parentLayout;
-    this.templates = layoutService.layoutTemplates;
 
   }
 
@@ -44,8 +49,28 @@ export class LayoutComponent implements OnInit {
   move(event: WidgetDragEvent, ref: Layout) {
     // this.layoutService.move(event, ref);
     //TODO:
-    console.log(event);
-    // this.config.appendNode(event.data.data);
+
+    let layoutConfig:LayoutConfig;
+
+    if (event.data.type === "widget") {
+      //drop的是部件
+      const widgetManifest = <WidgetLoaderManifest>event.data.data;
+      layoutConfig = {
+        id: "",
+        layout: [],
+        type: 'widget',
+        content: {
+          name: widgetManifest.name
+        }
+      }
+    } else {
+      //拖动的是layout
+      var tpl = <LayoutTemplate>event.data;
+      layoutConfig = tpl.layoutConfig;
+      //TODO:需要调整type为tpl.name
+      layoutConfig.type = 'group';
+    }
+    ref.appendNode(layoutConfig);
   }
 
 

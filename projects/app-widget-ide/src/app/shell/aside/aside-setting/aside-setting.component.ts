@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
 import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
 // import { LayoutService } from 'widget-core';
 // import { WidgetSettableDirective } from 'widget-core';
@@ -13,9 +12,7 @@ export class AsideSettingComponent implements OnInit {
 
 settings:any;
 
-  constructor(private layoutService:LayoutService) {    
-    //TODO:取消注释
-    // this.layoutService.onSelectSettableItem$.subscribe(s=>this.selecteSettableItem(s));
+  constructor() {    
    }
   ngOnInit() {
   }
