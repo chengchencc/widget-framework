@@ -18,6 +18,8 @@ import { Observable } from 'rxjs';
 import { Layout } from '../common/layout';
 import { History } from '../common/history';
 import { WidgetDragEvent } from '../dnd';
+import { LayoutConfig, LayoutTemplate } from '../common/layout.interface';
+import { WidgetLoaderManifest } from '../common/widget.interface';
 
 /**
  * widget core 页面显示组件。
@@ -134,7 +136,27 @@ export class PreviewComponent implements OnInit {
   }
 
   appendLayout(event:WidgetDragEvent){
-    this.layout.appendNode(event.data.layoutConfig);
+    let layoutConfig:LayoutConfig;
+
+    if (event.data.type === "widget") {
+      //drop的是部件
+      const widgetManifest = <WidgetLoaderManifest>event.data.data;
+      layoutConfig = {
+        id: "",
+        layout: [],
+        type: 'widget',
+        content: {
+          name: widgetManifest.name
+        }
+      }
+    } else {
+      //drop的是layout
+      var tpl = <LayoutTemplate>event.data;
+      layoutConfig = tpl.layoutConfig;
+      //TODO:需要调整type为tpl.name
+      layoutConfig.type = 'group';
+    }
+    this.layout.appendNode(layoutConfig);
   }
 
 }

@@ -47,9 +47,6 @@ export class LayoutComponent implements OnInit {
   }
 
   move(event: WidgetDragEvent, ref: Layout) {
-    // this.layoutService.move(event, ref);
-    //TODO:
-
     let layoutConfig:LayoutConfig;
 
     if (event.data.type === "widget") {
@@ -64,7 +61,7 @@ export class LayoutComponent implements OnInit {
         }
       }
     } else {
-      //拖动的是layout
+      //drop的是layout
       var tpl = <LayoutTemplate>event.data;
       layoutConfig = tpl.layoutConfig;
       //TODO:需要调整type为tpl.name
