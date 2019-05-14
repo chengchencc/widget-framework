@@ -18,7 +18,7 @@ import { PageService } from './page/page.service';
 import { Widget_Core_Config_Token, DefaultWidgetCoreConfig } from './core.config';
 import { LayoutComponent } from './layout/components/layout.component';
 import { WidgetContainerComponent } from './layout/components/widget-container/widget-container.component';
-import { LayoutService } from './common/layout.service';
+import { LayoutTemplateService } from './common/layout-template.service';
 import { DraggableModule } from './dnd/draggable.module';
 import { GridsterModule } from './gridster/gridster.module';
 import { GridsterContainerComponent } from './layout/components/gridster-wrapper/gridster-container.component';
@@ -45,7 +45,7 @@ import { History } from './common/history';
   providers:[
     Store,
     WidgetLoader,
-    LayoutService,
+    LayoutTemplateService,
     PageService,
     SettingService,
     History,

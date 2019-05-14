@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutTemplate } from 'projects/widget-core/src/lib/common/layout.interface';
-import { LayoutService } from 'projects/widget-core/src/lib/common/layout.service';
+import { LayoutTemplateService } from 'projects/widget-core/src/lib/common/layout-template.service';
 // import { LayoutTemplate } from 'widget-core';
 // import { LayoutService } from 'widget-core';
 
@@ -16,11 +16,11 @@ export class SidebarLayoutComponent implements OnInit {
   //自定义布局模板
   customLayoutTemplates:LayoutTemplate[];
 
-  constructor(private layoutService:LayoutService) { }
+  constructor(private layoutTemplateService:LayoutTemplateService) { }
 
   ngOnInit() {
-    this.layoutTemplates = this.layoutService.layoutTemplates;
-    this.customLayoutTemplates = this.layoutService.customLayoutTemplates;
+    this.layoutTemplates = this.layoutTemplateService.layoutTemplates;
+    this.customLayoutTemplates = this.layoutTemplateService.customLayoutTemplates;
   }
 
   remove(item:any){

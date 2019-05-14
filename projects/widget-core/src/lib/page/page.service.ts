@@ -11,16 +11,16 @@ import { Layout } from '../common/layout';
  */
 @Injectable()
 export class PageService {
-  
+
   private _isDesignMode = true;
   /**
    * 当前正在配置的页面，暂时只支持配置一个页面
    */
-  private _currentPage:PreviewComponent;
+  private _currentPage: PreviewComponent;
 
-  public layoutChanged:Subject<Layout> = new Subject<Layout>();
+  public layoutChanged: Subject<Layout> = new Subject<Layout>();
 
-  constructor(@Inject(Widget_Core_Config_Token) private config: WidgetCoreConfig, private store:Store ) {  }
+  constructor(@Inject(Widget_Core_Config_Token) private config: WidgetCoreConfig, private store: Store) { }
 
   public get isDesignMode(): boolean {
     return this._isDesignMode;
@@ -32,8 +32,15 @@ export class PageService {
   /**
    * 获取当前正在配置的页面
    */
-  public get currentPage() : PreviewComponent {
+  public get currentPage(): PreviewComponent {
     return this._currentPage;
+  }
+
+  /**
+   * 初始化
+   */
+  public init(){
+
   }
 
   /**
@@ -41,7 +48,7 @@ export class PageService {
    * @internal
    * @param page PreviewComponent
    */
- registerPage(page:PreviewComponent){
+  public registerPage(page: PreviewComponent) {
     this._currentPage = page;
   }
 
@@ -49,18 +56,18 @@ export class PageService {
    * 加载页面配置信息
    * @param id pageId
    */
-  public loadPage(id:string){
+  public loadPage(id: string) {
     return this.store.loadPageById(id);
   }
 
-  public savePage(id:string,pageInfoString:string){
-    return this.store.savePage(id,pageInfoString);
+  public savePage(id: string, pageInfoString: string) {
+    return this.store.savePage(id, pageInfoString);
   }
 
-  public save():Observable<string>{
-    return this.store.savePage(this._currentPage.pageId,this._currentPage.getSerializedPageConfig());
+  public save(): Observable<string> {
+    return this.store.savePage(this._currentPage.pageId, this._currentPage.getSerializedPageConfig());
   }
 
-  public 
+  public
 
 }

@@ -18,7 +18,7 @@ export type LayoutPropNameType = 'self' | 'style' |'classes' | 'layout' | 'conte
 /**
  * Layout 对象树
  */
-export class Layout {
+export class Layout implements LayoutConfig {
     public id: string;
     public path?: string;
     public type: LayoutType;
@@ -83,18 +83,33 @@ export class Layout {
     public getNode(path: string) {
 
     }
+    /**
+     * 当前节点子集 append 新节点
+     * @param node layout config
+     */
     public appendNode(node: LayoutConfig) {
         this.layout.push(new Layout(this, node, this._KeyValueDiffer, this._iterableDiffers));
         this._doCheck();
     }
+    /**
+     * 当前节点子集移除布局节点
+     * @param node layout config
+     */
     public removeNode(node: Layout) {
         this.layout.splice(this.layout.indexOf(node), 1);
         this._doCheck();
     }
-
+    /**
+     * 当前节点前插入节点
+     * @param node layout config
+     */
     public insertBefore(node:LayoutConfig) {
         throw new Error("not implements!");
     }
+    /**
+     * 当前节点后插入节点
+     * @param node layout config
+     */
     public insertAfter(node:LayoutConfig) {
         throw new Error("not implements!");
     }

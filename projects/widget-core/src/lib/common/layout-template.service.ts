@@ -1,41 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import * as _ from 'lodash';
-import { WidgetDragEvent } from '../dnd/draggable-model';
 import { Store } from '../store/store';
-import { GridType, CompactType, DisplayGrid } from '../gridster/gridsterConfig.interface';
-import { GridsterItem } from '../gridster/gridsterItem.interface';
-import { LayoutConfig,LayoutTemplate } from './layout.interface';
-import { WidgetLoaderManifest } from './widget.interface';
-import { DefaultLayoutTemplates, DefaultLayout } from './layout-default';
-import { Layout } from './layout';
+import { LayoutTemplate } from './layout.interface';
+import { DefaultLayoutTemplates } from './layout-default';
 
 @Injectable()
-export class LayoutService {
-  self: LayoutService = this;
+export class LayoutTemplateService {
 
-  onLayoutChanged$: Observable<Layout>
-  private onlayoutChangedSubject = new Subject<Layout>();
-
-  //布局配置信息
-  layoutConfig: Layout;
   //系统布局模板
   layoutTemplates: LayoutTemplate[] = DefaultLayoutTemplates;
   //自定义布局模板
   customLayoutTemplates: LayoutTemplate[] = [];
 
   constructor(private store: Store) {
-    console.log("layoutService :: ctor.");
-    this.onLayoutChanged$ = this.onlayoutChangedSubject.asObservable();
 
-    // this.layoutConfig = this.load();
-    // this.loadLayoutTemplates();
-  }
-
-
-  initial(layout:Layout){
-    console.log("layoutService :: initial :: layoutConfig");
-    this.layoutConfig = layout;
   }
 
   /**

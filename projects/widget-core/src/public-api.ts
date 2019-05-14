@@ -50,7 +50,7 @@ export * from './lib/preview/preview.component';
 export * from './lib/settable/setting.base';
 export * from './lib/settable/widget-settable.directive';
 export * from './lib/store/store';
-export * from './lib/common/layout.service';
+export * from './lib/common/layout-template.service';
 
 export * from './lib/settable/setting.sevice';
 

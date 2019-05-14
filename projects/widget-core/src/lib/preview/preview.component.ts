@@ -6,7 +6,6 @@
  * @desc [description]
  */
 import { Component, OnInit, Input, Inject, KeyValueDiffers, IterableDiffers, EventEmitter } from '@angular/core';
-import { LayoutService } from '../common/layout.service';
 import { PageConfig } from '../page/page.interface';
 import { PageService } from '../page/page.service';
 import { DefaultLayout } from '../common/layout-default';
@@ -45,7 +44,6 @@ export class PreviewComponent implements OnInit {
 
   constructor(
     public pageService: PageService,
-    public layoutService: LayoutService,
     public settingService: SettingService,
     @Inject(Widget_Core_Config_Token) private evnConfig: WidgetCoreConfig,
     private store: Store,
@@ -60,7 +58,7 @@ export class PreviewComponent implements OnInit {
     
     this.history.subscribe(this.layout.changes)
 
-    this.layoutChanged.subscribe(l=>{
+    this.layoutChanged.subscribe((l: Layout)=>{
       this.pageService.layoutChanged.next(l);
     });
     this.layoutChanged.emit(this.layout);
