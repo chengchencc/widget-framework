@@ -14,7 +14,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { WidgetSettableDirective } from './settable/widget-settable.directive';
 import { Store } from './store/store';
 import { WidgetLoader } from './loader/widget-loader';
-import { PageService } from './page/page.service';
+import { PageService } from './common/page.service';
 import { Widget_Core_Config_Token, DefaultWidgetCoreConfig } from './core.config';
 import { LayoutComponent } from './layout/components/layout.component';
 import { WidgetContainerComponent } from './layout/components/widget-container/widget-container.component';

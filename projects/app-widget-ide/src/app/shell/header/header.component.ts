@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     {key:"red",href:"/assets/themes/styles.css"}
   ]
 
-  constructor(private designerService: DesignerService) { }
+  constructor(public designerService: DesignerService) { }
 
   ngOnInit() {
   }

@@ -5,9 +5,8 @@
  * @modify date 2019-05-09 14:32:42
  * @desc [description]
  */
-import { Component, OnInit, Input, Inject, KeyValueDiffers, IterableDiffers, EventEmitter } from '@angular/core';
-import { PageConfig } from '../page/page.interface';
-import { PageService } from '../page/page.service';
+import { Component, OnInit, Input, Inject, KeyValueDiffers, IterableDiffers, EventEmitter, Output } from '@angular/core';
+import { PageService, PageConfig } from '../common/page.service';
 import { DefaultLayout } from '../common/layout-default';
 import { serializePageConfig, DeserializePageConfig } from '../common/utils';
 import { Widget_Core_Config_Token, WidgetCoreConfig } from '../core.config';
@@ -38,104 +37,55 @@ import { WidgetLoaderManifest } from '../common/widget.interface';
 })
 export class PreviewComponent implements OnInit {
 
-  private _pageConfig: PageConfig;
-  public layout: Layout;
+
+  @Output()
   public layoutChanged:EventEmitter<Layout> = new EventEmitter<Layout>();
 
   constructor(
     public pageService: PageService,
     public settingService: SettingService,
-    @Inject(Widget_Core_Config_Token) private evnConfig: WidgetCoreConfig,
-    private store: Store,
-    private history:History,
-    private _KeyValueDiffer: KeyValueDiffers, private _iterableDiffers: IterableDiffers) { }
+    @Inject(Widget_Core_Config_Token) private evnConfig: WidgetCoreConfig) { }
 
   @Input()
   public set config(v: PageConfig) {
-    this._pageConfig = <PageConfig>v;
-
-    this.layout = new Layout(null, this._pageConfig.layout, this._KeyValueDiffer, this._iterableDiffers);
-    
-    this.history.subscribe(this.layout.changes)
-
-    this.layoutChanged.subscribe((l: Layout)=>{
-      this.pageService.layoutChanged.next(l);
-    });
-    this.layoutChanged.emit(this.layout);
-    
-    //this.layoutService.initial(this.layout);
+      this.pageService.init(v);
   }
 
-  public get config(): PageConfig {
-    return this._pageConfig;
-  }
-  // @Input()
-  // public set config(v: PageConfig | string) {
-  //   if (TypeHelper.isString(v)) {
-  //     v = DeserializePageConfig(<string>v);
-  //   }
-  //   this._pageConfig = <PageConfig>v;
-  //   this.layoutService.initial(this._pageConfig.layout);
-  // } 
   @Input()
   public set configString(v: string) {
-    this.config = DeserializePageConfig(<string>v);
+    this.config = DeserializePageConfig(v);
+    this.pageService.init(this.config);
   }
 
   @Input()
   public set pageId(v: string) {
-    //通过异步更新的方式，防止angular二次变化监测报错问题 。
-    //参考：https://juejin.im/entry/59f0cc8a6fb9a0452935f979
-    setTimeout(() => {
-      this.pageService.loadPage(v).subscribe((page) => {
-        if (page) {
-          this.config = page;
-        } else {
-          console.log(this._initialNewPageInfo());
-          this.config = this._initialNewPageInfo();
-          this.config.id = v;
-        }
-      })
-    }, 0);
+    this.pageService.initByPageId(v).subscribe(()=>{
+      console.log("pageservice initialed");
+      this.layoutChanged.emit(this.pageService.layout);
+    });
   }
 
+  public get layout(): Layout{
+    return this.pageService.layout;
+  }
 
   public get pageId(): string {
-    return this._pageConfig.id;
+    return this.pageService.id;
   }
 
   ngOnInit() {
     this.pageService.registerPage(this);
-  }
-
-  /**
-   * 获取序列化后的页面配置信息
-   */
-  public getSerializedPageConfig(): string {
-    return serializePageConfig(this._pageConfig);
+    this.pageService.layoutChanged.subscribe(layout=>{
+      this.layoutChanged.emit(layout);
+    })
   }
 
   public savePage(): Observable<string> {
-    return this.store.savePage(this.pageId, serializePageConfig(this._pageConfig));
-  }
-
-  /**
-   * 初始化新增页面时的默认页面配置信息
-   */
-  private _initialNewPageInfo(): PageConfig {
-    const newPage = {
-      info: {
-        name: "",
-        desc: ""
-      },
-      layout: new Layout(null, DefaultLayout, this._KeyValueDiffer, this._iterableDiffers)
-    };
-    return newPage;
+    return this.pageService.save();
   }
 
   appendLayout(event:WidgetDragEvent){
     let layoutConfig:LayoutConfig;
-
     if (event.data.type === "widget") {
       //drop的是部件
       const widgetManifest = <WidgetLoaderManifest>event.data.data;
@@ -152,7 +102,7 @@ export class PreviewComponent implements OnInit {
       var tpl = <LayoutTemplate>event.data;
       layoutConfig = tpl.layoutConfig;
       //TODO:需要调整type为tpl.name
-      layoutConfig.type = 'group';
+      //layoutConfig.type = 'group';
     }
     this.layout.appendNode(layoutConfig);
   }

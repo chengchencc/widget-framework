@@ -1,15 +1,15 @@
 <div class="setting-container">
 
-  <form>
+  <form *ngIf="info">
       <div class="form-group">
         <label for="exampleInputEmail1">名称</label>
-        <input type="text" class="form-control form-control-sm" id="name" name="name" aria-describedby="emailHelp" placeholder="请输入页面名称" autocomplete="off" >
+        <input type="text" class="form-control form-control-sm" id="name" name="name" aria-describedby="emailHelp" placeholder="请输入页面名称" autocomplete="off" [(ngModel)]="designService.pageService.info.name">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
 
       <div class="form-group">
           <label for="exampleInputEmail1">描述</label>
-          <textarea type="text" class="form-control form-control-sm" id="description" name="description" row="3" placeholder=""></textarea>
+          <textarea type="text" class="form-control form-control-sm" id="description" name="description" row="3" placeholder="" [(ngModel)]="designService.pageService.info.desc"></textarea>
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
       <!-- <div class="form-group">

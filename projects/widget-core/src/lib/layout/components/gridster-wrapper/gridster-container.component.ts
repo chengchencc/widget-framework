@@ -101,7 +101,8 @@ export class GridsterContainerComponent implements OnInit {
     if(event.data.type !== "widget"){
       // console.log();
       // this.elementRef.nativeElement.style.cursor="not-allowed";
-      throw new WidgetError("cannot",ErrorType.warning);
+      // throw new WidgetError("cannot",ErrorType.warning);
+      throw new Error("cannot drop layout to grid！");
       // throw new WidgetError("cannot",ErrorType.warning);
       return;
     }

@@ -11,15 +11,16 @@ export class AsideStructureComponent implements OnInit {
 
   layoutConfig: Layout;
 
-  constructor(private _designService:DesignerService) {  }
+  constructor(private _designService: DesignerService) { }
 
   ngOnInit() {
     //由于previewComponent 与 当前组件非父子组件，没有加载先后顺序，因此，第一次订阅，previewComponent不一定加载，使用settimeout来延迟绑定
-    setTimeout(() => {
-      this._designService.currentPage().layoutChanged.subscribe(layout=>{
+    this._designService.pageService.pageInitialed.subscribe(layout => {
+      setTimeout(() => {
         this.layoutConfig = layout;
-      });      
-    }, 0);
+      }, 0);
+    });
+
   }
 
 }

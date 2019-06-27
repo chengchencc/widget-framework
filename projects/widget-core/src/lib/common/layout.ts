@@ -217,9 +217,10 @@ export class Layout implements LayoutConfig {
     }
 
     /**序列化为json string字符串 */
-    public stringify() {
-        throw new Error("method not implements!");
-    }
+    public toJSON(){
+        const { id, path, type, classes, style, settings, content, layout} = this;
+        return { id, path, type, classes, style, settings, content, layout };
+      }
 
 }
 

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from 'projects/widget-core/src/lib/store/store';
-import { PageService } from 'projects/widget-core/src/lib/page/page.service';
+import { PageService } from 'projects/widget-core/src/public-api';
 
 @Injectable()
 export class DesignerService {
@@ -14,7 +14,7 @@ export class DesignerService {
   onTogglePreviewState$: Observable<boolean> = this.togglePreviewSubject.asObservable();
 
 
-  constructor(private store: Store, private pageService: PageService,private toastr: ToastrService) {
+  constructor(private store: Store, public pageService: PageService,private toastr: ToastrService) {
     console.log(this.store.whoAmI());
   }
 

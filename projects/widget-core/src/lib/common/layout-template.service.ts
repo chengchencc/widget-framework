@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { Store } from '../store/store';
 import { LayoutTemplate } from './layout.interface';
 import { DefaultLayoutTemplates } from './layout-default';
+import { jsonSerializeRemoveRef } from './utils';
 
 @Injectable()
 export class LayoutTemplateService {
@@ -15,6 +16,31 @@ export class LayoutTemplateService {
   constructor(private store: Store) {
 
   }
+
+  //模板相关
+  addLayoutTemplate = (tpl: LayoutTemplate) => {
+    this.store.addCustomLayoutTemplate(jsonSerializeRemoveRef(tpl,'parent')).subscribe(id=>{
+      tpl.id = id;
+      this.customLayoutTemplates.push(tpl);      
+    });
+  }
+
+  loadLayoutTemplates = () => {
+    this.store.getAllCustomLayoutTemplate().subscribe(tpls=>{
+      if (tpls) {
+        tpls.forEach(value=>{
+          this.customLayoutTemplates.push(JSON.parse(value));          
+        });
+      }
+    });
+  }
+
+  deleteLayoutTemplate = (tpl: LayoutTemplate) => {
+    this.store.removeCustomLayoutTemplate(tpl.id).subscribe(()=>{
+      console.log("removed");
+    });
+  }
+
 
   /**
    * append layout
@@ -85,27 +111,7 @@ export class LayoutTemplateService {
 
 
 
-  //模板相关
-  // addLayoutTemplate = (tpl: LayoutTemplate) => {
-  //   this.customLayoutTemplates.push(tpl);
-  //   this.saveLayoutTemplate();
-  // }
 
-  // saveLayoutTemplate() {
-  //   //  this.store.saveCustomLayoutTemplate(this._serializeLayout(this.customLayoutTemplates));
-  // }
-
-  // loadLayoutTemplates = () => {
-  //   let tpls = this.store.loadCustomLayoutTemplate();
-  //   if (tpls) {
-  //     this.customLayoutTemplates = JSON.parse(tpls);
-  //   }
-  // }
-
-  // deleteLayoutTemplate = (tpl: LayoutTemplate) => {
-  //   _.remove(this.customLayoutTemplates, tpl);
-  //   this.saveLayoutTemplate();
-  // }
 
 
 

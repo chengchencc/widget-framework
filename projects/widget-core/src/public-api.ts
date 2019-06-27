@@ -44,8 +44,7 @@ export * from './lib/layout/components/gridster-settings/gridster-settings.compo
 export * from './lib/utils';
 export * from './lib/loader/widget-core';
 export * from './lib/loader/widget-loader';
-export * from './lib/page/page.interface';
-export * from './lib/page/page.service';
+export * from './lib/common/page.service';
 export * from './lib/preview/preview.component';
 export * from './lib/settable/setting.base';
 export * from './lib/settable/widget-settable.directive';

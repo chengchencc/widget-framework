@@ -1,7 +1,3 @@
-import { Injectable } from '@angular/core';
-import { LayoutChange } from './layout';
-import { Observable } from 'rxjs';
-
 /**
  * @author [chengchen]
  * @email [chengchen216@hotmail.com]
@@ -10,8 +6,12 @@ import { Observable } from 'rxjs';
  * @desc [description]
  */
 
+import { Injectable } from '@angular/core';
+import { LayoutChange } from './layout';
+import { Observable } from 'rxjs';
+
 /**
- * 时间原因，暂时只实现撤销功能
+ * 页面修改历史
  */
 @Injectable()
 export class History {

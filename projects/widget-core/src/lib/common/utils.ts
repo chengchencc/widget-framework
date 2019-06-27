@@ -1,6 +1,6 @@
-import { PageConfig } from '../page/page.interface';
 import { Layout } from './layout';
 import * as uuid from 'uuid';
+import { PageConfig } from './page.service';
 
 /**
  * 序列化PageConfig,序列化过程中自动忽略掉layoutConfig的parent引用，避免循环引用
@@ -10,7 +10,7 @@ export const serializePageConfig = function (pageConfig:PageConfig) {
     return jsonSerializeRemoveRef(pageConfig,"parent");
 }
 
-function jsonSerializeRemoveRef(obj:any,refKey:string):string {
+export function jsonSerializeRemoveRef(obj:any,refKey:string):string {
     return JSON.stringify(obj,(key, value) => {
         if (key === refKey) {
           return undefined;
