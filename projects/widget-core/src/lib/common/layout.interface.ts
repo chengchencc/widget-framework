@@ -29,7 +29,7 @@ export interface ConfigEditorData { [propName: string]: string }
  * 页面布局模板存储结构
  */
 export interface LayoutTemplate{
-    name:string,
+    name:'body'|'div'|'grid'|'group'|'widget',
     id:string,
     layoutConfig:LayoutConfig
   }

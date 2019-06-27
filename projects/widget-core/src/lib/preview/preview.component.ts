@@ -154,7 +154,8 @@ export class PreviewComponent implements OnInit {
       var tpl = <LayoutTemplate>event.data;
       layoutConfig = tpl.layoutConfig;
       //TODO:需要调整type为tpl.name
-      layoutConfig.type = 'group';
+      // layoutConfig.type = 'group';
+      layoutConfig.type = tpl.name;
     }
     this.layout.appendNode(layoutConfig);
   }
