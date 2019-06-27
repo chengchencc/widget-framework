@@ -1,6 +1,8 @@
-import { __decorate, __metadata } from 'tslib';
-import { Injectable, NgModule, EventEmitter, Component, Input, Output, defineInjectable } from '@angular/core';
-import { Widget } from '@widget/core';
+import { __decorate, __metadata, __spread } from 'tslib';
+import { Widget } from 'widget-core';
+import 'chart.js';
+import { Injectable, Component, Output, EventEmitter, Input, ViewChild, defineInjectable, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 /**
  * @fileoverview added by tsickle
@@ -233,13 +235,133 @@ var CardComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var GspWidgetChartjsSettingsComponent = /** @class */ (function () {
+    function GspWidgetChartjsSettingsComponent() {
+        this.settingsChange = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    GspWidgetChartjsSettingsComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () { };
+    /**
+     * @return {?}
+     */
+    GspWidgetChartjsSettingsComponent.prototype.save = /**
+     * @return {?}
+     */
+    function () {
+        this.settingsChange.emit(this.settings);
+    };
+    GspWidgetChartjsSettingsComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'lib-gsp-widget-chartjs-settings',
+                    template: "<p>\r\n    this is chartjs widget settings page!\r\n</p>\r\n\r\n<div class=\"form-group\">\r\n  <label for=\"chartTitle\">\u6807\u9898</label>\r\n  <input type=\"text\" name=\"chartTitle\" id=\"chartTitle\" class=\"form-control\" placeholder=\"\u8BF7\u8F93\u5165\u6807\u9898\" aria-describedby=\"chartTitleHelper\" [(ngModel)]=\"settings.title\">\r\n  <small id=\"chartTitleHelper\" class=\"text-muted\">\u8BF7\u8F93\u5165\u6807\u9898\u3002\u3002\u3002</small>\r\n</div>\r\n\r\n<div class=\"form-group\">\r\n  <label class=\"custom-control custom-radio\">\r\n    <input type=\"radio\" name=\"legend\" id=\"legend\" value=\"true\" class=\"custom-control-input\" [(ngModel)]=\"settings.legend\">\r\n    <span class=\"custom-control-indicator\"></span>\r\n    <span class=\"custom-control-description\">\u663E\u793A\u56FE\u4F8B</span>\r\n  </label>\r\n</div>\r\n\r\n<button (click)=\"save()\" type=\"button\" name=\"save\" id=\"savesettings\" class=\"btn btn-dark btn-block\">save</button>",
+                    styles: [""]
+                }] }
+    ];
+    /** @nocollapse */
+    GspWidgetChartjsSettingsComponent.ctorParameters = function () { return []; };
+    GspWidgetChartjsSettingsComponent.propDecorators = {
+        settings: [{ type: Input }],
+        settingsChange: [{ type: Output }]
+    };
+    return GspWidgetChartjsSettingsComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var GspWidgetChartjsComponent = /** @class */ (function () {
+    function GspWidgetChartjsComponent() {
+    }
+    /**
+     * @return {?}
+     */
+    GspWidgetChartjsComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+    };
+    /**
+     * @return {?}
+     */
+    GspWidgetChartjsComponent.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        // this.canvas = document.getElementById('myChart');
+        // this.ctx = this.canvas.getContext('2d');
+        this.ctx = ((/** @type {?} */ (this.myCanvas.nativeElement))).getContext('2d');
+        /** @type {?} */
+        var Cc = Chart;
+        //Chart.__moduleExports && Chart.default.Chart || Chart;
+        /** @type {?} */
+        var myChart = new Cc(this.ctx, {
+            type: 'pie',
+            data: {
+                labels: ["New", "In Progress", "On Hold"],
+                datasets: [{
+                        label: '# of Votes',
+                        data: [1, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+            },
+            options: {
+                responsive: false
+            }
+        });
+    };
+    GspWidgetChartjsComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'lib-gsp-widget-chartjs',
+                    template: "\n  <canvas width=\"300\" height=\"300\" #chart></canvas>\n\n  "
+                }] }
+    ];
+    /** @nocollapse */
+    GspWidgetChartjsComponent.ctorParameters = function () { return []; };
+    GspWidgetChartjsComponent.propDecorators = {
+        myCanvas: [{ type: ViewChild, args: ['chart',] }]
+    };
+    GspWidgetChartjsComponent = __decorate([
+        Widget({
+            name: "chart",
+            settingComponent: GspWidgetChartjsSettingsComponent
+        }),
+        __metadata("design:paramtypes", [])
+    ], GspWidgetChartjsComponent);
+    return GspWidgetChartjsComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var c = [GspWidgetChartjsComponent, GspWidgetChartjsSettingsComponent];
 var DemoWidgetModule = /** @class */ (function () {
     function DemoWidgetModule() {
     }
     DemoWidgetModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: [DemoWidgetComponent, DemoWidgetNavComponent, JumbotronComponent, FormLoginComponent, CardComponent],
-                    imports: [],
+                    declarations: __spread([
+                        DemoWidgetComponent,
+                        DemoWidgetNavComponent,
+                        JumbotronComponent,
+                        FormLoginComponent,
+                        CardComponent
+                    ], c),
+                    imports: [
+                        FormsModule
+                    ],
                     exports: [DemoWidgetComponent]
                 },] }
     ];
@@ -256,6 +378,6 @@ var DemoWidgetModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { DemoWidgetService, DemoWidgetComponent, DemoWidgetModule, CardComponent as ɵd, DemoWidgetNavComponent as ɵa, FormLoginComponent as ɵc, JumbotronComponent as ɵb };
+export { DemoWidgetService, DemoWidgetComponent, DemoWidgetModule, CardComponent as ɵd, GspWidgetChartjsSettingsComponent as ɵf, GspWidgetChartjsComponent as ɵe, DemoWidgetNavComponent as ɵa, FormLoginComponent as ɵc, JumbotronComponent as ɵb };
 
 //# sourceMappingURL=demo-widget.js.map

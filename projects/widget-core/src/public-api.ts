@@ -35,6 +35,13 @@ export * from './lib/gridster/index';
 //add by chengchen
 export {GridsterPreviewComponent} from './lib/gridster/gridsterPreview.component';
 
+export * from './lib/common/history';
+export * from './lib/common/layout.interface';
+export * from './lib/common/layout';
+export * from './lib/common/page.service';
+export * from './lib/common/utils';
+export * from './lib/common/widget-error';
+export * from './lib/common/widget.interface';
 
 export {WidgetCoreConfig,Widget_Core_Config_Token,DefaultWidgetCoreConfig} from './lib/core.config';
 export * from './lib/layout/components/layout.component';

@@ -17,7 +17,29 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "widget-core": [
+        "dist/widget-core"
+      ],
+      "widget-core/*": [
+        "dist/widget-core/*"
+      ],
+      "widget-ide": [
+        "dist/widget-ide"
+      ],
+      "widget-ide/*": [
+        "dist/widget-ide/*"
+      ],
+      "demo-widget": [
+        "dist/demo-widget"
+      ],
+      "demo-widget/*": [
+        "dist/demo-widget/*"
+      ]
+    }
   },
-  "exclude": ["dist"]
+  "exclude": [
+    "dist"
+  ]
 }

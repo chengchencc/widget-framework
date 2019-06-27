@@ -95,7 +95,8 @@ export class WidgetLoader {
     SystemJS.set('@angular/forms', SystemJS.newModule(AngularForms));
     //方案1，使用本地gsp-widget-core依赖
     //import * as Core from 'gsp-widget-core';
-    SystemJS.set('@widget/core', SystemJS.newModule(WidgetCore));
+    SystemJS.set('widget-core', SystemJS.newModule(WidgetCore));
+    // SystemJS.set('@widget/core', SystemJS.newModule(WidgetCore));
 
     this.isSystemJSInitialed = true;
 

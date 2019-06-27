@@ -60,5 +60,19 @@
             "cols":2,
             "rows":1
         }
+    },
+    {
+        "name":"chart",
+        "displayName":"Chartjs",
+        "previewUrl":"",
+        "path":"DemoWidgetModule",
+        "src":"http://localhost:4200/assets/widgets/demo-widget/bundles/demo-widget.umd.js",
+        "moduleName":"DemoWidgetModule",
+        "description":"by angular library",
+        "registered":true,
+        "grid":{
+            "cols":2,
+            "rows":2
+        }
     }
 ]

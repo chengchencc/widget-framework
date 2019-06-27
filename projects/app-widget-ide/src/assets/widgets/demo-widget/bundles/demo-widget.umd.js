@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@widget/core')) :
-    typeof define === 'function' && define.amd ? define('demo-widget', ['exports', '@angular/core', '@widget/core'], factory) :
-    (factory((global['demo-widget'] = {}),global.ng.core,global.core));
-}(this, (function (exports,i0,core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('widget-core'), require('chart.js'), require('@angular/core'), require('@angular/forms')) :
+    typeof define === 'function' && define.amd ? define('demo-widget', ['exports', 'widget-core', 'chart.js', '@angular/core', '@angular/forms'], factory) :
+    (factory((global['demo-widget'] = {}),global.widgetCore,null,global.ng.core,global.ng.forms));
+}(this, (function (exports,widgetCore,chart_js,i0,forms) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -50,6 +50,35 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
             return Reflect.metadata(metadataKey, metadataValue);
     }
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m)
+            return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
+        }
+        catch (error) {
+            e = { error: error };
+        }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
+            }
+            finally {
+                if (e)
+                    throw e.error;
+            }
+        }
+        return ar;
+    }
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
 
     /**
      * @fileoverview added by tsickle
@@ -75,7 +104,7 @@
         /** @nocollapse */
         DemoWidgetComponent.ctorParameters = function () { return []; };
         DemoWidgetComponent = __decorate([
-            core.Widget({
+            widgetCore.Widget({
                 name: "demo-widget"
             }),
             __metadata("design:paramtypes", [])
@@ -108,7 +137,7 @@
         /** @nocollapse */
         DemoWidgetNavComponent.ctorParameters = function () { return []; };
         DemoWidgetNavComponent = __decorate([
-            core.Widget({
+            widgetCore.Widget({
                 name: "demo-widget-nav"
             }),
             __metadata("design:paramtypes", [])
@@ -162,7 +191,7 @@
             color: [{ type: i0.Input }]
         };
         JumbotronComponent = __decorate([
-            core.Widget({
+            widgetCore.Widget({
                 name: 'demo-widget-jumbotron'
             }),
             __metadata("design:paramtypes", [])
@@ -195,7 +224,7 @@
         /** @nocollapse */
         FormLoginComponent.ctorParameters = function () { return []; };
         FormLoginComponent = __decorate([
-            core.Widget({
+            widgetCore.Widget({
                 name: 'demo-widget-form-login'
             }),
             __metadata("design:paramtypes", [])
@@ -251,7 +280,7 @@
             titleClick: [{ type: i0.Output }]
         };
         CardComponent = __decorate([
-            core.Widget({
+            widgetCore.Widget({
                 name: 'demo-widget-card'
             }),
             __metadata("design:paramtypes", [])
@@ -263,13 +292,133 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var GspWidgetChartjsSettingsComponent = /** @class */ (function () {
+        function GspWidgetChartjsSettingsComponent() {
+            this.settingsChange = new i0.EventEmitter();
+        }
+        /**
+         * @return {?}
+         */
+        GspWidgetChartjsSettingsComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { };
+        /**
+         * @return {?}
+         */
+        GspWidgetChartjsSettingsComponent.prototype.save = /**
+         * @return {?}
+         */
+            function () {
+                this.settingsChange.emit(this.settings);
+            };
+        GspWidgetChartjsSettingsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-gsp-widget-chartjs-settings',
+                        template: "<p>\r\n    this is chartjs widget settings page!\r\n</p>\r\n\r\n<div class=\"form-group\">\r\n  <label for=\"chartTitle\">\u6807\u9898</label>\r\n  <input type=\"text\" name=\"chartTitle\" id=\"chartTitle\" class=\"form-control\" placeholder=\"\u8BF7\u8F93\u5165\u6807\u9898\" aria-describedby=\"chartTitleHelper\" [(ngModel)]=\"settings.title\">\r\n  <small id=\"chartTitleHelper\" class=\"text-muted\">\u8BF7\u8F93\u5165\u6807\u9898\u3002\u3002\u3002</small>\r\n</div>\r\n\r\n<div class=\"form-group\">\r\n  <label class=\"custom-control custom-radio\">\r\n    <input type=\"radio\" name=\"legend\" id=\"legend\" value=\"true\" class=\"custom-control-input\" [(ngModel)]=\"settings.legend\">\r\n    <span class=\"custom-control-indicator\"></span>\r\n    <span class=\"custom-control-description\">\u663E\u793A\u56FE\u4F8B</span>\r\n  </label>\r\n</div>\r\n\r\n<button (click)=\"save()\" type=\"button\" name=\"save\" id=\"savesettings\" class=\"btn btn-dark btn-block\">save</button>",
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        GspWidgetChartjsSettingsComponent.ctorParameters = function () { return []; };
+        GspWidgetChartjsSettingsComponent.propDecorators = {
+            settings: [{ type: i0.Input }],
+            settingsChange: [{ type: i0.Output }]
+        };
+        return GspWidgetChartjsSettingsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var GspWidgetChartjsComponent = /** @class */ (function () {
+        function GspWidgetChartjsComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        GspWidgetChartjsComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        /**
+         * @return {?}
+         */
+        GspWidgetChartjsComponent.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+            function () {
+                // this.canvas = document.getElementById('myChart');
+                // this.ctx = this.canvas.getContext('2d');
+                this.ctx = (( /** @type {?} */(this.myCanvas.nativeElement))).getContext('2d');
+                /** @type {?} */
+                var Cc = Chart;
+                //Chart.__moduleExports && Chart.default.Chart || Chart;
+                /** @type {?} */
+                var myChart = new Cc(this.ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ["New", "In Progress", "On Hold"],
+                        datasets: [{
+                                label: '# of Votes',
+                                data: [1, 2, 3],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                    },
+                    options: {
+                        responsive: false
+                    }
+                });
+            };
+        GspWidgetChartjsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-gsp-widget-chartjs',
+                        template: "\n  <canvas width=\"300\" height=\"300\" #chart></canvas>\n\n  "
+                    }] }
+        ];
+        /** @nocollapse */
+        GspWidgetChartjsComponent.ctorParameters = function () { return []; };
+        GspWidgetChartjsComponent.propDecorators = {
+            myCanvas: [{ type: i0.ViewChild, args: ['chart',] }]
+        };
+        GspWidgetChartjsComponent = __decorate([
+            widgetCore.Widget({
+                name: "chart",
+                settingComponent: GspWidgetChartjsSettingsComponent
+            }),
+            __metadata("design:paramtypes", [])
+        ], GspWidgetChartjsComponent);
+        return GspWidgetChartjsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var c = [GspWidgetChartjsComponent, GspWidgetChartjsSettingsComponent];
     var DemoWidgetModule = /** @class */ (function () {
         function DemoWidgetModule() {
         }
         DemoWidgetModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [DemoWidgetComponent, DemoWidgetNavComponent, JumbotronComponent, FormLoginComponent, CardComponent],
-                        imports: [],
+                        declarations: __spread([
+                            DemoWidgetComponent,
+                            DemoWidgetNavComponent,
+                            JumbotronComponent,
+                            FormLoginComponent,
+                            CardComponent
+                        ], c),
+                        imports: [
+                            forms.FormsModule
+                        ],
                         exports: [DemoWidgetComponent]
                     },] }
         ];
@@ -290,6 +439,8 @@
     exports.DemoWidgetComponent = DemoWidgetComponent;
     exports.DemoWidgetModule = DemoWidgetModule;
     exports.ɵd = CardComponent;
+    exports.ɵf = GspWidgetChartjsSettingsComponent;
+    exports.ɵe = GspWidgetChartjsComponent;
     exports.ɵa = DemoWidgetNavComponent;
     exports.ɵc = FormLoginComponent;
     exports.ɵb = JumbotronComponent;

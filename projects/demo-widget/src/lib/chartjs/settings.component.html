@@ -1,0 +1,19 @@
+<p>
+    this is chartjs widget settings page!
+</p>
+
+<div class="form-group">
+  <label for="chartTitle">标题</label>
+  <input type="text" name="chartTitle" id="chartTitle" class="form-control" placeholder="请输入标题" aria-describedby="chartTitleHelper" [(ngModel)]="settings.title">
+  <small id="chartTitleHelper" class="text-muted">请输入标题。。。</small>
+</div>
+
+<div class="form-group">
+  <label class="custom-control custom-radio">
+    <input type="radio" name="legend" id="legend" value="true" class="custom-control-input" [(ngModel)]="settings.legend">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">显示图例</span>
+  </label>
+</div>
+
+<button (click)="save()" type="button" name="save" id="savesettings" class="btn btn-dark btn-block">save</button>
