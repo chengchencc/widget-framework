@@ -26,6 +26,16 @@ export class ConfigEditorComponent implements OnInit {
 
   constructor() { }
 
+  /**
+   * 表单项中显示的值：
+   * 如果 getValue 没有拿到值，返回设置在 propList 中的默认值
+   * */
+  getDisplayValue (propName: string) {
+    let displayValue = this.getValue(propName)
+    if(!displayValue) displayValue = (<ConfigEditorProp>this.getPropByNameRecursively(this.propList, propName)).defaultValue
+    return displayValue
+  }
+
   ngOnInit() {
     console.count('init list')
   }
@@ -36,10 +46,6 @@ export class ConfigEditorComponent implements OnInit {
   getValueNums (propNames: string[]) {
     return propNames.map(name => this.getValueNum(name))
   }
-  // getValue (propName: string) {
-  //   return this.getValue(propName)
-  //   // return getValue(propName, this.configEditorData, this.computedStyles)
-  // }
   // 取出 数字+单位 中的 数字
   getValueNum (propName: string) {
     return getRegExpInValue(propName, NUM_REGEXP, this.getValue)
@@ -68,6 +74,7 @@ export class ConfigEditorComponent implements OnInit {
   }
 
   /** 递归查找 prop，被上面调用 */
+  // TODO: 改成直接传入 propName 路径，就不用再递归找了
   getPropByNameRecursively (props: (ConfigEditorProp|ConfigEditorPropsContainer)[], propName: string): (ConfigEditorProp|ConfigEditorPropsContainer) {
     for (let prop of props) {
       // 如果是 container，那还需要递归查找子 props

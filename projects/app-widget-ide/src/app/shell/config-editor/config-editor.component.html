@@ -19,7 +19,7 @@
         <label *ngIf="prop.type==StylePropType.Number || prop.type==StylePropType.ScopedNumberWithoutUnit"
           class='prop-name drag-input drag-input-x'
           libDragInput
-          [modal]="getValue(prop.name)"
+          [modal]="getDisplayValue(prop.name)"
           (changeValue)="handleChangeValue($event, prop)"
           [tooltip]="prop.tip || prop.name"
           [delay]="500"
@@ -33,7 +33,7 @@
               class="form-control form-control-sm"
               [name]="prop.name"
               [id]="prop.name"
-              [ngModel]="getValue(prop.name)"
+              [ngModel]="getDisplayValue(prop.name)"
               (ngModelChange)="handleChangeValue($event, prop)" >
               <option *ngFor="let v of prop.EnumValues"
                 [value]="v">{{camel2Joiner(v, ' ')}}</option>
@@ -67,7 +67,7 @@
               [id]="prop.name"
               class="form-control"
               [placeholder]="camel2Joiner(prop.name, ' ')"
-              [ngModel]="getValue(prop.name)"
+              [ngModel]="getDisplayValue(prop.name)"
               (ngModelChange)="handleChangeValue($event, prop)">
 
             <input *ngSwitchCase='StylePropType.Color'
@@ -76,7 +76,7 @@
               [id]="prop.name"
               class="form-control"
               [placeholder]="camel2Joiner(prop.name, ' ')"
-              [ngModel]="getValue(prop.name)"
+              [ngModel]="getDisplayValue(prop.name)"
               (ngModelChange)="handleChangeValue($event, prop)">
 
             <input *ngSwitchCase='StylePropType.ScopedNumberWithoutUnit'
@@ -85,7 +85,7 @@
               [id]="prop.name"
               class="form-control"
               [placeholder]="camel2Joiner(prop.name, ' ')"
-              [ngModel]="getValue(prop.name)"
+              [ngModel]="getDisplayValue(prop.name)"
               (ngModelChange)="handleChangeValue($event, prop)">
 
             <div *ngSwitchCase='StylePropType.Number'

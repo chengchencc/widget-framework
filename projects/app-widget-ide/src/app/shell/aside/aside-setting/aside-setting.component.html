@@ -1,12 +1,15 @@
 
 
 <div *ngIf="settings">
-  <!-- <config-editor
-    [getValue]="getValue"
-    [propList]="prop.styleProps"
-    [configEditorData]="configEditorData"
-    (onChangeValue)="handleChangeValue($event.value, $event.prop)" ></config-editor> -->
+  <!-- <widget-gridster-settings [settings]="settings" (settingsChange)="onSettingsChanged($event)"></widget-gridster-settings> -->
+  
+  <p *ngIf="!settingService.selectedSettable" class="no-selection-tip">请选择布局或部件</p>
 
-  <widget-gridster-settings [settings]="settings" (settingsChange)="onSettingsChanged($event)"></widget-gridster-settings>
-
+  <div *ngIf="settingService.selectedSettable">
+    <config-editor
+      [getValue]='getValue'
+      [propList]='propList'
+      [configEditorData]="this.settingService.selectedSettable.config.settings"
+      (onChangeValue)="handleChangeValue($event)" ></config-editor>
+  </div>
 </div>

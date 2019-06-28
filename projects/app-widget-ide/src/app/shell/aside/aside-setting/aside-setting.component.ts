@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
+import { ConfigEditorProp, ConfigEditorPropsContainer, gridsterSettingProps } from '../../../utils';
+import { SettingService } from 'projects/widget-core/src/lib/settable/setting.sevice';
 // import { LayoutService } from 'widget-core';
 // import { WidgetSettableDirective } from 'widget-core';
 
@@ -10,22 +12,45 @@ import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/w
 })
 export class AsideSettingComponent implements OnInit {
 
-  settings: any
+  // TODO: remove
+  settings: any = {
+    compactType: 'compactUp',
+    margin: 100,
+    displayGrid: 'always'
+  }
 
-  constructor() {    
-   }
+
+  // TODO: 从当前选中组件中获取
+  // settingData = []
+  // TODO: 根据当前选中部件/布局，动态改变
+  propList: (ConfigEditorProp | ConfigEditorPropsContainer)[] = gridsterSettingProps
+  // TODO: 获取并返回这个属性的值
+  getValue = (propName: string) => this.settingService.selectedSettable.config.settings[propName]
+  handleChangeValue (payload: { value: string, prop: ConfigEditorProp }) {
+    let { config } = this.settingService.selectedSettable
+    let { value, prop } = payload
+
+    config.settings[prop.name] = value
+    this.settingService.changeConfig(config)
+  }
+
+  constructor(
+    public settingService: SettingService
+  ) {
+    // this.settingData = this.settingService.selectedSettable.config.settings
+  }
   ngOnInit() {
   }
 
-  selecteSettableItem(item:WidgetSettableDirective){
-    if(item){
-      const {style,classes,settings,id} = item.config;
-      this.settings = settings; //{style:style,classes:classes,settings:settings,id:id};
-    }
-  }
+  // selecteSettableItem(item:WidgetSettableDirective){
+  //   if(item){
+  //     const {style,classes,settings,id} = item.config;
+  //     this.settings = settings; //{style:style,classes:classes,settings:settings,id:id};
+  //   }
+  // }
 
-  onSettingsChanged(newValue:any){
-    console.log(newValue);
-  }
+  // onSettingsChanged(newValue:any){
+  //   console.log(newValue);
+  // }
 
 }

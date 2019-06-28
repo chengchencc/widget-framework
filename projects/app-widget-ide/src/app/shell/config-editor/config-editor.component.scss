@@ -1,0 +1,26 @@
+.ul-prop {
+    .li-prop {
+        .prop-name {
+            padding: 0 2px;
+            border-radius: 2px;
+            line-height: 2;
+            // font-family: sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.1px;
+            // color: #ffffffb3;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            user-select: none;
+            
+            &.changed {
+                color: #ffa870;
+                background: #f79b6112;
+            }
+        }
+    }
+    .ul-prop {
+        padding-left: 10px;
+    }
+}
