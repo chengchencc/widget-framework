@@ -1,4 +1,5 @@
 import { LayoutTemplate, LayoutConfig } from './layout.interface';
+import { ConfigEditorProp, ConfigEditorType } from 'projects/app-widget-ide/src/app/utils';
 
 export const DefaultLayout:LayoutConfig = {
   id: '0',
@@ -170,3 +171,95 @@ export const DefaultLayoutTemplates:LayoutTemplate[]=[
       }
     },
   ];
+
+/**
+ * 保存不同布局的设置项
+ * layoutType -> setting proplist 映射，
+ */
+export const LayoutSettingsPropListMap: {
+  [ layoutType: string ]: ConfigEditorProp[]
+} = {
+  grid: [{
+      name: 'gridType',
+      type: ConfigEditorType.LongEnum,
+      EnumValues: ['fit', 'scrollVertical', 'scrollHorizontal', 'fixed', 'verticalFixed', 'horizontalFixed']
+    }, {
+      name: 'compactType',
+      type: ConfigEditorType.LongEnum,
+      EnumValues: ['none', 'compactUp', 'compactLeft', 'compactLeft&Up', 'compactUp&Left', 'compactUp&Right'],
+      defaultValue: 'none'
+    }, {
+      name: 'margin',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'displayGrid',
+      type: ConfigEditorType.LongEnum,
+      EnumValues: ['always', 'onDrag&Resize', 'none'],
+      defaultValue: 'none'
+    }, {
+      name: 'fixedColWidth',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'fixedRowHeight',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'mobileBreakpoint',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'minCols',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'maxCols',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'minRows',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'maxRows',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'defaultItemCols',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'defaultItemRows',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'maxItemCols',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'maxItemRows',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'minItemCols',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'minItemRows',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'minItemArea',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'maxItemArea',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'outerMarginTop',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'outerMarginRight',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'outerMarginBottom',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'outerMarginLeft',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'scrollSensitivity',
+      type: ConfigEditorType.Number,
+    }, {
+      name: 'scrollSpeed',
+      type: ConfigEditorType.Number,
+    }
+],
+  div: []
+}

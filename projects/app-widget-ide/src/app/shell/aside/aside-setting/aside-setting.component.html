@@ -8,7 +8,7 @@
   <div *ngIf="settingService.selectedSettable">
     <config-editor
       [getValue]='getValue'
-      [propList]='propList'
+      [propList]='getCurPropList()'
       [configEditorData]="this.settingService.selectedSettable.config.settings"
       (onChangeValue)="handleChangeValue($event)" ></config-editor>
   </div>

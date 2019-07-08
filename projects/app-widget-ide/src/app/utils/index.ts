@@ -263,24 +263,6 @@ export const styleProps = [{
     ]
   }]
 
-export const gridsterSettingProps = [{
-  name: '布局方式',
-  type: ConfigEditorType.LongEnum,
-  EnumValues: ['fit', 'scrollVertical', 'scrollHorizontal', 'fixed', 'verticalFixed', 'horizontalFixed']
-}, {
-  name: 'compact Type',
-  type: ConfigEditorType.LongEnum,
-  EnumValues: ['none', 'compactUp', 'compactLeft', 'compactLeft&Up', 'compactUp&Left', 'compactUp&Right'],
-  defaultValue: 'none'
-}, {
-  name: 'margin',
-  type: ConfigEditorType.Number,
-}, {
-  name: 'display Grid',
-  type: ConfigEditorType.LongEnum,
-  EnumValues: ['always', 'onDrag&Resize', 'none'],
-  defaultValue: 'none'
-}]
 
 /** 从 数字+单位 中找出 数字 和 单位 的正则 */
 export const NUM_REGEXP: RegExp = /^-?[\d.]+/
