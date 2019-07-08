@@ -53,9 +53,10 @@ export class GridsterContainerComponent implements OnInit {
     //TODO:需要优化性能
     // return Object.assign({},gridDefaultSettings,this.config.settings);
 
-    if(!this._options){
+    // TODO: 暂时去掉 if 以实现改变 _options
+    // if(!this._options){
       this._options = Object.assign({},deepClone(gridDefaultSettings),this.config.settings);
-    }
+    // }
 
     return this._options;
 
