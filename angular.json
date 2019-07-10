@@ -585,7 +585,7 @@
               "projects/widget-config/src/assets"
             ],
             "styles": [
-              "projects/widget-config/src/styles.css"
+              "projects/widget-config/src/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -642,7 +642,7 @@
             "tsConfig": "projects/widget-config/tsconfig.spec.json",
             "karmaConfig": "projects/widget-config/karma.conf.js",
             "styles": [
-              "projects/widget-config/src/styles.css"
+              "projects/widget-config/src/styles.scss"
             ],
             "scripts": [],
             "assets": [

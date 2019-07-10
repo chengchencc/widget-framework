@@ -1,0 +1,172 @@
+@import "../../../assets/variables.scss";
+
+
+.widget-list-page {
+    display: flex;
+    align-items: stretch;
+    height: calc(100vh - 60px);
+
+    .left-list {
+        width: 248px;
+        box-shadow: 0 10px 10px 0 #0000001c;
+        overflow-y: scroll;
+
+        .search {
+            position: relative;
+            margin: 25px 10px 10px;
+            input {
+                width: 100%;
+                box-sizing: border-box;
+                border: 1px solid #d6d6d6;
+                border-radius: 2px;
+                font-size: 16px;
+                padding: 6px;
+                padding-right: 30px;
+            }
+            button {
+                position: absolute;
+                right: 0;
+                border: none;
+                box-shadow: none;
+                padding: 5px;
+                i {
+                    color: $brandBlue;
+                    // font-size: 12px;
+                }
+            }
+        }
+    }
+
+    main {
+        width: calc(100% - 248px);
+        // padding: 15px;
+        overflow-y: scroll;
+
+        h2 {
+            padding: 25px;
+            border-bottom: 1px solid #f6f6f6;
+            margin: 0;
+        }
+        ul.widget-list {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 25px;
+            li {
+                width: 190px;
+                border-radius: 3px;
+                margin: 0 35px 20px 0;
+
+                .widget-wrapper {
+                    height: 150px;
+                    box-shadow: 0 0 10px 0 #0000001c;
+                }
+                .widget-name {
+                    text-align: center;
+                    font-size: 14px;
+                    margin: 22px;
+                }
+            }
+        }
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+
+    height: 56px;
+    padding: 0 10px;
+    box-shadow: 0 0 10px 0 #0000001c;
+    padding: 0 25px;
+    .left {
+        display: flex;
+        align-items: center;
+
+        .icon {
+
+        }
+        .title {
+            font-size: 20px;
+        }
+    }
+    .right {
+        display: flex;
+        align-items: center;
+        float: right;
+
+        ul.btns {
+            li {
+                .btn {
+                    margin: 0 3px;
+
+                    &:hover {
+                        color: $brandBlue;
+                        border-color: currentColor;
+                    }
+
+                    &.btn-primary {
+                        background: $brandBlue;
+                        border: 1px solid $brandBlue;
+                        color: white;
+                        &:hover {
+                            color: white;
+                            background: #388effce;
+                        }
+                    }
+
+                    // &:focus {
+                    // }
+                }
+            }
+        }
+    }
+}
+
+
+accordion {
+    accordion-group {
+        .accordion-toggle {
+            .heading {
+                background: none;
+                display: block;
+                font-size: 14px;
+                padding: 9px 12px;
+                width: 100%;
+                border: none;
+                text-align: left;
+                border-left: 4px solid transparent;
+                transition: all .2s ease;
+                cursor: pointer;
+                &:hover {
+                    background: #e6f7ff;
+                    border-color: $brandBlue;
+                    outline: none;
+                }
+
+                .material-icons {
+                    vertical-align: middle;
+                    font-size: 20px;
+                    color: $brandBlue;
+                    margin-right: 4px;
+                }
+            }
+        }
+        ul.inner-list {
+            li {
+                font-size: 14px;
+                padding: 8px 0px;
+                transition: all .2s ease;
+                cursor: pointer;
+                
+                .name {
+                    margin-left: 60px;
+                }
+
+                &:hover, &.active {
+                    background: #e6f7ff;
+                }
+            }
+        }
+    }
+}
