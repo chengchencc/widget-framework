@@ -5,10 +5,12 @@
     <span class=title>部件配置</span>
 
     
-    <ul class=step-switch>
+    <ul class=step-switch
+      *ngIf="stepManager.curStepIndex > 0" >
       <li *ngFor="let stepData of stepDataList.slice(1); let i = index"
-        [class.unactive]="stepManager.curStepIndex < i"
-        (click)="stepManager.toLastIndex(i)" >
+        [class.unactive]="stepManager.curStepIndex < i+1"
+        [class.cur]="stepManager.curStepIndex == i+1"
+        (click)="stepManager.toLastIndex(i+1)" >
         <i class="material-icons">arrow_forward</i>
         <span class=number>{{i+1}}</span>
         <span class=name>{{stepData.name}}</span>
@@ -72,9 +74,12 @@
   </div>
 
   <main>
-    <h2>销量统计部件</h2>
+    <h2 *ngIf="stepManager.curStepIndex==0"
+      class="main-panel-title" >销量统计部件</h2>
+    <h2 *ngIf="stepManager.curStepIndex>0"
+      class="main-panel-title" >{{stepManager.curStepData['name']}}</h2>
 
-    <ul class=widget-list
+    <ul class="widget-list main-panel"
       *ngIf="stepManager.curStepIndex==0" >
       <li>
         <div class=widget-wrapper>
@@ -120,21 +125,34 @@
       </li>
     </ul>
 
-    <div class=info-config
+    <div class="info-config main-panel"
       *ngIf="stepManager.curStepIndex==1" >
-      InfoConfig
+      <div class=input-group>
+        <label><span class="require-token">*</span> 部件名称</label>
+        <input class=form-control type="text">
+      </div>
+      <div class=input-group>
+        <label>备注</label>
+        <textarea class=form-control rows="4"></textarea>
+      </div>
     </div>
-    <div class=data-config
+    <div class="data-config main-panel"
       *ngIf="stepManager.curStepIndex==2" >
-      DataConfig
+      <div class=input-group>
+        <label><span class="require-token">*</span> 选择数据集</label>
+        <input class=form-control type="text">
+      </div>
     </div>
-    <div class=widget-config
+    <div class="widget-config main-panel"
       *ngIf="stepManager.curStepIndex==3" >
-      WidgetConfig
+      <div class=input-group>
+        <label><span class="require-token">*</span> 部件名称</label>
+        <input class=form-control type="text">
+      </div>
     </div>
-    <div class=preview
+    <div class="preview main-panel"
       *ngIf="stepManager.curStepIndex==4" >
-    preview
+      preview
     </div>
   </main>
 

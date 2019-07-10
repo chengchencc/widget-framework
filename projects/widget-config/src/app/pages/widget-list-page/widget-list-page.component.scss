@@ -43,9 +43,7 @@
         overflow-y: scroll;
 
         h2 {
-            padding: 25px;
-            border-bottom: 1px solid #f6f6f6;
-            margin: 0;
+            
         }
         ul.widget-list {
             display: flex;
@@ -66,6 +64,10 @@
                     margin: 22px;
                 }
             }
+        }
+
+        .input-group {
+            max-width: 400px;
         }
     }
 }
@@ -125,6 +127,11 @@
                     }
                     .number {
                         background: #c3c3c3;
+                    }
+                }
+                &.cur {
+                    .name {
+                        font-weight: bold;
                     }
                 }
                 &:first-child {
