@@ -6,12 +6,15 @@
   </div>
 
   <div class=right>
-    <ul class=btns>
-      <li>
-        <button class="btn btn-primary">下一步</button>
-        <button class="btn">取消</button>
-      </li>
-    </ul>
+    <div class=btns>
+      <!-- <li > -->
+        <button
+          *ngFor="let btn of stepManager.curStepData['btns']"
+          [ngClass]="btn.class"
+          (click)="btn.onClick()"
+          class="btn">{{btn.name}}</button>
+      <!-- </li> -->
+    </div>
   </div>
 </div>
 
@@ -59,7 +62,8 @@
   <main>
     <h2>销量统计部件</h2>
 
-    <ul class=widget-list>
+    <ul class=widget-list
+      *ngIf="stepManager.curStepIndex==0" >
       <li>
         <div class=widget-wrapper>
           <!-- widget -->
@@ -103,6 +107,23 @@
         <div class=widget-name>销量统计</div>
       </li>
     </ul>
+
+    <div class=info-config
+      *ngIf="stepManager.curStepIndex==1" >
+      InfoConfig
+    </div>
+    <div class=data-config
+      *ngIf="stepManager.curStepIndex==2" >
+      DataConfig
+    </div>
+    <div class=widget-config
+      *ngIf="stepManager.curStepIndex==3" >
+      WidgetConfig
+    </div>
+    <div class=preview
+      *ngIf="stepManager.curStepIndex==4" >
+    preview
+    </div>
   </main>
 
 </div>
