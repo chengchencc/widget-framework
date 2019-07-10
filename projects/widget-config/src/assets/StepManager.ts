@@ -27,7 +27,9 @@ export default class StepManager {
     toLast () {
         this._setStep(this.curStepIndex - 1)
     }
+    /** 切换到之前的任一 step，不包括当前 step。否则无效 */
     toLastIndex (targetStepIndex: number) {
+        if(targetStepIndex >= this.curStepIndex) return
         this._setStep(targetStepIndex)
     }
 }

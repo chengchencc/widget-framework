@@ -21,8 +21,9 @@ export class WidgetListPageComponent implements OnInit {
 
   curPageState = PageState.WidgetList
 
-  stepData =  [
+  stepDataList =  [
     {
+      name: '部件列表',
       btns: [{
         name: '新增部件',
         class: 'btn-primary',
@@ -41,6 +42,7 @@ export class WidgetListPageComponent implements OnInit {
       }],
     },
     {
+      name: '填写部件信息',
       btns: [{
         name: '下一步',
         class: 'btn-primary',
@@ -56,6 +58,7 @@ export class WidgetListPageComponent implements OnInit {
       }],
     },
     {
+      name: '配置数据集',
       btns: [{
         name: '上一步',
         onClick: () => {
@@ -80,6 +83,7 @@ export class WidgetListPageComponent implements OnInit {
       }]
     },
     {
+      name: '配置部件',
       btns: [{
         name: '上一步',
         onClick: () => {
@@ -103,6 +107,7 @@ export class WidgetListPageComponent implements OnInit {
       }]
     },
     {
+      name: '预览部件',
       btns: [{
         name: '上一步',
         onClick: () => {
@@ -120,7 +125,7 @@ export class WidgetListPageComponent implements OnInit {
       }]
     }
   ]
-  stepManager = new StepManager(this.stepData)
+  stepManager = new StepManager(this.stepDataList)
 
 
   PageState = PageState

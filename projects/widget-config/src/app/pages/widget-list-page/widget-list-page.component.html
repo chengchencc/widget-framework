@@ -3,7 +3,19 @@
   <div class=left>
     <img class=icon src="" alt="">
     <span class=title>部件配置</span>
+
+    
+    <ul class=step-switch>
+      <li *ngFor="let stepData of stepDataList.slice(1); let i = index"
+        [class.unactive]="stepManager.curStepIndex < i"
+        (click)="stepManager.toLastIndex(i)" >
+        <i class="material-icons">arrow_forward</i>
+        <span class=number>{{i+1}}</span>
+        <span class=name>{{stepData.name}}</span>
+      </li>
+    </ul>
   </div>
+
 
   <div class=right>
     <div class=btns>

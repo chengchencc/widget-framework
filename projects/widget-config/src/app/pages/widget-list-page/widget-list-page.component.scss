@@ -89,6 +89,52 @@
         .title {
             font-size: 20px;
         }
+
+        .step-switch {
+            margin-left: 150px;
+
+            li {
+                cursor: pointer;
+                display: inline-block;
+                font-size: 14px;
+
+                .material-icons {
+                    vertical-align: middle;
+                    font-size: 22px;
+                    margin: 0 15px 0 15px;
+                    color: $brandBlue;
+                }
+                .number {
+                    display: inline-block;
+                    background: $brandBlue;
+                    color: white;
+                    border-radius: 100px;
+                    width: 30px;
+                    height: 30px;
+                    text-align: center;
+                    padding-top: 5px;
+                    box-sizing: border-box;
+                    margin-right: 6px;
+                }
+                .name {
+                }
+
+                &.unactive {
+                    .material-icons, .name {
+                        color: #9a9a9a;
+                    }
+                    .number {
+                        background: #c3c3c3;
+                    }
+                }
+                &:first-child {
+                    .material-icons {
+                        display: none;
+                    }
+                }
+
+            }
+        }
     }
     .right {
         display: flex;
