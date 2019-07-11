@@ -1,6 +1,51 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import StepManager from 'projects/widget-config/src/assets/StepManager';
 // import {  } from '@angular/compiler/src/core';
+
+const widgetList = [{
+  categoryName: '通用部件',
+  widgets: [{
+    name: '个人信息',
+  }, {
+    name: '个人信息2',
+  }, {
+    name: '个人信息3',
+  }, {
+    name: '个人信息4',
+  }, {
+    name: '个人信息5',
+  }, {
+    name: '个人信息6',
+  }]
+}, {
+  categoryName: '通用部件2',
+  widgets: [{
+    name: '个人信息',
+  }, {
+    name: '个人信息2'
+  }]
+}, {
+  categoryName: '通用部件3',
+  widgets: [{
+    name: '个人信息',
+  }, {
+    name: '个人信息2',
+  }, {
+    name: '个人信息3'
+  }]
+}, {
+  categoryName: '通用部件4',
+  widgets: [{
+    name: '个人信息',
+  }, {
+    name: '个人信息2',
+  }, {
+    name: '个人信息3',
+  }, {
+    name: '个人信息4'
+  }]
+}]
+
 /** 部件配置页的 5 种状态 */
 enum PageState {
   WidgetList,
@@ -8,6 +53,14 @@ enum PageState {
   DataConfig,
   WidgetConfig,
   Preview,
+}
+
+interface WidgetCategory {
+  categoryName: string,
+  widgets: Widget[]
+}
+interface Widget {
+  name: string,
 }
 
 
@@ -127,11 +180,15 @@ export class WidgetListPageComponent implements OnInit {
   ]
   stepManager = new StepManager(this.stepDataList)
 
+  widgetList = widgetList
+  curSelection: WidgetCategory | Widget = null
 
   PageState = PageState
   constructor() { }
 
   ngOnInit() {
+    // TODO: 异步加载后设置
+    this.curSelection = this.widgetList[0]
   }
 
   

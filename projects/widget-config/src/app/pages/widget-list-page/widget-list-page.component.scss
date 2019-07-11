@@ -4,12 +4,15 @@
 .widget-list-page {
     display: flex;
     align-items: stretch;
-    height: calc(100vh - 60px);
+    // TODO: 基本布局封装成组件？
+    height: calc(100vh - 56px);
+    background: $bgGray;
 
     .left-list {
         width: 248px;
         box-shadow: 0 10px 10px 0 #0000001c;
         overflow-y: scroll;
+        background: white;
 
         .search {
             position: relative;
@@ -42,9 +45,6 @@
         // padding: 15px;
         overflow-y: scroll;
 
-        h2 {
-            
-        }
         ul.widget-list {
             display: flex;
             flex-wrap: wrap;
@@ -68,158 +68,6 @@
 
         .input-group {
             max-width: 400px;
-        }
-    }
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-
-    height: 56px;
-    padding: 0 10px;
-    box-shadow: 0 0 10px 0 #0000001c;
-    padding: 0 25px;
-    .left {
-        display: flex;
-        align-items: center;
-
-        .icon {
-
-        }
-        .title {
-            font-size: 20px;
-        }
-
-        .step-switch {
-            margin-left: 150px;
-
-            li {
-                cursor: pointer;
-                display: inline-block;
-                font-size: 14px;
-
-                .material-icons {
-                    vertical-align: middle;
-                    font-size: 22px;
-                    margin: 0 15px 0 15px;
-                    color: $brandBlue;
-                }
-                .number {
-                    display: inline-block;
-                    background: $brandBlue;
-                    color: white;
-                    border-radius: 100px;
-                    width: 30px;
-                    height: 30px;
-                    text-align: center;
-                    padding-top: 5px;
-                    box-sizing: border-box;
-                    margin-right: 6px;
-                }
-                .name {
-                }
-
-                &.unactive {
-                    .material-icons, .name {
-                        color: #9a9a9a;
-                    }
-                    .number {
-                        background: #c3c3c3;
-                    }
-                }
-                &.cur {
-                    .name {
-                        font-weight: bold;
-                    }
-                }
-                &:first-child {
-                    .material-icons {
-                        display: none;
-                    }
-                }
-
-            }
-        }
-    }
-    .right {
-        display: flex;
-        align-items: center;
-        float: right;
-
-        .btns {
-            // li {
-            .btn {
-                margin: 0 3px;
-
-                &:hover {
-                    color: $brandBlue;
-                    border-color: currentColor;
-                }
-
-                &.btn-primary {
-                    background: $brandBlue;
-                    border: 1px solid $brandBlue;
-                    color: white;
-                    &:hover {
-                        color: white;
-                        background: #388effce;
-                    }
-                }
-
-                // &:focus {
-                // }
-            }
-            // }
-        }
-    }
-}
-
-
-accordion {
-    accordion-group {
-        .accordion-toggle {
-            .heading {
-                background: none;
-                display: block;
-                font-size: 14px;
-                padding: 9px 12px;
-                width: 100%;
-                border: none;
-                text-align: left;
-                border-left: 4px solid transparent;
-                transition: all .2s ease;
-                cursor: pointer;
-                &:hover {
-                    background: #e6f7ff;
-                    border-color: $brandBlue;
-                    outline: none;
-                }
-
-                .material-icons {
-                    vertical-align: middle;
-                    font-size: 20px;
-                    color: $brandBlue;
-                    margin-right: 4px;
-                }
-            }
-        }
-        ul.inner-list {
-            li {
-                font-size: 14px;
-                padding: 8px 0px;
-                transition: all .2s ease;
-                cursor: pointer;
-                
-                .name {
-                    margin-left: 60px;
-                }
-
-                &:hover, &.active {
-                    background: #e6f7ff;
-                }
-            }
         }
     }
 }

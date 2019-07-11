@@ -4,7 +4,6 @@
     <img class=icon src="" alt="">
     <span class=title>部件配置</span>
 
-    
     <ul class=step-switch
       *ngIf="stepManager.curStepIndex > 0" >
       <li *ngFor="let stepData of stepDataList.slice(1); let i = index"
@@ -17,7 +16,6 @@
       </li>
     </ul>
   </div>
-
 
   <div class=right>
     <div class=btns>
@@ -45,115 +43,105 @@
     <!-- 列表 -->
     <accordion>
       <accordion-group
+        *ngFor="let category of widgetList"
         [isOpen]="true" >
+          <!-- TODO: 下面两个 active 应当用 id 判断，有正确数据后可改 -->
           <div accordion-heading
-            class=heading >
+            class=heading
+            [class.active]="curSelection['categoryName']==category.categoryName"
+            (click)="curSelection = category" >
             <i class="material-icons">folder</i>
-            通用部件</div>
+            {{category.categoryName}}</div>
           <ul class=inner-list>
-            <li><span class=name>个人信息</span></li>
-            <li><span class=name>个人信息</span></li>
-            <li><span class=name>个人信息</span></li>
-            <li><span class=name>个人信息</span></li>
+            <li *ngFor="let widget of category.widgets"
+              [class.active]="curSelection['name']==widget.name"
+              (click)="curSelection = widget" >
+              <span class=name>{{widget.name}}</span>
+            </li>
           </ul>
         </accordion-group>
-        <accordion-group
-          [isOpen]="true" >
-            <div accordion-heading
-              class=heading >
-              <i class="material-icons">folder_open</i>
-              通用部件</div>
-            <ul class=inner-list>
-              <li><span class=name>个人信息</span></li>
-              <li><span class=name>个人信息</span></li>
-              <li><span class=name>个人信息</span></li>
-              <li><span class=name>个人信息</span></li>
-            </ul>
-          </accordion-group>
       </accordion>
   </div>
 
   <main>
-    <h2 *ngIf="stepManager.curStepIndex==0"
-      class="main-panel-title" >销量统计部件</h2>
-    <h2 *ngIf="stepManager.curStepIndex>0"
-      class="main-panel-title" >{{stepManager.curStepData['name']}}</h2>
+    <div class="main-panel main-panel-full"
+      *ngIf="stepManager.curStepIndex!=3" >
+      <h2 *ngIf="stepManager.curStepIndex==0"
+        class="main-panel-title" >销量统计部件</h2>
+      <h2 *ngIf="stepManager.curStepIndex>0"
+        class="main-panel-title" >{{stepManager.curStepData['name']}}</h2>
 
-    <ul class="widget-list main-panel"
-      *ngIf="stepManager.curStepIndex==0" >
-      <li>
-        <div class=widget-wrapper>
-          <!-- widget -->
+      <!-- 0 部件列表页 -->
+      <div *ngIf="stepManager.curStepIndex==0"
+        class="main-panel-body" >
+        <!-- 当前选中的是分类，则显示列表 -->
+        <ul class=widget-list
+          *ngIf="curSelection['widgets']" >
+          <li *ngFor="let widget of curSelection['widgets']">
+            <div class=widget-wrapper>
+              <!-- widget -->
+            </div>
+            <div class=widget-name>{{widget.name}}</div>
+          </li>
+        </ul>
+        <!-- 当前选中的是部件，则显示部件 -->
+        <div class=widget-one
+          *ngIf="!curSelection['widgets']" >
+          <div class=widget-wrapper>
+              <!-- widget -->
+          </div>
+          <div class=widget-name>{{curSelection['name']}}</div>
         </div>
-        <div class=widget-name>销量统计</div>
-      </li>
-      <li>
-        <div class=widget-wrapper>
-          <!-- widget -->
-        </div>
-        <div class=widget-name>销量统计</div>
-      </li>
-      <li>
-        <div class=widget-wrapper>
-          <!-- widget -->
-        </div>
-        <div class=widget-name>销量统计</div>
-      </li>
-      <li>
-        <div class=widget-wrapper>
-          <!-- widget -->
-        </div>
-        <div class=widget-name>销量统计</div>
-      </li>
-      <li>
-        <div class=widget-wrapper>
-          <!-- widget -->
-        </div>
-        <div class=widget-name>销量统计</div>
-      </li>
-      <li>
-        <div class=widget-wrapper>
-          <!-- widget -->
-        </div>
-        <div class=widget-name>销量统计</div>
-      </li>
-      <li>
-        <div class=widget-wrapper>
-          <!-- widget -->
-        </div>
-        <div class=widget-name>销量统计</div>
-      </li>
-    </ul>
+      </div>
 
-    <div class="info-config main-panel"
-      *ngIf="stepManager.curStepIndex==1" >
-      <div class=input-group>
-        <label><span class="require-token">*</span> 部件名称</label>
-        <input class=form-control type="text">
+      <!-- 1 部件名称页 -->
+      <div class="info-config main-panel-body"
+        *ngIf="stepManager.curStepIndex==1" >
+        <div class=input-group>
+          <label><span class="require-token">*</span> 部件名称</label>
+          <input class=form-control type="text">
+        </div>
+        <div class=input-group>
+          <label>备注</label>
+          <textarea class=form-control rows="4"></textarea>
+        </div>
       </div>
-      <div class=input-group>
-        <label>备注</label>
-        <textarea class=form-control rows="4"></textarea>
+      <!-- 2 选择数据集 -->
+      <div class="data-config main-panel-body"
+        *ngIf="stepManager.curStepIndex==2" >
+        <div class=input-group>
+          <label><span class="require-token">*</span> 选择数据集</label>
+          <input class=form-control type="text">
+        </div>
+      </div>
+      <!-- 4 预览 -->
+      <div class="preview main-panel-body"
+        *ngIf="stepManager.curStepIndex==4" >
+        preview
       </div>
     </div>
-    <div class="data-config main-panel"
-      *ngIf="stepManager.curStepIndex==2" >
-      <div class=input-group>
-        <label><span class="require-token">*</span> 选择数据集</label>
-        <input class=form-control type="text">
+
+    <!-- 3 部件配置，因为布局不同所以单独列出 -->
+    <ng-container *ngIf="stepManager.curStepIndex==3" >
+      <div class="main-panel main-panel-card">
+        <h2 class="main-panel-title">部件配置</h2>
+        <div class="main-panel-body">
+          <div class=input-group>
+            <label><span class="require-token">*</span> 部件名称</label>
+            <input class=form-control type="text">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="widget-config main-panel"
-      *ngIf="stepManager.curStepIndex==3" >
-      <div class=input-group>
-        <label><span class="require-token">*</span> 部件名称</label>
-        <input class=form-control type="text">
+      <div class="main-panel main-panel-card">
+        <div class=left>
+          <div>数据集</div>
+          <div>
+            
+          </div>
+        </div>
+        <div class=right></div>
       </div>
-    </div>
-    <div class="preview main-panel"
-      *ngIf="stepManager.curStepIndex==4" >
-      preview
-    </div>
+    </ng-container>
   </main>
 
 </div>
