@@ -9,7 +9,7 @@
       <li *ngFor="let stepData of stepDataList.slice(1); let i = index"
         [class.unactive]="stepManager.curStepIndex < i+1"
         [class.cur]="stepManager.curStepIndex == i+1"
-        (click)="stepManager.toLastIndex(i+1)" >
+        (click)="handleClickStep(i+1)" >
         <i class="material-icons">arrow_forward</i>
         <span class=number>{{i+1}}</span>
         <span class=name>{{stepData.name}}</span>
@@ -132,11 +132,38 @@
           </div>
         </div>
       </div>
-      <div class="main-panel main-panel-card">
+      <div class="main-panel main-panel-card widget-config-panel">
         <div class=left>
-          <div>数据集</div>
-          <div>
-            
+          <div class=title-block>
+            <i class="material-icons">poll</i>
+            数据集</div>
+          <div class=field-list-block>
+            <div class=field-list>
+              <div class=title>
+                <i class="material-icons">sort</i>
+                <span class=text>维度</span>
+                <span class=plus>+</span>
+              </div>
+              <ul>
+                <li>序号</li>
+                <li>序号</li>
+                <li>序号</li>
+              </ul>
+            </div>
+            <div class=field-list>
+              <div class=title>
+                <i class="material-icons">linear_scale</i>
+                <span class=text>维度</span>
+                <span class=plus>+</span>
+              </div>
+              <ul>
+                <li>序号</li>
+                <li>序号</li>
+                <li>序号</li>
+                <li>序号</li>
+                <li>序号</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class=right></div>

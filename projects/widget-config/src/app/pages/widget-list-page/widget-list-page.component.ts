@@ -191,12 +191,15 @@ export class WidgetListPageComponent implements OnInit {
     this.curSelection = this.widgetList[0]
   }
 
-  
-  transitToNextState () {
-    
-  }
-  transitToLastState () {
-    
+  handleClickStep (targetStepIndex: number) {
+    // 点击老的任一步可以回去
+    if(targetStepIndex < this.stepManager.curStepIndex) {
+      this.stepManager.toLastIndex(targetStepIndex)
+      // 点击下一步就是下一步
+    } else if(targetStepIndex == this.stepManager.curStepIndex+1) {
+      this.stepManager.toNext()
+      return
+    }
   }
 
 }

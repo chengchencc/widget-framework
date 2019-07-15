@@ -69,5 +69,68 @@
         .input-group {
             max-width: 400px;
         }
+
+        .widget-config-panel {
+            .left {
+                width: 220px;
+                border-right: 1px solid $panelBlockBorder;
+                .title-block {
+                    padding: 18px 20px;
+                    border-bottom: 1px solid $panelBlockBorder;
+                    font-size: 16px;
+                    .material-icons {
+                        vertical-align: middle;
+                        color: $brandBlue;
+                        font-size: 21px;
+                        margin-right: 3px;
+                    }
+                }
+                .field-list-block {
+                    padding: 20px;
+                    .field-list {
+                        margin-bottom: 25px;
+                        margin-left: 10px;
+                        >.title {
+                            .material-icons {
+                                color: $brandBlue;
+                                vertical-align: middle;
+                                font-size: 21px;
+                                margin-right: 5px;
+                            }
+                            .text {
+                                vertical-align: middle;
+                                font-size: 14px;
+                            }
+                            .plus {
+                                color: $brandBlue;
+                                font-size: 24px;
+                                vertical-align: middle;
+                                float: right;
+                                line-height: 1;
+                                cursor: pointer;
+                            }
+                        }
+                        ul {
+                            padding: 0 0 10px 10px;
+                            li {
+                                font-size: 12px;
+                                height: 28px;
+                                // padding: 10px;
+                                &::before {
+                                    content: '';
+                                    border-left: 1px dashed gray;
+                                    border-bottom: 1px dashed gray;
+                                    width: 20px;
+                                    display: inline-block;
+                                    height: 28px;
+                                    vertical-align: super;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

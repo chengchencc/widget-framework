@@ -129,6 +129,7 @@ ul, li {
 
         .step-switch {
             margin-left: 150px;
+            user-select: none;
 
             li {
                 cursor: pointer;
