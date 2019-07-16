@@ -71,6 +71,8 @@
         }
 
         .widget-config-panel {
+            display: flex;
+            align-items: stretch;
             .left {
                 width: 220px;
                 border-right: 1px solid $panelBlockBorder;
@@ -129,6 +131,53 @@
                             }
                         }
                     }
+                }
+            }
+            .right {
+                padding: 20px;
+                flex: 1 1 auto;
+
+                .fields {
+                    label {
+                        width: 70px;
+                        box-sizing: border-box;
+                    }
+                }
+                // TODO: extract
+                .fields {
+                    .input-group {
+                        width: 100%;
+                        max-width: none;
+                        .field-picker {
+                            padding: 3px;
+                            ul {
+                                li {
+                                    display: inline-block;
+                                    margin-right: 12px;
+                                    .field-item {
+                                        display: flex;
+                                        align-items: stretch;
+                                        cursor: pointer;
+                                        .text {
+                                            font-size: 13px;
+                                            padding: 2px 16px;
+                                            background: #e6e6e6;
+                                        }
+                                        .material-icons {
+                                            border: 1px solid #e6e6e6;
+                                            border-left: none;
+                                            font-size: 17px;
+                                            color: #686868;
+                                            padding: 2px 1px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .pagination {
+                    float: right;
                 }
             }
         }
