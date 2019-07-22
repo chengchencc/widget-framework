@@ -321,3 +321,27 @@ accordion {
         }
     }
 }
+
+.btn-group {
+    label {
+        border-radius: 0;
+        border-left-width: 0;
+        box-shadow: none;
+
+        &:first-child {
+            border-bottom-left-radius: $btnGroupBorderRadius;
+            border-top-left-radius: $btnGroupBorderRadius;
+            border-left-width: 1px;
+        }
+        &:last-child {
+            border-bottom-right-radius: $btnGroupBorderRadius;
+            border-top-right-radius: $btnGroupBorderRadius;
+        }
+        
+        &.active {
+            background: $brandBlue;
+            border-color: $brandBlue;
+            color: white;
+        }
+    }
+}

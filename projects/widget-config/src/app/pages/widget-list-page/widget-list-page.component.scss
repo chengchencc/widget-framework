@@ -179,6 +179,24 @@
                 .pagination {
                     float: right;
                 }
+                .meta-comp-list {
+                    margin: 20px 0;
+                    li {
+                        margin: 0 8px 8px 0;
+                        display: inline-block;
+                        img {
+                            display: inline-block;
+                            width: 52px;
+                            height: 46px;
+                            background: gray;
+                        }
+                    }
+                }
+
+                .widget {
+                    height: 200px;
+                    width: 200px;
+                }
             }
         }
     }

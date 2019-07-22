@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { WidgetListPageComponent } from './pages/widget-list-page/widget-list-page.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,9 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
   imports: [
     BrowserModule,
     AccordionModule.forRoot(),
+    ButtonsModule.forRoot(),
+    FormsModule,
+    // ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

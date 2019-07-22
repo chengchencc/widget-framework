@@ -127,7 +127,7 @@
         <h2 class="main-panel-title">部件配置</h2>
         <div class="main-panel-body">
           <div class=input-group>
-            <label><span class="require-token">*</span> 部件名称</label>
+            <label><span class="require-token">*</span> 选择数据集</label>
             <input class=form-control type="text">
           </div>
         </div>
@@ -312,9 +312,48 @@
               <li><i class="material-icons">keyboard_arrow_right</i></li>
             </ul>
           </div>
+
+          <div>
+            <div>部件设计</div>
+          </div>
+
+          <ul class=meta-comp-list>
+            <li>
+              <img src="" alt="">
+            </li>
+            <li>
+              <img src="" alt="">
+            </li>
+            <li>
+              <img src="" alt="">
+            </li>
+            <li>
+              <img src="" alt="">
+            </li>
+            <li>
+              <img src="" alt="">
+            </li>
+          </ul>
+
+          <div class="btn-group"
+            btnRadioGroup
+            [(ngModel)]="metaCompType" >
+            <label class="btn btn-primary"
+              btnRadio="GraphOnly" >图</label>
+            <label class="btn btn-primary"
+              btnRadio="GraphNTable" >图+表</label>
+          </div>
+
+          <div class=widget>
+
+          </div>
         </div>
       </div>
     </ng-container>
   </main>
 
+  <div class=aside-editor-opener></div>
+  <div class=aside-editor>
+
+  </div>
 </div>

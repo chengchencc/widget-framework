@@ -184,6 +184,7 @@ export class WidgetListPageComponent implements OnInit {
   curSelection: WidgetCategory | Widget = null
 
   PageState = PageState
+  metaCompType: 'graphOnly' | 'graphNTable' = 'graphOnly'
   constructor() { }
 
   ngOnInit() {
