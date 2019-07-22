@@ -10,6 +10,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+// TODO: 因为 editor-config 搬进来了，所以需要引入 ngx-bootstrap
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+// import { ModalModule } from 'ngx-bootstrap/modal';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
 import { PreviewComponent } from './preview/preview.component';
 import { WidgetSettableDirective } from './settable/widget-settable.directive';
 import { Store } from './store/store';
@@ -26,6 +31,10 @@ import { GridsterSettingsComponent } from './layout/components/gridster-settings
 import { SettingService } from './settable/setting.sevice';
 import { History } from './common/history';
 
+import { BoxInputComponent } from './config-editor/box-input/box-input.component';
+import { ConfigEditorComponent } from './config-editor/config-editor.component';
+import { DragInputDirective } from './config-editor/drag-input.directive';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +42,10 @@ import { History } from './common/history';
     HttpClientModule,
     DraggableModule,
     GridsterModule,
+    // ngx
+    TooltipModule,
+    // ModalModule,
+    ButtonsModule
   ],
   declarations: [
     LayoutComponent,
@@ -40,7 +53,10 @@ import { History } from './common/history';
     WidgetContainerComponent,
     WidgetSettableDirective,
     GridsterContainerComponent,
-    GridsterSettingsComponent
+    GridsterSettingsComponent,
+    ConfigEditorComponent,
+    BoxInputComponent,
+    DragInputDirective
   ],
   providers:[
     Store,
@@ -59,7 +75,9 @@ import { History } from './common/history';
     GridsterContainerComponent,
     GridsterSettingsComponent,
     DraggableModule,
-    GridsterModule
+    GridsterModule,
+    ConfigEditorComponent,
+    BoxInputComponent,
   ]
 })
 export class WidgetCoreModule { 

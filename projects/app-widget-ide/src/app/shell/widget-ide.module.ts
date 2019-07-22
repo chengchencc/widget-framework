@@ -16,6 +16,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 // core
 import { WidgetCoreModule } from 'projects/widget-core/src/lib/widget-core.module';
+import { Widget_Core_Config_Token, WidgetCoreConfig } from 'projects/widget-core/src/lib/core.config';
 // import { WidgetCoreModule } from 'widget-core';
 // import { DraggableModule } from '@widget/core';
 
@@ -33,16 +34,12 @@ import { AsideStyleComponent } from './aside/aside-style/aside-style.component';
 import { AsideSettingComponent } from './aside/aside-setting/aside-setting.component';
 import { AsideStructureComponent } from './aside/aside-structure/aside-structure.component';
 import { AsideEventComponent } from './aside/aside-event/aside-event.component';
-import { BoxInputComponent } from './config-editor/box-input/box-input.component';
-import { DragInputDirective } from '../directives/drag-input.directive';
 
 //services
 import { DesignerService } from '../services/designer.service';
 
-import { Widget_Core_Config_Token, WidgetCoreConfig } from 'projects/widget-core/src/lib/core.config';
 import { ToastrModule } from 'ngx-toastr';
 import { AsideStructureTreeComponent } from './aside/aside-structure/aside-structure-tree.component';
-import { ConfigEditorComponent } from './config-editor/config-editor.component';
 
 // import { OverlayModule } from "@angular/cdk/overlay";
 
@@ -89,9 +86,6 @@ const widgetCoreConfig:WidgetCoreConfig={
     AsideStructureComponent,
     AsideStructureTreeComponent,
     AsideEventComponent,
-    BoxInputComponent,
-    DragInputDirective,
-    ConfigEditorComponent,
   ],
   exports:[
     WidgetIdeComponent

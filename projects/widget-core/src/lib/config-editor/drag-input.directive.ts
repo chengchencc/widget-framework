@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostListener, Output, EventEmitter, Input, NgZone } from '@angular/core';
-import { NUM_REGEXP } from '../utils';
 import { Subject } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
+import { NUM_REGEXP } from './utils';
 
 @Directive({
   selector: '[libDragInput]'

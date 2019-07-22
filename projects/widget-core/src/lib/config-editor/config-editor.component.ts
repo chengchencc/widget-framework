@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { NUM_REGEXP, UNIT_REGEXP, ConfigEditorProp, ConfigEditorPropsContainer, ConfigEditorType, camel2Joiner, getRegExpInValue } from '../../utils';
+import { NUM_REGEXP, UNIT_REGEXP, ConfigEditorProp, ConfigEditorPropsContainer, ConfigEditorType, camel2Joiner, getRegExpInValue } from './utils';
 import { ConfigEditorData } from 'projects/widget-core/src/lib/common/layout.interface';
 
 @Component({

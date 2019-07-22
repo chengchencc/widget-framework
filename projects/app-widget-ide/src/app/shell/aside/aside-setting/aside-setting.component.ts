@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WidgetSettableDirective } from 'projects/widget-core/src/lib/settable/widget-settable.directive';
-import { ConfigEditorProp, ConfigEditorPropsContainer } from '../../../utils';
+import { ConfigEditorProp, ConfigEditorPropsContainer } from 'projects/widget-core/src/lib/config-editor/utils';
 import { SettingService } from 'projects/widget-core/src/lib/settable/setting.sevice';
 import { LayoutSettingsPropListMap } from 'projects/widget-core/src/lib/common/layout-default';
 // import { LayoutService } from 'widget-core';

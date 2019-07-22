@@ -1,6 +1,8 @@
 import { Component, OnInit, DoCheck, ChangeDetectionStrategy } from '@angular/core';
 import { SettingService } from 'projects/widget-core/src/lib/settable/setting.sevice';
-import { NUM_REGEXP, UNIT_REGEXP, ConfigEditorType, ConfigEditorProp, clamp, getRegExpInValue, camel2Joiner, styleProps } from '../../../utils';
+import { NUM_REGEXP, UNIT_REGEXP, ConfigEditorType, ConfigEditorProp, getRegExpInValue, camel2Joiner } from 'projects/widget-core/src/lib/config-editor/utils';
+import { clamp, styleProps } from '../../../utils';
+
 
 @Component({
   selector: 'design-aside-style',

@@ -1,5 +1,5 @@
 import { LayoutTemplate, LayoutConfig } from './layout.interface';
-import { ConfigEditorProp, ConfigEditorType } from 'projects/app-widget-ide/src/app/utils';
+import { ConfigEditorProp, ConfigEditorType } from '../config-editor/utils';
 
 export const DefaultLayout:LayoutConfig = {
   id: '0',
