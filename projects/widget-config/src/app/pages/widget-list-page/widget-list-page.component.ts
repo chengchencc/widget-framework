@@ -1,6 +1,20 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import StepManager from 'projects/widget-config/src/assets/StepManager';
+import { ConfigEditorType } from 'projects/widget-core/src/lib/config-editor/utils';
 // import {  } from '@angular/compiler/src/core';
+
+const styleProps = [
+  {
+    name: 'property 1',
+    type: ConfigEditorType.Number
+  },
+  {
+    name: 'property 2',
+    type: ConfigEditorType.LongEnum,
+    EnumValues: ['value 1', 'v2', 'v3']
+  },
+  
+]
 
 const widgetList = [{
   categoryName: '通用部件',
@@ -185,6 +199,18 @@ export class WidgetListPageComponent implements OnInit {
 
   PageState = PageState
   metaCompType: 'graphOnly' | 'graphNTable' = 'graphOnly'
+
+
+  /** config editor */
+  getValue = () => {}
+  configData = {}
+
+  
+  getCurPropList () {
+    return styleProps
+  }
+  handleChangeValue () {}
+
   constructor() { }
 
   ngOnInit() {

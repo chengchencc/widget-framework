@@ -9,7 +9,10 @@ import { ConfigEditorData } from 'projects/widget-core/src/lib/common/layout.int
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfigEditorComponent implements OnInit {
-  // 全部属性信息列表
+  /**
+   * 全部属性信息列表
+   * 注意：如果要用调用函数得到此配置项，应每次返回相同配置对象，不要每次调用都返回新建实例，否则会导致页面无响应
+   * */ 
   @Input() propList: (ConfigEditorProp | ConfigEditorPropsContainer)[]
   // 实际被修改的数据，用于判断是否已被更改
   @Input() configEditorData: ConfigEditorData

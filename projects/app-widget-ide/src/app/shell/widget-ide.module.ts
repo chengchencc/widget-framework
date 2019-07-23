@@ -9,7 +9,6 @@ import { WidgetIdeComponent } from './widget-ide.component';
 //common vendors
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
@@ -60,7 +59,7 @@ const widgetCoreConfig:WidgetCoreConfig={
     NgSelectModule,
     TabsModule.forRoot(),
     CollapseModule.forRoot(),
-    TooltipModule.forRoot(),
+
     ModalModule.forRoot(),
     ButtonsModule.forRoot(),
     AccordionModule.forRoot(),

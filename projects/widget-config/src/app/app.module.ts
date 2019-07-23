@@ -6,6 +6,7 @@ import { WidgetListPageComponent } from './pages/widget-list-page/widget-list-pa
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WidgetCoreModule } from 'projects/widget-core/src/public-api';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AccordionModule.forRoot(),
     ButtonsModule.forRoot(),
     FormsModule,
-    // ReactiveFormsModule
+    WidgetCoreModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

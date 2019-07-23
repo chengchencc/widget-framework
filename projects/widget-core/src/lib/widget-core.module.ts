@@ -43,9 +43,10 @@ import { DragInputDirective } from './config-editor/drag-input.directive';
     DraggableModule,
     GridsterModule,
     // ngx
-    TooltipModule,
+    TooltipModule.forRoot(),
     // ModalModule,
     ButtonsModule
+    // ButtonsModule.forRoot()
   ],
   declarations: [
     LayoutComponent,
