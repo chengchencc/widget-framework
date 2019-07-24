@@ -9,8 +9,9 @@
     background: $bgGray;
 
     .left-list {
+        position: relative;
         width: 248px;
-        box-shadow: 0 10px 10px 0 #0000001c;
+        box-shadow: $sectionShadow;
         overflow-y: scroll;
         background: white;
 
@@ -22,8 +23,8 @@
                 box-sizing: border-box;
                 border: 1px solid #d6d6d6;
                 border-radius: 2px;
-                font-size: 16px;
-                padding: 6px;
+                font-size: 15px;
+                padding: 3px;
                 padding-right: 30px;
             }
             button {
@@ -56,7 +57,7 @@
 
                 .widget-wrapper {
                     height: 150px;
-                    box-shadow: 0 0 10px 0 #0000001c;
+                    box-shadow: $sectionShadow;
                 }
                 .widget-name {
                     text-align: center;
@@ -73,7 +74,7 @@
         .widget-config-panel {
             display: flex;
             align-items: stretch;
-            .left {
+            >.left {
                 width: 220px;
                 border-right: 1px solid $panelBlockBorder;
                 .title-block {
@@ -133,7 +134,7 @@
                     }
                 }
             }
-            .right {
+            >.right {
                 padding: 20px;
                 flex: 1 1 auto;
 
@@ -176,8 +177,22 @@
                         }
                     }
                 }
-                .pagination {
-                    float: right;
+                .pagi-row {
+                    text-align: right;
+                    .pagination {
+                        display: inline-block;
+                    }
+                }
+                .widget-config-title-row {
+                    border-bottom: 1px solid $panelBlockBorder;
+                    margin: 0 -20px;
+                    .widget-config-title {
+                        color: $brandBlue;
+                        border-bottom: 2px solid;
+                        display: inline-block;
+                        padding: 8px 16px;
+                        font-size: 16px;
+                    }
                 }
                 .meta-comp-list {
                     margin: 20px 0;
@@ -188,16 +203,82 @@
                             display: inline-block;
                             width: 52px;
                             height: 46px;
-                            background: gray;
+                            background: $placeholderGray;
                         }
                     }
                 }
-
-                .widget {
-                    height: 200px;
-                    width: 200px;
+                .widget-editor-row {
+                    display: flex;
+                    margin-top: 10px;
+                    >.left {
+                        width: 50%;
+                        .widget {
+                            height: 200px;
+                            width: 200px;
+                            background: $placeholderGray;
+                        }
+                    }
+                    >.right {
+                        width: 50%;
+                        text-align: right;
+                    }
                 }
+
             }
+        }
+    }
+
+    .aside-editor-opener {
+
+    }
+    .aside-editor {
+        display: inline-block;
+        width: 320px;
+        background: white;
+        box-shadow: $sectionShadow;
+        text-align: left;
+
+        // 定位
+        // position: fixed;
+        // right: 0;
+
+        .aside-header {
+            padding: 10px;
+            font-size: 14px;
+            background: $configEditorTitleBackground;
+            .text {
+            }
+            i {
+                font-size: 16px;
+                float: right;
+                margin-top: 3px;
+                cursor: pointer;
+            }
+        }
+        .panel {
+            background: none;
+        }
+        .panel-group {
+            .panel-collapse {
+                padding: 3px 5px;
+            }
+            .heading {
+                background: $configEditorTitleBackground;
+                font-size: 13px;
+                border: none;
+                padding: 5px 10px;
+                font-size: 12px;
+                font-weight: bold;
+            }
+            .form-group {
+                margin: 3px 0;
+            }
+        }
+        .accordion-arrow-icon {
+            transform: rotate(-90deg);
+        }
+        .panel-open .accordion-arrow-icon {
+            transform: rotate(0deg);
         }
     }
 }

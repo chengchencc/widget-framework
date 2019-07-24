@@ -5,14 +5,33 @@ import { ConfigEditorType } from 'projects/widget-core/src/lib/config-editor/uti
 
 const styleProps = [
   {
-    name: 'property 1',
-    type: ConfigEditorType.Number
-  },
-  {
-    name: 'property 2',
-    type: ConfigEditorType.LongEnum,
-    EnumValues: ['value 1', 'v2', 'v3']
-  },
+    name: '关联上下文',
+    propList: [
+      {
+        name: '关联上下文',
+        type: ConfigEditorType.Text
+      },
+      {
+        name: 'property 2',
+        type: ConfigEditorType.LongEnum,
+        EnumValues: ['value 1', 'v2', 'v3']
+      }
+    ]
+  }, {
+    name: '部件信息',
+    propList: [
+      {
+        name: '标题名称',
+        type: ConfigEditorType.Text
+      }, {
+        name: '副标题名称',
+        type: ConfigEditorType.Text
+      }, {
+        name: '选择筛选条件',
+        type: ConfigEditorType.Text
+      }
+    ]
+  }
   
 ]
 
@@ -198,7 +217,7 @@ export class WidgetListPageComponent implements OnInit {
   curSelection: WidgetCategory | Widget = null
 
   PageState = PageState
-  metaCompType: 'graphOnly' | 'graphNTable' = 'graphOnly'
+  metaCompType: 'graphOnly' | 'graphNTable'
 
 
   /** config editor */
@@ -206,7 +225,7 @@ export class WidgetListPageComponent implements OnInit {
   configData = {}
 
   
-  getCurPropList () {
+  getCurPropCategoryList () {
     return styleProps
   }
   handleChangeValue () {}
@@ -214,6 +233,7 @@ export class WidgetListPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.metaCompType = 'graphOnly'
     // TODO: 异步加载后设置
     this.curSelection = this.widgetList[0]
   }

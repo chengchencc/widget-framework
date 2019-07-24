@@ -45,22 +45,22 @@
       <accordion-group
         *ngFor="let category of widgetList"
         [isOpen]="true" >
-          <!-- TODO: 下面两个 active 应当用 id 判断，有正确数据后可改 -->
-          <div accordion-heading
-            class=heading
-            [class.active]="curSelection['categoryName']==category.categoryName"
-            (click)="curSelection = category" >
-            <i class="material-icons">folder</i>
-            {{category.categoryName}}</div>
-          <ul class=inner-list>
-            <li *ngFor="let widget of category.widgets"
-              [class.active]="curSelection['name']==widget.name"
-              (click)="curSelection = widget" >
-              <span class=name>{{widget.name}}</span>
-            </li>
-          </ul>
-        </accordion-group>
-      </accordion>
+        <!-- TODO: 下面两个 active 应当用 id 判断，有正确数据后可改 -->
+        <div accordion-heading
+          class=heading
+          [class.active]="curSelection['categoryName']==category.categoryName"
+          (click)="curSelection = category" >
+          <i class="material-icons">folder</i>
+          {{category.categoryName}}</div>
+        <ul class=inner-list>
+          <li *ngFor="let widget of category.widgets"
+            [class.active]="curSelection['name']==widget.name"
+            (click)="curSelection = widget" >
+            <span class=name>{{widget.name}}</span>
+          </li>
+        </ul>
+      </accordion-group>
+    </accordion>
   </div>
 
   <main>
@@ -305,16 +305,18 @@
               </tr>
             </tbody>
           </table>
-          <div class=pagination>
-            <ul>
-              <li><i class="material-icons">keyboard_arrow_left</i></li>
-              <li *ngFor="let i of [1,2,3,4,5]">{{i}}</li>
-              <li><i class="material-icons">keyboard_arrow_right</i></li>
-            </ul>
+          <div class=pagi-row>
+            <div class=pagination>
+              <ul>
+                <li><i class="material-icons">keyboard_arrow_left</i></li>
+                <li *ngFor="let i of [1,2,3,4,5]">{{i}}</li>
+                <li><i class="material-icons">keyboard_arrow_right</i></li>
+              </ul>
+            </div>
           </div>
 
-          <div>
-            <div>部件设计</div>
+          <div class="widget-config-title-row">
+            <div class="widget-config-title" >部件设计</div>
           </div>
 
           <ul class=meta-comp-list>
@@ -338,26 +340,51 @@
           <div class="btn-group"
             btnRadioGroup
             [(ngModel)]="metaCompType" >
-            <label class="btn btn-primary"
+            <label class="btn"
               btnRadio="GraphOnly" >图</label>
-            <label class="btn btn-primary"
+            <label class="btn"
               btnRadio="GraphNTable" >图+表</label>
           </div>
 
-          <div class=widget>
+          <div class=widget-editor-row>
+            <div class=left>
+              <div class=widget>
 
+              </div>
+            </div>
+            <div class=right>
+              <!-- <div class=aside-editor-opener>
+                <i class="material-icons">format_indent_decrease</i>
+              </div> -->
+              <div class=aside-editor>
+                <div class=aside-header>
+                  <span class=text>属性配置</span>
+                  <!-- <i class="material-icons">format_indent_increase</i> -->
+                </div>
+                <accordion class="ul-category">
+                  <accordion-group *ngFor="let category of getCurPropCategoryList()"
+                    [isOpen]="true" >
+                    <div accordion-heading
+                      class=heading>
+                      <i class="accordion-arrow-icon material-icons">arrow_drop_down</i>
+                      {{category.name}}</div>
+                    <config-editor
+                      [getValue]='getValue'
+                      [propList]='category.propList'
+                      [configEditorData]="configData"
+                      (onChangeValue)="handleChangeValue($event)" ></config-editor>
+                  </accordion-group>
+                </accordion>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </ng-container>
   </main>
 
-  <div class=aside-editor-opener></div>
-  <div class=aside-editor>
-    <config-editor
-      [getValue]='getValue'
-      [propList]='getCurPropList()'
-      [configEditorData]="configData"
-      (onChangeValue)="handleChangeValue($event)" ></config-editor>
-  </div>
+  <!-- <div class=aside-editor-opener>
+    <i class="material-icons">format_indent_decrease</i>
+  </div> -->
+
 </div>

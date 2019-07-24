@@ -1,6 +1,8 @@
 
 @import "~material-design-icons/iconfont/material-icons.css";
 @import "./assets/variables.scss";
+@import '../../styles/theme/theme.scss';
+
 
 /* You can add global styles to this file, and also import other style files */
 body {
@@ -73,6 +75,12 @@ table {
         }
     }
 }
+label {
+    margin: 0;
+}
+.form-group {
+    margin-bottom: 10px;
+}
 
 .btn {
     background: none;
@@ -116,21 +124,21 @@ table {
         margin-bottom: 0;
     }
     label {
-        // flex: 1 1 30%;
         width: 30%;
         text-align: right;
         padding: 4px 10px;
+        margin-bottom: 0;
         .require-token {
             color: red;
             margin-right: 3px;
         }
     }
     .form-control {
-        // flex: 1 1 70%;
+        height: auto;
         flex: 1 1 auto;
         border: 1px solid #cecece;
         border-radius: 2px;
-        padding: 6px;
+        padding: 3px 6px;
         font-size: 14px;
     }
 }
@@ -238,10 +246,7 @@ table {
                     }
                 }
 
-                // &:focus {
-                // }
             }
-            // }
         }
     }
 }
@@ -249,6 +254,17 @@ table {
 
 accordion {
     accordion-group {
+        .card {
+            border: none;
+        }
+        .card-header {
+            padding: 0;
+            border: 0;
+            background: none;
+        }
+        .card-body {
+            padding: 0;
+        }
         .accordion-toggle {
             .heading {
                 background: none;
@@ -322,22 +338,10 @@ accordion {
     }
 }
 
+
+
 .btn-group {
     label {
-        border-radius: 0;
-        border-left-width: 0;
-        box-shadow: none;
-
-        &:first-child {
-            border-bottom-left-radius: $btnGroupBorderRadius;
-            border-top-left-radius: $btnGroupBorderRadius;
-            border-left-width: 1px;
-        }
-        &:last-child {
-            border-bottom-right-radius: $btnGroupBorderRadius;
-            border-top-right-radius: $btnGroupBorderRadius;
-        }
-        
         &.active {
             background: $brandBlue;
             border-color: $brandBlue;
