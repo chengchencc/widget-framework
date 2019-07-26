@@ -1,78 +1,61 @@
 
 
 <div class="modal-header">
-  <h4 class="modal-title pull-left">计算列</h4>
+  <h4 class="modal-title pull-left">月度筛选</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
+  <div class="row">
+    <div class="col-sm-4">
+      <label class="mb-2">月度字段</label>
+      <!-- <div> -->
+        <!-- search -->
+        <app-search-input></app-search-input>
 
-  <div class="form-group row" >
-    <label class="col-sm-3 col-form-label"><span class="require-token">*</span>字段名称</label>
-    <div class=col-sm-9>
-      <input type="text" class="form-control form-control-sm" required>
+        <select class="form-control form-control-sm mt-1" size="12">
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+          <option value="">1 月</option>
+        </select>
+      <!-- </div> -->
     </div>
-  </div>
-
-  <div class="form-group row" >
-    <label class="col-sm-3 col-form-label"><span class="require-token">*</span>字段名称</label>
-    <div class=col-sm-9>
-      <input type="text" class="form-control form-control-sm">
-    </div>
-  </div>
-  <div class="form-group row" >
-    <label class="col-sm-3 col-form-label"><span class="require-token">*</span>字段名称</label>
-    <div class=col-sm-9>
-      <select class="form-control form-control-sm" name="" id="">
-        <option value="">数值</option>
+    <div class="col-sm-2 p-1">
+      <select class="form-control form-control-sm mt-4">
+        <option value="">></option>
+        <option value="">></option>
+        <option value="">></option>
+        <option value="">></option>
+        <option value="">></option>
+        <option value="">></option>
+        <option value="">></option>
+        <option value="">></option>
+        <option value="">></option>
+        <option value="">></option>
       </select>
     </div>
-  </div>
-  <div class="form-group row" >
-    <label class="col-sm-3 col-form-label"><span class="require-token">*</span>字段名称</label>
-    <div class=col-sm-9>
-      <textarea class="form-control form-control-sm" name="" id="" cols="30" rows="3"></textarea>
-    </div>
-  </div>
-  <div class="row">
-    <div class="offset-1 col-sm-10 row">
-      <div class="col-sm-5">
-        <div class="mb-1">选择字段</div>
-        <select class="form-control form-control-sm mb-1" name="" id="">
-          <option value="">销售统计表</option>
-        </select>
-        <select class="form-control form-control-sm" multiple
-          size="8">
-          <option value="">员工编号</option>
-          <option value="">员工编号</option>
-          <option value="">员工编号</option>
-          <option value="">员工编号</option>
-        </select>
-      </div>
-      <div class="col-sm-2 operators">
-        <button class="btn btn-primary">+</button>
-        <button class="btn">+</button>
-        <button class="btn">+</button>
-        <button class="btn">+</button>
-        <button class="btn">+</button>
-      </div>
-      <div class="col-sm-5">
-        <div class="mb-1">选择函数</div>
-        <select class="form-control form-control-sm" multiple
-          size="10">
-          <option value="">MAX</option>
-          <option value="">MIN</option>
-          <option value="">SUM</option>
-          <option value="">AVG</option>
-        </select>
+    <div class="col-sm-6">
+      <label class="mb-2">匹配值</label>
+      <div class="row m-0">
+        <input type="text" class="form-control form-control-sm col-sm-7">
+        <div class="col-sm-5 p-1 value-btns">
+          <div class="btn">+</div>
+          <div class="btn">-</div>
+        </div>
       </div>
     </div>
   </div>
-
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">取消</button>
-  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">保存</button>
-  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">保存并继续添加</button>
+  <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">保存</button>
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">取消</button>
 </div>

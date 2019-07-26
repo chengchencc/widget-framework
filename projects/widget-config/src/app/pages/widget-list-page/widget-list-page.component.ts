@@ -3,6 +3,7 @@ import StepManager from 'projects/widget-config/src/assets/StepManager';
 import { ConfigEditorType } from 'projects/widget-core/src/lib/config-editor/utils';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { CalcuFieldComponent } from '../../modals/calcu-field/calcu-field.component';
+import { MonthFilterComponent } from '../../modals/month-filter/month-filter.component';
 // import {  } from '@angular/compiler/src/core';
 
 const styleProps = [
@@ -254,8 +255,10 @@ export class WidgetListPageComponent implements OnInit {
   }
 
   handleClickCalcuField () {
-    // this.bsModalRef = 
     this.modalService.show(CalcuFieldComponent, {});
+  }
+  handleClickMonthFilter () {
+    this.modalService.show(MonthFilterComponent, {});
   }
 
 }

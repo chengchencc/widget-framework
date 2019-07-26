@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { WidgetListPageComponent } from './pages/widget-list-page/widget-list-page.component';
 import { CalcuFieldComponent } from './modals/calcu-field/calcu-field.component';
 import { MonthFilterComponent } from './modals/month-filter/month-filter.component';
+import { SearchInputComponent } from './comps/search-input/search-input.component';
 
 
 @NgModule({
@@ -19,10 +20,12 @@ import { MonthFilterComponent } from './modals/month-filter/month-filter.compone
     AppComponent,
     WidgetListPageComponent,
     CalcuFieldComponent,
-    MonthFilterComponent
+    MonthFilterComponent,
+    SearchInputComponent
   ],
   entryComponents: [
-    CalcuFieldComponent
+    CalcuFieldComponent,
+    MonthFilterComponent
   ],
   imports: [
     BrowserModule,

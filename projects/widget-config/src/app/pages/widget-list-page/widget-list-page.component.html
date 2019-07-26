@@ -34,12 +34,15 @@
 
   <div class=left-list>
     <!-- 搜索 -->
-    <div class=search>
+    <div class="p-2 pt-3">
+      <app-search-input></app-search-input>
+    </div>
+    <!-- <div class=search>
       <input type="text" placeholder="搜索">
       <button class=btn>
           <i class="material-icons">search</i>
       </button>
-    </div>
+    </div> -->
     <!-- 列表 -->
     <accordion>
       <accordion-group
@@ -179,7 +182,7 @@
                     <div class="field-item">
                       <span class=text class=text>序号</span>
                       <i class="material-icons">close</i>
-                      <i class="material-icons">filter_list</i>
+                      <i class="material-icons" (click)="handleClickMonthFilter()">filter_list</i>
                       <i class="material-icons">sort</i>
                     </div>
                   </li>

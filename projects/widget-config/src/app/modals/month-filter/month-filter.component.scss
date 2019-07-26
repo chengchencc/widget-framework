@@ -1,0 +1,12 @@
+
+@import "../../../assets/variables.scss";
+
+.value-btns {
+    .btn {
+        color: $brandBlue;
+        border: none;
+        font-size: 22px;
+        padding: 0px 0 3px 15px;
+        box-shadow: none;
+    }
+}
