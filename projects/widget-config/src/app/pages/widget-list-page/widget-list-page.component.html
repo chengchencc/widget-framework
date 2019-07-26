@@ -117,7 +117,9 @@
       <!-- 4 预览 -->
       <div class="preview main-panel-body"
         *ngIf="stepManager.curStepIndex==4" >
-        preview
+        <div class=widget>
+
+        </div>
       </div>
     </div>
 
@@ -142,7 +144,7 @@
               <div class=title>
                 <i class="material-icons">sort</i>
                 <span class=text>维度</span>
-                <span class=plus>+</span>
+                <span class=plus (click)="handleClickCalcuField()">+</span>
               </div>
               <ul>
                 <li>序号</li>

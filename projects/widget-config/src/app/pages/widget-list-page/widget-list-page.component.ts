@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import StepManager from 'projects/widget-config/src/assets/StepManager';
 import { ConfigEditorType } from 'projects/widget-core/src/lib/config-editor/utils';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { CalcuFieldComponent } from '../../modals/calcu-field/calcu-field.component';
 // import {  } from '@angular/compiler/src/core';
 
 const styleProps = [
@@ -230,7 +232,9 @@ export class WidgetListPageComponent implements OnInit {
   }
   handleChangeValue () {}
 
-  constructor() { }
+  constructor(
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit() {
     this.metaCompType = 'graphOnly'
@@ -247,6 +251,11 @@ export class WidgetListPageComponent implements OnInit {
       this.stepManager.toNext()
       return
     }
+  }
+
+  handleClickCalcuField () {
+    // this.bsModalRef = 
+    this.modalService.show(CalcuFieldComponent, {});
   }
 
 }

@@ -161,7 +161,7 @@
                                         cursor: pointer;
                                         .text {
                                             font-size: 13px;
-                                            padding: 2px 16px;
+                                            padding: 1px 16px;
                                             background: #e6e6e6;
                                         }
                                         .material-icons {
@@ -224,6 +224,13 @@
                     }
                 }
 
+            }
+        }
+        .preview {
+            .widget {
+                box-shadow: $sectionShadow;
+                width: 300px;
+                height: 300px;
             }
         }
     }

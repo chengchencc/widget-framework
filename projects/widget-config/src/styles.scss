@@ -54,6 +54,7 @@ table {
         th {
             padding: 8px 0;
             font-size: 13px;
+            text-align: center;
         }
     }
     tbody {
@@ -128,10 +129,7 @@ label {
         text-align: right;
         padding: 4px 10px;
         margin-bottom: 0;
-        .require-token {
-            color: red;
-            margin-right: 3px;
-        }
+        
     }
     .form-control {
         height: auto;
@@ -231,20 +229,7 @@ label {
             .btn {
                 margin: 0 3px;
 
-                &:hover {
-                    color: $brandBlue;
-                    border-color: currentColor;
-                }
-
-                &.btn-primary {
-                    background: $brandBlue;
-                    border: 1px solid $brandBlue;
-                    color: white;
-                    &:hover {
-                        color: white;
-                        background: #388effce;
-                    }
-                }
+                
 
             }
         }
@@ -338,6 +323,27 @@ accordion {
     }
 }
 
+.modal {
+    .modal-header {
+        border-bottom: none;
+        padding: 5px 15px;
+        h4 {
+            font-size: 15px;
+            font-weight: bold;
+        }
+    }
+    .modal-body {
+        font-size: 13px;
+    }
+    .modal-footer {
+        padding: 5px 15px;
+        background: $configEditorTitleBackground;
+        border: none;
+        .btn-default {
+            background: white;
+        }
+    }
+}
 
 
 .btn-group {
@@ -346,6 +352,41 @@ accordion {
             background: $brandBlue;
             border-color: $brandBlue;
             color: white;
+        }
+    }
+}
+
+
+.col-form-label {
+    // font-size: 13px;
+    text-align: right;
+}
+label {
+    // font-size: 13px;
+
+    .require-token {
+        color: red;
+        margin-right: 3px;
+    }
+}
+.form-control-sm {
+    font-size: 12px;
+    padding: 3px 5px;
+}
+
+.btn {
+    &:hover {
+        color: $brandBlue;
+        border-color: currentColor;
+    }
+
+    &.btn-primary {
+        background: $brandBlue;
+        border: 1px solid $brandBlue;
+        color: white;
+        &:hover {
+            color: white;
+            background: #388effce;
         }
     }
 }
