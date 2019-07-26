@@ -13,7 +13,20 @@ import { WidgetListPageComponent } from './pages/widget-list-page/widget-list-pa
 import { CalcuFieldComponent } from './modals/calcu-field/calcu-field.component';
 import { MonthFilterComponent } from './modals/month-filter/month-filter.component';
 import { SearchInputComponent } from './comps/search-input/search-input.component';
+import { RouterModule } from '@angular/router';
+import { ManageTmplPageComponent } from './pages/manage-tmpl-page/manage-tmpl-page.component';
 
+const appRoutes = [
+  { path: 'widget-config', component: WidgetListPageComponent },
+  { path: 'manage-tmpl', component: ManageTmplPageComponent },
+  { path: 'add-tmpl', component: WidgetListPageComponent },
+  { path: 'distribute-tmpl', component: WidgetListPageComponent },
+  { path: '',
+    redirectTo: '/widget-config',
+    pathMatch: 'full'
+  },
+  // { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   declarations: [
@@ -21,7 +34,8 @@ import { SearchInputComponent } from './comps/search-input/search-input.componen
     WidgetListPageComponent,
     CalcuFieldComponent,
     MonthFilterComponent,
-    SearchInputComponent
+    SearchInputComponent,
+    ManageTmplPageComponent
   ],
   entryComponents: [
     CalcuFieldComponent,
@@ -29,6 +43,10 @@ import { SearchInputComponent } from './comps/search-input/search-input.componen
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     AccordionModule.forRoot(),
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
