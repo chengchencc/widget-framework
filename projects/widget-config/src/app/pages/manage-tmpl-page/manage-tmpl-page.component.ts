@@ -7,6 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageTmplPageComponent implements OnInit {
 
+  headerOption = {
+    title: '首页模板分配',
+    btns: [
+      {
+        name: '分配首页',
+        class: 'btn-primary',
+        onClick: () => {}
+      }, {
+        name: '复制',
+        class: '',
+        onClick: () => {}
+      }, {
+        name: '删除',
+        class: '',
+        onClick: () => {}
+      }, {
+        name: '取消',
+        class: '',
+        onClick: () => {}
+      }
+    ]
+  }
+
+
   constructor() { }
 
   ngOnInit() {

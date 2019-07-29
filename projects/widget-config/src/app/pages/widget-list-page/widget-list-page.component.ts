@@ -4,6 +4,7 @@ import { ConfigEditorType } from 'projects/widget-core/src/lib/config-editor/uti
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { CalcuFieldComponent } from '../../modals/calcu-field/calcu-field.component';
 import { MonthFilterComponent } from '../../modals/month-filter/month-filter.component';
+import { SearchableListCategory, SearchableListItem } from '../../comps/searchable-list/searchable-list.component';
 // import {  } from '@angular/compiler/src/core';
 
 const styleProps = [
@@ -38,9 +39,9 @@ const styleProps = [
   
 ]
 
-const widgetList = [{
+const widgetCategoryList = [{
   categoryName: '通用部件',
-  widgets: [{
+  children: [{
     name: '个人信息',
   }, {
     name: '个人信息2',
@@ -55,14 +56,14 @@ const widgetList = [{
   }]
 }, {
   categoryName: '通用部件2',
-  widgets: [{
+  children: [{
     name: '个人信息',
   }, {
     name: '个人信息2'
   }]
 }, {
   categoryName: '通用部件3',
-  widgets: [{
+  children: [{
     name: '个人信息',
   }, {
     name: '个人信息2',
@@ -71,7 +72,7 @@ const widgetList = [{
   }]
 }, {
   categoryName: '通用部件4',
-  widgets: [{
+  children: [{
     name: '个人信息',
   }, {
     name: '个人信息2',
@@ -216,8 +217,8 @@ export class WidgetListPageComponent implements OnInit {
   ]
   stepManager = new StepManager(this.stepDataList)
 
-  widgetList = widgetList
-  curSelection: WidgetCategory | Widget = null
+  widgetCategoryList = widgetCategoryList
+  selectedWidgetOrCategory: SearchableListItem | SearchableListCategory = null
 
   PageState = PageState
   metaCompType: 'graphOnly' | 'graphNTable'
@@ -240,7 +241,11 @@ export class WidgetListPageComponent implements OnInit {
   ngOnInit() {
     this.metaCompType = 'graphOnly'
     // TODO: 异步加载后设置
-    this.curSelection = this.widgetList[0]
+    // this.curSelection = this.widgetList[0]
+  }
+
+  handleSelectWidgetOrCategory (selectedWidgetOrCategory: SearchableListItem | SearchableListCategory) {
+    this.selectedWidgetOrCategory = selectedWidgetOrCategory
   }
 
   handleClickStep (targetStepIndex: number) {

@@ -15,6 +15,7 @@ import { MonthFilterComponent } from './modals/month-filter/month-filter.compone
 import { SearchInputComponent } from './comps/search-input/search-input.component';
 import { RouterModule } from '@angular/router';
 import { ManageTmplPageComponent } from './pages/manage-tmpl-page/manage-tmpl-page.component';
+import { SearchableListComponent } from './comps/searchable-list/searchable-list.component';
 
 const appRoutes = [
   { path: 'widget-config', component: WidgetListPageComponent },
@@ -35,7 +36,8 @@ const appRoutes = [
     CalcuFieldComponent,
     MonthFilterComponent,
     SearchInputComponent,
-    ManageTmplPageComponent
+    ManageTmplPageComponent,
+    SearchableListComponent
   ],
   entryComponents: [
     CalcuFieldComponent,

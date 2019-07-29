@@ -31,40 +31,10 @@
 </div>
 
 <div class=widget-list-page>
-
-  <div class=left-list>
-    <!-- 搜索 -->
-    <div class="p-2 pt-3">
-      <app-search-input></app-search-input>
-    </div>
-    <!-- <div class=search>
-      <input type="text" placeholder="搜索">
-      <button class=btn>
-          <i class="material-icons">search</i>
-      </button>
-    </div> -->
-    <!-- 列表 -->
-    <accordion>
-      <accordion-group
-        *ngFor="let category of widgetList"
-        [isOpen]="true" >
-        <!-- TODO: 下面两个 active 应当用 id 判断，有正确数据后可改 -->
-        <div accordion-heading
-          class=heading
-          [class.active]="curSelection['categoryName']==category.categoryName"
-          (click)="curSelection = category" >
-          <i class="material-icons">folder</i>
-          {{category.categoryName}}</div>
-        <ul class=inner-list>
-          <li *ngFor="let widget of category.widgets"
-            [class.active]="curSelection['name']==widget.name"
-            (click)="curSelection = widget" >
-            <span class=name>{{widget.name}}</span>
-          </li>
-        </ul>
-      </accordion-group>
-    </accordion>
-  </div>
+  <app-searchable-list [categoryList]="widgetCategoryList"
+    [categorySelectable]="true"
+    [itemSelectable]="true"
+    (onSelect)="selectedWidgetOrCategory = $event" ></app-searchable-list>
 
   <main>
     <div class="main-panel main-panel-full"
@@ -79,8 +49,8 @@
         class="main-panel-body" >
         <!-- 当前选中的是分类，则显示列表 -->
         <ul class=widget-list
-          *ngIf="curSelection['widgets']" >
-          <li *ngFor="let widget of curSelection['widgets']">
+          *ngIf="selectedWidgetOrCategory && selectedWidgetOrCategory['widgets']" >
+          <li *ngFor="let widget of selectedWidgetOrCategory['widgets']">
             <div class=widget-wrapper>
               <!-- widget -->
             </div>
@@ -89,11 +59,11 @@
         </ul>
         <!-- 当前选中的是部件，则显示部件 -->
         <div class=widget-one
-          *ngIf="!curSelection['widgets']" >
+          *ngIf="selectedWidgetOrCategory && !selectedWidgetOrCategory['widgets']" >
           <div class=widget-wrapper>
               <!-- widget -->
           </div>
-          <div class=widget-name>{{curSelection['name']}}</div>
+          <div class=widget-name>{{selectedWidgetOrCategory['name']}}</div>
         </div>
       </div>
 

@@ -1,3 +1,20 @@
-<p>
-  manage-tmpl-page works!
-</p>
+<div class=header>
+  <div class=left>
+    <img class=icon src="" alt="">
+    <span class=title>{{headerOption.title}}</span>
+    <!-- TODO: tempRef -->
+  </div>
+
+  <div class=right>
+    <!-- TODO: tempRef -->
+    <div class=btns>
+      <!-- <li > -->
+        <button
+          *ngFor="let btn of headerOption.btns"
+          [ngClass]="btn.class"
+          (click)="btn.onClick()"
+          class="btn">{{btn.name}}</button>
+      <!-- </li> -->
+    </div>
+  </div>
+</div>

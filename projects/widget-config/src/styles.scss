@@ -237,66 +237,6 @@ label {
 }
 
 
-accordion {
-    accordion-group {
-        .card {
-            border: none;
-        }
-        .card-header {
-            padding: 0;
-            border: 0;
-            background: none;
-        }
-        .card-body {
-            padding: 0;
-        }
-        .accordion-toggle {
-            .heading {
-                background: none;
-                display: block;
-                font-size: 14px;
-                padding: 9px 12px;
-                width: 100%;
-                border: none;
-                text-align: left;
-                border-left: 4px solid transparent;
-                transition: all .2s ease;
-                cursor: pointer;
-                &:hover, &.active {
-                    background: #e6f7ff;
-                    border-color: $brandBlue;
-                    outline: none;
-                }
-
-                .material-icons {
-                    vertical-align: middle;
-                    font-size: 20px;
-                    color: $brandBlue;
-                    margin-right: 4px;
-                }
-            }
-        }
-        ul.inner-list {
-            li {
-                font-size: 14px;
-                padding: 8px 0px;
-                transition: all .2s ease;
-                cursor: pointer;
-                border-left: 4px solid transparent;
-                
-                .name {
-                    margin-left: 55px;
-                }
-
-                &:hover, &.active {
-                    background: #e6f7ff;
-                    border-color: $brandBlue;
-                    outline: none;
-                }
-            }
-        }
-    }
-}
 
 .pagination {
     margin-top: 10px;

@@ -8,14 +8,6 @@
     height: calc(100vh - 56px);
     background: $bgGray;
 
-    .left-list {
-        position: relative;
-        width: 248px;
-        box-shadow: $sectionShadow;
-        overflow-y: scroll;
-        background: white;
-
-    }
 
     main {
         width: calc(100% - 248px);

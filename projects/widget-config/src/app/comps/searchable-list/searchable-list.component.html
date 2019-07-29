@@ -1,0 +1,28 @@
+
+<div class=searchable-list>
+  <!-- 搜索 -->
+  <div class="p-2 pt-3">
+    <app-search-input></app-search-input>
+  </div>
+  <!-- 列表 -->
+  <accordion>
+    <accordion-group
+      *ngFor="let category of categoryList"
+      [isOpen]="true" >
+      <!-- TODO: 下面两个 active 应当用 id 判断，有正确数据后可改 -->
+      <div accordion-heading
+        class=heading
+        [class.active]="curSelection && curSelection['categoryName']==category.categoryName"
+        (click)="handleClickCategory(category)" >
+        <i class="material-icons">folder</i>
+        {{category.categoryName}}</div>
+      <ul class=inner-list>
+        <li *ngFor="let item of category.children"
+          [class.active]="curSelection && curSelection['name']==item.name"
+          (click)="handleClickItem(item)" >
+          <span class=name>{{item.name}}</span>
+        </li>
+      </ul>
+    </accordion-group>
+  </accordion>
+</div>
