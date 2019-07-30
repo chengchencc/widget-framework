@@ -82,6 +82,27 @@ const widgetCategoryList: SearchableListCategory[] = [{
     id: 'a', name: '个人信息4'
   }]
 }]
+const tableDataMock = [
+  {
+    id: 1,
+    number: '2019',
+    c: 'fdsfdsfsdfs',
+    d: 'dfs',
+    e: 'fdsf'
+  }, {
+    id: 1,
+    number: '2019',
+    c: 'fdsfdsfsdfs',
+    d: 'dfs',
+    e: 'fdsf'
+  }, {
+    id: 1,
+    number: '2019',
+    c: 'fdsfdsfsdfs',
+    d: 'dfs',
+    e: 'fdsf'
+  }
+]
 
 /** 部件配置页的 5 种状态 */
 enum PageState {
@@ -110,6 +131,14 @@ interface Widget {
 export class WidgetListPageComponent implements OnInit {
 
   curPageState = PageState.WidgetList
+  
+  tableDataMock = tableDataMock
+  tableHeaders = {
+    number: '序号',
+    c: 'CC',
+    d: 'DD',
+    e: 'EE'
+  }
 
   stepDataList =  [
     {

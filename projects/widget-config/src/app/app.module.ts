@@ -16,6 +16,7 @@ import { SearchInputComponent } from './comps/search-input/search-input.componen
 import { RouterModule } from '@angular/router';
 import { ManageTmplPageComponent } from './pages/manage-tmpl-page/manage-tmpl-page.component';
 import { SearchableListComponent } from './comps/searchable-list/searchable-list.component';
+import { GoodTableComponent } from './comps/good-table/good-table.component';
 
 const appRoutes = [
   { path: 'widget-config', component: WidgetListPageComponent },
@@ -37,7 +38,8 @@ const appRoutes = [
     MonthFilterComponent,
     SearchInputComponent,
     ManageTmplPageComponent,
-    SearchableListComponent
+    SearchableListComponent,
+    GoodTableComponent
   ],
   entryComponents: [
     CalcuFieldComponent,

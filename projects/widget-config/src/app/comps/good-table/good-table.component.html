@@ -1,0 +1,26 @@
+<div class="good-table mt-4">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngIf="checkable" (click)="handleClickCheckAll()">
+          <i *ngIf="selectedRows.length < tableData.length"
+            class="checkbox-icon material-icons">check_box_outline_blank</i>
+          <i *ngIf="selectedRows.length == tableData.length"
+            class="checkbox-icon checked material-icons">check_box</i>
+        </th>
+        <th *ngFor="let headerText of getHeaderValues()">{{headerText}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableData">
+        <td *ngIf="checkable" (click)="handleClickCheckRow(row)">
+          <i *ngIf="!selectedRows.includes(row)"
+            class="checkbox-icon material-icons">check_box_outline_blank</i>
+          <i *ngIf="selectedRows.includes(row)"
+            class="checkbox-icon checked material-icons">check_box</i>
+        </td>
+        <td *ngFor="let fieldValue of getRowValues(row)">{{fieldValue}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

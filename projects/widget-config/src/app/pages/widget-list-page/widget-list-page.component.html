@@ -239,47 +239,10 @@
             </div>
           </div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>序号</th>
-                <th>序号</th>
-                <th>序号</th>
-                <th>序号</th>
-                <th>序号</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-              </tr>
-              <tr>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-              </tr>
-              <tr>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-              </tr>
-              <tr>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-                <td>2019</td>
-              </tr>
-            </tbody>
-          </table>
+          <app-good-table
+            [tableData]="tableDataMock"
+            [tableHeaders]="tableHeaders" ></app-good-table>
+          
           <div class=pagi-row>
             <div class=pagination>
               <ul>
