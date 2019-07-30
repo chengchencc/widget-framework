@@ -9,29 +9,29 @@ import { SearchableListCategory, SearchableListItem } from '../../comps/searchab
 
 const styleProps = [
   {
-    name: '关联上下文',
+    id: 'a', name: '关联上下文',
     propList: [
       {
-        name: '关联上下文',
+        id: 'a', name: '关联上下文',
         type: ConfigEditorType.Text
       },
       {
-        name: 'property 2',
+        id: 'a', name: 'property 2',
         type: ConfigEditorType.LongEnum,
         EnumValues: ['value 1', 'v2', 'v3']
       }
     ]
   }, {
-    name: '部件信息',
+    id: 'a', name: '部件信息',
     propList: [
       {
-        name: '标题名称',
+        id: 'a', name: '标题名称',
         type: ConfigEditorType.Text
       }, {
-        name: '副标题名称',
+        id: 'a', name: '副标题名称',
         type: ConfigEditorType.Text
       }, {
-        name: '选择筛选条件',
+        id: 'a', name: '选择筛选条件',
         type: ConfigEditorType.Text
       }
     ]
@@ -39,47 +39,47 @@ const styleProps = [
   
 ]
 
-const widgetCategoryList = [{
+const widgetCategoryList: SearchableListCategory[] = [{
   categoryName: '通用部件',
   children: [{
-    name: '个人信息',
+    id: 'a', name: '个人信息',
   }, {
-    name: '个人信息2',
+    id: 'a', name: '个人信息2',
   }, {
-    name: '个人信息3',
+    id: 'a', name: '个人信息3',
   }, {
-    name: '个人信息4',
+    id: 'a', name: '个人信息4',
   }, {
-    name: '个人信息5',
+    id: 'a', name: '个人信息5',
   }, {
-    name: '个人信息6',
+    id: 'a', name: '个人信息6',
   }]
 }, {
   categoryName: '通用部件2',
   children: [{
-    name: '个人信息',
+    id: 'a', name: '个人信息',
   }, {
-    name: '个人信息2'
+    id: 'a', name: '个人信息2'
   }]
 }, {
   categoryName: '通用部件3',
   children: [{
-    name: '个人信息',
+    id: 'a', name: '个人信息',
   }, {
-    name: '个人信息2',
+    id: 'a', name: '个人信息2',
   }, {
-    name: '个人信息3'
+    id: 'a', name: '个人信息3'
   }]
 }, {
   categoryName: '通用部件4',
   children: [{
-    name: '个人信息',
+    id: 'a', name: '个人信息',
   }, {
-    name: '个人信息2',
+    id: 'a', name: '个人信息2',
   }, {
-    name: '个人信息3',
+    id: 'a', name: '个人信息3',
   }, {
-    name: '个人信息4'
+    id: 'a', name: '个人信息4'
   }]
 }]
 
@@ -97,7 +97,7 @@ interface WidgetCategory {
   widgets: Widget[]
 }
 interface Widget {
-  name: string,
+  id: 'a', name: string,
 }
 
 
@@ -113,34 +113,34 @@ export class WidgetListPageComponent implements OnInit {
 
   stepDataList =  [
     {
-      name: '部件列表',
+      id: 'a', name: '部件列表',
       btns: [{
-        name: '新增部件',
+        id: 'a', name: '新增部件',
         class: 'btn-primary',
         onClick: () => {
           this.stepManager.toNext()
         }
       }, {
-        name: '编辑',
+        id: 'a', name: '编辑',
         onClick: () => {}
       }, {
-        name: '复制',
+        id: 'a', name: '复制',
         onClick: () => {}
       }, {
-        name: '删除',
+        id: 'a', name: '删除',
         onClick: () => {}
       }],
     },
     {
-      name: '填写部件信息',
+      id: 'a', name: '填写部件信息',
       btns: [{
-        name: '下一步',
+        id: 'a', name: '下一步',
         class: 'btn-primary',
         onClick: () => {
           this.stepManager.toNext()
         }
       }, {
-        name: '取消',
+        id: 'a', name: '取消',
         onClick: () => {
           this.stepManager.toLastIndex(0)
 
@@ -148,16 +148,16 @@ export class WidgetListPageComponent implements OnInit {
       }],
     },
     {
-      name: '配置数据集',
+      id: 'a', name: '配置数据集',
       btns: [{
-        name: '上一步',
+        id: 'a', name: '上一步',
         onClick: () => {
           this.curPageState = PageState.InfoConfig
           this.stepManager.toLast()
 
         }
       }, {
-        name: '下一步',
+        id: 'a', name: '下一步',
         class: 'btn-primary',
         onClick: () => {
           this.curPageState = PageState.InfoConfig
@@ -165,7 +165,7 @@ export class WidgetListPageComponent implements OnInit {
 
         }
       }, {
-        name: '取消',
+        id: 'a', name: '取消',
         onClick: () => {
           this.stepManager.toLastIndex(0)
 
@@ -173,23 +173,23 @@ export class WidgetListPageComponent implements OnInit {
       }]
     },
     {
-      name: '配置部件',
+      id: 'a', name: '配置部件',
       btns: [{
-        name: '上一步',
+        id: 'a', name: '上一步',
         onClick: () => {
           this.curPageState = PageState.InfoConfig
           this.stepManager.toLast()
 
         }
       }, {
-        name: '下一步',
+        id: 'a', name: '下一步',
         class: 'btn-primary',
         onClick: () => {
           this.curPageState = PageState.InfoConfig
           this.stepManager.toNext()
         }
       }, {
-        name: '取消',
+        id: 'a', name: '取消',
         onClick: () => {
           this.stepManager.toLastIndex(0)
 
@@ -197,18 +197,18 @@ export class WidgetListPageComponent implements OnInit {
       }]
     },
     {
-      name: '预览部件',
+      id: 'a', name: '预览部件',
       btns: [{
-        name: '上一步',
+        id: 'a', name: '上一步',
         onClick: () => {
           this.stepManager.toLast()
         }
       }, {
-        name: '保存',
+        id: 'a', name: '保存',
         class: 'btn-primary',
         onClick: () => {}
       }, {
-        name: '取消',
+        id: 'a', name: '取消',
         onClick: () => {
           this.stepManager.toLastIndex(0)
         }

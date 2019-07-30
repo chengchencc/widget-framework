@@ -2,206 +2,208 @@
 
 
 .widget-list-page {
-    display: flex;
-    align-items: stretch;
     // TODO: 基本布局封装成组件？
-    height: calc(100vh - 56px);
-    background: $bgGray;
 
 
-    main {
-        width: calc(100% - 248px);
-        // padding: 15px;
-        overflow-y: scroll;
+   
+    .widget-list {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 25px;
+        li {
+            width: 190px;
+            border-radius: 3px;
+            margin: 0 35px 20px 0;
 
-        ul.widget-list {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 25px;
-            li {
-                width: 190px;
-                border-radius: 3px;
-                margin: 0 35px 20px 0;
-
-                .widget-wrapper {
-                    height: 150px;
-                    box-shadow: $sectionShadow;
-                }
-                .widget-name {
-                    text-align: center;
-                    font-size: 14px;
-                    margin: 22px;
-                }
+            .widget-wrapper {
+                height: 150px;
+                box-shadow: $sectionShadow;
             }
         }
-
-        .input-group {
-            max-width: 400px;
+    }
+    .widget-one {
+        width: 200px;
+        .widget-wrapper {
+            height: 150px;
+            box-shadow: $sectionShadow;
         }
+    }
+    .widget-list, .widget-one {
+        .widget-name {
+            text-align: center;
+            font-size: 14px;
+            margin: 22px;
+        }
+    }
 
-        .widget-config-panel {
-            display: flex;
-            align-items: stretch;
-            >.left {
-                width: 220px;
-                border-right: 1px solid $panelBlockBorder;
-                .title-block {
-                    padding: 18px 20px;
-                    border-bottom: 1px solid $panelBlockBorder;
-                    font-size: 16px;
-                    .material-icons {
-                        vertical-align: middle;
-                        color: $brandBlue;
-                        font-size: 21px;
-                        margin-right: 3px;
-                    }
-                }
-                .field-list-block {
-                    padding: 20px;
-                    .field-list {
-                        margin-bottom: 25px;
-                        margin-left: 10px;
-                        >.title {
-                            .material-icons {
-                                color: $brandBlue;
-                                vertical-align: middle;
-                                font-size: 21px;
-                                margin-right: 5px;
-                            }
-                            .text {
-                                vertical-align: middle;
-                                font-size: 14px;
-                            }
-                            .plus {
-                                color: $brandBlue;
-                                font-size: 24px;
-                                vertical-align: middle;
-                                float: right;
-                                line-height: 1;
-                                cursor: pointer;
-                            }
-                        }
-                        ul {
-                            padding: 0 0 10px 10px;
-                            li {
-                                font-size: 12px;
-                                height: 28px;
-                                // padding: 10px;
-                                &::before {
-                                    content: '';
-                                    border-left: 1px dashed gray;
-                                    border-bottom: 1px dashed gray;
-                                    width: 20px;
-                                    display: inline-block;
-                                    height: 28px;
-                                    vertical-align: super;
-                                    margin-right: 10px;
-                                }
-                            }
-                        }
-                    }
+
+    .input-group {
+        max-width: 400px;
+    }
+
+    .widget-config-panel {
+        display: flex;
+        align-items: stretch;
+        >.left {
+            width: 220px;
+            border-right: 1px solid $panelBlockBorder;
+            .title-block {
+                padding: 18px 20px;
+                border-bottom: 1px solid $panelBlockBorder;
+                font-size: 16px;
+                .material-icons {
+                    vertical-align: middle;
+                    color: $brandBlue;
+                    font-size: 21px;
+                    margin-right: 3px;
                 }
             }
-            >.right {
+            .field-list-block {
                 padding: 20px;
-                flex: 1 1 auto;
-
-                .fields {
-                    label {
-                        width: 70px;
-                        box-sizing: border-box;
+                .field-list {
+                    margin-bottom: 25px;
+                    margin-left: 10px;
+                    >.title {
+                        .material-icons {
+                            color: $brandBlue;
+                            vertical-align: middle;
+                            font-size: 21px;
+                            margin-right: 5px;
+                        }
+                        .text {
+                            vertical-align: middle;
+                            font-size: 14px;
+                        }
+                        .plus {
+                            color: $brandBlue;
+                            font-size: 24px;
+                            vertical-align: middle;
+                            float: right;
+                            line-height: 1;
+                            cursor: pointer;
+                        }
+                    }
+                    ul {
+                        padding: 0 0 10px 10px;
+                        li {
+                            font-size: 12px;
+                            height: 28px;
+                            // padding: 10px;
+                            &::before {
+                                content: '';
+                                border-left: 1px dashed gray;
+                                border-bottom: 1px dashed gray;
+                                width: 20px;
+                                display: inline-block;
+                                height: 28px;
+                                vertical-align: super;
+                                margin-right: 10px;
+                            }
+                        }
                     }
                 }
-                // TODO: extract
-                .fields {
-                    .input-group {
-                        width: 100%;
-                        max-width: none;
-                        .field-picker {
-                            padding: 3px;
-                            ul {
-                                li {
-                                    display: inline-block;
-                                    margin-right: 12px;
-                                    .field-item {
-                                        display: flex;
-                                        align-items: stretch;
-                                        cursor: pointer;
-                                        .text {
-                                            font-size: 13px;
-                                            padding: 1px 16px;
-                                            background: #e6e6e6;
-                                        }
-                                        .material-icons {
-                                            border: 1px solid #e6e6e6;
-                                            border-left: none;
-                                            font-size: 17px;
-                                            color: #686868;
-                                            padding: 2px 1px;
-                                        }
+            }
+        }
+        >.right {
+            padding: 20px;
+            flex: 1 1 auto;
+
+            .fields {
+                label {
+                    width: 70px;
+                    box-sizing: border-box;
+                }
+            }
+            // TODO: extract
+            .fields {
+                .input-group {
+                    width: 100%;
+                    max-width: none;
+                    .field-picker {
+                        padding: 3px;
+                        ul {
+                            li {
+                                display: inline-block;
+                                margin-right: 12px;
+                                .field-item {
+                                    display: flex;
+                                    align-items: stretch;
+                                    cursor: pointer;
+                                    .text {
+                                        font-size: 13px;
+                                        padding: 1px 16px;
+                                        background: #e6e6e6;
+                                    }
+                                    .material-icons {
+                                        border: 1px solid #e6e6e6;
+                                        border-left: none;
+                                        font-size: 17px;
+                                        color: #686868;
+                                        padding: 2px 1px;
                                     }
                                 }
                             }
                         }
                     }
                 }
-                .pagi-row {
+            }
+            .pagi-row {
+                text-align: right;
+                .pagination {
+                    display: inline-block;
+                }
+            }
+            .widget-config-title-row {
+                border-bottom: 1px solid $panelBlockBorder;
+                margin: 0 -20px;
+                .widget-config-title {
+                    color: $brandBlue;
+                    border-bottom: 2px solid;
+                    display: inline-block;
+                    padding: 8px 16px;
+                    font-size: 16px;
+                }
+            }
+            .meta-comp-list {
+                margin: 20px 0;
+                li {
+                    margin: 0 8px 8px 0;
+                    display: inline-block;
+                    img {
+                        display: inline-block;
+                        width: 52px;
+                        height: 46px;
+                        background: $placeholderGray;
+                    }
+                }
+            }
+            .widget-editor-row {
+                display: flex;
+                margin-top: 10px;
+                >.left {
+                    width: 50%;
+                    .widget {
+                        height: 200px;
+                        width: 200px;
+                        background: $placeholderGray;
+                    }
+                }
+                >.right {
+                    width: 50%;
                     text-align: right;
-                    .pagination {
-                        display: inline-block;
-                    }
                 }
-                .widget-config-title-row {
-                    border-bottom: 1px solid $panelBlockBorder;
-                    margin: 0 -20px;
-                    .widget-config-title {
-                        color: $brandBlue;
-                        border-bottom: 2px solid;
-                        display: inline-block;
-                        padding: 8px 16px;
-                        font-size: 16px;
-                    }
-                }
-                .meta-comp-list {
-                    margin: 20px 0;
-                    li {
-                        margin: 0 8px 8px 0;
-                        display: inline-block;
-                        img {
-                            display: inline-block;
-                            width: 52px;
-                            height: 46px;
-                            background: $placeholderGray;
-                        }
-                    }
-                }
-                .widget-editor-row {
-                    display: flex;
-                    margin-top: 10px;
-                    >.left {
-                        width: 50%;
-                        .widget {
-                            height: 200px;
-                            width: 200px;
-                            background: $placeholderGray;
-                        }
-                    }
-                    >.right {
-                        width: 50%;
-                        text-align: right;
-                    }
-                }
+            }
 
-            }
-        }
-        .preview {
-            .widget {
-                box-shadow: $sectionShadow;
-                width: 300px;
-                height: 300px;
-            }
         }
     }
+    .preview {
+        .widget {
+            box-shadow: $sectionShadow;
+            width: 300px;
+            height: 300px;
+        }
+    }
+    
 
     .aside-editor-opener {
 
@@ -251,6 +253,8 @@
         }
         .accordion-arrow-icon {
             transform: rotate(-90deg);
+            vertical-align: middle;
+            font-size: 20px;
         }
         .panel-open .accordion-arrow-icon {
             transform: rotate(0deg);

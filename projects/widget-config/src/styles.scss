@@ -96,26 +96,6 @@ label {
 
 }
 
-.main-panel {
-    background: white;
-    .main-panel-title {
-        padding: 25px;
-        border-bottom: 1px solid #ededed;
-        margin: 0;
-    }
-    .main-panel-body {
-        padding: 25px;
-        background: white;
-
-    }
-    &.main-panel-full {
-        height: 100%;
-    }
-    &.main-panel-card {
-        // height: 100%;
-        margin: 10px;
-    }
-}
 
 .input-group {
     display: flex;
@@ -331,7 +311,66 @@ label {
     }
 }
 
+/* ngx bootstrap */
+accordion {
+    accordion-group {
+        .card {
+            border: none;
+        }
+        .panel-heading {
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: pointer;
+        }
+        .card-body {
+            padding: 0;
+        }
+    }
+}
+
+/* page layout */
+// header 下的所有（与 header 平级）
+.under-header {
+    background: $bgGray;
+    height: calc(100vh - 56px);
+    &.under-header-flex {
+        display: flex;
+        align-items: stretch;
+    }
+    // 主要内容区（与左侧列表平级）
+    .main-content {
+        // padding: 15px;
+        overflow-y: scroll;
+        // width: 100%;
+        // 在列表右侧
+        &.main-content-right {
+            width: calc(100% - 248px);
+        }
+        // 右侧主要部分的一块 panel
+        .main-panel {
+            display: flow-root;
+            background: white;
+            &.main-panel-full {
+                height: 100%;
+            }
+            &.main-panel-card {
+                // height: 100%;
+                margin: 10px;
+            }
+            .main-panel-title {
+                padding: 25px;
+                border-bottom: 1px solid #ededed;
+                margin: 0;
+            }
+            .main-panel-body {
+                padding: 25px;
+                background: white;
+            }
+        }
+    }
+}
+
 
 
 /* comps */
-
