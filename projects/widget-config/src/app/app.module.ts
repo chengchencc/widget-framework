@@ -55,6 +55,7 @@ const appRoutes = [
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     WidgetCoreModule
   ],
   providers: [

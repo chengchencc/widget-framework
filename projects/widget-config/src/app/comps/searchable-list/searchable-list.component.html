@@ -2,12 +2,14 @@
 <div class=searchable-list>
   <!-- 搜索 -->
   <div class="p-2 pt-3">
-    <app-search-input></app-search-input>
+    <app-search-input
+      (onSearch)="handleSearch($event)"
+      ></app-search-input>
   </div>
   <!-- 列表 -->
   <accordion>
     <accordion-group
-      *ngFor="let category of categoryList"
+      *ngFor="let category of categoryListAfterSearch()"
       [isOpen]="true" >
       <!-- TODO: 下面两个 active 应当用 id 判断，有正确数据后可改 -->
       <div accordion-heading

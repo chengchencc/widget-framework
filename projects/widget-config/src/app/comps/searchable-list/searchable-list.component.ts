@@ -1,19 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import {  } from 'events';
-
-
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 export interface SearchableListItem { id: string, name: string }
 export interface SearchableListCategory {
   categoryName: string,
   children: SearchableListItem[]
 }
-// type A = 
 
 @Component({
   selector: 'app-searchable-list',
   templateUrl: './searchable-list.component.html',
   styleUrls: ['./searchable-list.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchableListComponent implements OnInit {
 
@@ -24,11 +21,34 @@ export class SearchableListComponent implements OnInit {
 
   @Output() onSelect = new EventEmitter<SearchableListItem | SearchableListCategory>()
 
+  public searchText: string = ''
   public curSelection: SearchableListItem | SearchableListCategory
 
-  constructor() { }
+  constructor(
+    private changeDetector: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
+  }
+
+  categoryListAfterSearch () {
+    let displayCategoryList: SearchableListCategory[] = []
+
+    this.categoryList.forEach(category => {
+      if(category.categoryName.includes(this.searchText)) {
+        displayCategoryList.push(category)
+      } else {
+        let matchItemList = category.children
+          .filter(item => item.name.includes(this.searchText))
+        if(matchItemList.length > 0) {
+          displayCategoryList.push({
+            categoryName: category.categoryName,
+            children: matchItemList
+          })
+        }
+      }
+    })
+    return displayCategoryList
   }
 
   handleClickCategory (category: SearchableListCategory) {
@@ -42,6 +62,10 @@ export class SearchableListComponent implements OnInit {
       this.curSelection = item
       this.onSelect.emit(item)
     }
+  }
+  handleSearch (searchText: string) {
+    this.searchText = searchText
+    this.changeDetector.detectChanges()
   }
 
 }

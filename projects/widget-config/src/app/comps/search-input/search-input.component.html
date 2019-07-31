@@ -1,6 +1,13 @@
+
+
 <div class=search>
-  <input type="text" placeholder="搜索" class="form-control form-control-sm">
+  <input
+    [formControl]="searchInput"
+    type="text"
+    placeholder="搜索"
+    class="form-control form-control-sm">
   <button class=btn>
-      <i class="material-icons">search</i>
+      <i class="material-icons"
+        (click)="handleClickSearchBtn()" >search</i>
   </button>
 </div>
