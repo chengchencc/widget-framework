@@ -18,6 +18,7 @@ import { ManageTmplPageComponent } from './pages/manage-tmpl-page/manage-tmpl-pa
 import { SearchableListComponent } from './comps/searchable-list/searchable-list.component';
 import { GoodTableComponent } from './comps/good-table/good-table.component';
 import { DistributeTmplComponent } from './pages/distribute-tmpl/distribute-tmpl.component';
+import { PublicHeaderComponent } from './comps/public-header/public-header.component';
 
 const appRoutes = [
   { path: 'widget-config', component: WidgetListPageComponent },
@@ -41,7 +42,8 @@ const appRoutes = [
     ManageTmplPageComponent,
     SearchableListComponent,
     GoodTableComponent,
-    DistributeTmplComponent
+    DistributeTmplComponent,
+    PublicHeaderComponent
   ],
   entryComponents: [
     CalcuFieldComponent,

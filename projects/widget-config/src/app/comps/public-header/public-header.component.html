@@ -1,0 +1,22 @@
+<div class="header fs-14">
+    <div class="left flex-fill">
+      <img class=icon src="" alt="">
+      <span class=title>{{title}}</span>
+      <!-- TODO: tempRef -->
+    </div>
+  
+    <div class="right flex-fill justify-content-end">
+      <!-- tempRef -->
+      <ng-container *ngTemplateOutlet="rightComp"></ng-container>
+  
+      <div class=btns>
+        <!-- <li > -->
+          <button
+            *ngFor="let btn of btns"
+            [ngClass]="btn.class"
+            (click)="btn.onClick()"
+            class="btn">{{btn.name}}</button>
+        <!-- </li> -->
+      </div>
+    </div>
+  </div>

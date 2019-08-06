@@ -1,24 +1,19 @@
-<div class=header>
-  <div class=left>
-    <img class=icon src="" alt="">
-    <span class=title>{{headerOption.title}}</span>
-    <!-- TODO: tempRef -->
-  </div>
 
-  <div class=right>
-    <!-- TODO: tempRef -->
-
-    <div class=btns>
-      <!-- <li > -->
-        <button
-          *ngFor="let btn of headerOption.btns"
-          [ngClass]="btn.class"
-          (click)="btn.onClick()"
-          class="btn">{{btn.name}}</button>
-      <!-- </li> -->
-    </div>
-  </div>
-</div>
+<app-public-header
+  [btns]="headerOption.btns"
+  [title]="headerOption.title" >
+  <ng-template #rightComp>
+    <form class="form-inline mr-3">
+      <label>筛选</label>
+      <select class="form-control form-control-sm ml-2 mr-2"
+        style="width:200px;" >
+        <option>请选择</option>
+        <option>1</option>
+        <option>2</option>
+      </select>
+    </form>
+  </ng-template>
+</app-public-header>
 
 <div class="manage-tmpl-page under-header under-header-flex">
   <app-searchable-list [categoryList]="roleCategoryList"

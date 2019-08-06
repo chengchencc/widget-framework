@@ -1,0 +1,90 @@
+@import "../../../assets/variables.scss";
+
+.header {
+    display: flex;
+    // justify-content: space-between;
+    align-items: stretch;
+
+    height: 56px;
+    padding: 0 10px;
+    box-shadow: 0 0 10px 0 #0000001c;
+    padding: 0 25px;
+    background: white;
+    /* 否则影子会被遮住 */
+    position: relative;
+    z-index: 1;
+
+    .left {
+        display: flex;
+        align-items: center;
+
+        .icon {
+
+        }
+        .title {
+            font-size: 20px;
+        }
+
+        .step-switch {
+            margin-left: 150px;
+            user-select: none;
+
+            li {
+                cursor: pointer;
+                display: inline-block;
+                font-size: 14px;
+
+                .material-icons {
+                    vertical-align: middle;
+                    font-size: 22px;
+                    margin: 0 15px 0 15px;
+                    color: $brandBlue;
+                }
+                .number {
+                    display: inline-block;
+                    background: $brandBlue;
+                    color: white;
+                    border-radius: 100px;
+                    width: 30px;
+                    height: 30px;
+                    text-align: center;
+                    padding-top: 5px;
+                    box-sizing: border-box;
+                    margin-right: 6px;
+                }
+                .name {
+                }
+
+                &.unactive {
+                    .material-icons, .name {
+                        color: #9a9a9a;
+                    }
+                    .number {
+                        background: #c3c3c3;
+                    }
+                }
+                &.cur {
+                    .name {
+                        font-weight: bold;
+                    }
+                }
+                &:first-child {
+                    .material-icons {
+                        display: none;
+                    }
+                }
+
+            }
+        }
+    }
+    .right {
+        display: flex;
+        align-items: center;
+        .btns {
+            // li {
+            .btn {
+                margin: 0 3px;
+            }
+        }
+    }
+}
