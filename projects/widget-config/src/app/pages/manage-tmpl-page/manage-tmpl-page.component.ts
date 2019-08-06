@@ -78,10 +78,10 @@ export class ManageTmplPageComponent implements OnInit {
       name: '财务控制'
     }, {
       id: 'a',
-      name: '财务控制'
+      name: '财务控制2'
     }, {
       id: 'a',
-      name: '财务控制'
+      name: '财务控制3'
     }]
   }]
 

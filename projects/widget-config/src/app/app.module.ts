@@ -17,12 +17,13 @@ import { RouterModule } from '@angular/router';
 import { ManageTmplPageComponent } from './pages/manage-tmpl-page/manage-tmpl-page.component';
 import { SearchableListComponent } from './comps/searchable-list/searchable-list.component';
 import { GoodTableComponent } from './comps/good-table/good-table.component';
+import { DistributeTmplComponent } from './pages/distribute-tmpl/distribute-tmpl.component';
 
 const appRoutes = [
   { path: 'widget-config', component: WidgetListPageComponent },
   { path: 'manage-tmpl', component: ManageTmplPageComponent },
   { path: 'add-tmpl', component: WidgetListPageComponent },
-  { path: 'distribute-tmpl', component: WidgetListPageComponent },
+  { path: 'distribute-tmpl', component: DistributeTmplComponent },
   { path: '',
     redirectTo: '/widget-config',
     pathMatch: 'full'
@@ -39,7 +40,8 @@ const appRoutes = [
     SearchInputComponent,
     ManageTmplPageComponent,
     SearchableListComponent,
-    GoodTableComponent
+    GoodTableComponent,
+    DistributeTmplComponent
   ],
   entryComponents: [
     CalcuFieldComponent,

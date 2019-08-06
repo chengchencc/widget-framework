@@ -1,0 +1,116 @@
+<div class=header>
+  <div class=left>
+    <img class=icon src="" alt="">
+    <span class=title>{{headerOption.title}}</span>
+    <!-- TODO: tempRef -->
+  </div>
+
+  <div class=right>
+    <!-- TODO: tempRef -->
+
+    <div class=btns>
+      <!-- <li > -->
+        <button
+          *ngFor="let btn of headerOption.btns"
+          [ngClass]="btn.class"
+          (click)="btn.onClick()"
+          class="btn">{{btn.name}}</button>
+      <!-- </li> -->
+    </div>
+  </div>
+</div>
+
+<div class="manage-tmpl-page under-header under-header-flex">
+  <app-searchable-list [categoryList]="roleCategoryList"
+    [categorySelectable]="false"
+    [itemSelectable]="true"
+    (onSelect)="selectedWidgetOrCategory = $event" ></app-searchable-list>
+  
+  <div class="main-content main-content-right">
+    <div class="main-panel main-panel-full">
+      <div class="main-panel-body bfc">
+        
+        <div class="mt-2 mb-3">
+          <i *ngIf="true"
+            class="checkbox-icon material-icons align-bottom">check_box_outline_blank</i>
+          <i *ngIf="false"
+            class="checkbox-icon checked material-icons align-bottom">check_box</i>
+          <span class="ml-3">全选</span>
+        </div>
+        <ul>
+          <!-- 岗位 -->
+          <li class="d-flex mt-3 mb-3">
+            <i *ngIf="!false"
+            class="checkbox-icon material-icons mt-3">check_box_outline_blank</i>
+            <i *ngIf="false"
+              class="checkbox-icon checked material-icons mt-3">check_box</i>
+            <div class="role-wrapper flex-fill border p-3 ml-3 rounded">
+              <div>
+                <i *ngIf="!false"
+                  class="material-icons fs-34 align-middle text-brand mt-n1">person</i>
+                <span class="fs-16 font-weight-bold ml-1">销售专员</span>
+                <span class="fs-12 ml-3">岗位描述</span>
+              </div>
+              <ul class="fs-14">
+                <li class="d-flex bg-light-gray p-3 mt-2 mb-2">
+                  <i *ngIf="!false"
+                  class="checkbox-icon material-icons pr-3">check_box_outline_blank</i>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>描述</div>
+                  </div>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>描述</div>
+                  </div>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>描述</div>
+                  </div>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>描述</div>
+                  </div>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>
+                      <i *ngIf="!false"
+                      class="checkbox-icon material-icons pr-1 align-bottom">check_box_outline_blank</i>
+                      描述</div>
+                  </div>
+                </li>
+                <li class="d-flex bg-light-gray p-3 mt-2 mb-2">
+                  <i *ngIf="!false"
+                  class="checkbox-icon material-icons pr-3">check_box_outline_blank</i>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>描述</div>
+                  </div>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>描述</div>
+                  </div>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>描述</div>
+                  </div>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>描述</div>
+                  </div>
+                  <div class="flex-fill">
+                    <div class="mb-2">销售专员首页1</div>
+                    <div>
+                      <i *ngIf="!false"
+                      class="checkbox-icon material-icons pr-1 align-bottom">check_box_outline_blank</i>
+                      描述</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
